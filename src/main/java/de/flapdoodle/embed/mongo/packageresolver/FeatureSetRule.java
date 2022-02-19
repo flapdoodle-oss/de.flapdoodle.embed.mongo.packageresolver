@@ -20,6 +20,24 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-public interface HasPlatformMatchRules {
-	PackageFinderRules rules();
+import org.immutables.value.Value;
+
+import java.util.Set;
+
+@Value.Immutable
+@Value.Style(stagedBuilder = true)
+public interface FeatureSetRule {
+  DistributionMatch match();
+  Set<Feature> features();
+
+  static FeatureSetRule of(DistributionMatch match, Feature ... features) {
+    return builder()
+            .match(match)
+            .addFeatures(features)
+            .build();
+  }
+
+  static ImmutableFeatureSetRule.MatchBuildStage builder() {
+    return ImmutableFeatureSetRule.builder();
+  }
 }

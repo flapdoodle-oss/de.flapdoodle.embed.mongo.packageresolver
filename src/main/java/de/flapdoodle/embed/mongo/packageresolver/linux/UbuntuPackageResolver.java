@@ -20,7 +20,6 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
-import de.flapdoodle.embed.mongo.packageresolver.Command;
 import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
@@ -38,7 +37,7 @@ import java.util.Optional;
 public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRules {
 
   private final Command command;
-  private final ImmutablePlatformMatchRules rules;
+  private final ImmutablePackageFinderRules rules;
 
   public UbuntuPackageResolver(Command command) {
     this.command = command;
@@ -46,7 +45,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
   }
 
 	@Override
-	public PlatformMatchRules rules() {
+	public PackageFinderRules rules() {
 		return rules;
 	}
 
@@ -60,7 +59,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 			.withVersion(versions);
 	}
 
-  private static ImmutablePlatformMatchRules rules(Command command) {
+  private static ImmutablePackageFinderRules rules(Command command) {
     ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
 		DistributionMatch ubuntu18xxArmMongoVersions = DistributionMatch.any(
@@ -73,7 +72,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 			VersionRange.of("4.2.0", "4.2.3")
 		);
 
-		PlatformMatchRule ubuntu1804arm = PlatformMatchRule.builder()
+		PackageFinderRule ubuntu1804arm = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10,
 						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10)
 						.andThen(ubuntu18xxArmMongoVersions
@@ -86,7 +85,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 							.build())
 					.build();
 
-			PlatformMatchRule tools_ubuntu1804arm = PlatformMatchRule.builder()
+			PackageFinderRule tools_ubuntu1804arm = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.ARM,
 							UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10,
 							UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10
@@ -109,7 +108,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 			VersionRange.of("4.0.1", "4.0.27"),
 			VersionRange.of("3.6.20", "3.6.23")
 		);
-		PlatformMatchRule ubuntu1804x64 = PlatformMatchRule.builder()
+		PackageFinderRule ubuntu1804x64 = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.X86,
 							UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10,
 							UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10,
@@ -123,7 +122,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 							.build())
 					.build();
 
-			PlatformMatchRule tools_ubuntu1804x64 = PlatformMatchRule.builder()
+			PackageFinderRule tools_ubuntu1804x64 = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.X86,
 							UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10,
 							UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10
@@ -142,7 +141,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 			VersionRange.of("4.4.0", "4.4.9")
 		);
 		
-		PlatformMatchRule ubuntu20And21arm = PlatformMatchRule.builder()
+		PackageFinderRule ubuntu20And21arm = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.ARM,
 						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10)
 						.andThen(ubuntu20xxMongoVersions))
@@ -153,7 +152,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 							.build())
 					.build();
 
-			PlatformMatchRule tools_ubuntu20And21arm = PlatformMatchRule.builder()
+			PackageFinderRule tools_ubuntu20And21arm = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.ARM,
 						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10)
 						.andThen(ubuntu20xxMongoVersions))
@@ -164,7 +163,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 							.build())
 					.build();
 
-			PlatformMatchRule ubuntu20And21x64 = PlatformMatchRule.builder()
+			PackageFinderRule ubuntu20And21x64 = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.X86,
 						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10)
 						.andThen(ubuntu20xxMongoVersions))
@@ -175,7 +174,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 							.build())
 					.build();
 
-			PlatformMatchRule tools_ubuntu20And21x64 = PlatformMatchRule.builder()
+			PackageFinderRule tools_ubuntu20And21x64 = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.X86,
 						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10)
 						.andThen(ubuntu20xxMongoVersions))
@@ -190,14 +189,14 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 					case MongoDump:
 					case MongoImport:
 					case MongoRestore:
-							return PlatformMatchRules.empty()
+							return PackageFinderRules.empty()
 									.withRules(
 											tools_ubuntu20And21arm, tools_ubuntu20And21x64,
 											tools_ubuntu1804arm, tools_ubuntu1804x64
 									);
 			}
 
-    return PlatformMatchRules.empty()
+    return PackageFinderRules.empty()
             .withRules(
                     ubuntu20And21arm, ubuntu20And21x64,
                     ubuntu1804arm, ubuntu1804x64

@@ -20,7 +20,6 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
-import de.flapdoodle.embed.mongo.packageresolver.Command;
 import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
@@ -37,14 +36,14 @@ import java.util.Optional;
 
 public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRules {
 
-	private final ImmutablePlatformMatchRules rules;
+	private final ImmutablePackageFinderRules rules;
 
 	public AmazonPackageResolver(final Command command) {
 		this.rules = rules(command);
 	}
 
 	@Override
-	public PlatformMatchRules rules() {
+	public PackageFinderRules rules() {
 		return rules;
 	}
 	
@@ -53,7 +52,7 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 		return rules.packageFor(distribution);
 	}
 
-	private static ImmutablePlatformMatchRules rules(final Command command) {
+	private static ImmutablePackageFinderRules rules(final Command command) {
 		final ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
 		DistributionMatch amazon2ArmMongoVersions = DistributionMatch.any(
@@ -65,7 +64,7 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 			VersionRange.of("4.2.13", "4.2.16")
 		);
 
-		final PlatformMatchRule amazon2Arm = PlatformMatchRule.builder()
+		final PackageFinderRule amazon2Arm = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2).andThen(amazon2ArmMongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
@@ -74,7 +73,7 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 				.build())
 			.build();
 
-		final PlatformMatchRule amazon2ArmTools = PlatformMatchRule.builder()
+		final PackageFinderRule amazon2ArmTools = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2).andThen(amazon2ArmMongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
@@ -94,7 +93,7 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 			VersionRange.of("4.0.0", "4.0.27"),
 			VersionRange.of("3.6.22", "3.6.23")
 		);
-		final PlatformMatchRule amazon2 = PlatformMatchRule.builder()
+		final PackageFinderRule amazon2 = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux2).andThen(amazon2MongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
@@ -103,7 +102,7 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 				.build())
 			.build();
 
-		final PlatformMatchRule amazon2tools = PlatformMatchRule.builder()
+		final PackageFinderRule amazon2tools = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux2).andThen(amazon2MongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
@@ -129,7 +128,7 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 			VersionRange.of("3.0.0", "3.0.15")
 		);
 
-		final PlatformMatchRule amazon = PlatformMatchRule.builder()
+		final PackageFinderRule amazon = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux).andThen(amazonMongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
@@ -138,7 +137,7 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 				.build())
 			.build();
 
-		final PlatformMatchRule amazontools = PlatformMatchRule.builder()
+		final PackageFinderRule amazontools = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux).andThen(amazonMongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
@@ -151,14 +150,14 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 			case MongoDump:
 			case MongoImport:
 			case MongoRestore:
-				return PlatformMatchRules.empty()
+				return PackageFinderRules.empty()
 					.withRules(
 						amazon2ArmTools,
 						amazon2tools,
 						amazontools
 					);
 			default:
-				return PlatformMatchRules.empty()
+				return PackageFinderRules.empty()
 					.withRules(
 						amazon2Arm,
 						amazon2,

@@ -20,7 +20,6 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
-import de.flapdoodle.embed.mongo.packageresolver.Command;
 import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
@@ -41,7 +40,7 @@ import java.util.Optional;
 public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMatchRules {
 
   private final Command command;
-  private final ImmutablePlatformMatchRules rules;
+  private final ImmutablePackageFinderRules rules;
 
   public CentosRedhatPackageResolver(Command command) {
     this.command = command;
@@ -49,7 +48,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
   }
 
 	@Override
-	public PlatformMatchRules rules() {
+	public PackageFinderRules rules() {
 		return rules;
 	}
 
@@ -63,7 +62,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.withVersion(versions);
 	}
 
-  private static ImmutablePlatformMatchRules rules(Command command) {
+  private static ImmutablePackageFinderRules rules(Command command) {
     ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
 		DistributionMatch centos6mongoVersions = DistributionMatch.any(
@@ -79,7 +78,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			VersionRange.of("3.2.0", "3.2.22"),
 			VersionRange.of("3.0.0", "3.0.15")
 		);
-		PlatformMatchRule centos6 = PlatformMatchRule.builder()
+		PackageFinderRule centos6 = PackageFinderRule.builder()
 			.match(match(BitSize.B64, CPUType.X86,
 				CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6).andThen(centos6mongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
@@ -89,7 +88,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 				.build())
 			.build();
 
-		PlatformMatchRule tools_centos6 = PlatformMatchRule.builder()
+		PackageFinderRule tools_centos6 = PackageFinderRule.builder()
 			.match(match(BitSize.B64, CPUType.X86,
 					CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6
 				).andThen(centos6mongoVersions))
@@ -116,7 +115,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			VersionRange.of("3.0.0", "3.0.15")
 		);
 
-		PlatformMatchRule centos7 = PlatformMatchRule.builder()
+		PackageFinderRule centos7 = PackageFinderRule.builder()
 			.match(match(BitSize.B64, CPUType.X86,
 					CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7
 				).andThen(centos7MongoVersions))
@@ -127,7 +126,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 				.build())
 			.build();
 
-		PlatformMatchRule tools_centos7 = PlatformMatchRule.builder()
+		PackageFinderRule tools_centos7 = PackageFinderRule.builder()
 			.match(match(BitSize.B64, CPUType.X86,
 					CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7
 				).andThen(centos7MongoVersions))
@@ -151,7 +150,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			VersionRange.of("3.6.17", "3.6.23"),
 			VersionRange.of("3.4.24", "3.4.24")
 		);
-		PlatformMatchRule centos8 = PlatformMatchRule.builder()
+		PackageFinderRule centos8 = PackageFinderRule.builder()
 			.match(match(BitSize.B64, CPUType.X86,
 					CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8
 				).andThen(centos8MongoVersions))
@@ -162,7 +161,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 				.build())
 			.build();
 
-		PlatformMatchRule tools_centos8 = PlatformMatchRule.builder()
+		PackageFinderRule tools_centos8 = PackageFinderRule.builder()
 			.match(match(BitSize.B64, CPUType.X86,
 					CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8
 				).andThen(centos8MongoVersions))
@@ -179,7 +178,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.4", "4.4.9")
 		);
-		PlatformMatchRule centos8arm = PlatformMatchRule.builder()
+		PackageFinderRule centos8arm = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.ARM,
 							CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8
 						).andThen(centos8ArmMongoVersions))
@@ -190,7 +189,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 							.build())
 					.build();
 
-			PlatformMatchRule tools_centos8arm = PlatformMatchRule.builder()
+			PackageFinderRule tools_centos8arm = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.ARM,
 							CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8
 						).andThen(centos8ArmMongoVersions))
@@ -206,13 +205,13 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 					case MongoDump:
 					case MongoImport:
 					case MongoRestore:
-							return PlatformMatchRules.empty()
+							return PackageFinderRules.empty()
 									.withRules(
 											tools_centos6, tools_centos7, tools_centos8, tools_centos8arm
 									);
 			}
 
-    return PlatformMatchRules.empty()
+    return PackageFinderRules.empty()
             .withRules(
                     centos6, centos7, centos8, centos8arm
             );

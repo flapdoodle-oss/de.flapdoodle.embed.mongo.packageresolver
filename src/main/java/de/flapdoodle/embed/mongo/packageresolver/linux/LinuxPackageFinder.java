@@ -20,7 +20,6 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
-import de.flapdoodle.embed.mongo.packageresolver.Command;
 import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
@@ -46,7 +45,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 	private static final Logger LOGGER = LoggerFactory.getLogger(LinuxPackageFinder.class);
 
 	private final Command command;
-	private final ImmutablePlatformMatchRules rules;
+	private final ImmutablePackageFinderRules rules;
 
 	public LinuxPackageFinder(Command command) {
 		this.command = command;
@@ -54,7 +53,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 	}
 
 	@Override
-	public PlatformMatchRules rules() {
+	public PackageFinderRules rules() {
 		return rules;
 	}
 
@@ -63,24 +62,24 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 		return rules.packageFor(distribution);
 	}
 	
-	private static ImmutablePlatformMatchRules rules(Command command) {
+	private static ImmutablePackageFinderRules rules(Command command) {
 		ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
     UbuntuPackageResolver ubuntuPackageResolver = new UbuntuPackageResolver(command);
 
-    final ImmutablePlatformMatchRule ubuntuRule = PlatformMatchRule.builder()
+    final ImmutablePackageFinderRule ubuntuRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux)
 				.withVersion(UbuntuVersion.values()))
 			.finder(ubuntuPackageResolver)
 			.build();
 
-    final ImmutablePlatformMatchRule linuxMintRule = PlatformMatchRule.builder()
+    final ImmutablePackageFinderRule linuxMintRule = PackageFinderRule.builder()
       .match(PlatformMatch.withOs(OS.Linux)
         .withVersion(LinuxMintVersion.values()))
       .finder(new LinuxMintPackageResolver(ubuntuPackageResolver))
       .build();
 
-    final ImmutablePlatformMatchRule debianRule = PlatformMatchRule.builder()
+    final ImmutablePackageFinderRule debianRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux).withVersion(DebianVersion.values()))
 			.finder(new DebianPackageResolver(command))
 			.build();
@@ -91,13 +90,13 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 				Stream.of(OracleVersion.values()))
 			.flatMap(it -> it).collect(Collectors.toList());
 
-		ImmutablePlatformMatchRule centosRedhatOracleRule = PlatformMatchRule.builder()
+		ImmutablePackageFinderRule centosRedhatOracleRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux)
 				.withVersion(centosRedhatAndOracleVersions))
 			.finder(centosRedhatPackageResolver)
 			.build();
 
-		ImmutablePlatformMatchRule amazonRule = PlatformMatchRule.builder()
+		ImmutablePackageFinderRule amazonRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux)
 				.withVersion(AmazonVersion.values()))
 			.finder(new AmazonPackageResolver(command))
@@ -108,7 +107,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
       https://fastdl.mongodb.org/linux/mongodb-linux-i686-{}.tgz
       3.2.21 - 3.2.0, 3.0.14 - 3.0.0, 2.6.12 - 2.6.0
     */
-		PlatformMatchRule legacy32 = PlatformMatchRule.builder()
+		PackageFinderRule legacy32 = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux).withBitSize(BitSize.B32).andThen(DistributionMatch.any(
 					VersionRange.of("3.2.0", "3.2.21"),
 					VersionRange.of("3.0.0", "3.0.14"),
@@ -126,7 +125,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-{}.tgz
     4.0.26 - 4.0.0, 3.6.22 - 3.6.0, 3.4.23 - 3.4.9, 3.4.7 - 3.4.0, 3.2.21 - 3.2.0, 3.0.14 - 3.0.0, 2.6.12 - 2.6.0
    */
-		PlatformMatchRule legacy64 = PlatformMatchRule.builder()
+		PackageFinderRule legacy64 = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux).withBitSize(BitSize.B64)
 				.andThen(DistributionMatch.any(
 					VersionRange.of("4.0.0", "4.0.26"),
@@ -144,7 +143,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 				.build())
 			.build();
 
-		PlatformMatchRule hiddenLegacy64 = PlatformMatchRule.builder()
+		PackageFinderRule hiddenLegacy64 = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux).withBitSize(BitSize.B64)
 				.andThen(DistributionMatch.any(
 					VersionRange.of("3.3.1", "3.3.1"),
@@ -157,7 +156,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 				.build())
 			.build();
 
-		PlatformMatchRule hiddenLegacy32 = PlatformMatchRule.builder()
+		PackageFinderRule hiddenLegacy32 = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux).withBitSize(BitSize.B32)
 				.andThen(DistributionMatch.any(
 					VersionRange.of("3.3.1", "3.3.1"),
@@ -170,12 +169,12 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 				.build())
 			.build();
 
-		PlatformMatchRule failIfNothingMatches = PlatformMatchRule.builder()
+		PackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux))
 			.finder(new FallbackToUbuntuOrFailPackageFinder(ubuntuPackageResolver))
 			.build();
 
-		return PlatformMatchRules.empty()
+		return PackageFinderRules.empty()
 			.withRules(
 				ubuntuRule,
 				linuxMintRule,

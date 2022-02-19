@@ -20,7 +20,6 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
-import de.flapdoodle.embed.mongo.packageresolver.Command;
 import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
@@ -37,14 +36,14 @@ import java.util.Optional;
 
 public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRules {
 
-    private final ImmutablePlatformMatchRules rules;
+    private final ImmutablePackageFinderRules rules;
 
     public DebianPackageResolver(final Command command) {
         this.rules = rules(command);
     }
 
     @Override
-    public PlatformMatchRules rules() {
+    public PackageFinderRules rules() {
       return rules;
     }
 
@@ -58,7 +57,7 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
       .withVersion(versions);
   }
 
-  private static ImmutablePlatformMatchRules rules(final Command command) {
+  private static ImmutablePackageFinderRules rules(final Command command) {
         final ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
     DistributionMatch debian9MongoVersions = DistributionMatch.any(
@@ -72,7 +71,7 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
       VersionRange.of("4.0.0", "4.0.27"),
       VersionRange.of("3.6.5", "3.6.23")
     );
-    final PlatformMatchRule debian9 = PlatformMatchRule.builder()
+    final PackageFinderRule debian9 = PackageFinderRule.builder()
                 .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9)
                   .andThen(debian9MongoVersions))
                 .finder(UrlTemplatePackageResolver.builder()
@@ -82,7 +81,7 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                         .build())
                 .build();
 
-        final PlatformMatchRule debian9tools = PlatformMatchRule.builder()
+        final PackageFinderRule debian9tools = PackageFinderRule.builder()
                 .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9)
                   .andThen(debian9MongoVersions))
                 .finder(UrlTemplatePackageResolver.builder()
@@ -101,7 +100,7 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
       VersionRange.of("4.2.5", "4.2.16"),
       VersionRange.of("4.2.1", "4.2.3")
     );
-    final PlatformMatchRule debian10 = PlatformMatchRule.builder()
+    final PackageFinderRule debian10 = PackageFinderRule.builder()
                 .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11).andThen(debian10MongoVersions))
                 .finder(UrlTemplatePackageResolver.builder()
                         .fileSet(fileSet)
@@ -110,7 +109,7 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                         .build())
                 .build();
 
-        final PlatformMatchRule debian10tools = PlatformMatchRule.builder()
+        final PackageFinderRule debian10tools = PackageFinderRule.builder()
                 .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11).andThen(debian10MongoVersions))
                 .finder(UrlTemplatePackageResolver.builder()
                         .fileSet(fileSet)
@@ -123,13 +122,13 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
             case MongoDump:
             case MongoImport:
             case MongoRestore:
-                return PlatformMatchRules.empty()
+                return PackageFinderRules.empty()
                         .withRules(
                                 debian9tools,
                                 debian10tools
                         );
             default:
-                return PlatformMatchRules.empty()
+                return PackageFinderRules.empty()
                         .withRules(
                                 debian9,
                                 debian10

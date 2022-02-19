@@ -65,13 +65,13 @@ public final class ExplainRules {
 		}
 	}
 
-	static String explain(PlatformMatchRules rules) {
+	static String explain(PackageFinderRules rules) {
 		Output output = new Output();
 		explain(output.root(), rules);
 		return output.asString();
 	}
 
-	static void explain(Output.Context context, PlatformMatchRules rules) {
+	static void explain(Output.Context context, PackageFinderRules rules) {
 		rules.rules().forEach(rule -> {
 			context.matching(explainMatch(rule.match()));
 			PackageFinder finder = rule.finder();

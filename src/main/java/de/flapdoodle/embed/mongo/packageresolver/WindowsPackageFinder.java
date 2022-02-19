@@ -32,7 +32,7 @@ import java.util.Optional;
 
 public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRules {
   private final Command command;
-  private final ImmutablePlatformMatchRules rules;
+  private final ImmutablePackageFinderRules rules;
 
   public WindowsPackageFinder(Command command) {
     this.command = command;
@@ -40,7 +40,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
   }
 
   @Override
-  public PlatformMatchRules rules() {
+  public PackageFinderRules rules() {
     return rules;
   }
 
@@ -59,11 +59,11 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
     return PlatformMatch.withOs(OS.Windows).withBitSize(bitSize);
   }
 
-  private static ImmutablePlatformMatchRules rules(Command command) {
+  private static ImmutablePackageFinderRules rules(Command command) {
     FileSet fileSet = fileSetOf(command);
     ArchiveType archiveType = ArchiveType.ZIP;
 
-    ImmutablePlatformMatchRule windowsServer_2008_rule = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule windowsServer_2008_rule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
                     VersionRange.of("3.4.9", "3.4.24"),
                     VersionRange.of("3.4.0", "3.4.7"),
@@ -84,7 +84,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
       VersionRange.of("4.4.11", "4.4.11"),
       VersionRange.of("4.4.0", "4.4.9")
     );
-    ImmutablePlatformMatchRule windows_x64_rule = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule windows_x64_rule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(windows64MongoVersions))
             .finder(UrlTemplatePackageResolver.builder()
                     .fileSet(fileSet)
@@ -93,7 +93,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
                     .build())
             .build();
 
-      ImmutablePlatformMatchRule tools_windows_x64_rule = PlatformMatchRule.builder()
+      ImmutablePackageFinderRule tools_windows_x64_rule = PackageFinderRule.builder()
           .match(match(BitSize.B64).andThen(windows64MongoVersions))
           .finder(UrlTemplatePackageResolver.builder()
               .fileSet(fileSet)
@@ -102,7 +102,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
               .build())
           .build();
 
-      ImmutablePlatformMatchRule windows_x64_2008ssl_rule = PlatformMatchRule.builder()
+      ImmutablePackageFinderRule windows_x64_2008ssl_rule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
                     VersionRange.of("4.0.0", "4.0.27"),
                     VersionRange.of("3.6.0", "3.6.23"),
@@ -118,7 +118,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
                     .build())
             .build();
 
-    ImmutablePlatformMatchRule windows_x64_2012ssl_rule = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule windows_x64_2012ssl_rule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
                     VersionRange.of("4.2.18", "4.2.18"),
                     VersionRange.of("4.2.5", "4.2.16"),
@@ -131,7 +131,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
                     .build())
             .build();
 
-    ImmutablePlatformMatchRule win32rule = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule win32rule = PackageFinderRule.builder()
             .match(match(BitSize.B32).andThen(DistributionMatch.any(
                             VersionRange.of("3.2.0", "3.2.22"),
                             VersionRange.of("3.0.0", "3.0.15"),
@@ -144,7 +144,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
                     .build())
             .build();
 
-    ImmutablePlatformMatchRule hiddenLegacyWin32rule = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule hiddenLegacyWin32rule = PackageFinderRule.builder()
             .match(match(BitSize.B32).andThen(DistributionMatch.any(
                             VersionRange.of("3.3.1", "3.3.1"),
                             VersionRange.of("3.5.5", "3.5.5")
@@ -156,7 +156,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
                     .build())
             .build();
 
-    ImmutablePlatformMatchRule win_x86_64 = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule win_x86_64 = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
                     VersionRange.of("3.4.9", "3.4.24"),
                     VersionRange.of("3.4.0", "3.4.7"),
@@ -171,7 +171,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
                     .build())
             .build();
 
-    ImmutablePlatformMatchRule hiddenLegacyWin_x86_64 = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule hiddenLegacyWin_x86_64 = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
                     VersionRange.of("3.3.1", "3.3.1"),
                     VersionRange.of("3.5.5", "3.5.5")
@@ -183,7 +183,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
                     .build())
             .build();
 
-    ImmutablePlatformMatchRule failIfNothingMatches = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
             .match(PlatformMatch.withOs(OS.Windows))
             .finder(PackageFinder.failWithMessage(distribution -> "windows distribution not supported: " + distribution))
             .build();
@@ -192,7 +192,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
           case MongoDump:
           case MongoImport:
           case MongoRestore:
-              return PlatformMatchRules.empty()
+              return PackageFinderRules.empty()
                   .withRules(
                       tools_windows_x64_rule,
                       win_x86_64,
@@ -208,7 +208,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
       }
 
 
-      return PlatformMatchRules.empty()
+      return PackageFinderRules.empty()
             .withRules(
                     win_x86_64,
                     windows_x64_rule,

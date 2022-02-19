@@ -32,7 +32,7 @@ import java.util.Optional;
 
 public class SolarisPackageFinder implements PackageFinder, HasPlatformMatchRules {
   private final Command command;
-  private final PlatformMatchRules rules;
+  private final PackageFinderRules rules;
 
   public SolarisPackageFinder(Command command) {
     this.command = command;
@@ -40,7 +40,7 @@ public class SolarisPackageFinder implements PackageFinder, HasPlatformMatchRule
   }
 
   @Override
-  public PlatformMatchRules rules() {
+  public PackageFinderRules rules() {
     return rules;
   }
 
@@ -59,11 +59,11 @@ public class SolarisPackageFinder implements PackageFinder, HasPlatformMatchRule
     return PlatformMatch.withOs(OS.Solaris).withBitSize(bitSize);
   }
 
-  private static PlatformMatchRules rules(Command command) {
+  private static PackageFinderRules rules(Command command) {
     FileSet fileSet = fileSetOf(command);
     ArchiveType archiveType = ArchiveType.TGZ;
 
-    ImmutablePlatformMatchRule firstRule = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule firstRule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
                             VersionRange.of("3.4.0", "3.4.5"),
                             VersionRange.of("3.2.0", "3.2.14"),
@@ -77,7 +77,7 @@ public class SolarisPackageFinder implements PackageFinder, HasPlatformMatchRule
                     .build())
             .build();
 
-    ImmutablePlatformMatchRule hiddenLegacyRule = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule hiddenLegacyRule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
                             VersionRange.of("3.3.1", "3.3.1"),
                             VersionRange.of("3.5.5", "3.5.5")
@@ -89,13 +89,13 @@ public class SolarisPackageFinder implements PackageFinder, HasPlatformMatchRule
                     .build())
             .build();
 
-    PlatformMatchRule failIfNothingMatches = PlatformMatchRule.builder()
+    PackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
             .match(PlatformMatch.withOs(OS.Solaris))
             .finder(PackageFinder.failWithMessage(distribution -> "solaris distribution not supported: " + distribution))
             .build();
 
 
-    return PlatformMatchRules.empty()
+    return PackageFinderRules.empty()
             .withRules(
                     firstRule,
                     hiddenLegacyRule,

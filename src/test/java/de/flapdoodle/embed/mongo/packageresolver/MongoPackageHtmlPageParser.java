@@ -112,7 +112,7 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		System.out.println(explained);
 	}
 
-	private static PlatformMatchRules mapAsPlatformRules(ImmutableListMultimap<PlatformMatch, List<UrlAndVersions>> map) {
+	private static PackageFinderRules mapAsPlatformRules(ImmutableListMultimap<PlatformMatch, List<UrlAndVersions>> map) {
     List<Tuple<PlatformMatch, List<UrlAndVersions>>> platformAndVersions = map.asMap()
       .entrySet()
       .stream().map(entry -> new Tuple<>(entry.getKey(), entry.getValue()
@@ -124,16 +124,16 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		Set<OS> osSet = ImmutableSet.of(OS.Windows, OS.OS_X, OS.Linux, OS.Solaris, OS.FreeBSD);
 		Preconditions.checkArgument(osSet.size()==OS.values().length,"entries missing");
 
-		List<PlatformMatchRule> rules = osSet.stream()
+		List<PackageFinderRule> rules = osSet.stream()
 			.map(os -> asPlatformRules(os, platformAndVersions))
 			.collect(Collectors.toList());
 
-		return PlatformMatchRules.builder()
+		return PackageFinderRules.builder()
 			.addAllRules(rules)
 			.build();
 	}
 
-	private static PlatformMatchRule asPlatformRules(OS os, List<Tuple<PlatformMatch, List<UrlAndVersions>>> platformAndVersions) {
+	private static PackageFinderRule asPlatformRules(OS os, List<Tuple<PlatformMatch, List<UrlAndVersions>>> platformAndVersions) {
     Optional<OS> osMatch = Optional.of(os);
 
     List<Tuple<PlatformMatch, List<UrlAndVersions>>> matchingOs = platformAndVersions.stream()
@@ -148,9 +148,9 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
       // more than one
 			if (os.distributions().isEmpty()) {
 				// no dist
-				return PlatformMatchRule.of(PlatformMatch.withOs(os), new JustRulesPackageFinder(
-					PlatformMatchRules.empty().withRules(matchingOs.stream()
-						.map(entry -> PlatformMatchRule.of(entry.a(), new JustRulesPackageFinder(asVersionDetectionRules(entry.a(), entry.b()))))
+				return PackageFinderRule.of(PlatformMatch.withOs(os), new JustRulesPackageFinder(
+					PackageFinderRules.empty().withRules(matchingOs.stream()
+						.map(entry -> PackageFinderRule.of(entry.a(), new JustRulesPackageFinder(asVersionDetectionRules(entry.a(), entry.b()))))
 						.collect(Collectors.toList()))));
 
 			} else {
@@ -159,37 +159,37 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 //    }
 	}
 
-	private static PlatformMatchRule groupedByDist(OS os, List<Tuple<PlatformMatch, List<UrlAndVersions>>> matchingOs) {
+	private static PackageFinderRule groupedByDist(OS os, List<Tuple<PlatformMatch, List<UrlAndVersions>>> matchingOs) {
 
-		List<PlatformMatchRule> list = os.distributions().stream()
-			.map(dist -> PlatformMatchRule.of(PlatformMatch.withOs(os).withVersion(dist.versions()), new JustRulesPackageFinder(
+		List<PackageFinderRule> list = os.distributions().stream()
+			.map(dist -> PackageFinderRule.of(PlatformMatch.withOs(os).withVersion(dist.versions()), new JustRulesPackageFinder(
 				groupedByVersion(os, dist, matchingOs.stream()
 					.filter(entry -> entry.a().version().stream().anyMatch(v -> dist.versions().contains(v)))
 					.collect(Collectors.toList()))
 			)))
 			.collect(Collectors.toList());
 
-		return PlatformMatchRule.of(PlatformMatch.withOs(os), new JustRulesPackageFinder(PlatformMatchRules.empty().withRules(list)));
+		return PackageFinderRule.of(PlatformMatch.withOs(os), new JustRulesPackageFinder(PackageFinderRules.empty().withRules(list)));
 	}
 
-	private static PlatformMatchRules groupedByVersion(OS os, de.flapdoodle.os.Distribution dist, List<Tuple<PlatformMatch, List<UrlAndVersions>>> matching) {
-		List<PlatformMatchRule> rules = dist.versions().stream()
+	private static PackageFinderRules groupedByVersion(OS os, de.flapdoodle.os.Distribution dist, List<Tuple<PlatformMatch, List<UrlAndVersions>>> matching) {
+		List<PackageFinderRule> rules = dist.versions().stream()
 			.map(version -> tuple(version, asVersionDetectionRules(PlatformMatch.withOs(os).withVersion(version), matching.stream()
 				.filter(entry -> entry.a().version().contains(version))
 				.flatMap(tuple -> tuple.b().stream())
 				.collect(Collectors.toList()))))
-			.map(tuple -> PlatformMatchRule.of(PlatformMatch.withOs(os).withVersion(tuple.a()), new JustRulesPackageFinder(tuple.b())))
+			.map(tuple -> PackageFinderRule.of(PlatformMatch.withOs(os).withVersion(tuple.a()), new JustRulesPackageFinder(tuple.b())))
 			.collect(Collectors.toList());
 
-		return PlatformMatchRules.empty().withRules(rules);
+		return PackageFinderRules.empty().withRules(rules);
 	}
 
-	private static PlatformMatchRules asVersionDetectionRules(PlatformMatch parent, List<UrlAndVersions> urlAndVersions) {
-    List<PlatformMatchRule> list = urlAndVersions.stream().map(entry -> {
+	private static PackageFinderRules asVersionDetectionRules(PlatformMatch parent, List<UrlAndVersions> urlAndVersions) {
+    List<PackageFinderRule> list = urlAndVersions.stream().map(entry -> {
         DistributionMatch match = DistributionMatch.any(compressedVersionsList(entry.versions()));
 				String url = entry.url();
 				url=url.replace("https://fastdl.mongodb.org","");
-        return PlatformMatchRule.of(parent.andThen(match), UrlTemplatePackageResolver.builder()
+        return PackageFinderRule.of(parent.andThen(match), UrlTemplatePackageResolver.builder()
           .urlTemplate(url)
           .fileSet(FileSet.builder()
             .addEntry(FileType.Executable,"mongod")
@@ -199,7 +199,7 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
       })
       .collect(Collectors.toList());
 
-    return PlatformMatchRules.empty()
+    return PackageFinderRules.empty()
       .withRules(list);
   }
 
@@ -215,14 +215,14 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 
 	static class JustRulesPackageFinder implements PackageFinder, HasPlatformMatchRules {
 
-		private final PlatformMatchRules rules;
+		private final PackageFinderRules rules;
 
-		public JustRulesPackageFinder(PlatformMatchRules rules) {
+		public JustRulesPackageFinder(PackageFinderRules rules) {
 			this.rules = rules;
 		}
 
 		@Override
-    public PlatformMatchRules rules() {
+    public PackageFinderRules rules() {
 			return rules;
 		}
 

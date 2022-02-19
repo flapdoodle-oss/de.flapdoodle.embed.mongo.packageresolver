@@ -20,6 +20,12 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-public interface HasPlatformMatchRules {
-	PackageFinderRules rules();
+import de.flapdoodle.embed.process.distribution.Distribution;
+
+public interface FeatureSetResolver {
+	FeatureSet featuresOf(Distribution distribution);
+
+	static FeatureSetResolver defaultInstance() {
+		return DefaultFeatureSetResolver.INSTANCE;
+	}
 }

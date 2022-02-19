@@ -28,10 +28,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Value.Immutable
-public abstract class PlatformMatchRules {
-  abstract List<PlatformMatchRule> rules();
+public abstract class PackageFinderRules {
+  abstract List<PackageFinderRule> rules();
 
-  public ImmutablePlatformMatchRules with(PlatformMatchRule rule) {
+  public ImmutablePackageFinderRules with(PackageFinderRule rule) {
     return builder()
       .rules(rules())
       .addRules(rule)
@@ -40,7 +40,7 @@ public abstract class PlatformMatchRules {
 
   @Value.Auxiliary
   public Optional<DistributionPackage> packageFor(Distribution distribution) {
-    for (PlatformMatchRule rule : rules()) {
+    for (PackageFinderRule rule : rules()) {
       if (rule.match().match(distribution)) {
         Optional<DistributionPackage> result = rule.finder().packageFor(distribution);
         if (result.isPresent()) {
@@ -52,11 +52,11 @@ public abstract class PlatformMatchRules {
   }
 
 
-  public static ImmutablePlatformMatchRules empty() {
+  public static ImmutablePackageFinderRules empty() {
     return builder().build();
   }
 
-  public static ImmutablePlatformMatchRules.Builder builder() {
-    return ImmutablePlatformMatchRules.builder();
+  public static ImmutablePackageFinderRules.Builder builder() {
+    return ImmutablePackageFinderRules.builder();
   }
 }

@@ -22,20 +22,19 @@ package de.flapdoodle.embed.mongo.packageresolver;
 
 import org.immutables.value.Value;
 
+import java.util.Set;
+
 @Value.Immutable
-@Value.Style(stagedBuilder = true)
-public interface PlatformMatchRule {
-  DistributionMatch match();
-  PackageFinder finder();
+public abstract class FeatureSet {
+	@Value.Parameter
+	protected abstract Set<Feature> features();
 
-  static PlatformMatchRule of(DistributionMatch match, PackageFinder finder) {
-    return builder()
-            .match(match)
-            .finder(finder)
-            .build();
-  }
+	@Value.Auxiliary
+	public boolean enabled(Feature feature) {
+		return features().contains(feature);
+	}
 
-  static ImmutablePlatformMatchRule.MatchBuildStage builder() {
-    return ImmutablePlatformMatchRule.builder();
-  }
+	public static FeatureSet of(Iterable<Feature> features) {
+		return ImmutableFeatureSet.of(features);
+	}
 }

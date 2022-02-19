@@ -32,7 +32,7 @@ import java.util.Optional;
 
 public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
   private final Command command;
-  private final ImmutablePlatformMatchRules rules;
+  private final ImmutablePackageFinderRules rules;
 
   public OSXPackageFinder(Command command) {
     this.command = command;
@@ -40,7 +40,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
   }
 
   @Override
-  public PlatformMatchRules rules() {
+  public PackageFinderRules rules() {
     return rules;
   }
 
@@ -59,11 +59,11 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
     return PlatformMatch.withOs(OS.OS_X).withBitSize(bitSize);
   }
 
-  private static ImmutablePlatformMatchRules rules(Command command) {
+  private static ImmutablePackageFinderRules rules(Command command) {
     FileSet fileSet = fileSetOf(command);
     ArchiveType archiveType = ArchiveType.TGZ;
 
-    ImmutablePlatformMatchRule firstRule = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule firstRule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
                             VersionRange.of("4.0.0", "4.0.27"),
                             VersionRange.of("3.6.0", "3.6.23"),
@@ -79,7 +79,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
                     .build())
             .build();
 
-    ImmutablePlatformMatchRule thirdRule = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule thirdRule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
                             VersionRange.of("3.5.5", "3.5.5"), // missing in overview
                             VersionRange.of("3.4.9", "3.4.24"),
@@ -96,7 +96,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
                     .build())
             .build();
 
-    ImmutablePlatformMatchRule fourthRule = PlatformMatchRule.builder()
+    ImmutablePackageFinderRule fourthRule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
                             VersionRange.of("5.0.5", "5.0.5"),
                             VersionRange.of("5.0.0", "5.0.2"),
@@ -113,7 +113,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
                     .build())
             .build();
 
-      ImmutablePlatformMatchRule toolsRule = PlatformMatchRule.builder()
+      ImmutablePackageFinderRule toolsRule = PackageFinderRule.builder()
           .match(match(BitSize.B64).andThen(DistributionMatch.any(
                   VersionRange.of("5.0.5", "5.0.5"),
                   VersionRange.of("5.0.0", "5.0.2"),
@@ -127,7 +127,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
               .build())
           .build();
 
-      PlatformMatchRule failIfNothingMatches = PlatformMatchRule.builder()
+      PackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
             .match(PlatformMatch.withOs(OS.OS_X))
             .finder(PackageFinder.failWithMessage(distribution -> "osx distribution not supported: " + distribution))
             .build();
@@ -136,7 +136,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
           case MongoDump:
           case MongoImport:
           case MongoRestore:
-              return PlatformMatchRules.empty()
+              return PackageFinderRules.empty()
                   .withRules(
                       toolsRule,
                       firstRule,
@@ -146,7 +146,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
                   );
       }
 
-    return PlatformMatchRules.empty()
+    return PackageFinderRules.empty()
             .withRules(
                     firstRule,
                     thirdRule,

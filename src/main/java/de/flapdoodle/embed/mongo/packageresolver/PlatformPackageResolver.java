@@ -35,7 +35,7 @@ import java.util.Optional;
 public class PlatformPackageResolver implements PackageResolver, HasPlatformMatchRules {
 
   private final Command command;
-  private final PlatformMatchRules rules;
+  private final PackageFinderRules rules;
 
   public PlatformPackageResolver(Command command) {
     // TODO system property finder
@@ -46,11 +46,11 @@ public class PlatformPackageResolver implements PackageResolver, HasPlatformMatc
     // https://www.mongodb.org/dl/windows
 
     this.command = command;
-    this.rules = PlatformMatchRules.empty()
-        .with(PlatformMatchRule.of(PlatformMatch.withOs(OS.Windows), new WindowsPackageFinder(command)))
-        .with(PlatformMatchRule.of(PlatformMatch.withOs(OS.OS_X), new OSXPackageFinder(command)))
-        .with(PlatformMatchRule.of(PlatformMatch.withOs(OS.Linux), new LinuxPackageFinder(command)))
-        .with(PlatformMatchRule.of(PlatformMatch.withOs(OS.Solaris), new SolarisPackageFinder(command)));
+    this.rules = PackageFinderRules.empty()
+        .with(PackageFinderRule.of(PlatformMatch.withOs(OS.Windows), new WindowsPackageFinder(command)))
+        .with(PackageFinderRule.of(PlatformMatch.withOs(OS.OS_X), new OSXPackageFinder(command)))
+        .with(PackageFinderRule.of(PlatformMatch.withOs(OS.Linux), new LinuxPackageFinder(command)))
+        .with(PackageFinderRule.of(PlatformMatch.withOs(OS.Solaris), new SolarisPackageFinder(command)));
   }
 
   @Override
@@ -67,7 +67,7 @@ public class PlatformPackageResolver implements PackageResolver, HasPlatformMatc
   }
 
   @Override
-  public PlatformMatchRules rules() {
+  public PackageFinderRules rules() {
     return rules;
   }
 
