@@ -20,9 +20,7 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
-import de.flapdoodle.os.Platform;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -83,7 +81,7 @@ class DefaultFeatureSetResolverTest {
 		}
 	}
 
-	private static Distribution withVersion(String version) {
-		return Distribution.of(Version.of(version), Platform.detect());
+	private static Version withVersion(String version) {
+		return Version.of(version);
 	}
 }

@@ -20,10 +20,10 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.embed.process.distribution.Distribution;
+import de.flapdoodle.embed.process.distribution.Version;
 
 public interface FeatureSetResolver {
-	FeatureSet featuresOf(Distribution distribution);
+	FeatureSet featuresOf(Version version);
 
 	static FeatureSetResolver defaultInstance() {
 		return DefaultFeatureSetResolver.INSTANCE;

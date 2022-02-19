@@ -27,17 +27,10 @@ import java.util.Set;
 @Value.Immutable
 @Value.Style(stagedBuilder = true)
 public interface FeatureSetRule {
-  DistributionMatch match();
+  VersionRange versionRange();
   Set<Feature> features();
 
-  static FeatureSetRule of(DistributionMatch match, Feature ... features) {
-    return builder()
-            .match(match)
-            .addFeatures(features)
-            .build();
-  }
-
-  static ImmutableFeatureSetRule.MatchBuildStage builder() {
+  static ImmutableFeatureSetRule.VersionRangeBuildStage builder() {
     return ImmutableFeatureSetRule.builder();
   }
 }

@@ -20,7 +20,7 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.embed.process.distribution.Distribution;
+import de.flapdoodle.embed.process.distribution.Version;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,9 +36,9 @@ public class DefaultFeatureSetResolver implements FeatureSetResolver {
 	public static DefaultFeatureSetResolver INSTANCE=new DefaultFeatureSetResolver();
 
 	@Override
-	public FeatureSet featuresOf(Distribution distribution) {
+	public FeatureSet featuresOf(Version distribution) {
 		Set<Feature> features = rules.stream()
-			.filter(rule -> rule.match().match(distribution))
+			.filter(rule -> rule.versionRange().match(distribution))
 			.flatMap(rule -> rule.features().stream())
 			.collect(Collectors.toSet());
 
@@ -63,7 +63,7 @@ public class DefaultFeatureSetResolver implements FeatureSetResolver {
 
 	private static FeatureSetRule enable(Feature feature, VersionRange range) {
 		return FeatureSetRule.builder()
-			.match(DistributionMatch.any(range))
+			.versionRange(range)
 			.addFeatures(feature)
 			.build();
 	}
