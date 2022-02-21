@@ -10,7 +10,7 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 ### Maven
 
-[![Maven Central](https://img.shields.io/maven-central/v/de.flapdoodle.embed/de.flapdoodle.embed.mongo.svg)](https://maven-badges.herokuapp.com/maven-central/de.flapdoodle.embed/de.flapdoodle.embed.mongo.processresolver)
+[![Maven Central](https://img.shields.io/maven-central/v/de.flapdoodle.embed/de.flapdoodle.embed.mongo.packageresolver.svg)](https://maven-badges.herokuapp.com/maven-central/de.flapdoodle.embed/de.flapdoodle.embed.mongo.packageresolver)
 
 Snapshots (Repository http://oss.sonatype.org/content/repositories/snapshots)
 
