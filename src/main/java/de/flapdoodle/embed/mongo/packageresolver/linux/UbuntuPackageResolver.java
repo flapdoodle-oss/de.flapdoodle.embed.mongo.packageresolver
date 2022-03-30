@@ -113,7 +113,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 							UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10,
 							UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10,
 							UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10,
-							UbuntuVersion.Ubuntu_21_10
+							UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04
 						).andThen(ubuntu18xxMongoVersions))
 					.finder(UrlTemplatePackageResolver.builder()
 							.fileSet(fileSet)
@@ -143,7 +143,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 		
 		PackageFinderRule ubuntu20And21arm = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.ARM,
-						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10)
+						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04)
 						.andThen(ubuntu20xxMongoVersions))
 					.finder(UrlTemplatePackageResolver.builder()
 							.fileSet(fileSet)
@@ -154,7 +154,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 			PackageFinderRule tools_ubuntu20And21arm = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.ARM,
-						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10)
+						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04)
 						.andThen(ubuntu20xxMongoVersions))
 					.finder(UrlTemplatePackageResolver.builder()
 							.fileSet(fileSet)
@@ -165,7 +165,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 			PackageFinderRule ubuntu20And21x64 = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.X86,
-						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10)
+						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04)
 						.andThen(ubuntu20xxMongoVersions))
 					.finder(UrlTemplatePackageResolver.builder()
 							.fileSet(fileSet)
@@ -176,7 +176,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 			PackageFinderRule tools_ubuntu20And21x64 = PackageFinderRule.builder()
 					.match(match(BitSize.B64, CPUType.X86,
-						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10)
+						UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04)
 						.andThen(ubuntu20xxMongoVersions))
 					.finder(UrlTemplatePackageResolver.builder()
 							.fileSet(fileSet)

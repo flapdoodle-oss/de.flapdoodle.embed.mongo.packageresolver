@@ -103,6 +103,13 @@ class LinuxPackageFinderTest {
   }
 
   @Test
+  public void resolveAmazonPackageFromSample() {
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(AmazonVersion.AmazonLinux2), "5.0.2")
+      .resolvesTo("/linux/mongodb-linux-x86_64-amazon2-{}.tgz");
+  }
+
+  @Test
   public void resolveFallbackPackage() {
     assertThat(linuxWith(CommonArchitecture.X86_64), "5.0.2")
       .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");

@@ -93,7 +93,8 @@ class UbuntuPackageResolverTest {
         Arguments.of(UbuntuVersion.Ubuntu_20_10, "5.0.5 - 5.0.5"),
         Arguments.of(UbuntuVersion.Ubuntu_21_10, "4.4.9 - 4.4.0"),
         Arguments.of(UbuntuVersion.Ubuntu_21_10, "5.0.2 - 5.0.0"),
-        Arguments.of(UbuntuVersion.Ubuntu_21_10, "5.0.5 - 5.0.5")
+        Arguments.of(UbuntuVersion.Ubuntu_21_10, "5.0.5 - 5.0.5"),
+        Arguments.of(UbuntuVersion.Ubuntu_22_04, "5.0.5 - 5.0.5")
     );
   }
 
