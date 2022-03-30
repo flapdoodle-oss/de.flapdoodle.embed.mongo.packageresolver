@@ -56,11 +56,12 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 		final ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
 		DistributionMatch amazon2ArmMongoVersions = DistributionMatch.any(
-			VersionRange.of("5.0.5", "5.0.5"),
+			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.4", "4.4.9"),
-			VersionRange.of("4.2.18", "4.2.18"),
+			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.13", "4.2.16")
 		);
 
@@ -83,14 +84,15 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 			.build();
 
 		DistributionMatch amazon2MongoVersions = DistributionMatch.any(
-			VersionRange.of("5.0.5", "5.0.5"),
+			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.18", "4.2.18"),
+			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.5", "4.2.16"),
 			VersionRange.of("4.2.0", "4.2.3"),
-			VersionRange.of("4.0.0", "4.0.27"),
+			VersionRange.of("4.0.0", "4.0.28"),
 			VersionRange.of("3.6.22", "3.6.23")
 		);
 		final PackageFinderRule amazon2 = PackageFinderRule.builder()
@@ -113,14 +115,15 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 
 		DistributionMatch amazonMongoVersions = DistributionMatch.any(
-			VersionRange.of("5.0.5", "5.0.5"),
+			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.18", "4.2.18"),
+			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.5", "4.2.16"),
 			VersionRange.of("4.2.0", "4.2.3"),
-			VersionRange.of("4.0.0", "4.0.27"),
+			VersionRange.of("4.0.0", "4.0.28"),
 			VersionRange.of("3.6.0", "3.6.23"),
 			VersionRange.of("3.4.9", "3.4.24"),
 			VersionRange.of("3.4.0", "3.4.7"),

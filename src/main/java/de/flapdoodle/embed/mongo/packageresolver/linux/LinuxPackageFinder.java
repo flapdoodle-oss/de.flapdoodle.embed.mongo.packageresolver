@@ -128,7 +128,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 		PackageFinderRule legacy64 = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux).withBitSize(BitSize.B64)
 				.andThen(DistributionMatch.any(
-					VersionRange.of("4.0.0", "4.0.26"),
+					VersionRange.of("4.0.0", "4.0.28"),
 					VersionRange.of("3.6.0", "3.6.22"),
 					VersionRange.of("3.4.9", "3.4.23"),
 					VersionRange.of("3.4.0", "3.4.7"),

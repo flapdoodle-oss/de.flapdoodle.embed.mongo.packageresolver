@@ -79,8 +79,9 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
             .build();
 
     DistributionMatch windows64MongoVersions = DistributionMatch.any(
-      VersionRange.of("5.0.5", "5.0.5"),
+      VersionRange.of("5.0.5", "5.0.6"),
       VersionRange.of("5.0.0", "5.0.2"),
+      VersionRange.of("4.4.13", "4.4.13"),
       VersionRange.of("4.4.11", "4.4.11"),
       VersionRange.of("4.4.0", "4.4.9")
     );
@@ -104,7 +105,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
 
       ImmutablePackageFinderRule windows_x64_2008ssl_rule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                    VersionRange.of("4.0.0", "4.0.27"),
+                    VersionRange.of("4.0.0", "4.0.28"),
                     VersionRange.of("3.6.0", "3.6.23"),
                     VersionRange.of("3.4.9", "3.4.24"),
                     VersionRange.of("3.4.0", "3.4.7"),
@@ -120,7 +121,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
 
     ImmutablePackageFinderRule windows_x64_2012ssl_rule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                    VersionRange.of("4.2.18", "4.2.18"),
+                    VersionRange.of("4.2.18", "4.2.19"),
                     VersionRange.of("4.2.5", "4.2.16"),
                     VersionRange.of("4.2.0", "4.2.3")
             )))

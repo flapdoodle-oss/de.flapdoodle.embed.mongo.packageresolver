@@ -56,7 +56,11 @@ public abstract class AbstractPackageHtmlParser {
 
 		return groupedByName.entrySet().stream()
 			.map(entry -> new ParsedDist(entry.getKey(), entry.getValue().stream()
-				.flatMap(it -> it.urls.stream())
+				.flatMap(it -> it.urls.stream()
+					.map(u -> u.url))
+				.collect(Collectors.toSet())
+				.stream()
+				.map(url -> new ParsedUrl(url))
 				.collect(Collectors.toList())))
 			.collect(Collectors.toList());
 	}
@@ -185,6 +189,11 @@ public abstract class AbstractPackageHtmlParser {
 		public ParsedDist(String name, List<ParsedUrl> urls) {
 			this.name = name;
 			this.urls = urls;
+
+			Set<String> urlsAsSet = urls.stream().map(p -> p.url).collect(Collectors.toSet());
+			if (urlsAsSet.size()!= urls.size()) {
+				throw new IllegalArgumentException("url collisions: "+urls+"("+urlsAsSet+")");
+			}
 		}
 	}
 
@@ -248,13 +257,7 @@ public abstract class AbstractPackageHtmlParser {
 
 		private static List<UrlAndVersions> urlAndVersions(ParsedVersions filtered) {
 			ImmutableSetMultimap<String, String> x = filtered.list.stream()
-				.flatMap(parsedVersion -> parsedVersion.dists
-					.stream()
-					.flatMap(parsedDist -> parsedDist.urls
-						.stream()
-						.map(parsedUrl -> parsedUrl.url))
-					.collect(Collectors.toMap(Function.identity(), entry -> parsedVersion.version))
-					.entrySet().stream())
+				.flatMap(parsedVersion -> urlToVersionSet(parsedVersion).stream())
 				.collect(ImmutableSetMultimap.toImmutableSetMultimap(entry -> entry.getKey().replace(entry.getValue(),"{version}"), Map.Entry::getValue));
 
 			return x.asMap().entrySet().stream()
@@ -269,6 +272,20 @@ public abstract class AbstractPackageHtmlParser {
 				.sorted()
 				.collect(Collectors.toCollection(LinkedHashSet::new));
 		}
+	}
+
+	private static Set<Map.Entry<String, String>> urlToVersionSet(ParsedVersion parsedVersion) {
+		Set<Map.Entry<String, String>> ret = parsedVersion.dists
+			.stream()
+			.flatMap(parsedDist -> parsedDist.urls
+				.stream()
+				.map(parsedUrl -> parsedUrl.url)
+				.collect(Collectors.toSet())
+				.stream())
+			.collect(Collectors.toMap(Function.identity(), entry -> parsedVersion.version))
+			.entrySet();
+		
+		return ret;
 	}
 
 	static class UrlAndVersions {
