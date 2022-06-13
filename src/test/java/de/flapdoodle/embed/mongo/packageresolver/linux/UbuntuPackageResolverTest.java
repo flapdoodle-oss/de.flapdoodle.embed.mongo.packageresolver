@@ -38,6 +38,35 @@ import java.util.stream.Stream;
 
 class UbuntuPackageResolverTest {
   /*
+		Ubuntu 16.04 ARM 64
+			--
+		5.0.6 - 5.0.5, 5.0.2 - 5.0.0, 4.4.13, 4.4.11, 4.4.9 - 4.4.0, 4.2.19 - 4.2.18, 4.2.16 - 4.2.0, 3.4.8, 3.2.22 - 3.2.0, 3.0.15 - 3.0.0, 2.6.12 - 2.6.0
+		https://fastdl.mongodb.org/linux/mongodb-linux-arm64-ubuntu1604-{}.tgz
+		4.0.28 - 4.0.0, 3.6.23 - 3.6.0, 3.4.24 - 3.4.9, 3.4.7 - 3.4.0
+  */
+  @ParameterizedTest
+  @ValueSource(strings = {"5.0.6 - 5.0.5", "5.0.2 - 5.0.0", "4.4.13, 4.4.11", "4.4.9 - 4.4.0", "4.2.19 - 4.2.18", "4.2.16 - 4.2.0", "3.4.8", "3.2.22 - 3.2.0", "3.0.15 - 3.0.0", "2.6.12 - 2.6.0"})
+  public void ubuntu16arm(String version) {
+    assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_16_04), version)
+      .resolvesTo("/linux/mongodb-linux-arm64-ubuntu1604-{}.tgz");
+  }
+
+  /*
+			-----------------------------------
+			Ubuntu 16.04 x64
+			--
+		5.0.6 - 5.0.5, 5.0.2 - 5.0.0, 4.2.4, 3.4.8, 3.2.6 - 3.2.0, 3.0.15 - 3.0.0, 2.6.12 - 2.6.0
+		https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz
+		4.4.13, 4.4.11, 4.4.9 - 4.4.0, 4.2.19 - 4.2.18, 4.2.16 - 4.2.5, 4.2.3 - 4.2.0, 4.0.28 - 4.0.0, 3.6.23 - 3.6.0, 3.4.24 - 3.4.9, 3.4.7 - 3.4.0, 3.2.22 - 3.2.7
+  */
+  @ParameterizedTest
+  @ValueSource(strings = {"5.0.6 - 5.0.5", "5.0.2 - 5.0.0", "4.2.4", "3.4.8", "3.2.6 - 3.2.0", "3.0.15 - 3.0.0", "2.6.12 - 2.6.0"})
+  public void ubuntu16x64(String version) {
+    assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_16_04), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
+  }
+
+  /*
     Ubuntu 18.04 ARM 64
     https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz
     5.0.2 - 5.0.0, 4.4.9 - 4.4.0, 4.2.16 - 4.2.5, 4.2.3 - 4.2.0

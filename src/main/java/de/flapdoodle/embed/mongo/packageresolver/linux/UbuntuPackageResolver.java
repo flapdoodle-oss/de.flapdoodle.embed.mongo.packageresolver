@@ -62,6 +62,80 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
   private static ImmutablePackageFinderRules rules(Command command) {
     ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
+
+		DistributionMatch ubuntu16xxArmMongoVersions = DistributionMatch.any(
+			VersionRange.of("5.0.5", "5.0.6"),
+			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.13", "4.4.13"),
+			VersionRange.of("4.4.11", "4.4.11"),
+			VersionRange.of("4.4.0", "4.4.9"),
+			VersionRange.of("4.2.18", "4.2.19"),
+			VersionRange.of("4.2.0", "4.2.16"),
+			VersionRange.of("3.4.8", "3.4.8"),
+			VersionRange.of("3.2.0", "3.2.22"),
+			VersionRange.of("3.0.0", "3.0.15"),
+			VersionRange.of("2.6.0", "2.6.12")
+		);
+
+		PackageFinderRule ubuntu1604arm = PackageFinderRule.builder()
+			.match(match(BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10)
+				.andThen(ubuntu16xxArmMongoVersions
+				)
+			)
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-arm64-ubuntu1604-{version}.tgz")
+				.build())
+			.build();
+
+		PackageFinderRule tools_ubuntu1604arm = PackageFinderRule.builder()
+			.match(match(BitSize.B64, CPUType.ARM,
+				UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10
+			).andThen(ubuntu16xxArmMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/tools/db/mongodb-database-tools-ubuntu1604-arm64-{tools.version}.tgz")
+				.build())
+			.build();
+
+
+
+		DistributionMatch ubuntu16xxMongoVersions = DistributionMatch.any(
+			VersionRange.of("5.0.5", "5.0.6"),
+			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.2.4", "4.2.4"),
+			VersionRange.of("3.4.8", "3.4.8"),
+			VersionRange.of("3.2.0", "3.2.6"),
+			VersionRange.of("3.0.0", "3.0.15"),
+			VersionRange.of("2.6.0", "2.6.12")
+		);
+
+		PackageFinderRule ubuntu1604x64 = PackageFinderRule.builder()
+			.match(match(BitSize.B64, CPUType.X86,
+				UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10
+			).andThen(ubuntu16xxMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-x86_64-ubuntu1604-{version}.tgz")
+				.build())
+			.build();
+
+		PackageFinderRule tools_ubuntu1604x64 = PackageFinderRule.builder()
+			.match(match(BitSize.B64, CPUType.X86,
+				UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10
+			).andThen(ubuntu16xxMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/tools/db/mongodb-database-tools-ubuntu1604-x86_64-{tools.version}.tgz")
+				.build())
+			.build();
+
+
+
 		DistributionMatch ubuntu18xxArmMongoVersions = DistributionMatch.any(
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
@@ -195,14 +269,16 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 							return PackageFinderRules.empty()
 									.withRules(
 											tools_ubuntu20And21arm, tools_ubuntu20And21x64,
-											tools_ubuntu1804arm, tools_ubuntu1804x64
+											tools_ubuntu1804arm, tools_ubuntu1804x64,
+											tools_ubuntu1604arm, tools_ubuntu1604x64
 									);
 			}
 
     return PackageFinderRules.empty()
             .withRules(
                     ubuntu20And21arm, ubuntu20And21x64,
-                    ubuntu1804arm, ubuntu1804x64
+                    ubuntu1804arm, ubuntu1804x64,
+										ubuntu1604arm, ubuntu1604x64
             );
   }
 }
