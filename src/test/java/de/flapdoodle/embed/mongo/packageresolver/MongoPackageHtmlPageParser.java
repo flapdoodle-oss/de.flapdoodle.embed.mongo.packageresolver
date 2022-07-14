@@ -297,10 +297,14 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 			return Optional.empty();
 		}
 
-		if (name.contains("Ubuntu 12.04") || name.contains("Ubuntu 14.04") || name.contains("Ubuntu 16.04") || name.contains("ubuntu1410-clang")) {
+		if (name.contains("Ubuntu 12.04") || name.contains("Ubuntu 14.04") || name.contains("ubuntu1410-clang")) {
 			return Optional.empty();
 		}
 
+		if (name.contains("Ubuntu 16.04")) {
+			os = Optional.of(OS.Linux);
+			versions = Optional.of(UbuntuVersion.Ubuntu_16_04);
+		}
 		if (name.contains("Ubuntu 18.04")) {
 			os = Optional.of(OS.Linux);
 			versions = Optional.of(UbuntuVersion.Ubuntu_18_04);

@@ -107,7 +107,7 @@ public abstract class AbstractPackageHtmlParser {
 			.sorted(Comparator.comparing(VersionRange::min).reversed())
 			.map(r -> r.min().equals(r.max())
 				? asString(r.min())
-				: asString(r.max()) + " - " + asString(r.min()))
+				: asString(r.min()) + " -> " + asString(r.max()))
 			.collect(Collectors.joining(", "));
 	}
 

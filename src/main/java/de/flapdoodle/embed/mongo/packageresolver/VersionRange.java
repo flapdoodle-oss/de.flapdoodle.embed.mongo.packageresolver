@@ -55,4 +55,8 @@ public abstract class VersionRange implements DistributionMatch {
   public static VersionRange of(String min, String max) {
     return of(NumericVersion.of(min), NumericVersion.of(max));
   }
+
+  public static VersionRange of(String minMax) {
+    return of(NumericVersion.of(minMax), NumericVersion.of(minMax));
+  }
 }

@@ -105,6 +105,7 @@ public final class ExplainRules {
 		List<String> parts=new ArrayList<>();
 		match.os().ifPresent(os -> parts.add("os="+os));
 		match.bitSize().ifPresent(bitSize -> parts.add("bitSize="+bitSize));
+		match.cpuType().ifPresent(cpuType -> parts.add("cpuType="+cpuType));
 
 		if (!match.version().isEmpty()) {
 			parts.add(match.version().stream().map(version -> ""+version)

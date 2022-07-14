@@ -88,14 +88,21 @@ public class HtmlParserResultTester {
       final NumericVersion max;
       final NumericVersion min;
 
-      if (versionRange.contains("-")) {
-        String[] maxMin = versionRange.split("-");
-        Preconditions.checkArgument(maxMin.length==2,"invalid version range: %s",versionRange);
-        min = NumericVersion.of(maxMin[1].trim());
-        max = NumericVersion.of(maxMin[0].trim());
+      if (versionRange.contains("->")) {
+        String[] minMax = versionRange.split("->");
+        Preconditions.checkArgument(minMax.length==2,"invalid version range: %s",versionRange);
+        min = NumericVersion.of(minMax[0].trim());
+        max = NumericVersion.of(minMax[1].trim());
       } else {
-        min = NumericVersion.of(versionRange.trim());
-        max = null;
+        if (versionRange.contains("-")) {
+          String[] maxMin = versionRange.split("-");
+          Preconditions.checkArgument(maxMin.length==2,"invalid version range: %s",versionRange);
+          min = NumericVersion.of(maxMin[1].trim());
+          max = NumericVersion.of(maxMin[0].trim());
+        } else {
+          min = NumericVersion.of(versionRange.trim());
+          max = null;
+        }
       }
       return new VersionGenerator(min, max);
     }

@@ -64,17 +64,10 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 
 		DistributionMatch ubuntu16xxArmMongoVersions = DistributionMatch.any(
-			VersionRange.of("5.0.5", "5.0.6"),
-			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.13", "4.4.13"),
-			VersionRange.of("4.4.11", "4.4.11"),
-			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.18", "4.2.19"),
-			VersionRange.of("4.2.0", "4.2.16"),
-			VersionRange.of("3.4.8", "3.4.8"),
-			VersionRange.of("3.2.0", "3.2.22"),
-			VersionRange.of("3.0.0", "3.0.15"),
-			VersionRange.of("2.6.0", "2.6.12")
+			VersionRange.of("4.0.0", "4.0.28"),
+			VersionRange.of("3.6.0", "3.6.23"),
+			VersionRange.of("3.4.9", "3.4.24"),
+			VersionRange.of("3.4.0", "3.4.7")
 		);
 
 		PackageFinderRule ubuntu1604arm = PackageFinderRule.builder()
@@ -103,13 +96,17 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 
 		DistributionMatch ubuntu16xxMongoVersions = DistributionMatch.any(
-			VersionRange.of("5.0.5", "5.0.6"),
-			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.2.4", "4.2.4"),
-			VersionRange.of("3.4.8", "3.4.8"),
-			VersionRange.of("3.2.0", "3.2.6"),
-			VersionRange.of("3.0.0", "3.0.15"),
-			VersionRange.of("2.6.0", "2.6.12")
+			VersionRange.of("4.4.13"),
+			VersionRange.of("4.4.11"),
+			VersionRange.of("4.4.0", "4.4.9"),
+			VersionRange.of("4.2.18", "4.2.19"),
+			VersionRange.of("4.2.5", "4.2.16"),
+			VersionRange.of("4.2.0", "4.2.3"),
+			VersionRange.of("4.0.0", "4.0.28"),
+			VersionRange.of("3.6.0", "3.6.23"),
+			VersionRange.of("3.4.9", "3.4.24"),
+			VersionRange.of("3.4.0", "3.4.7"),
+			VersionRange.of("3.2.7", "3.2.22")
 		);
 
 		PackageFinderRule ubuntu1604x64 = PackageFinderRule.builder()
