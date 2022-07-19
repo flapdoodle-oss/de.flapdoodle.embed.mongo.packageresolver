@@ -120,6 +120,7 @@
                         </goals>
                         <configuration>
                             <rules>
+                                <dependencyConvergence />
                                 <banDuplicateClasses>
                                     <ignoreClasses>
                                         <!-- example of ignoring one specific class -->
@@ -390,14 +391,14 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.22.0</version>
+            <version>3.23.1</version>
             <scope>test</scope>
         </dependency>
         <!-- TODO remove me -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.3.1</version>
+            <version>4.6.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -416,12 +417,12 @@
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.process</artifactId>
-            <version>3.1.9</version>
+            <version>3.1.13</version>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle</groupId>
             <artifactId>de.flapdoodle.os</artifactId>
-            <version>1.1.10</version>
+            <version>1.1.11</version>
         </dependency>
         <dependency>
             <groupId>org.immutables</groupId>
@@ -439,14 +440,14 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>31.0.1-jre</version>
+            <version>31.1-jre</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.30</version>
+            <version>1.7.36</version>
             <scope>test</scope>
         </dependency>
 
@@ -454,7 +455,7 @@
             <!-- jsoup HTML parser library @ https://jsoup.org/ -->
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.14.3</version>
+            <version>1.15.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
