@@ -418,6 +418,7 @@
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.process</artifactId>
             <version>3.1.14</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle</groupId>
