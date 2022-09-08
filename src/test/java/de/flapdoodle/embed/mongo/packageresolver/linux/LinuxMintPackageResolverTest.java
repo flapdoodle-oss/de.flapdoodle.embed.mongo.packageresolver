@@ -57,6 +57,18 @@ class LinuxMintPackageResolverTest {
             .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
   }
 
+  /*
+    Ubuntu 22.04 x64
+    https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz
+    5.0.2 - 5.0.0, 4.4.9 - 4.4.0
+  */
+  @ParameterizedTest
+  @ValueSource(strings = {"5.0.2 - 5.0.0", "4.4.9 - 4.4.0"})
+  public void ubuntu22x64(String version) {
+    assertThat(linuxWith(CommonArchitecture.X86_64, LinuxMintVersion.LINUX_MINT_21_0), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+  }
+
   private static Platform linuxWith(CommonArchitecture architecture, de.flapdoodle.os.Version version) {
     return ImmutablePlatform.builder()
             .operatingSystem(OS.Linux)
