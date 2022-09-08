@@ -417,13 +417,8 @@
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.process</artifactId>
-            <version>3.1.14</version>
+            <version>3.1.15</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>de.flapdoodle</groupId>
-            <artifactId>de.flapdoodle.os</artifactId>
-            <version>1.1.12</version>
         </dependency>
         <dependency>
             <groupId>org.immutables</groupId>
