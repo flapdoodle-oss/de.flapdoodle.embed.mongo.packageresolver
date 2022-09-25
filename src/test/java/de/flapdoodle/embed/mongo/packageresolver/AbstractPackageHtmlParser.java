@@ -122,6 +122,7 @@ public abstract class AbstractPackageHtmlParser {
 				List<String> urls = version.dists.stream()
 					.flatMap(dist -> dist.urls.stream())
 					.map(packageUrl -> packageUrl.url)
+					.sorted()
 					.collect(Collectors.toList());
 
 				String versionLessUrl = urls.stream().map(it -> it.replace(version.version, "{}"))

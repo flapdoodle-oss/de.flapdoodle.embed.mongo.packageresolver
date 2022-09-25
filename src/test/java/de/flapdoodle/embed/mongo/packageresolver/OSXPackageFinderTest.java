@@ -33,10 +33,10 @@ class OSXPackageFinderTest {
 
   /*
     https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-{}.tgz
-    4.0.26 - 4.0.0, 3.6.22 - 3.6.0
+    4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23
   */
   @ParameterizedTest
-  @ValueSource(strings = {"4.0.26 - 4.0.0", "3.6.22 - 3.6.0"})
+  @ValueSource(strings = {"4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23"})
   public void firstSet(String version) {
     assertThat(version)
             .resolvesTo("/osx/mongodb-osx-ssl-x86_64-{}.tgz");
@@ -44,10 +44,10 @@ class OSXPackageFinderTest {
 
   /*
     https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-{}.tgz|https://fastdl.mongodb.org/osx/mongodb-osx-x86_64-{}.tgz
-    3.4.23 - 3.4.9, 3.4.7 - 3.4.0, 3.2.21 - 3.2.0, 3.0.14 - 3.0.4
+    3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.0 -> 3.2.22, 3.0.4 -> 3.0.15
   */
   @ParameterizedTest
-  @ValueSource(strings = {"3.4.23 - 3.4.9", "3.4.7 - 3.4.0", "3.2.21 - 3.2.0", "3.0.14 - 3.0.4"})
+  @ValueSource(strings = {"3.4.9 -> 3.4.24", " 3.4.0 -> 3.4.7", " 3.2.0 -> 3.2.22", " 3.0.4 -> 3.0.15"})
   public void secondSet(String version) {
     assertThat(version)
             .resolvesTo("/osx/mongodb-osx-ssl-x86_64-{}.tgz");
@@ -55,10 +55,10 @@ class OSXPackageFinderTest {
 
   /*
     https://fastdl.mongodb.org/osx/mongodb-osx-x86_64-{}.tgz
-    3.0.3 - 3.0.0, 2.6.12 - 2.6.0
+    3.0.0 -> 3.0.3, 2.6.0 -> 2.6.12
   */
   @ParameterizedTest
-  @ValueSource(strings = {"3.0.3 - 3.0.0", "2.6.12 - 2.6.0"})
+  @ValueSource(strings = {"3.0.0 -> 3.0.3", "2.6.0 -> 2.6.12"})
   public void thirdSet(String version) {
     assertThat(version)
             .resolvesTo("/osx/mongodb-osx-x86_64-{}.tgz");
@@ -66,10 +66,10 @@ class OSXPackageFinderTest {
 
   /*
     https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-{}.tgz
-    5.0.2 - 5.0.0, 4.4.9 - 4.4.0, 4.2.16 - 4.2.5, 4.2.3 - 4.2.0
+    6.0.1, 5.0.12, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3
   */
   @ParameterizedTest
-  @ValueSource(strings = {"5.0.2 - 5.0.0", "4.4.9 - 4.4.0", "4.2.16 - 4.2.5", "4.2.3 - 4.2.0"})
+  @ValueSource(strings = {"6.0.1", " 5.0.12", " 5.0.5 -> 5.0.6", " 5.0.0 -> 5.0.2", " 4.4.16", " 4.4.13", " 4.4.11", " 4.4.0 -> 4.4.9", " 4.2.22", " 4.2.18 -> 4.2.19", " 4.2.5 -> 4.2.16", " 4.2.0 -> 4.2.3"})
   public void fourthSet(String version) {
     assertThat(version)
             .resolvesTo("/osx/mongodb-macos-x86_64-{}.tgz");
