@@ -21,6 +21,7 @@
 package de.flapdoodle.embed.mongo.packageresolver;
 
 import com.google.common.io.Resources;
+import de.flapdoodle.types.Try;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -30,16 +31,34 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MongoToolsPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		public static void main(String[] args) throws IOException {
-				URL url = Resources.getResource("versions/react/mongotools-versions-2021-10-28.html");
-				System.out.println("-> " + url);
-				Document document = Jsoup.parse(Resources.toString(url, StandardCharsets.UTF_8));
+			List<String> resources = Arrays.asList(
+				"versions/react/mongotools-versions-2021-10-28.html",
+				"versions/react/mongotools-versions-2022-09-25.html"
+			);
 
-				ParsedVersions versions = new ParsedVersions(parse(document));
+			List<List<ParsedVersion>> allVersions = resources.stream()
+				//.map(it -> Try.supplier(() -> parse(Jsoup.parse(Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8)))))
+				.map(it -> Try.supplier(() -> Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8))
+					.mapCheckedException(RuntimeException::new)
+					.get())
+				.map(Jsoup::parse)
+				.map(MongoToolsPackageHtmlPageParser::parse)
+				.collect(Collectors.toList());
+
+			ParsedVersions versions = new ParsedVersions(mergeAll(allVersions));
+
+//			URL url = Resources.getResource("versions/react/mongotools-versions-2021-10-28.html");
+//				System.out.println("-> " + url);
+//				Document document = Jsoup.parse(Resources.toString(url, StandardCharsets.UTF_8));
+//
+//				ParsedVersions versions = new ParsedVersions(parse(document));
 //    dump(versions);
 				Set<String> names = versions.names();
 //    List<ParsedVersion> filtered = filter(versions, it -> it.name.contains("indows"));

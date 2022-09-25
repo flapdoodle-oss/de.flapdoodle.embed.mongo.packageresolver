@@ -66,9 +66,11 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
     ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
 		DistributionMatch centos6mongoVersions = DistributionMatch.any(
+			VersionRange.of("4.4.16"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9"),
+			VersionRange.of("4.2.22"),
 			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.5", "4.2.16"),
 			VersionRange.of("4.2.0", "4.2.3"),
@@ -101,11 +103,15 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos7MongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.1"),
+			VersionRange.of("5.0.12"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.16"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9"),
+			VersionRange.of("4.2.22"),
 			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.5", "4.2.16"),
 			VersionRange.of("4.2.0", "4.2.3"),
@@ -141,11 +147,15 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 
 
 		DistributionMatch centos8MongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.1"),
+			VersionRange.of("5.0.12"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.16"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9"),
+			VersionRange.of("4.2.22"),
 			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.5", "4.2.16"),
 			VersionRange.of("4.2.1", "4.2.3"),
@@ -176,8 +186,11 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos8ArmMongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.1"),
+			VersionRange.of("5.0.12"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.16"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.4", "4.4.9")

@@ -33,28 +33,47 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class DebianPackageResolverTest {
-  /*
-    Debian 9 x64
-    https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian92-{}.tgz
-    3.6.23 - 5.0.4
-  */
+  /**
+   * Debian 9 x64
+   * https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian92-{}.tgz
+   * 5.0.12, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.0 -> 4.0.28, 3.6.5 -> 3.6.23
+   */
   @ParameterizedTest
-  @ValueSource(strings = {"5.0.5", "5.0.2 - 5.0.0", "4.4.11", "4.4.9 - 4.4.0", "4.2.18", "4.2.16 - 4.2.5", "4.2.3 - 4.2.0", "4.0.27 - 4.0.0", "3.6.23 - 3.6.5"})
+  @ValueSource(strings = {"5.0.12", " 5.0.5 -> 5.0.6", " 5.0.0 -> 5.0.2", " 4.4.16", " 4.4.13", " 4.4.11", " 4.4.0 -> 4.4.9", " 4.2.22", " 4.2.18 -> 4.2.19", " 4.2.5 -> 4.2.16", " 4.2.0 -> 4.2.3", " 4.0.0 -> 4.0.28", " 3.6.5 -> 3.6.23"})
   public void debian9x64(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, DebianVersion.DEBIAN_9), version)
             .resolvesTo("/linux/mongodb-linux-x86_64-debian92-{}.tgz");
   }
 
-  /*
-    Debian 10 x64
-    https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian10-{}.tgz
-    4.2.13 - 5.0.4
-  */
+  /**
+   * Debian 10 x64
+   * https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian10-{}.tgz
+   * 6.0.1, 5.0.12, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.1 -> 4.2.3
+   */
   @ParameterizedTest
-  @ValueSource(strings = {"5.0.5", "5.0.2 - 5.0.0", "4.4.11", "4.4.9 - 4.4.0", "4.2.18", "4.2.16 - 4.2.5", "4.2.3 - 4.2.1"})
+  @ValueSource(strings = {"6.0.1", " 5.0.12", " 5.0.5 -> 5.0.6", " 5.0.0 -> 5.0.2", " 4.4.16", " 4.4.13", " 4.4.11", " 4.4.0 -> 4.4.9", " 4.2.22", " 4.2.18 -> 4.2.19", " 4.2.5 -> 4.2.16", " 4.2.1 -> 4.2.3"})
   public void debian10x64(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, DebianVersion.DEBIAN_10), version)
             .resolvesTo("/linux/mongodb-linux-x86_64-debian10-{}.tgz");
+  }
+
+  /**
+   * Debian 11 x64
+   * https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian11-{}.tgz
+   * 6.0.1, 5.0.12
+   */
+  @ParameterizedTest
+  @ValueSource(strings = {"6.0.1", " 5.0.12"})
+  public void debian11x64(String version) {
+    assertThat(linuxWith(CommonArchitecture.X86_64, DebianVersion.DEBIAN_11), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-debian11-{}.tgz");
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {" 5.0.5 -> 5.0.6", " 5.0.0 -> 5.0.2", " 4.4.16", " 4.4.13", " 4.4.11", " 4.4.0 -> 4.4.9", " 4.2.22", " 4.2.18 -> 4.2.19", " 4.2.5 -> 4.2.16", " 4.2.1 -> 4.2.3"})
+  public void debian11x64_with_debian10_archives(String version) {
+    assertThat(linuxWith(CommonArchitecture.X86_64, DebianVersion.DEBIAN_11), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-debian10-{}.tgz");
   }
 
   private static Platform linuxWith(CommonArchitecture architecture, de.flapdoodle.os.Version version) {

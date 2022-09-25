@@ -110,11 +110,28 @@ public class HtmlParserResultTester {
     public void forEach(Consumer<NumericVersion> withVersion) {
       if (max!=null) {
         withVersion.accept(min);
-        // TODO interpolate versions
+        between(min, max).forEach(withVersion);
         withVersion.accept(max);
       } else {
         withVersion.accept(min);
       }
+    }
+
+    private static Stream<NumericVersion> between(NumericVersion start, NumericVersion limit) {
+      if (start.major()==limit.major()) {
+        if (start.minor()==limit.minor()) {
+          Stream.Builder<NumericVersion> streamBuilder = Stream.builder();
+          ImmutableNumericVersion current = ImmutableNumericVersion.copyOf(start);
+          while ((current.patch() + 1)<limit.patch()) {
+            current=current.withPatch(current.patch() + 1);
+            streamBuilder.add(current);
+          }
+          return streamBuilder.build();
+        } else {
+          throw new IllegalArgumentException("not supported");
+        }
+      }
+      return Stream.of();
     }
   }
 }

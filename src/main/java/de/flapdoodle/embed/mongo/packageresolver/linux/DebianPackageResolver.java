@@ -61,11 +61,14 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
         final ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
     DistributionMatch debian9MongoVersions = DistributionMatch.any(
+      VersionRange.of("5.0.12"),
       VersionRange.of("5.0.5", "5.0.6"),
       VersionRange.of("5.0.0", "5.0.2"),
-      VersionRange.of("4.4.11", "4.4.11"),
+      VersionRange.of("4.4.16"),
       VersionRange.of("4.4.13", "4.4.13"),
+      VersionRange.of("4.4.11", "4.4.11"),
       VersionRange.of("4.4.0", "4.4.9"),
+      VersionRange.of("4.2.22"),
       VersionRange.of("4.2.18", "4.2.19"),
       VersionRange.of("4.2.5", "4.2.16"),
       VersionRange.of("4.2.0", "4.2.3"),
@@ -93,11 +96,15 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                 .build();
 
     DistributionMatch debian10MongoVersions = DistributionMatch.any(
+      VersionRange.of("6.0.1"),
+      VersionRange.of("5.0.12"),
       VersionRange.of("5.0.5", "5.0.6"),
       VersionRange.of("5.0.0", "5.0.2"),
+      VersionRange.of("4.4.16"),
       VersionRange.of("4.4.13", "4.4.13"),
       VersionRange.of("4.4.11", "4.4.11"),
       VersionRange.of("4.4.0", "4.4.9"),
+      VersionRange.of("4.2.22"),
       VersionRange.of("4.2.18", "4.2.19"),
       VersionRange.of("4.2.5", "4.2.16"),
       VersionRange.of("4.2.1", "4.2.3")
@@ -120,20 +127,45 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                         .build())
                 .build();
 
+    DistributionMatch debian11MongoVersions = DistributionMatch.any(
+      VersionRange.of("6.0.1"),
+      VersionRange.of("5.0.12")
+    );
+
+    final PackageFinderRule debian11 = PackageFinderRule.builder()
+      .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11).andThen(debian11MongoVersions))
+      .finder(UrlTemplatePackageResolver.builder()
+        .fileSet(fileSet)
+        .archiveType(ArchiveType.TGZ)
+        .urlTemplate("/linux/mongodb-linux-x86_64-debian11-{version}.tgz")
+        .build())
+      .build();
+
+    final PackageFinderRule debian11tools = PackageFinderRule.builder()
+      .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11).andThen(debian11MongoVersions))
+      .finder(UrlTemplatePackageResolver.builder()
+        .fileSet(fileSet)
+        .archiveType(ArchiveType.TGZ)
+        .urlTemplate("/tools/db/mongodb-database-tools-debian10-x86_64-{tools.version}.tgz")
+        .build())
+      .build();
+
         switch (command) {
             case MongoDump:
             case MongoImport:
             case MongoRestore:
                 return PackageFinderRules.empty()
                         .withRules(
-                                debian9tools,
-                                debian10tools
+                          debian11tools,
+                          debian10tools,
+                          debian9tools
                         );
             default:
                 return PackageFinderRules.empty()
                         .withRules(
-                                debian9,
-                                debian10
+                          debian11,
+                          debian10,
+                          debian9
                         );
         }
     }

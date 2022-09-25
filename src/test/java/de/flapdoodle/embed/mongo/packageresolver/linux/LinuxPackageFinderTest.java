@@ -38,10 +38,10 @@ class LinuxPackageFinderTest {
   /*
     Linux (legacy) undefined
     https://fastdl.mongodb.org/linux/mongodb-linux-i686-{}.tgz
-    3.2.21 - 3.2.0, 3.0.14 - 3.0.0, 2.6.12 - 2.6.0
+    3.2.0 -> 3.2.22, 3.0.0 -> 3.0.15, 2.6.0 -> 2.6.12
   */
   @ParameterizedTest
-  @ValueSource(strings = {"3.2.21 - 3.2.0", "3.0.14 - 3.0.0", "2.6.12 - 2.6.0"})
+  @ValueSource(strings = {"3.2.0 -> 3.2.22", " 3.0.0 -> 3.0.15", " 2.6.0 -> 2.6.12"})
   public void legacy32Bit(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_32), version)
             .resolvesTo("/linux/mongodb-linux-i686-{}.tgz");
@@ -50,10 +50,10 @@ class LinuxPackageFinderTest {
   /*
     Linux (legacy) x64
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-{}.tgz
-    4.0.26 - 4.0.0, 3.6.22 - 3.6.0, 3.4.23 - 3.4.9, 3.4.7 - 3.4.0, 3.2.21 - 3.2.0, 3.0.14 - 3.0.0, 2.6.12 - 2.6.0
+    4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23, 3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.0 -> 3.2.22, 3.0.0 -> 3.0.15, 2.6.0 -> 2.6.12
   */
   @ParameterizedTest
-  @ValueSource(strings = {"4.0.26 - 4.0.0", "3.6.22 - 3.6.0", "3.4.23 - 3.4.9", "3.4.7 - 3.4.0", "3.2.21 - 3.2.0", "3.0.14 - 3.0.0", "2.6.12 - 2.6.0"})
+  @ValueSource(strings = {"4.0.0 -> 4.0.28", " 3.6.0 -> 3.6.23", " 3.4.9 -> 3.4.24", " 3.4.0 -> 3.4.7", " 3.2.0 -> 3.2.22", " 3.0.0 -> 3.0.15", " 2.6.0 -> 2.6.12"})
   public void  legacy64Bit(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64), version)
             .resolvesTo("/linux/mongodb-linux-x86_64-{}.tgz");

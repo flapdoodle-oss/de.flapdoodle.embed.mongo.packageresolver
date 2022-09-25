@@ -34,15 +34,15 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 class UbuntuPackageResolverTest {
   /*
     Ubuntu 16.04 ARM 64
-    --
-    5.0.5 - 5.0.6, 5.0.0 - 5.0.2, 4.4.13, 4.4.11, 4.4.0 - 4.4.9, 4.2.18 - 4.2.19, 4.2.0 - 4.2.16, 3.4.8, 3.2.0 - 3.2.22, 3.0.0 - 3.0.15, 2.6.0 - 2.6.12
     https://fastdl.mongodb.org/linux/mongodb-linux-arm64-ubuntu1604-{}.tgz
-    4.0.0 - 4.0.28, 3.6.0 - 3.6.23, 3.4.9 - 3.4.24, 3.4.0 - 3.4.7
+    4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23, 3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7
   */
   @ParameterizedTest
   @ValueSource(strings = {"4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7"})
@@ -53,13 +53,11 @@ class UbuntuPackageResolverTest {
 
   /*
     Ubuntu 16.04 x64
-    --
-    5.0.5 - 5.0.6, 5.0.0 - 5.0.2, 4.2.4, 3.4.8, 3.2.0 - 3.2.6, 3.0.0 - 3.0.15, 2.6.0 - 2.6.12
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz
-    4.4.13, 4.4.11, 4.4.0 - 4.4.9, 4.2.18 - 4.2.19, 4.2.5 - 4.2.16, 4.2.0 - 4.2.3, 4.0.0 - 4.0.28, 3.6.0 - 3.6.23, 3.4.9 - 3.4.24, 3.4.0 - 3.4.7, 3.2.7 - 3.2.22
+    4.4.16, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23, 3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.7 -> 3.2.22
   */
   @ParameterizedTest
-  @ValueSource(strings = {"4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22"})
+  @ValueSource(strings = {"4.4.16", " 4.4.13", " 4.4.11", " 4.4.0 -> 4.4.9", " 4.2.22", " 4.2.18 -> 4.2.19", " 4.2.5 -> 4.2.16", " 4.2.0 -> 4.2.3", " 4.0.0 -> 4.0.28", " 3.6.0 -> 3.6.23", " 3.4.9 -> 3.4.24", " 3.4.0 -> 3.4.7", " 3.2.7 -> 3.2.22"})
   public void ubuntu16x64(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_16_04), version)
       .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
@@ -68,10 +66,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 18.04 ARM 64
     https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz
-    5.0.2 - 5.0.0, 4.4.9 - 4.4.0, 4.2.16 - 4.2.5, 4.2.3 - 4.2.0
+    6.0.1, 5.0.12, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3
   */
   @ParameterizedTest
-  @ValueSource(strings = {"5.0.2 - 5.0.0", "4.4.9 - 4.4.0", "4.2.16 - 4.2.5", "4.2.3 - 4.2.0"})
+  @ValueSource(strings = {"6.0.1", " 5.0.12", " 5.0.5 -> 5.0.6", " 5.0.0 -> 5.0.2", " 4.4.16", " 4.4.13", " 4.4.11", " 4.4.0 -> 4.4.9", " 4.2.22", " 4.2.18 -> 4.2.19", " 4.2.5 -> 4.2.16", " 4.2.0 -> 4.2.3"})
   public void ubuntu18arm(String version) {
     assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_18_04), version)
             .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
@@ -80,10 +78,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 18.04 x64
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz
-    5.0.2 - 5.0.0, 4.4.9 - 4.4.0, 4.2.16 - 4.2.5, 4.2.3 - 4.2.0, 4.0.26 - 4.0.1, 3.6.22 - 3.6.20
+    6.0.1, 5.0.12, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.1 -> 4.0.28, 3.6.20 -> 3.6.23
   */
   @ParameterizedTest
-  @ValueSource(strings = {"5.0.2 - 5.0.0", "4.4.9 - 4.4.0", "4.2.16 - 4.2.5", "4.2.3 - 4.2.0", "4.0.26 - 4.0.1", "3.6.22 - 3.6.20"})
+  @ValueSource(strings = {"6.0.1", " 5.0.12", " 5.0.5 -> 5.0.6", " 5.0.0 -> 5.0.2", " 4.4.16", " 4.4.13", " 4.4.11", " 4.4.0 -> 4.4.9", " 4.2.22", " 4.2.18 -> 4.2.19", " 4.2.5 -> 4.2.16", " 4.2.0 -> 4.2.3", " 4.0.1 -> 4.0.28", " 3.6.20 -> 3.6.23"})
   public void ubuntu18x64(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_04), version)
             .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
@@ -112,18 +110,17 @@ class UbuntuPackageResolverTest {
   }
 
   private static Stream<Arguments> ubuntu2xxxOsToMongoVersion() {
+    List<String> versions = Arrays.asList("6.0.1", " 5.0.12", " 5.0.5 -> 5.0.6", " 5.0.0 -> 5.0.2", " 4.4.16", " 4.4.13", " 4.4.11",
+      " 4.4.0 -> 4.4.9");
+
     return Stream.of(
-        Arguments.of(UbuntuVersion.Ubuntu_20_04, "4.4.9 - 4.4.0"),
-        Arguments.of(UbuntuVersion.Ubuntu_20_04, "5.0.2 - 5.0.0"),
-        Arguments.of(UbuntuVersion.Ubuntu_20_04, "5.0.5 - 5.0.5"),
-        Arguments.of(UbuntuVersion.Ubuntu_20_10, "4.4.9 - 4.4.0"),
-        Arguments.of(UbuntuVersion.Ubuntu_20_10, "5.0.2 - 5.0.0"),
-        Arguments.of(UbuntuVersion.Ubuntu_20_10, "5.0.5 - 5.0.5"),
-        Arguments.of(UbuntuVersion.Ubuntu_21_10, "4.4.9 - 4.4.0"),
-        Arguments.of(UbuntuVersion.Ubuntu_21_10, "5.0.2 - 5.0.0"),
-        Arguments.of(UbuntuVersion.Ubuntu_21_10, "5.0.5 - 5.0.5"),
-        Arguments.of(UbuntuVersion.Ubuntu_22_04, "5.0.5 - 5.0.5")
-    );
+        UbuntuVersion.Ubuntu_20_04,
+        UbuntuVersion.Ubuntu_20_10,
+        UbuntuVersion.Ubuntu_21_10,
+        UbuntuVersion.Ubuntu_22_04
+      )
+      .flatMap(ubuntuVersion -> versions.stream()
+        .map(it -> Arguments.of(ubuntuVersion, it)));
   }
 
   private static Platform linuxWith(CommonArchitecture architecture, de.flapdoodle.os.Version version) {

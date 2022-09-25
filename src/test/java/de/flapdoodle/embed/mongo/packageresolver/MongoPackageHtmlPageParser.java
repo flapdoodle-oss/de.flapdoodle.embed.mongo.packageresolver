@@ -54,7 +54,8 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		List<String> resources = Arrays.asList(
 			"versions/react/mongo-db-versions-2021-10-28.html",
 			"versions/react/mongo-db-versions-2022-01-16.html",
-			"versions/react/mongo-db-versions-2022-03-30.html"
+			"versions/react/mongo-db-versions-2022-03-30.html",
+			"versions/react/mongo-db-versions-2022-09-25.html"
 		);
 
 		List<List<ParsedVersion>> allVersions = resources.stream()
@@ -270,6 +271,10 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 
 		if (name.contains("Debian 7.1") || name.contains("Debian 8.1") || name.contains("CentOS 5.5")) {
 			return Optional.empty();
+		}
+		if (name.contains("Debian 11.0")) {
+			os = Optional.of(OS.Linux);
+			versions = Optional.of(DebianVersion.DEBIAN_11);
 		}
 		if (name.contains("Debian 10.0")) {
 			os = Optional.of(OS.Linux);

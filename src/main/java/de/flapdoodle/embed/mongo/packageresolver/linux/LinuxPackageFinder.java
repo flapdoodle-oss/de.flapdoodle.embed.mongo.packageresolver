@@ -105,12 +105,12 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
     /*
       Linux (legacy) undefined
       https://fastdl.mongodb.org/linux/mongodb-linux-i686-{}.tgz
-      3.2.21 - 3.2.0, 3.0.14 - 3.0.0, 2.6.12 - 2.6.0
+			3.2.0 -> 3.2.22, 3.0.0 -> 3.0.15, 2.6.0 -> 2.6.12
     */
 		PackageFinderRule legacy32 = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux).withBitSize(BitSize.B32).andThen(DistributionMatch.any(
-					VersionRange.of("3.2.0", "3.2.21"),
-					VersionRange.of("3.0.0", "3.0.14"),
+					VersionRange.of("3.2.0", "3.2.22"),
+					VersionRange.of("3.0.0", "3.0.15"),
 					VersionRange.of("2.6.0", "2.6.12")
 				)))
 			.finder(UrlTemplatePackageResolver.builder()
@@ -123,17 +123,17 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
   /*
     Linux (legacy) x64
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-{}.tgz
-    4.0.26 - 4.0.0, 3.6.22 - 3.6.0, 3.4.23 - 3.4.9, 3.4.7 - 3.4.0, 3.2.21 - 3.2.0, 3.0.14 - 3.0.0, 2.6.12 - 2.6.0
+    4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23, 3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.0 -> 3.2.22, 3.0.0 -> 3.0.15, 2.6.0 -> 2.6.12
    */
 		PackageFinderRule legacy64 = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(OS.Linux).withBitSize(BitSize.B64)
 				.andThen(DistributionMatch.any(
 					VersionRange.of("4.0.0", "4.0.28"),
-					VersionRange.of("3.6.0", "3.6.22"),
-					VersionRange.of("3.4.9", "3.4.23"),
+					VersionRange.of("3.6.0", "3.6.23"),
+					VersionRange.of("3.4.9", "3.4.24"),
 					VersionRange.of("3.4.0", "3.4.7"),
-					VersionRange.of("3.2.0", "3.2.21"),
-					VersionRange.of("3.0.0", "3.0.14"),
+					VersionRange.of("3.2.0", "3.2.22"),
+					VersionRange.of("3.0.0", "3.0.15"),
 					VersionRange.of("2.6.0", "2.6.12")
 				)))
 			.finder(UrlTemplatePackageResolver.builder()
