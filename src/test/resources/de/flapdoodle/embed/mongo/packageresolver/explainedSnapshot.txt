@@ -49,7 +49,7 @@
       url=/linux/mongodb-linux-x86_64-debian10-{version}.tgz (TGZ)
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_9)) and (5.0.12-5.0.12 or 5.0.5-5.0.6 or 5.0.0-5.0.2 or 4.4.16-4.4.16 or 4.4.13-4.4.13 or 4.4.11-4.4.11 or 4.4.0-4.4.9 or 4.2.22-4.2.22 or 4.2.18-4.2.19 or 4.2.5-4.2.16 or 4.2.0-4.2.3 or 4.0.0-4.0.28 or 3.6.5-3.6.23)
       url=/linux/mongodb-linux-x86_64-debian92-{version}.tgz (TGZ)
-  (os=Linux and (version is any of CentOS_6, CentOS_7, CentOS_8, Redhat_6, Redhat_7, Redhat_8, Oracle_6, Oracle_7, Oracle_8))
+  (os=Linux and (version is any of CentOS_6, CentOS_7, CentOS_8, Redhat_6, Redhat_7, Redhat_8, Redhat_9, Oracle_6, Oracle_7, Oracle_8))
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of CentOS_6, Redhat_6, Oracle_6)) and (4.4.16-4.4.16 or 4.4.13-4.4.13 or 4.4.11-4.4.11 or 4.4.0-4.4.9 or 4.2.22-4.2.22 or 4.2.18-4.2.19 or 4.2.5-4.2.16 or 4.2.0-4.2.3 or 4.0.0-4.0.28 or 3.6.0-3.6.23 or 3.4.9-3.4.24 or 3.4.0-3.4.7 or 3.2.0-3.2.22 or 3.0.0-3.0.15)
       url=/linux/mongodb-linux-x86_64-rhel62-{version}.tgz (TGZ)
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of CentOS_7, Redhat_7, Oracle_7)) and (6.0.1-6.0.1 or 5.0.12-5.0.12 or 5.0.5-5.0.6 or 5.0.0-5.0.2 or 4.4.16-4.4.16 or 4.4.13-4.4.13 or 4.4.11-4.4.11 or 4.4.0-4.4.9 or 4.2.22-4.2.22 or 4.2.18-4.2.19 or 4.2.5-4.2.16 or 4.2.0-4.2.3 or 4.0.0-4.0.28 or 3.6.0-3.6.23 or 3.4.9-3.4.24 or 3.4.0-3.4.7 or 3.2.0-3.2.22 or 3.0.0-3.0.15)
