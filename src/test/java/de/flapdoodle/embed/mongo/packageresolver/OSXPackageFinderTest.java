@@ -20,16 +20,21 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
+import de.flapdoodle.embed.mongo.packageresolver.linux.UbuntuPackageResolver;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
-import de.flapdoodle.os.CommonArchitecture;
-import de.flapdoodle.os.ImmutablePlatform;
-import de.flapdoodle.os.OS;
-import de.flapdoodle.os.Platform;
+import de.flapdoodle.os.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class OSXPackageFinderTest {
+
+  @ParameterizedTest
+  @ValueSource(strings = {"6.0.1 -> 6.0.2"})
+  public void armSet(String version) {
+    assertThat(osx(CommonArchitecture.ARM_64), version)
+      .resolvesTo("/osx/mongodb-macos-arm64-{}.tgz");
+  }
 
   /*
     https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-{}.tgz
@@ -77,17 +82,26 @@ class OSXPackageFinderTest {
 
 
   private static Platform osx() {
+    return osx(CommonArchitecture.X86_64);
+  }
+
+  private static Platform osx(Architecture architecture) {
     return ImmutablePlatform.builder()
-            .operatingSystem(OS.OS_X)
-            .architecture(CommonArchitecture.X86_64)
-            .build();
+      .operatingSystem(OS.OS_X)
+      .architecture(architecture)
+      .build();
   }
 
   private static HtmlParserResultTester assertThat(String versionList) {
-    return HtmlParserResultTester.with(
-            new OSXPackageFinder(Command.Mongo),
-            version -> Distribution.of(Version.of(version), osx()),
-            versionList);
+    return assertThat(osx(), versionList);
   }
+
+  private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
+    return HtmlParserResultTester.with(
+      new OSXPackageFinder(Command.Mongo),
+      version -> Distribution.of(Version.of(version), platform),
+      versionList);
+  }
+
 
 }

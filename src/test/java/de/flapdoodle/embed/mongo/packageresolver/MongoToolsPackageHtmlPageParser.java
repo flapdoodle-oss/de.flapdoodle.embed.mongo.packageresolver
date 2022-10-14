@@ -40,7 +40,8 @@ public class MongoToolsPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		public static void main(String[] args) throws IOException {
 			List<String> resources = Arrays.asList(
 				"versions/react/mongotools-versions-2021-10-28.html",
-				"versions/react/mongotools-versions-2022-09-25.html"
+				"versions/react/mongotools-versions-2022-09-25.html",
+				"versions/react/mongotools-versions-2022-10-14.html"
 			);
 
 			List<List<ParsedVersion>> allVersions = resources.stream()

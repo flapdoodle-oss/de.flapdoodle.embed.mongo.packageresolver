@@ -96,11 +96,11 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 
 		DistributionMatch ubuntu16xxMongoVersions = DistributionMatch.any(
-			VersionRange.of("4.4.16"),
+			VersionRange.of("4.4.16", "4.4.17"),
 			VersionRange.of("4.4.13"),
 			VersionRange.of("4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.22"),
+			VersionRange.of("4.2.22", "4.2.23"),
 			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.5", "4.2.16"),
 			VersionRange.of("4.2.0", "4.2.3"),
@@ -136,15 +136,15 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 
 		DistributionMatch ubuntu18xxArmMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1"),
-			VersionRange.of("5.0.12"),
+			VersionRange.of("6.0.1", "6.0.2"),
+			VersionRange.of("5.0.12", "5.0.13"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.16"),
+			VersionRange.of("4.4.16", "4.4.17"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.22"),
+			VersionRange.of("4.2.22", "4.2.23"),
 			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.5", "4.2.16"),
 			VersionRange.of("4.2.0", "4.2.3")
@@ -176,15 +176,15 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 					.build();
 
 		DistributionMatch ubuntu18xxMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1"),
-			VersionRange.of("5.0.12"),
+			VersionRange.of("6.0.1", "6.0.2"),
+			VersionRange.of("5.0.12", "5.0.13"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.16"),
+			VersionRange.of("4.4.16", "4.4.17"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.22"),
+			VersionRange.of("4.2.22", "4.2.23"),
 			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.5", "4.2.16"),
 			VersionRange.of("4.2.0", "4.2.3"),
@@ -218,11 +218,11 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 					.build();
 
 		DistributionMatch ubuntu20xxMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1"),
-			VersionRange.of("5.0.12"),
+			VersionRange.of("6.0.1", "6.0.2"),
+			VersionRange.of("5.0.12", "5.0.13"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.16"),
+			VersionRange.of("4.4.16", "4.4.17"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9")

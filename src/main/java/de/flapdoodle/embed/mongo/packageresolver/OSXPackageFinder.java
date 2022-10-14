@@ -26,7 +26,9 @@ import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
+import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.OS;
+import de.flapdoodle.os.linux.UbuntuVersion;
 
 import java.util.Optional;
 
@@ -59,9 +61,25 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
     return PlatformMatch.withOs(OS.OS_X).withBitSize(bitSize);
   }
 
+  private static PlatformMatch match(BitSize bitSize, CPUType cpuType) {
+    return PlatformMatch.withOs(OS.OS_X).withBitSize(bitSize).withCpuType(cpuType);
+  }
+
+
   private static ImmutablePackageFinderRules rules(Command command) {
     FileSet fileSet = fileSetOf(command);
     ArchiveType archiveType = ArchiveType.TGZ;
+
+    ImmutablePackageFinderRule armRule = PackageFinderRule.builder()
+            .match(match(BitSize.B64, CPUType.ARM).andThen(DistributionMatch.any(
+                VersionRange.of("6.0.1", "6.0.2")
+            )))
+            .finder(UrlTemplatePackageResolver.builder()
+                .fileSet(fileSet)
+                .archiveType(archiveType)
+                .urlTemplate("/osx/mongodb-macos-arm64-{version}.tgz")
+                .build())
+            .build();
 
     ImmutablePackageFinderRule firstRule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
@@ -98,15 +116,15 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
 
     ImmutablePackageFinderRule fourthRule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                            VersionRange.of("6.0.1"),
-                            VersionRange.of("5.0.12"),
+                            VersionRange.of("6.0.1", "6.0.2"),
+                            VersionRange.of("5.0.12", "5.0.13"),
                             VersionRange.of("5.0.5", "5.0.6"),
                             VersionRange.of("5.0.0", "5.0.2"),
-                            VersionRange.of("4.4.16"),
+                            VersionRange.of("4.4.16", "4.4.17"),
                             VersionRange.of("4.4.13", "4.4.13"),
                             VersionRange.of("4.4.11", "4.4.11"),
                             VersionRange.of("4.4.0", "4.4.9"),
-                            VersionRange.of("4.2.22"),
+                            VersionRange.of("4.2.22", "4.2.23"),
                             VersionRange.of("4.2.18", "4.2.19"),
                             VersionRange.of("4.2.5", "4.2.16"),
                             VersionRange.of("4.2.0", "4.2.3")
@@ -120,11 +138,11 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
 
       ImmutablePackageFinderRule toolsRule = PackageFinderRule.builder()
           .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                  VersionRange.of("6.0.1"),
-                  VersionRange.of("5.0.12"),
+                  VersionRange.of("6.0.1", "6.0.2"),
+                  VersionRange.of("5.0.12", "5.0.13"),
                   VersionRange.of("5.0.5", "5.0.6"),
                   VersionRange.of("5.0.0", "5.0.2"),
-                  VersionRange.of("4.4.16"),
+                  VersionRange.of("4.4.16", "4.4.17"),
                   VersionRange.of("4.4.13", "4.4.13"),
                   VersionRange.of("4.4.11", "4.4.11"),
                   VersionRange.of("4.4.0", "4.4.9")
@@ -157,6 +175,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
 
     return PackageFinderRules.empty()
             .withRules(
+                    armRule,
                     firstRule,
                     thirdRule,
                     fourthRule,
