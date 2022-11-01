@@ -17,7 +17,7 @@ Snapshots (Repository http://oss.sonatype.org/content/repositories/snapshots)
 	<dependency>
 		<groupId>de.flapdoodle.embed</groupId>
 		<artifactId>de.flapdoodle.embed.mongo.packageresolver</artifactId>
-		<version>1.0.12-SNAPSHOT</version>
+		<version>1.0.13-SNAPSHOT</version>
 	</dependency>
 
 
