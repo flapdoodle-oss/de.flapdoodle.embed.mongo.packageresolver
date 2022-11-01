@@ -116,8 +116,10 @@ class UbuntuPackageResolverTest {
     return Stream.of(
         UbuntuVersion.Ubuntu_20_04,
         UbuntuVersion.Ubuntu_20_10,
+        UbuntuVersion.Ubuntu_21_04,
         UbuntuVersion.Ubuntu_21_10,
-        UbuntuVersion.Ubuntu_22_04
+        UbuntuVersion.Ubuntu_22_04,
+        UbuntuVersion.Ubuntu_22_10
       )
       .flatMap(ubuntuVersion -> versions.stream()
         .map(it -> Arguments.of(ubuntuVersion, it)));
