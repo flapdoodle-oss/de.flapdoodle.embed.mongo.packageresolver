@@ -34,4 +34,5 @@ public enum Feature {
 
 	DISABLE_USE_PREALLOC, /* disable usePreAlloc >= 4.2.0 */
 	DISABLE_USE_SMALL_FILES,  /* disable useSmallFiles >= 4.2.0 */
+	RS_INITIATE, /* rs.initiate() / replSetInitiate >= 4.2.0*/
 }

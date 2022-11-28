@@ -56,7 +56,8 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 			"versions/react/mongo-db-versions-2022-01-16.html",
 			"versions/react/mongo-db-versions-2022-03-30.html",
 			"versions/react/mongo-db-versions-2022-09-25.html",
-			"versions/react/mongo-db-versions-2022-10-14.html"
+			"versions/react/mongo-db-versions-2022-10-14.html",
+			"versions/react/mongo-db-versions-2022-11-27.html"
 		);
 
 		List<List<ParsedVersion>> allVersions = resources.stream()

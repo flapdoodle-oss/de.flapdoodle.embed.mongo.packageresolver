@@ -57,7 +57,8 @@ public class DefaultFeatureSetResolver implements FeatureSetResolver {
 			enable(Feature.NO_HTTP_INTERFACE_ARG, VersionRange.of("3.6.0", MAX_VERSION)),
 			enable(Feature.NO_BIND_IP_TO_LOCALHOST, VersionRange.of("3.6.0", MAX_VERSION)),
 			enable(Feature.DISABLE_USE_PREALLOC, VersionRange.of("4.2.13", MAX_VERSION)),
-			enable(Feature.DISABLE_USE_SMALL_FILES, VersionRange.of("4.2.13", MAX_VERSION))
+			enable(Feature.DISABLE_USE_SMALL_FILES, VersionRange.of("4.2.13", MAX_VERSION)),
+			enable(Feature.RS_INITIATE, VersionRange.of("4.2.0", MAX_VERSION))
 		));
 	}
 

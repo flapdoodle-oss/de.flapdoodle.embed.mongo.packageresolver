@@ -410,7 +410,7 @@
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.process</artifactId>
-            <version>3.2.7</version>
+            <version>3.2.8</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

@@ -61,7 +61,8 @@ class DefaultFeatureSetResolverTest {
 			Arguments.of(Feature.NO_BIND_IP_TO_LOCALHOST, "3.6.0"),
 			Arguments.of(Feature.NO_HTTP_INTERFACE_ARG, "3.6.0"),
 			Arguments.of(Feature.DISABLE_USE_PREALLOC, "4.2.13"),
-			Arguments.of(Feature.DISABLE_USE_SMALL_FILES, "4.2.13")
+			Arguments.of(Feature.DISABLE_USE_SMALL_FILES, "4.2.13"),
+			Arguments.of(Feature.RS_INITIATE, "4.2.0")
 		);
 	}
 
