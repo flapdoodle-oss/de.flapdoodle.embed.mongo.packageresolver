@@ -70,9 +70,23 @@ class DebianPackageResolverTest {
   }
 
   @ParameterizedTest
+  @ValueSource(strings = {"6.0.1 -> 6.0.3", "5.0.12 -> 5.0.14"})
+  public void debian12x64(String version) {
+    assertThat(linuxWith(CommonArchitecture.X86_64, DebianVersion.DEBIAN_12), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-debian11-{}.tgz");
+  }
+
+  @ParameterizedTest
   @ValueSource(strings = {"5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.23", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.1 -> 4.2.3"})
   public void debian11x64_with_debian10_archives(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, DebianVersion.DEBIAN_11), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-debian10-{}.tgz");
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.23", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.1 -> 4.2.3"})
+  public void debian12x64_with_debian10_archives(String version) {
+    assertThat(linuxWith(CommonArchitecture.X86_64, DebianVersion.DEBIAN_12), version)
       .resolvesTo("/linux/mongodb-linux-x86_64-debian10-{}.tgz");
   }
 

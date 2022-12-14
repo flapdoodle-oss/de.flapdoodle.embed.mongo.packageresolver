@@ -110,7 +110,7 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
       VersionRange.of("4.2.1", "4.2.3")
     );
     final PackageFinderRule debian10 = PackageFinderRule.builder()
-                .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11).andThen(debian10MongoVersions))
+                .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian10MongoVersions))
                 .finder(UrlTemplatePackageResolver.builder()
                         .fileSet(fileSet)
                         .archiveType(ArchiveType.TGZ)
@@ -119,7 +119,7 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                 .build();
 
         final PackageFinderRule debian10tools = PackageFinderRule.builder()
-                .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11).andThen(debian10MongoVersions))
+                .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian10MongoVersions))
                 .finder(UrlTemplatePackageResolver.builder()
                         .fileSet(fileSet)
                         .archiveType(ArchiveType.TGZ)
@@ -133,7 +133,7 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
     );
 
     final PackageFinderRule debian11 = PackageFinderRule.builder()
-      .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11).andThen(debian11MongoVersions))
+      .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian11MongoVersions))
       .finder(UrlTemplatePackageResolver.builder()
         .fileSet(fileSet)
         .archiveType(ArchiveType.TGZ)
@@ -142,7 +142,7 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
       .build();
 
     final PackageFinderRule debian11tools = PackageFinderRule.builder()
-      .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11).andThen(debian11MongoVersions))
+      .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian11MongoVersions))
       .finder(UrlTemplatePackageResolver.builder()
         .fileSet(fileSet)
         .archiveType(ArchiveType.TGZ)

@@ -47,7 +47,7 @@ public class MongoToolsPackageHtmlPageParser extends AbstractPackageHtmlParser {
 			List<List<ParsedVersion>> allVersions = resources.stream()
 				//.map(it -> Try.supplier(() -> parse(Jsoup.parse(Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8)))))
 				.map(it -> Try.supplier(() -> Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8))
-					.mapCheckedException(RuntimeException::new)
+					.mapToUncheckedException(RuntimeException::new)
 					.get())
 				.map(Jsoup::parse)
 				.map(MongoToolsPackageHtmlPageParser::parse)
