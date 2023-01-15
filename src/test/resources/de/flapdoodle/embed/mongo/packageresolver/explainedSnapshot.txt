@@ -42,8 +42,8 @@
       url=/linux/mongodb-linux-arm64-ubuntu1604-{version}.tgz (TGZ)
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of Ubuntu_16_04, Ubuntu_16_10)) and (4.4.16-4.4.18 or 4.4.13-4.4.13 or 4.4.11-4.4.11 or 4.4.0-4.4.9 or 4.2.22-4.2.23 or 4.2.18-4.2.19 or 4.2.5-4.2.16 or 4.2.0-4.2.3 or 4.0.0-4.0.28 or 3.6.0-3.6.23 or 3.4.9-3.4.24 or 3.4.0-3.4.7 or 3.2.7-3.2.22)
       url=/linux/mongodb-linux-x86_64-ubuntu1604-{version}.tgz (TGZ)
-  (os=Linux and (version is any of LINUX_MINT_19_0, LINUX_MINT_19_1, LINUX_MINT_19_2, LINUX_MINT_19_3, LINUX_MINT_20_0, LINUX_MINT_20_1, LINUX_MINT_20_2, LINUX_MINT_20_3, LINUX_MINT_21_0))
-    use Ubuntu_18_04 for LINUX_MINT_19_0, LINUX_MINT_19_1, LINUX_MINT_19_2, LINUX_MINT_19_3 and Ubuntu_20_04 for LINUX_MINT_20_0, LINUX_MINT_20_1, LINUX_MINT_20_2, LINUX_MINT_20_3 and Ubuntu_22_04 for LINUX_MINT_21_0
+  (os=Linux and (version is any of LINUX_MINT_19_0, LINUX_MINT_19_1, LINUX_MINT_19_2, LINUX_MINT_19_3, LINUX_MINT_20_0, LINUX_MINT_20_1, LINUX_MINT_20_2, LINUX_MINT_20_3, LINUX_MINT_21_0, LINUX_MINT_21_1))
+    use Ubuntu_18_04 for LINUX_MINT_19_0, LINUX_MINT_19_1, LINUX_MINT_19_2, LINUX_MINT_19_3 and Ubuntu_20_04 for LINUX_MINT_20_0, LINUX_MINT_20_1, LINUX_MINT_20_2, LINUX_MINT_20_3 and Ubuntu_22_04 for LINUX_MINT_21_0, LINUX_MINT_21_1
   (os=Linux and (version is any of DEBIAN_12, DEBIAN_11, DEBIAN_10, DEBIAN_9))
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_11, DEBIAN_12)) and (6.0.1-6.0.3 or 5.0.12-5.0.14)
       url=/linux/mongodb-linux-x86_64-debian11-{version}.tgz (TGZ)
