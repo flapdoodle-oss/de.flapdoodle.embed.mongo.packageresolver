@@ -136,7 +136,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 
 		DistributionMatch ubuntu18xxArmMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.3"),
+			VersionRange.of("6.0.1", "6.0.4"),
 			VersionRange.of("5.0.12", "5.0.14"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
@@ -176,7 +176,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 					.build();
 
 		DistributionMatch ubuntu18xxMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.3"),
+			VersionRange.of("6.0.1", "6.0.4"),
 			VersionRange.of("5.0.12", "5.0.14"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
@@ -222,7 +222,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 					.build();
 
 		DistributionMatch ubuntu20xxMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.3"),
+			VersionRange.of("6.0.1", "6.0.4"),
 			VersionRange.of("5.0.12", "5.0.14"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
@@ -276,12 +276,62 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 							.build())
 					.build();
 
-			switch (command) {
+		DistributionMatch ubuntu22xxMongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.4")
+		);
+
+		PackageFinderRule ubuntu22arm = PackageFinderRule.builder()
+			.match(match(BitSize.B64, CPUType.ARM,
+				UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10)
+				.andThen(ubuntu22xxMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-aarch64-ubuntu2204-{version}.tgz")
+				.build())
+			.build();
+
+		PackageFinderRule tools_ubuntu22arm = PackageFinderRule.builder()
+			.match(match(BitSize.B64, CPUType.ARM,
+				UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10)
+				.andThen(ubuntu22xxMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/tools/db/mongodb-database-tools-ubuntu2204-arm64-{tools.version}.tgz")
+				.build())
+			.build();
+
+		PackageFinderRule ubuntu22x64 = PackageFinderRule.builder()
+			.match(match(BitSize.B64, CPUType.X86,
+				UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10)
+				.andThen(ubuntu22xxMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-x86_64-ubuntu2204-{version}.tgz")
+				.build())
+			.build();
+
+		PackageFinderRule tools_ubuntu22x64 = PackageFinderRule.builder()
+			.match(match(BitSize.B64, CPUType.X86,
+				UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10)
+				.andThen(ubuntu22xxMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/tools/db/mongodb-database-tools-ubuntu2204-x86_64-{tools.version}.tgz")
+				.build())
+			.build();
+
+
+		switch (command) {
 					case MongoDump:
 					case MongoImport:
 					case MongoRestore:
 							return PackageFinderRules.empty()
 									.withRules(
+											tools_ubuntu22arm, tools_ubuntu22x64,
 											tools_ubuntu20to22arm, tools_ubuntu20to22x64,
 											tools_ubuntu1804arm, tools_ubuntu1804x64,
 											tools_ubuntu1604arm, tools_ubuntu1604x64
@@ -290,7 +340,8 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
     return PackageFinderRules.empty()
             .withRules(
-                    ubuntu20to22arm, ubuntu20To22x64,
+										ubuntu22arm, ubuntu22x64,
+										ubuntu20to22arm, ubuntu20To22x64,
                     ubuntu1804arm, ubuntu1804x64,
 										ubuntu1604arm, ubuntu1604x64
             );

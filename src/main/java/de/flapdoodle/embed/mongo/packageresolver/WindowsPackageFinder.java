@@ -79,7 +79,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
             .build();
 
     DistributionMatch windows64MongoVersions = DistributionMatch.any(
-      VersionRange.of("6.0.1", "6.0.3"),
+      VersionRange.of("6.0.1", "6.0.4"),
       VersionRange.of("5.0.12", "5.0.14"),
       VersionRange.of("5.0.5", "5.0.6"),
       VersionRange.of("5.0.0", "5.0.2"),

@@ -103,7 +103,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos7MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.3"),
+			VersionRange.of("6.0.1", "6.0.4"),
 			VersionRange.of("5.0.12", "5.0.14"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
@@ -147,7 +147,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 
 
 		DistributionMatch centos8MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.3"),
+			VersionRange.of("6.0.1", "6.0.4"),
 			VersionRange.of("5.0.12", "5.0.14"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
@@ -188,7 +188,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos8ArmMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.3"),
+			VersionRange.of("6.0.1", "6.0.4"),
 			VersionRange.of("5.0.12", "5.0.14"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
@@ -221,6 +221,30 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 							.build())
 					.build();
 
+		DistributionMatch centos9MongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.4")
+		);
+		PackageFinderRule centos9 = PackageFinderRule.builder()
+			.match(match(BitSize.B64, CPUType.X86,
+				CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
+			).andThen(centos9MongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-x86_64-rhel90-{version}.tgz")
+				.build())
+			.build();
+
+		PackageFinderRule tools_centos9 = PackageFinderRule.builder()
+			.match(match(BitSize.B64, CPUType.X86,
+				CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
+			).andThen(centos9MongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/tools/db/mongodb-database-tools-rhel90-x86_64-{tools.version}.tgz")
+				.build())
+			.build();
 
 			switch (command) {
 					case MongoDump:
@@ -228,12 +252,14 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 					case MongoRestore:
 							return PackageFinderRules.empty()
 									.withRules(
+										tools_centos9,
 											tools_centos6, tools_centos7, tools_centos8, tools_centos8arm
 									);
 			}
 
     return PackageFinderRules.empty()
             .withRules(
+							centos9,
                     centos6, centos7, centos8, centos8arm
             );
   }

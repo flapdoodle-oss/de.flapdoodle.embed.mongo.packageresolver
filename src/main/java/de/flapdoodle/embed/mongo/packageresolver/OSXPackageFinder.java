@@ -72,7 +72,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
 
     ImmutablePackageFinderRule armRule = PackageFinderRule.builder()
             .match(match(BitSize.B64, CPUType.ARM).andThen(DistributionMatch.any(
-                VersionRange.of("6.0.1", "6.0.3")
+                VersionRange.of("6.0.1", "6.0.4")
             )))
             .finder(UrlTemplatePackageResolver.builder()
                 .fileSet(fileSet)
@@ -116,7 +116,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
 
     ImmutablePackageFinderRule fourthRule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                            VersionRange.of("6.0.1", "6.0.3"),
+                            VersionRange.of("6.0.1", "6.0.4"),
                             VersionRange.of("5.0.12", "5.0.14"),
                             VersionRange.of("5.0.5", "5.0.6"),
                             VersionRange.of("5.0.0", "5.0.2"),
@@ -138,7 +138,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
 
       ImmutablePackageFinderRule toolsRule = PackageFinderRule.builder()
           .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                  VersionRange.of("6.0.1", "6.0.3"),
+                  VersionRange.of("6.0.1", "6.0.4"),
                   VersionRange.of("5.0.12", "5.0.14"),
                   VersionRange.of("5.0.5", "5.0.6"),
                   VersionRange.of("5.0.0", "5.0.2"),

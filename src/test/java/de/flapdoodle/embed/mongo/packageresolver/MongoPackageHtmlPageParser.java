@@ -33,10 +33,7 @@ import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.OS;
 import de.flapdoodle.os.Version;
-import de.flapdoodle.os.linux.AmazonVersion;
-import de.flapdoodle.os.linux.CentosVersion;
-import de.flapdoodle.os.linux.DebianVersion;
-import de.flapdoodle.os.linux.UbuntuVersion;
+import de.flapdoodle.os.linux.*;
 import de.flapdoodle.types.Try;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -57,7 +54,8 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 			"versions/react/mongo-db-versions-2022-03-30.html",
 			"versions/react/mongo-db-versions-2022-09-25.html",
 			"versions/react/mongo-db-versions-2022-10-14.html",
-			"versions/react/mongo-db-versions-2022-11-27.html"
+			"versions/react/mongo-db-versions-2022-11-27.html",
+			"versions/react/mongo-db-versions-2023-02-12.html"
 		);
 
 		List<List<ParsedVersion>> allVersions = resources.stream()
@@ -300,6 +298,11 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 			versions = Optional.of(CentosVersion.CentOS_8);
 		}
 
+		if (name.contains("rhel90")) {
+			os = Optional.of(OS.Linux);
+			versions = Optional.of(RedhatVersion.Redhat_9);
+		}
+
 		if (name.contains("SUSE")) {
 			return Optional.empty();
 		}
@@ -319,6 +322,10 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		if (name.contains("Ubuntu 20.04")) {
 			os = Optional.of(OS.Linux);
 			versions = Optional.of(UbuntuVersion.Ubuntu_20_04);
+		}
+		if (name.contains("Ubuntu 22.04")) {
+			os = Optional.of(OS.Linux);
+			versions = Optional.of(UbuntuVersion.Ubuntu_22_04);
 		}
 
 		if (name.contains("Linux (legacy)")) {

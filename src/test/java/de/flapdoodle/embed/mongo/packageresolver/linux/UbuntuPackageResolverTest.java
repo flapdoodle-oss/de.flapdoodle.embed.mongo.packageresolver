@@ -66,10 +66,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 18.04 ARM 64
     https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz
-    6.0.1 -> 6.0.3, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.23, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3
+    6.0.1 -> 6.0.4, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.23, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3
   */
   @ParameterizedTest
-  @ValueSource(strings = {"6.0.1 -> 6.0.3", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.23", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3"})
+  @ValueSource(strings = {"6.0.1 -> 6.0.4", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.23", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3"})
   public void ubuntu18arm(String version) {
     assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_18_04), version)
             .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
@@ -78,10 +78,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 18.04 x64
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz
-    6.0.1 -> 6.0.3, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.23, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.1 -> 4.0.28, 3.6.20 -> 3.6.23
+    6.0.1 -> 6.0.4, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.23, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.1 -> 4.0.28, 3.6.20 -> 3.6.23
   */
   @ParameterizedTest
-  @ValueSource(strings = {"6.0.1 -> 6.0.3", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.23", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23"})
+  @ValueSource(strings = {"6.0.1 -> 6.0.4", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.23", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23"})
   public void ubuntu18x64(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_04), version)
             .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
@@ -104,9 +104,37 @@ class UbuntuPackageResolverTest {
   */
   @ParameterizedTest
   @MethodSource("ubuntu2xxxOsToMongoVersion")
-  void ubuntuAndx64(UbuntuVersion ubuntuVersion, String version) {
+  void ubuntux64(UbuntuVersion ubuntuVersion, String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, ubuntuVersion), version)
             .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+  }
+
+  /*
+    Ubuntu 22.04 ARM 64
+    https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz
+    6.0.4
+  */
+  @ParameterizedTest
+  @ValueSource(strings = {"6.0.4"})
+  public void ubuntu22arm(String version) {
+    assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
+      .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
+    assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_10), version)
+      .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
+  }
+
+  /*
+    Ubuntu 22.04 x64
+    https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz
+    6.0.4
+  */
+  @ParameterizedTest
+  @ValueSource(strings = {"6.0.4"})
+  public void ubuntu22x64(String version) {
+    assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
+    assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_10), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
   }
 
   private static Stream<Arguments> ubuntu2xxxOsToMongoVersion() {

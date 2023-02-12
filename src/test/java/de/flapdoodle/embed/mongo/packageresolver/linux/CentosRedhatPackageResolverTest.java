@@ -55,10 +55,10 @@ class CentosRedhatPackageResolverTest {
   /*
 			RedHat / CentOS 7.0 x64
 			https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-{}.tgz
-			6.0.1 -> 6.0.3, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.23, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23, 3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.0 -> 3.2.22, 3.0.0 -> 3.0.15
+			6.0.1 -> 6.0.4, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.23, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23, 3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.0 -> 3.2.22, 3.0.0 -> 3.0.15
    */
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.1 -> 6.0.3", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
+	@ValueSource(strings = { "6.0.1 -> 6.0.4", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
 	public void centos7(String version) {
 		assertThat(linuxWith(CommonArchitecture.X86_64, CentosVersion.CentOS_7), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
@@ -71,16 +71,16 @@ class CentosRedhatPackageResolverTest {
   /*
  			RedHat / CentOS 8.0 x64
 			https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel80-{}.tgz
-			6.0.1 -> 6.0.3, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.23, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.1 -> 4.2.3, 4.0.14 -> 4.0.28, 3.6.17 -> 3.6.23, 3.4.24
+			6.0.1 -> 6.0.4, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.23, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.1 -> 4.2.3, 4.0.14 -> 4.0.28, 3.6.17 -> 3.6.23, 3.4.24
    */
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.1 -> 6.0.3", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.1 -> 4.2.3", "4.0.14 -> 4.0.28", "3.6.17 -> 3.6.23", "3.4.24" })
+	@ValueSource(strings = { "6.0.1 -> 6.0.4", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.1 -> 4.2.3", "4.0.14 -> 4.0.28", "3.6.17 -> 3.6.23", "3.4.24" })
 	public void centos8(String version) {
 		assertThat(linuxWith(CommonArchitecture.X86_64, CentosVersion.CentOS_8), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
 		assertThat(linuxWith(CommonArchitecture.X86_64, RedhatVersion.Redhat_8), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
-		assertThat(linuxWith(CommonArchitecture.X86_64, OracleVersion.Oracle_9), version)
+		assertThat(linuxWith(CommonArchitecture.X86_64, OracleVersion.Oracle_8), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
 	}
 
@@ -96,9 +96,25 @@ class CentosRedhatPackageResolverTest {
 	}
 
 	/*
+		rhel90 x64
+		https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel90-{}.tgz
+		6.0.4
+	 */
+	@ParameterizedTest
+	@ValueSource(strings = { "6.0.4" })
+	public void centos9new(String version) {
+		assertThat(linuxWith(CommonArchitecture.X86_64, CentosVersion.CentOS_9), version)
+			.resolvesTo("/linux/mongodb-linux-x86_64-rhel90-{}.tgz");
+		assertThat(linuxWith(CommonArchitecture.X86_64, RedhatVersion.Redhat_9), version)
+			.resolvesTo("/linux/mongodb-linux-x86_64-rhel90-{}.tgz");
+		assertThat(linuxWith(CommonArchitecture.X86_64, OracleVersion.Oracle_9), version)
+			.resolvesTo("/linux/mongodb-linux-x86_64-rhel90-{}.tgz");
+	}
+
+	/*
 			RedHat / CentOS 8.2 ARM 64
 			https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-rhel82-{}.tgz
-			6.0.1 -> 6.0.3, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.4 -> 4.4.9
+			6.0.1 -> 6.0.4, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.4 -> 4.4.9
 	*/
 	@ParameterizedTest
 	@ValueSource(strings = { "6.0.1 -> 6.0.3", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.4 -> 4.4.9" })

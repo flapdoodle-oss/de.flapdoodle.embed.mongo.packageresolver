@@ -41,7 +41,9 @@ public class MongoToolsPackageHtmlPageParser extends AbstractPackageHtmlParser {
 			List<String> resources = Arrays.asList(
 				"versions/react/mongotools-versions-2021-10-28.html",
 				"versions/react/mongotools-versions-2022-09-25.html",
-				"versions/react/mongotools-versions-2022-10-14.html"
+				"versions/react/mongotools-versions-2022-10-14.html",
+				"versions/react/mongotools-versions-2022-11-27.html",
+				"versions/react/mongotools-versions-2023-02-12.html"
 			);
 
 			List<List<ParsedVersion>> allVersions = resources.stream()
