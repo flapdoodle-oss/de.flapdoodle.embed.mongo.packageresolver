@@ -109,6 +109,32 @@ class UbuntuPackageResolverTest {
             .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
   }
 
+  @ParameterizedTest
+  @ValueSource(strings = {"6.0.4"})
+  public void ubuntu20arm(String version) {
+    assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_04), version)
+      .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
+    assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_10), version)
+      .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
+    assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_21_04), version)
+      .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
+    assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_21_10), version)
+      .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"6.0.4"})
+  public void ubuntu20x64(String version) {
+    assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_04), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+    assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_10), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+    assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_04), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+    assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_10), version)
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+  }
+
   /*
     Ubuntu 22.04 ARM 64
     https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz

@@ -304,7 +304,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 		PackageFinderRule ubuntu22x64 = PackageFinderRule.builder()
 			.match(match(BitSize.B64, CPUType.X86,
-				UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10)
+				UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10)
 				.andThen(ubuntu22xxMongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
