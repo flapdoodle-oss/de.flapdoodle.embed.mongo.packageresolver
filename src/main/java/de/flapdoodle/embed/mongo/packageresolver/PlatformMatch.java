@@ -62,6 +62,10 @@ public interface PlatformMatch extends DistributionMatch {
     return true;
   }
 
+  static <T> boolean dontMatch(Optional<T> match, T value) {
+    return match.isPresent() && !match.get().equals(value);
+  }
+
   static <T extends Enum<T>> boolean dontMatch(Optional<T> match, T value) {
     return match.isPresent() && match.get()!=value;
   }

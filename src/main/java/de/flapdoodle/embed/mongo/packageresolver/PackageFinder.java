@@ -20,14 +20,14 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.Distribution;
 
 import java.util.Optional;
 import java.util.function.Function;
 
 public interface PackageFinder {
-  Optional<DistributionPackage> packageFor(Distribution distribution);
+  Optional<Package> packageFor(Distribution distribution);
 
   class FailWithMessage implements PackageFinder, HasExplanation {
 
@@ -37,7 +37,7 @@ public interface PackageFinder {
       this.messageFactory = messageFactory;
     }
 
-    @Override public Optional<DistributionPackage> packageFor(Distribution distribution) {
+    @Override public Optional<Package> packageFor(Distribution distribution) {
       throw new IllegalArgumentException(messageFactory.apply(distribution));
     }
 

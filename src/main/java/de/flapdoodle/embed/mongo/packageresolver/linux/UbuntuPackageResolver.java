@@ -21,15 +21,15 @@
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.embed.mongo.packageresolver.*;
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.ImmutableFileSet;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
-import de.flapdoodle.os.OS;
+import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.linux.UbuntuVersion;
 
 import java.util.Optional;
@@ -50,12 +50,12 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 	}
 
 	@Override
-  public Optional<DistributionPackage> packageFor(Distribution distribution) {
+  public Optional<Package> packageFor(Distribution distribution) {
     return rules.packageFor(distribution);
   }
 
 	private static PlatformMatch match(BitSize bitSize, CPUType cpuType, UbuntuVersion... versions) {
-		return PlatformMatch.withOs(OS.Linux).withBitSize(bitSize).withCpuType(cpuType)
+		return PlatformMatch.withOs(CommonOS.Linux).withBitSize(bitSize).withCpuType(cpuType)
 			.withVersion(versions);
 	}
 

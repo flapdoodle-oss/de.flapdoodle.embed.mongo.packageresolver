@@ -24,10 +24,7 @@ import de.flapdoodle.embed.mongo.packageresolver.Command;
 import de.flapdoodle.embed.mongo.packageresolver.HtmlParserResultTester;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
-import de.flapdoodle.os.CommonArchitecture;
-import de.flapdoodle.os.ImmutablePlatform;
-import de.flapdoodle.os.OS;
-import de.flapdoodle.os.Platform;
+import de.flapdoodle.os.*;
 import de.flapdoodle.os.linux.AmazonVersion;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -71,7 +68,7 @@ class AmazonPackageResolverTest {
 
 	private static Platform linuxWith(CommonArchitecture architecture, de.flapdoodle.os.Version version) {
 		return ImmutablePlatform.builder()
-			.operatingSystem(OS.Linux)
+			.operatingSystem(CommonOS.Linux)
 			.architecture(architecture)
 			.version(version)
 			.build();

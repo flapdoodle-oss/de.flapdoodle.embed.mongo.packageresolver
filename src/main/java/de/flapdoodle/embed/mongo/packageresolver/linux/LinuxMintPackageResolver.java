@@ -23,10 +23,10 @@ package de.flapdoodle.embed.mongo.packageresolver.linux;
 import de.flapdoodle.embed.mongo.packageresolver.HasExplanation;
 import de.flapdoodle.embed.mongo.packageresolver.PackageFinder;
 import de.flapdoodle.embed.mongo.packageresolver.PlatformMatch;
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.Distribution;
+import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.ImmutablePlatform;
-import de.flapdoodle.os.OS;
 import de.flapdoodle.os.Version;
 import de.flapdoodle.os.linux.LinuxMintVersion;
 import de.flapdoodle.os.linux.UbuntuVersion;
@@ -45,8 +45,8 @@ public class LinuxMintPackageResolver implements PackageFinder, HasExplanation {
 	}
 
 	@Override
-	public Optional<DistributionPackage> packageFor(Distribution distribution) {
-		if (PlatformMatch.withOs(OS.Linux).withVersion(LinuxMintVersion.values()).match(distribution)) {
+	public Optional<Package> packageFor(Distribution distribution) {
+		if (PlatformMatch.withOs(CommonOS.Linux).withVersion(LinuxMintVersion.values()).match(distribution)) {
 			if (!distribution.platform().version().isPresent()) throw new RuntimeException("version not set: "+distribution);
 			Version currentVersion = distribution.platform().version().get();
 			if (currentVersion instanceof LinuxMintVersion) {

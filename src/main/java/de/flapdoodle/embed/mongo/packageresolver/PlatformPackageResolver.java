@@ -21,10 +21,10 @@
 package de.flapdoodle.embed.mongo.packageresolver;
 
 import de.flapdoodle.embed.mongo.packageresolver.linux.LinuxPackageFinder;
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
-import de.flapdoodle.embed.process.config.store.PackageResolver;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.Distribution;
-import de.flapdoodle.os.OS;
+import de.flapdoodle.embed.process.distribution.PackageResolver;
+import de.flapdoodle.os.CommonOS;
 
 import java.util.Optional;
 
@@ -47,15 +47,15 @@ public class PlatformPackageResolver implements PackageResolver, HasPlatformMatc
 
     this.command = command;
     this.rules = PackageFinderRules.empty()
-        .with(PackageFinderRule.of(PlatformMatch.withOs(OS.Windows), new WindowsPackageFinder(command)))
-        .with(PackageFinderRule.of(PlatformMatch.withOs(OS.OS_X), new OSXPackageFinder(command)))
-        .with(PackageFinderRule.of(PlatformMatch.withOs(OS.Linux), new LinuxPackageFinder(command)))
-        .with(PackageFinderRule.of(PlatformMatch.withOs(OS.Solaris), new SolarisPackageFinder(command)));
+        .with(PackageFinderRule.of(PlatformMatch.withOs(CommonOS.Windows), new WindowsPackageFinder(command)))
+        .with(PackageFinderRule.of(PlatformMatch.withOs(CommonOS.OS_X), new OSXPackageFinder(command)))
+        .with(PackageFinderRule.of(PlatformMatch.withOs(CommonOS.Linux), new LinuxPackageFinder(command)))
+        .with(PackageFinderRule.of(PlatformMatch.withOs(CommonOS.Solaris), new SolarisPackageFinder(command)));
   }
 
   @Override
-  public DistributionPackage packageFor(Distribution distribution) {
-    Optional<DistributionPackage> result = rules.packageFor(distribution);
+  public Package packageFor(Distribution distribution) {
+    Optional<Package> result = rules.packageFor(distribution);
     return result.orElseThrow(() -> {
 
       String message = "could not resolve package for " + distribution + System.lineSeparator() +

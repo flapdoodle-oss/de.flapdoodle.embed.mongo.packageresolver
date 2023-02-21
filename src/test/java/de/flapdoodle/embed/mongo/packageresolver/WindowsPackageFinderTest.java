@@ -22,10 +22,7 @@ package de.flapdoodle.embed.mongo.packageresolver;
 
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
-import de.flapdoodle.os.CommonArchitecture;
-import de.flapdoodle.os.ImmutablePlatform;
-import de.flapdoodle.os.OS;
-import de.flapdoodle.os.Platform;
+import de.flapdoodle.os.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -104,7 +101,7 @@ class WindowsPackageFinderTest {
 
   private static Platform windowsWith(CommonArchitecture architecture) {
     return ImmutablePlatform.builder()
-            .operatingSystem(OS.Windows)
+            .operatingSystem(CommonOS.Windows)
             .architecture(architecture)
             .build();
   }

@@ -91,7 +91,7 @@ class OSXPackageFinderTest {
 
   private static Platform osx(Architecture architecture) {
     return ImmutablePlatform.builder()
-      .operatingSystem(OS.OS_X)
+      .operatingSystem(CommonOS.OS_X)
       .architecture(architecture)
       .build();
   }

@@ -24,15 +24,12 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.io.Resources;
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
-import de.flapdoodle.os.BitSize;
-import de.flapdoodle.os.CPUType;
-import de.flapdoodle.os.OS;
-import de.flapdoodle.os.Version;
+import de.flapdoodle.os.*;
 import de.flapdoodle.os.linux.*;
 import de.flapdoodle.types.Try;
 import org.jsoup.Jsoup;
@@ -123,8 +120,8 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
         .collect(Collectors.toList())))
       .collect(Collectors.toList());
 
-		Set<OS> osSet = ImmutableSet.of(OS.Windows, OS.OS_X, OS.Linux, OS.Solaris, OS.FreeBSD);
-		Preconditions.checkArgument(osSet.size()==OS.values().length,"entries missing");
+		Set<OS> osSet = ImmutableSet.of(CommonOS.Windows, CommonOS.OS_X, CommonOS.Linux, CommonOS.Solaris, CommonOS.FreeBSD);
+		Preconditions.checkArgument(osSet.size()==CommonOS.list().size(),"entries missing");
 
 		List<PackageFinderRule> rules = osSet.stream()
 			.map(os -> asPlatformRules(os, platformAndVersions))
@@ -229,7 +226,7 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		}
 
 		@Override
-    public Optional<DistributionPackage> packageFor(Distribution distribution) {
+    public Optional<Package> packageFor(Distribution distribution) {
 			return rules.packageFor(distribution);
 		}
 	}
@@ -255,17 +252,17 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		}
 
 		if (name.contains("indows")) {
-			os = Optional.of(OS.Windows);
+			os = Optional.of(CommonOS.Windows);
 			if (!bitsize.isPresent()) {
 				bitsize=Optional.of(BitSize.B32);
 			}
 		}
 		if (name.contains("Amazon Linux")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(AmazonVersion.AmazonLinux);
 		}
 		if (name.contains("Amazon Linux 2")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(AmazonVersion.AmazonLinux2);
 		}
 
@@ -273,33 +270,33 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 			return Optional.empty();
 		}
 		if (name.contains("Debian 11.0")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(DebianVersion.DEBIAN_11);
 		}
 		if (name.contains("Debian 10.0")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(DebianVersion.DEBIAN_10);
 		}
 		if (name.contains("Debian 9.2")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(DebianVersion.DEBIAN_9);
 		}
 
 		if (name.contains("CentOS 6.2") || name.contains("CentOS 6.7")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(CentosVersion.CentOS_6);
 		}
 		if (name.contains("CentOS 7.0")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(CentosVersion.CentOS_7);
 		}
 		if (name.contains("CentOS 8.0") || name.contains("CentOS 8.2")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(CentosVersion.CentOS_8);
 		}
 
 		if (name.contains("rhel90")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(RedhatVersion.Redhat_9);
 		}
 
@@ -312,37 +309,37 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		}
 
 		if (name.contains("Ubuntu 16.04")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(UbuntuVersion.Ubuntu_16_04);
 		}
 		if (name.contains("Ubuntu 18.04")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(UbuntuVersion.Ubuntu_18_04);
 		}
 		if (name.contains("Ubuntu 20.04")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(UbuntuVersion.Ubuntu_20_04);
 		}
 		if (name.contains("Ubuntu 22.04")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(UbuntuVersion.Ubuntu_22_04);
 		}
 
 		if (name.contains("Linux (legacy)")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 		}
 		if (name.contains("Linux (legacy) undefined")) {
-			os = Optional.of(OS.Linux);
+			os = Optional.of(CommonOS.Linux);
 			cpuType = Optional.of(CPUType.X86);
 			bitsize = Optional.of(BitSize.B32);
 		}
 
 		if (name.contains("macOS")) {
-			os = Optional.of(OS.OS_X);
+			os = Optional.of(CommonOS.OS_X);
 		}
 
 		if (name.contains("sunos5")) {
-			os = Optional.of(OS.Solaris);
+			os = Optional.of(CommonOS.Solaris);
 		}
 
 		if (!bitsize.isPresent()) {

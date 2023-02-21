@@ -20,13 +20,13 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
-import de.flapdoodle.os.OS;
+import de.flapdoodle.os.CommonOS;
 
 import java.util.Optional;
 
@@ -45,7 +45,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
   }
 
   @Override
-  public Optional<DistributionPackage> packageFor(Distribution distribution) {
+  public Optional<Package> packageFor(Distribution distribution) {
     return rules.packageFor(distribution);
   }
 
@@ -56,7 +56,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
   }
 
   private static PlatformMatch match(BitSize bitSize) {
-    return PlatformMatch.withOs(OS.Windows).withBitSize(bitSize);
+    return PlatformMatch.withOs(CommonOS.Windows).withBitSize(bitSize);
   }
 
   private static ImmutablePackageFinderRules rules(Command command) {
@@ -189,7 +189,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
             .build();
 
     ImmutablePackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
-            .match(PlatformMatch.withOs(OS.Windows))
+            .match(PlatformMatch.withOs(CommonOS.Windows))
             .finder(PackageFinder.failWithMessage(distribution -> "windows distribution not supported: " + distribution))
             .build();
 

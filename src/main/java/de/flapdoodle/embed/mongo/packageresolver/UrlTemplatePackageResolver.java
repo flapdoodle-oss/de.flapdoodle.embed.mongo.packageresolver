@@ -20,8 +20,8 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
@@ -37,9 +37,9 @@ public abstract class UrlTemplatePackageResolver implements PackageFinder, HasEx
   abstract String urlTemplate();
 
   @Override
-  public Optional<DistributionPackage> packageFor(Distribution distribution) {
+  public Optional<Package> packageFor(Distribution distribution) {
     String path=render(urlTemplate(), distribution);
-    return Optional.of(DistributionPackage.of(archiveType(), fileSet(), path));
+    return Optional.of(Package.of(archiveType(), fileSet(), path));
   }
 
   @Value.Auxiliary

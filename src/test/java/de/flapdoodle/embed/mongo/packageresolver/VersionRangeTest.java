@@ -22,6 +22,7 @@ package de.flapdoodle.embed.mongo.packageresolver;
 
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
+import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.Platform;
 import org.junit.jupiter.api.Test;
 
@@ -32,14 +33,14 @@ class VersionRangeTest {
   @Test
   public void mustMatchVersionRange() {
     VersionRange range = VersionRange.of("4.0.0", "4.0.26");
-    boolean result = range.match(Distribution.of(Version.of("4.0.12"), Platform.detect()));
+    boolean result = range.match(Distribution.of(Version.of("4.0.12"), Platform.detect(CommonOS.list())));
     assertThat(result).isTrue();
   }
 
   @Test
   public void mustMatchVersionIfSingleValue() {
     VersionRange range = VersionRange.of("3.3.1", "3.3.1");
-    boolean result = range.match(Distribution.of(Version.of("3.3.1"), Platform.detect()));
+    boolean result = range.match(Distribution.of(Version.of("3.3.1"), Platform.detect(CommonOS.list())));
     assertThat(result).isTrue();
   }
 }

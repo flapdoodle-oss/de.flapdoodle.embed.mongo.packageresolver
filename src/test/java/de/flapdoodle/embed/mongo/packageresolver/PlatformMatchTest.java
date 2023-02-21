@@ -23,6 +23,7 @@ package de.flapdoodle.embed.mongo.packageresolver;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
 import de.flapdoodle.os.CommonArchitecture;
+import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.ImmutablePlatform;
 import de.flapdoodle.os.OS;
 import de.flapdoodle.os.linux.UbuntuVersion;
@@ -35,7 +36,7 @@ class PlatformMatchTest {
   @Test
   void differentVersionsMustNotMatch() {
     ImmutablePlatform platform = ImmutablePlatform.builder()
-            .operatingSystem(OS.Linux)
+            .operatingSystem(CommonOS.Linux)
             .architecture(CommonArchitecture.X86_64)
             .build();
     
@@ -48,7 +49,7 @@ class PlatformMatchTest {
   @Test
   void sameVersionMustNotMatch() {
     ImmutablePlatform platform = ImmutablePlatform.builder()
-            .operatingSystem(OS.Linux)
+            .operatingSystem(CommonOS.Linux)
             .architecture(CommonArchitecture.X86_64)
             .version(UbuntuVersion.Ubuntu_18_04)
             .build();
@@ -62,7 +63,7 @@ class PlatformMatchTest {
   @Test
   void noVersionMustNotMatch() {
     ImmutablePlatform platform = ImmutablePlatform.builder()
-            .operatingSystem(OS.Linux)
+            .operatingSystem(CommonOS.Linux)
             .architecture(CommonArchitecture.X86_64)
             .version(UbuntuVersion.Ubuntu_18_04)
             .build();

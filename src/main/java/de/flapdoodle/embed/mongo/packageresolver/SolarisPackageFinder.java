@@ -20,13 +20,13 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
-import de.flapdoodle.os.OS;
+import de.flapdoodle.os.CommonOS;
 
 import java.util.Optional;
 
@@ -45,7 +45,7 @@ public class SolarisPackageFinder implements PackageFinder, HasPlatformMatchRule
   }
 
   @Override
-  public Optional<DistributionPackage> packageFor(Distribution distribution) {
+  public Optional<Package> packageFor(Distribution distribution) {
     return rules.packageFor(distribution);
   }
 
@@ -56,7 +56,7 @@ public class SolarisPackageFinder implements PackageFinder, HasPlatformMatchRule
   }
 
   private static PlatformMatch match(BitSize bitSize) {
-    return PlatformMatch.withOs(OS.Solaris).withBitSize(bitSize);
+    return PlatformMatch.withOs(CommonOS.Solaris).withBitSize(bitSize);
   }
 
   private static PackageFinderRules rules(Command command) {
@@ -90,7 +90,7 @@ public class SolarisPackageFinder implements PackageFinder, HasPlatformMatchRule
             .build();
 
     PackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
-            .match(PlatformMatch.withOs(OS.Solaris))
+            .match(PlatformMatch.withOs(CommonOS.Solaris))
             .finder(PackageFinder.failWithMessage(distribution -> "solaris distribution not supported: " + distribution))
             .build();
 

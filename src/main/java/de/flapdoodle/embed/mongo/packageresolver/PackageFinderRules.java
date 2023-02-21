@@ -20,7 +20,7 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import org.immutables.value.Value;
 
@@ -39,10 +39,10 @@ public abstract class PackageFinderRules {
   }
 
   @Value.Auxiliary
-  public Optional<DistributionPackage> packageFor(Distribution distribution) {
+  public Optional<Package> packageFor(Distribution distribution) {
     for (PackageFinderRule rule : rules()) {
       if (rule.match().match(distribution)) {
-        Optional<DistributionPackage> result = rule.finder().packageFor(distribution);
+        Optional<Package> result = rule.finder().packageFor(distribution);
         if (result.isPresent()) {
           return result;
         }

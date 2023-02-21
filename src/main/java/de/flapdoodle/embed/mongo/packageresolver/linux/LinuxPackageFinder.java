@@ -21,15 +21,15 @@
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.embed.mongo.packageresolver.*;
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.ImmutableFileSet;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
+import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.ImmutablePlatform;
-import de.flapdoodle.os.OS;
 import de.flapdoodle.os.Version;
 import de.flapdoodle.os.linux.*;
 import org.slf4j.Logger;
@@ -58,7 +58,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 	}
 
 	@Override
-	public Optional<DistributionPackage> packageFor(Distribution distribution) {
+	public Optional<Package> packageFor(Distribution distribution) {
 		return rules.packageFor(distribution);
 	}
 	
@@ -68,19 +68,19 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
     UbuntuPackageResolver ubuntuPackageResolver = new UbuntuPackageResolver(command);
 
     final ImmutablePackageFinderRule ubuntuRule = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(OS.Linux)
+			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(UbuntuVersion.values()))
 			.finder(ubuntuPackageResolver)
 			.build();
 
     final ImmutablePackageFinderRule linuxMintRule = PackageFinderRule.builder()
-      .match(PlatformMatch.withOs(OS.Linux)
+      .match(PlatformMatch.withOs(CommonOS.Linux)
         .withVersion(LinuxMintVersion.values()))
       .finder(new LinuxMintPackageResolver(ubuntuPackageResolver))
       .build();
 
     final ImmutablePackageFinderRule debianRule = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(OS.Linux).withVersion(DebianVersion.values()))
+			.match(PlatformMatch.withOs(CommonOS.Linux).withVersion(DebianVersion.values()))
 			.finder(new DebianPackageResolver(command))
 			.build();
 
@@ -91,13 +91,13 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 			.flatMap(it -> it).collect(Collectors.toList());
 
 		ImmutablePackageFinderRule centosRedhatOracleRule = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(OS.Linux)
+			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(centosRedhatAndOracleVersions))
 			.finder(centosRedhatPackageResolver)
 			.build();
 
 		ImmutablePackageFinderRule amazonRule = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(OS.Linux)
+			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(AmazonVersion.values()))
 			.finder(new AmazonPackageResolver(command))
 			.build();
@@ -108,7 +108,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 			3.2.0 -> 3.2.22, 3.0.0 -> 3.0.15, 2.6.0 -> 2.6.12
     */
 		PackageFinderRule legacy32 = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(OS.Linux).withBitSize(BitSize.B32).andThen(DistributionMatch.any(
+			.match(PlatformMatch.withOs(CommonOS.Linux).withBitSize(BitSize.B32).andThen(DistributionMatch.any(
 					VersionRange.of("3.2.0", "3.2.22"),
 					VersionRange.of("3.0.0", "3.0.15"),
 					VersionRange.of("2.6.0", "2.6.12")
@@ -126,7 +126,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
     4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23, 3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.0 -> 3.2.22, 3.0.0 -> 3.0.15, 2.6.0 -> 2.6.12
    */
 		PackageFinderRule legacy64 = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(OS.Linux).withBitSize(BitSize.B64)
+			.match(PlatformMatch.withOs(CommonOS.Linux).withBitSize(BitSize.B64)
 				.andThen(DistributionMatch.any(
 					VersionRange.of("4.0.0", "4.0.28"),
 					VersionRange.of("3.6.0", "3.6.23"),
@@ -144,7 +144,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 			.build();
 
 		PackageFinderRule hiddenLegacy64 = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(OS.Linux).withBitSize(BitSize.B64)
+			.match(PlatformMatch.withOs(CommonOS.Linux).withBitSize(BitSize.B64)
 				.andThen(DistributionMatch.any(
 					VersionRange.of("3.3.1", "3.3.1"),
 					VersionRange.of("3.5.5", "3.5.5")
@@ -157,7 +157,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 			.build();
 
 		PackageFinderRule hiddenLegacy32 = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(OS.Linux).withBitSize(BitSize.B32)
+			.match(PlatformMatch.withOs(CommonOS.Linux).withBitSize(BitSize.B32)
 				.andThen(DistributionMatch.any(
 					VersionRange.of("3.3.1", "3.3.1"),
 					VersionRange.of("3.5.5", "3.5.5")
@@ -170,7 +170,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 			.build();
 
 		PackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(OS.Linux))
+			.match(PlatformMatch.withOs(CommonOS.Linux))
 			.finder(new FallbackToUbuntuOrFailPackageFinder(ubuntuPackageResolver))
 			.build();
 
@@ -198,7 +198,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 		}
 
 		@Override
-		public Optional<DistributionPackage> packageFor(Distribution distribution) {
+		public Optional<Package> packageFor(Distribution distribution) {
 			if (distribution.platform().distribution().isPresent()) {
 				// only fallback if no linux dist is detected
 				return Optional.empty();
@@ -210,7 +210,7 @@ public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules 
 
 			LOGGER.warn("because there is no package for " + distribution + " we fall back to " + ubuntuLTSFallback);
 
-			Optional<DistributionPackage> resolvedPackage = ubuntuPackageResolver.packageFor(ubuntuLTSFallback);
+			Optional<Package> resolvedPackage = ubuntuPackageResolver.packageFor(ubuntuLTSFallback);
 			if (!resolvedPackage.isPresent()) {
 				throw new IllegalArgumentException("linux distribution not supported: " + distribution + "(with fallback to " + ubuntuLTSFallback + ")");
 			}

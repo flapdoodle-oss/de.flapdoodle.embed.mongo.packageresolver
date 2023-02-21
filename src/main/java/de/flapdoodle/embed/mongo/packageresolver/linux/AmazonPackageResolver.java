@@ -21,15 +21,15 @@
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.embed.mongo.packageresolver.*;
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.ImmutableFileSet;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
-import de.flapdoodle.os.OS;
+import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.linux.AmazonVersion;
 
 import java.util.Optional;
@@ -48,7 +48,7 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 	}
 	
 	@Override
-	public Optional<DistributionPackage> packageFor(final Distribution distribution) {
+	public Optional<Package> packageFor(final Distribution distribution) {
 		return rules.packageFor(distribution);
 	}
 
@@ -182,7 +182,7 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 	private static ImmutablePlatformMatch match(BitSize bitSize, CPUType cpuType, AmazonVersion version) {
 		return PlatformMatch
-			.withOs(OS.Linux)
+			.withOs(CommonOS.Linux)
 			.withVersion(version)
 			.withBitSize(bitSize)
 			.withCpuType(cpuType);

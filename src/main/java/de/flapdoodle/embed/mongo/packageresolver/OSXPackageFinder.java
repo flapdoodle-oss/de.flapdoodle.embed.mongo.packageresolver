@@ -20,15 +20,14 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
-import de.flapdoodle.os.OS;
-import de.flapdoodle.os.linux.UbuntuVersion;
+import de.flapdoodle.os.CommonOS;
 
 import java.util.Optional;
 
@@ -47,7 +46,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
   }
 
   @Override
-  public Optional<DistributionPackage> packageFor(Distribution distribution) {
+  public Optional<Package> packageFor(Distribution distribution) {
     return rules.packageFor(distribution);
   }
 
@@ -58,11 +57,11 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
   }
 
   private static PlatformMatch match(BitSize bitSize) {
-    return PlatformMatch.withOs(OS.OS_X).withBitSize(bitSize);
+    return PlatformMatch.withOs(CommonOS.OS_X).withBitSize(bitSize);
   }
 
   private static PlatformMatch match(BitSize bitSize, CPUType cpuType) {
-    return PlatformMatch.withOs(OS.OS_X).withBitSize(bitSize).withCpuType(cpuType);
+    return PlatformMatch.withOs(CommonOS.OS_X).withBitSize(bitSize).withCpuType(cpuType);
   }
 
 
@@ -155,7 +154,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
           .build();
 
       PackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
-            .match(PlatformMatch.withOs(OS.OS_X))
+            .match(PlatformMatch.withOs(CommonOS.OS_X))
             .finder(PackageFinder.failWithMessage(distribution -> "osx distribution not supported: " + distribution))
             .build();
 

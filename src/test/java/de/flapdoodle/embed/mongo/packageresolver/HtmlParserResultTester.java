@@ -21,7 +21,7 @@
 package de.flapdoodle.embed.mongo.packageresolver;
 
 import com.google.common.base.Preconditions;
-import de.flapdoodle.embed.process.config.store.DistributionPackage;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.Distribution;
 
 import java.util.List;
@@ -59,10 +59,10 @@ public class HtmlParserResultTester {
   public void resolvesTo(String url) {
     versions.forEach(versionGenerator -> {
       versionGenerator.forEach(version -> {
-        Optional<DistributionPackage> result = testee.packageFor(distributionWithVersion.apply(asString(version)));
+        Optional<Package> result = testee.packageFor(distributionWithVersion.apply(asString(version)));
         assertThat(result).describedAs("package for "+version).isPresent();
         String expectedUrl = url.replace("{}", asString(version));
-        assertThat(result.get().archivePath()).isEqualTo(expectedUrl);
+        assertThat(result.get().url()).isEqualTo(expectedUrl);
       });
     });
   }
