@@ -51,10 +51,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 16.04 x64
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz
-    4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.23, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23, 3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.7 -> 3.2.22
+    4.4.16 -> 4.4.19, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.24, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23, 3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.7 -> 3.2.22
   */
   @ParameterizedTest
-  @ValueSource(strings = {"4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.23", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22"})
+  @ValueSource(strings = {"4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22"})
   public void ubuntu16x64(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_16_04), version)
       .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
@@ -63,10 +63,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 18.04 ARM 64
     https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz
-    6.0.1 -> 6.0.4, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.23, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3
+    6.0.1 -> 6.0.5, 5.0.12 -> 5.0.15, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.19, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.24, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3
   */
   @ParameterizedTest
-  @ValueSource(strings = {"6.0.1 -> 6.0.4", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.23", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3"})
+  @ValueSource(strings = {"6.0.1 -> 6.0.5", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3"})
   public void ubuntu18arm(String version) {
     assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_18_04), version)
             .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
@@ -75,10 +75,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 18.04 x64
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz
-    6.0.1 -> 6.0.4, 5.0.12 -> 5.0.14, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.18, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.23, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.1 -> 4.0.28, 3.6.20 -> 3.6.23
+    6.0.1 -> 6.0.5, 5.0.12 -> 5.0.15, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.19, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.24, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.1 -> 4.0.28, 3.6.20 -> 3.6.23
   */
   @ParameterizedTest
-  @ValueSource(strings = {"6.0.1 -> 6.0.4", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.23", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23"})
+  @ValueSource(strings = {"6.0.1 -> 6.0.5", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23"})
   public void ubuntu18x64(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_04), version)
             .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
@@ -107,7 +107,7 @@ class UbuntuPackageResolverTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"6.0.4"})
+  @ValueSource(strings = {"6.0.4 -> 6.0.5"})
   public void ubuntu20arm(String version) {
     assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_04), version)
       .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
@@ -120,7 +120,7 @@ class UbuntuPackageResolverTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"6.0.4"})
+  @ValueSource(strings = {"6.0.4 -> 6.0.5"})
   public void ubuntu20x64(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_04), version)
       .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
@@ -135,10 +135,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 22.04 ARM 64
     https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz
-    6.0.4
+    6.0.4 -> 6.0.5
   */
   @ParameterizedTest
-  @ValueSource(strings = {"6.0.4"})
+  @ValueSource(strings = {"6.0.4 -> 6.0.5"})
   public void ubuntu22arm(String version) {
     assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
       .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
@@ -149,10 +149,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 22.04 x64
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz
-    6.0.4
+    6.0.4 -> 6.0.5
   */
   @ParameterizedTest
-  @ValueSource(strings = {"6.0.4"})
+  @ValueSource(strings = {"6.0.4 -> 6.0.5"})
   public void ubuntu22x64(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
       .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
@@ -161,7 +161,7 @@ class UbuntuPackageResolverTest {
   }
 
   private static Stream<Arguments> ubuntu2xxxOsToMongoVersion() {
-    List<String> versions = Arrays.asList("6.0.1 -> 6.0.3", "5.0.12 -> 5.0.14", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.18", "4.4.13", "4.4.11",
+    List<String> versions = Arrays.asList("6.0.1 -> 6.0.3", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11",
       "4.4.0 -> 4.4.9");
 
     return Stream.of(

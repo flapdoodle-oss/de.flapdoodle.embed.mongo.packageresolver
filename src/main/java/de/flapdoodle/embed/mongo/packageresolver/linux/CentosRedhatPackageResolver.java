@@ -66,11 +66,11 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
     ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
 		DistributionMatch centos6mongoVersions = DistributionMatch.any(
-			VersionRange.of("4.4.16", "4.4.18"),
+			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.22", "4.2.23"),
+			VersionRange.of("4.2.22", "4.2.24"),
 			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.5", "4.2.16"),
 			VersionRange.of("4.2.0", "4.2.3"),
@@ -103,15 +103,15 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos7MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.4"),
-			VersionRange.of("5.0.12", "5.0.14"),
+			VersionRange.of("6.0.1", "6.0.5"),
+			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.16", "4.4.18"),
+			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.22", "4.2.23"),
+			VersionRange.of("4.2.22", "4.2.24"),
 			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.5", "4.2.16"),
 			VersionRange.of("4.2.0", "4.2.3"),
@@ -147,15 +147,15 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 
 
 		DistributionMatch centos8MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.4"),
-			VersionRange.of("5.0.12", "5.0.14"),
+			VersionRange.of("6.0.1", "6.0.5"),
+			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.16", "4.4.18"),
+			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.22", "4.2.23"),
+			VersionRange.of("4.2.22", "4.2.24"),
 			VersionRange.of("4.2.18", "4.2.19"),
 			VersionRange.of("4.2.5", "4.2.16"),
 			VersionRange.of("4.2.1", "4.2.3"),
@@ -188,11 +188,11 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos8ArmMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.4"),
-			VersionRange.of("5.0.12", "5.0.14"),
+			VersionRange.of("6.0.1", "6.0.5"),
+			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.16", "4.4.18"),
+			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.4", "4.4.9")
@@ -222,7 +222,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 					.build();
 
 		DistributionMatch centos9MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.4")
+			VersionRange.of("6.0.3", "6.0.5")
 		);
 		PackageFinderRule centos9 = PackageFinderRule.builder()
 			.match(match(BitSize.B64, CPUType.X86,
