@@ -65,7 +65,29 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
   private static ImmutablePackageFinderRules rules(Command command) {
     ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
+		PlatformMatch centos6x86_64 = match(BitSize.B64, CPUType.X86,
+			CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6);
+
+		PlatformMatch centos7x86_64 = match(BitSize.B64, CPUType.X86,
+			CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7
+		);
+
+		PlatformMatch centos8and9x86_64 = match(BitSize.B64, CPUType.X86,
+			CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8,
+			CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
+		);
+
+		PlatformMatch centos8and9arm_64 = match(BitSize.B64, CPUType.ARM,
+			CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8,
+			CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
+		);
+
+		PlatformMatch centos9x86_64 = match(BitSize.B64, CPUType.X86,
+			CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
+		);
+
 		DistributionMatch centos6mongoVersions = DistributionMatch.any(
+			VersionRange.of("4.4.22"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -81,9 +103,9 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			VersionRange.of("3.2.0", "3.2.22"),
 			VersionRange.of("3.0.0", "3.0.15")
 		);
+
 		PackageFinderRule centos6 = PackageFinderRule.builder()
-			.match(match(BitSize.B64, CPUType.X86,
-				CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6).andThen(centos6mongoVersions))
+			.match(centos6x86_64.andThen(centos6mongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
@@ -92,9 +114,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		PackageFinderRule tools_centos6 = PackageFinderRule.builder()
-			.match(match(BitSize.B64, CPUType.X86,
-					CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6
-				).andThen(centos6mongoVersions))
+			.match(centos6x86_64.andThen(centos6mongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
@@ -103,10 +123,12 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos7MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.5"),
+			VersionRange.of("6.0.1", "6.0.6"),
+			VersionRange.of("5.0.18"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.22"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -124,9 +146,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 		);
 
 		PackageFinderRule centos7 = PackageFinderRule.builder()
-			.match(match(BitSize.B64, CPUType.X86,
-					CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7
-				).andThen(centos7MongoVersions))
+			.match(centos7x86_64.andThen(centos7MongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
@@ -134,10 +154,23 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 				.build())
 			.build();
 
+		DistributionMatch centos7devMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0"),
+			VersionRange.of("6.3.1")
+		);
+
+		PackageFinderRule centos7dev = PackageFinderRule.builder()
+			.match(centos7x86_64.andThen(centos7devMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-x86_64-rhel70-{version}.tgz")
+				.isDevVersion(true)
+				.build())
+			.build();
+
 		PackageFinderRule tools_centos7 = PackageFinderRule.builder()
-			.match(match(BitSize.B64, CPUType.X86,
-					CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7
-				).andThen(centos7MongoVersions))
+			.match(centos7x86_64.andThen(centos7MongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
@@ -147,10 +180,12 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 
 
 		DistributionMatch centos8MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.5"),
+			VersionRange.of("6.0.1", "6.0.6"),
+			VersionRange.of("5.0.18"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.22"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -163,11 +198,9 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			VersionRange.of("3.6.17", "3.6.23"),
 			VersionRange.of("3.4.24", "3.4.24")
 		);
+
 		PackageFinderRule centos8 = PackageFinderRule.builder()
-			.match(match(BitSize.B64, CPUType.X86,
-					CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8,
-					CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
-				).andThen(centos8MongoVersions))
+			.match(centos8and9x86_64.andThen(centos8MongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
@@ -175,11 +208,23 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 				.build())
 			.build();
 
+		DistributionMatch centos8devMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0"),
+			VersionRange.of("6.3.1")
+		);
+
+		PackageFinderRule centos8dev = PackageFinderRule.builder()
+			.match(centos8and9x86_64.andThen(centos8devMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-x86_64-rhel80-{version}.tgz")
+				.isDevVersion(true)
+				.build())
+			.build();
+
 		PackageFinderRule tools_centos8 = PackageFinderRule.builder()
-			.match(match(BitSize.B64, CPUType.X86,
-					CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8,
-					CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
-				).andThen(centos8MongoVersions))
+			.match(centos8and9x86_64.andThen(centos8MongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
@@ -188,32 +233,44 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos8ArmMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.5"),
+			VersionRange.of("6.0.1", "6.0.6"),
+			VersionRange.of("5.0.18"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.22"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
 			VersionRange.of("4.4.4", "4.4.9")
 		);
-		PackageFinderRule centos8arm = PackageFinderRule.builder()
-					.match(match(BitSize.B64, CPUType.ARM,
-						CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8,
-						CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
-					).andThen(centos8ArmMongoVersions))
-					.finder(UrlTemplatePackageResolver.builder()
-							.fileSet(fileSet)
-							.archiveType(ArchiveType.TGZ)
-							.urlTemplate("/linux/mongodb-linux-aarch64-rhel82-{version}.tgz")
-							.build())
-					.build();
 
-			PackageFinderRule tools_centos8arm = PackageFinderRule.builder()
-					.match(match(BitSize.B64, CPUType.ARM,
-							CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8,
-							CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
-						).andThen(centos8ArmMongoVersions))
+		PackageFinderRule centos8arm = PackageFinderRule.builder()
+				.match(centos8and9arm_64.andThen(centos8ArmMongoVersions))
+				.finder(UrlTemplatePackageResolver.builder()
+					.fileSet(fileSet)
+					.archiveType(ArchiveType.TGZ)
+					.urlTemplate("/linux/mongodb-linux-aarch64-rhel82-{version}.tgz")
+					.build())
+				.build();
+
+		DistributionMatch centos8armDevMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0"),
+			VersionRange.of("6.3.1")
+		);
+
+		PackageFinderRule centos8armDev = PackageFinderRule.builder()
+				.match(centos8and9arm_64.andThen(centos8armDevMongoVersions))
+				.finder(UrlTemplatePackageResolver.builder()
+					.fileSet(fileSet)
+					.archiveType(ArchiveType.TGZ)
+					.urlTemplate("/linux/mongodb-linux-aarch64-rhel82-{version}.tgz")
+					.isDevVersion(true)
+					.build())
+				.build();
+
+		PackageFinderRule tools_centos8arm = PackageFinderRule.builder()
+					.match(centos8and9arm_64.andThen(centos8ArmMongoVersions))
 					.finder(UrlTemplatePackageResolver.builder()
 							.fileSet(fileSet)
 							.archiveType(ArchiveType.TGZ)
@@ -222,12 +279,11 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 					.build();
 
 		DistributionMatch centos9MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.3", "6.0.5")
+			VersionRange.of("6.0.3", "6.0.6")
 		);
+
 		PackageFinderRule centos9 = PackageFinderRule.builder()
-			.match(match(BitSize.B64, CPUType.X86,
-				CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
-			).andThen(centos9MongoVersions))
+			.match(centos9x86_64.andThen(centos9MongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
@@ -235,10 +291,23 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 				.build())
 			.build();
 
+		DistributionMatch centos9devMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0"),
+			VersionRange.of("6.3.1")
+		);
+
+		PackageFinderRule centos9dev = PackageFinderRule.builder()
+			.match(centos9x86_64.andThen(centos9devMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-x86_64-rhel90-{version}.tgz")
+				.isDevVersion(true)
+				.build())
+			.build();
+
 		PackageFinderRule tools_centos9 = PackageFinderRule.builder()
-			.match(match(BitSize.B64, CPUType.X86,
-				CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
-			).andThen(centos9MongoVersions))
+			.match(centos9x86_64.andThen(centos9MongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
@@ -259,8 +328,11 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 
     return PackageFinderRules.empty()
             .withRules(
-							centos9,
-                    centos6, centos7, centos8, centos8arm
+							centos9dev, centos9,
+							centos6,
+							centos7dev, centos7,
+							centos8dev, centos8,
+							centos8armDev, centos8arm
             );
   }
 }

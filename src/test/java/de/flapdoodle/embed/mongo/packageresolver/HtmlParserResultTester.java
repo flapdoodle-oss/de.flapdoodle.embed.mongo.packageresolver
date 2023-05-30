@@ -67,6 +67,19 @@ public class HtmlParserResultTester {
     });
   }
 
+  public void resolveDevPackageTo(String url) {
+    versions.forEach(versionGenerator -> {
+      versionGenerator.forEach(version -> {
+        Optional<Package> optionalPackage = testee.packageFor(distributionWithVersion.apply(asString(version)));
+        assertThat(optionalPackage).describedAs("package for "+version).isPresent();
+        String expectedUrl = url.replace("{}", asString(version));
+        Package aPackage = optionalPackage.get();
+        assertThat(aPackage.url()).isEqualTo(expectedUrl);
+        assertThat(aPackage.hint()).isPresent().hasValue("Development Version / Release Candidate");
+      });
+    });
+  }
+
   private static String asString(NumericVersion version) {
     return version.major()+"."+version.minor()+"."+version.patch();
   }

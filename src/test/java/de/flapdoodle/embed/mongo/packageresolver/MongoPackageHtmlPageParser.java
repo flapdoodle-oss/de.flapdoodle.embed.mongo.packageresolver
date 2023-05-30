@@ -31,6 +31,7 @@ import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.*;
 import de.flapdoodle.os.linux.*;
+import de.flapdoodle.types.Pair;
 import de.flapdoodle.types.Try;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -41,28 +42,31 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 
 	public static void main(String[] args) throws IOException {
-		List<String> resources = Arrays.asList(
-			"versions/react/mongo-db-versions-2021-10-28.html",
-			"versions/react/mongo-db-versions-2022-01-16.html",
-			"versions/react/mongo-db-versions-2022-03-30.html",
-			"versions/react/mongo-db-versions-2022-09-25.html",
-			"versions/react/mongo-db-versions-2022-10-14.html",
-			"versions/react/mongo-db-versions-2022-11-27.html",
-			"versions/react/mongo-db-versions-2023-02-12.html",
-			"versions/react/mongo-db-versions-2023-03-16.html"
+		List<Pair<String, Boolean>> resources = Arrays.asList(
+			Pair.of("versions/react/mongo-db-versions-2021-10-28.html", false),
+			Pair.of("versions/react/mongo-db-versions-2022-01-16.html", false),
+			Pair.of("versions/react/mongo-db-versions-2022-03-30.html", false),
+			Pair.of("versions/react/mongo-db-versions-2022-09-25.html", false),
+			Pair.of("versions/react/mongo-db-versions-2022-10-14.html", false),
+			Pair.of("versions/react/mongo-db-versions-2022-11-27.html", false),
+			Pair.of("versions/react/mongo-db-versions-2023-02-12.html", false),
+			Pair.of("versions/react/mongo-db-versions-2023-03-16.html", false),
+			Pair.of("versions/react/mongo-db-versions-2023-05-21.html", false),
+			Pair.of("versions/react/mongo-db-versions-2023-05-21-dev.html", true)
 		);
 
 		List<List<ParsedVersion>> allVersions = resources.stream()
 			//.map(it -> Try.supplier(() -> parse(Jsoup.parse(Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8)))))
-			.map(it -> Try.supplier(() -> Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8))
+			.map(it -> it.mapFirst(path -> Try.supplier(() -> Resources.toString(Resources.getResource(path), StandardCharsets.UTF_8))
 				.mapToUncheckedException(RuntimeException::new)
-				.get())
-			.map(Jsoup::parse)
-			.map(MongoPackageHtmlPageParser::parse)
+				.get()))
+			.map(it -> it.mapFirst(Jsoup::parse))
+			.map(it -> MongoPackageHtmlPageParser.parse(it.first(), it.second()))
 			.collect(Collectors.toList());
 
 		//List<ParsedVersion> versions = mergeAll(allVersions);
@@ -185,17 +189,47 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 	}
 
 	private static PackageFinderRules asVersionDetectionRules(PlatformMatch parent, List<UrlAndVersions> urlAndVersions) {
-    List<PackageFinderRule> list = urlAndVersions.stream().map(entry -> {
-        DistributionMatch match = DistributionMatch.any(compressedVersionsList(entry.versions()));
+    List<PackageFinderRule> list = urlAndVersions.stream()
+			.flatMap(entry -> {
+				List<String> releaseVersions = entry.versions().stream()
+					.filter(it -> !it.second())
+					.map(Pair::first)
+					.collect(Collectors.toList());
+
+        DistributionMatch match = DistributionMatch.any(compressedVersionsList(releaseVersions));
+
 				String url = entry.url();
 				url=url.replace("https://fastdl.mongodb.org","");
-        return PackageFinderRule.of(parent.andThen(match), UrlTemplatePackageResolver.builder()
-          .urlTemplate(url)
-          .fileSet(FileSet.builder()
-            .addEntry(FileType.Executable,"mongod")
-            .build())
-          .archiveType(archiveTypeFromUrl(url))
-          .build());
+
+				PackageFinderRule releaseRule = PackageFinderRule.of(parent.andThen(match), UrlTemplatePackageResolver.builder()
+					.urlTemplate(url)
+					.fileSet(FileSet.builder()
+						.addEntry(FileType.Executable, "mongod")
+						.build())
+					.archiveType(archiveTypeFromUrl(url))
+					.build());
+
+				List<String> devVersions = entry.versions().stream()
+					.filter(it -> it.second())
+					.map(Pair::first)
+					.collect(Collectors.toList());
+
+				if (!devVersions.isEmpty()) {
+					DistributionMatch devMatch = DistributionMatch.any(compressedVersionsList(devVersions));
+
+					PackageFinderRule devRule = PackageFinderRule.of(parent.andThen(devMatch), UrlTemplatePackageResolver.builder()
+						.urlTemplate(url)
+						.fileSet(FileSet.builder()
+							.addEntry(FileType.Executable, "mongod")
+							.build())
+						.archiveType(archiveTypeFromUrl(url))
+						.isDevVersion(true)
+						.build());
+
+					return Stream.of(releaseRule, devRule);
+				}
+				return Stream.of(releaseRule);
+				
       })
       .collect(Collectors.toList());
 
@@ -384,7 +418,7 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		return new Tuple<>(a,b);
 	}
 
-	static List<ParsedVersion> parse(Document document) {
+	static List<ParsedVersion> parse(Document document, boolean isDevVersion) {
 		List<ParsedVersion> versions = new ArrayList<>();
 		Elements divs = document.select("div > div");
 		for (Element div : divs) {
@@ -420,7 +454,7 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 					}
 					parsedDists.add(new ParsedDist(name, parsedUrls));
 				}
-				versions.add(new ParsedVersion(version, parsedDists));
+				versions.add(new ParsedVersion(version, isDevVersion, parsedDists));
 			} else {
 //        System.out.println("##############");
 //        System.out.println(div);

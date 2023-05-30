@@ -22,6 +22,7 @@ package de.flapdoodle.embed.mongo.packageresolver;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSetMultimap;
+import de.flapdoodle.types.Pair;
 
 import java.util.*;
 import java.util.function.Function;
@@ -33,17 +34,17 @@ public abstract class AbstractPackageHtmlParser {
 	static List<ParsedVersion> mergeAll(List<List<ParsedVersion>> allVersions) {
 		List<ParsedVersion> flatmapped = allVersions.stream().flatMap(it -> it.stream()).collect(Collectors.toList());
 
-		Set<String> versions = flatmapped.stream()
-			.map(it -> it.version)
+		Set<Pair<String, Boolean>> versions = flatmapped.stream()
+			.map(it -> Pair.of(it.version, it.isDevVersion))
 			.collect(Collectors.toSet());
 
-		return versions.stream().map(v -> new ParsedVersion(v, mergeDists(v, flatmapped)))
+		return versions.stream().map(pair -> new ParsedVersion(pair.first(), pair.second(), mergeDists(pair.first(), pair.second(), flatmapped)))
 			.collect(Collectors.toList());
 	}
 
-	private static List<ParsedDist> mergeDists(String v, List<ParsedVersion> src) {
+	private static List<ParsedDist> mergeDists(String v, boolean isDevVersion, List<ParsedVersion> src) {
 		List<ParsedDist> matchingDists = src.stream()
-			.filter(pv -> v.equals(pv.version))
+			.filter(pv -> v.equals(pv.version) && isDevVersion==pv.isDevVersion)
 			.flatMap(pv -> pv.dists.stream())
 			.collect(Collectors.toList());
 
@@ -74,7 +75,9 @@ public abstract class AbstractPackageHtmlParser {
 			.sorted()
 			.forEach(version -> {
 				if (!version.dists.isEmpty()) {
-					System.out.println(version.version);
+					System.out.print(version.version);
+					if (version.isDevVersion) System.out.print("(DEV)");
+					System.out.println();
 					version.dists.forEach(dist -> {
 						dist.urls.forEach(packageUrl -> {
 							System.out.println("  " + packageUrl.url);
@@ -88,13 +91,21 @@ public abstract class AbstractPackageHtmlParser {
 		Map<String, List<ParsedVersion>> groupedByVersionLessUrl = versions.groupByVersionLessUrl();
 
 		groupedByVersionLessUrl.forEach((url, versionList) -> {
-			System.out.println(url.isEmpty() ? "--" : url);
+			boolean noDownloadUrl = url.isEmpty();
+			System.out.println(noDownloadUrl ? "* --" : url);
 			//String versionNumbers = versionList.stream().map(it -> it.version).collect(Collectors.joining(", "));
-			List<String> versionNumbers = versionNumbers(versionList);
-
+			List<String> versionNumbers = versionNumbers(versionList, false);
 			String compressedVersions = compressedVersionAsString(versionNumbers);
-
+			System.out.print(noDownloadUrl ? "* " : "");
 			System.out.println(compressedVersions);
+
+			List<String> devVersionNumbers = versionNumbers(versionList, true);
+			String compressedDevVersions = compressedVersionAsString(devVersionNumbers);
+			if (!compressedDevVersions.isEmpty()) {
+				System.out.print(noDownloadUrl ? "* " : "");
+				System.out.print(compressedDevVersions);
+				System.out.println(" (DEV)");
+			}
 		});
 	}
 
@@ -106,13 +117,20 @@ public abstract class AbstractPackageHtmlParser {
 		return ranges.stream()
 			.sorted(Comparator.comparing(VersionRange::min).reversed())
 			.map(r -> r.min().equals(r.max())
-				? asString(r.min())
-				: asString(r.min()) + " -> " + asString(r.max()))
+				? quoted(asString(r.min()))
+				: quoted(asString(r.min()) + " -> " + asString(r.max())))
 			.collect(Collectors.joining(", "));
 	}
 
-	static List<String> versionNumbers(List<ParsedVersion> versions) {
-		return versions.stream().map(it -> it.version).collect(Collectors.toList());
+	private static String quoted(String src) {
+		return "\""+src+"\"";
+	}
+
+	static List<String> versionNumbers(List<ParsedVersion> versions, boolean devVersions) {
+		return versions.stream()
+			.filter(it -> it.isDevVersion == devVersions)
+			.map(it -> it.version)
+			.collect(Collectors.toList());
 	}
 
 	static Map<String, List<ParsedVersion>> groupByVersionLessUrl(List<ParsedVersion> versions) {
@@ -134,7 +152,8 @@ public abstract class AbstractPackageHtmlParser {
 	}
 
 	static List<VersionRange> compressedVersionsList(Collection<String> numericVersions) {
-		List<NumericVersion> versions = numericVersions.stream().map(NumericVersion::of)
+		List<NumericVersion> versions = numericVersions.stream()
+			.map(NumericVersion::of)
 			.sorted(Comparator.reverseOrder())
 			.collect(Collectors.toList());
 
@@ -200,10 +219,12 @@ public abstract class AbstractPackageHtmlParser {
 
 	static class ParsedVersion implements Comparable<ParsedVersion> {
 		final String version;
+		final boolean isDevVersion;
 		final List<ParsedDist> dists;
 
-		public ParsedVersion(String version, List<ParsedDist> dists) {
+		public ParsedVersion(String version, boolean isDevVersion, List<ParsedDist> dists) {
 			this.version = version;
+			this.isDevVersion = isDevVersion;
 			this.dists = dists;
 		}
 
@@ -231,7 +252,7 @@ public abstract class AbstractPackageHtmlParser {
 			return src.stream()
 				.map(version -> {
 					List<ParsedDist> filtered = version.dists.stream().filter(distFilter).collect(Collectors.toList());
-					return new ParsedVersion(version.version, filtered);
+					return new ParsedVersion(version.version, version.isDevVersion, filtered);
 				})
 				.collect(Collectors.toList());
 		}
@@ -257,9 +278,9 @@ public abstract class AbstractPackageHtmlParser {
 		}
 
 		private static List<UrlAndVersions> urlAndVersions(ParsedVersions filtered) {
-			ImmutableSetMultimap<String, String> x = filtered.list.stream()
+			ImmutableSetMultimap<String, Pair<String, Boolean>> x = filtered.list.stream()
 				.flatMap(parsedVersion -> urlToVersionSet(parsedVersion).stream())
-				.collect(ImmutableSetMultimap.toImmutableSetMultimap(entry -> entry.getKey().replace(entry.getValue(),"{version}"), Map.Entry::getValue));
+				.collect(ImmutableSetMultimap.toImmutableSetMultimap(entry -> entry.getKey().replace(entry.getValue().first(),"{version}"), Map.Entry::getValue));
 
 			return x.asMap().entrySet().stream()
 				.map(entry -> new UrlAndVersions(entry.getKey(), ImmutableSet.copyOf(entry.getValue())))
@@ -275,15 +296,15 @@ public abstract class AbstractPackageHtmlParser {
 		}
 	}
 
-	private static Set<Map.Entry<String, String>> urlToVersionSet(ParsedVersion parsedVersion) {
-		Set<Map.Entry<String, String>> ret = parsedVersion.dists
+	private static Set<Map.Entry<String, Pair<String, Boolean>>> urlToVersionSet(ParsedVersion parsedVersion) {
+		Set<Map.Entry<String, Pair<String, Boolean>>> ret = parsedVersion.dists
 			.stream()
 			.flatMap(parsedDist -> parsedDist.urls
 				.stream()
 				.map(parsedUrl -> parsedUrl.url)
 				.collect(Collectors.toSet())
 				.stream())
-			.collect(Collectors.toMap(Function.identity(), entry -> parsedVersion.version))
+			.collect(Collectors.toMap(Function.identity(), entry -> Pair.of(parsedVersion.version, parsedVersion.isDevVersion)))
 			.entrySet();
 		
 		return ret;
@@ -291,9 +312,9 @@ public abstract class AbstractPackageHtmlParser {
 
 	static class UrlAndVersions {
 		private final String url;
-		private final Set<String> versions;
+		private final Set<Pair<String, Boolean>> versions;
 
-		public UrlAndVersions(String url, Set<String> versions) {
+		public UrlAndVersions(String url, Set<Pair<String, Boolean>> versions) {
 			this.url = url;
 			this.versions = versions;
 		}
@@ -302,7 +323,7 @@ public abstract class AbstractPackageHtmlParser {
 			return url;
 		}
 
-		public Set<String> versions() {
+		public Set<Pair<String, Boolean>> versions() {
 			return versions;
 		}
 

@@ -71,7 +71,7 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
 
     ImmutablePackageFinderRule armRule = PackageFinderRule.builder()
             .match(match(BitSize.B64, CPUType.ARM).andThen(DistributionMatch.any(
-                VersionRange.of("6.0.1", "6.0.5")
+                VersionRange.of("6.0.1", "6.0.6")
             )))
             .finder(UrlTemplatePackageResolver.builder()
                 .fileSet(fileSet)
@@ -79,6 +79,19 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
                 .urlTemplate("/osx/mongodb-macos-arm64-{version}.tgz")
                 .build())
             .build();
+
+    ImmutablePackageFinderRule armDevRule = PackageFinderRule.builder()
+      .match(match(BitSize.B64, CPUType.ARM).andThen(DistributionMatch.any(
+        VersionRange.of("7.0.0"),
+        VersionRange.of("6.3.1")
+      )))
+      .finder(UrlTemplatePackageResolver.builder()
+        .fileSet(fileSet)
+        .archiveType(archiveType)
+        .urlTemplate("/osx/mongodb-macos-arm64-{version}.tgz")
+        .isDevVersion(true)
+        .build())
+      .build();
 
     ImmutablePackageFinderRule firstRule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
@@ -115,10 +128,12 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
 
     ImmutablePackageFinderRule fourthRule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                            VersionRange.of("6.0.1", "6.0.5"),
+                            VersionRange.of("6.0.1", "6.0.6"),
+                            VersionRange.of("5.0.18"),
                             VersionRange.of("5.0.12", "5.0.15"),
                             VersionRange.of("5.0.5", "5.0.6"),
                             VersionRange.of("5.0.0", "5.0.2"),
+                            VersionRange.of("4.4.22"),
                             VersionRange.of("4.4.16", "4.4.19"),
                             VersionRange.of("4.4.13", "4.4.13"),
                             VersionRange.of("4.4.11", "4.4.11"),
@@ -135,7 +150,20 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
                     .build())
             .build();
 
-      ImmutablePackageFinderRule toolsRule = PackageFinderRule.builder()
+    ImmutablePackageFinderRule fourthDevRule = PackageFinderRule.builder()
+      .match(match(BitSize.B64).andThen(DistributionMatch.any(
+        VersionRange.of("7.0.0"),
+        VersionRange.of("6.3.1")
+      )))
+      .finder(UrlTemplatePackageResolver.builder()
+        .fileSet(fileSet)
+        .archiveType(archiveType)
+        .urlTemplate("/osx/mongodb-macos-x86_64-{version}.tgz")
+        .isDevVersion(true)
+        .build())
+      .build();
+
+    ImmutablePackageFinderRule toolsRule = PackageFinderRule.builder()
           .match(match(BitSize.B64).andThen(DistributionMatch.any(
                   VersionRange.of("6.0.1", "6.0.5"),
                   VersionRange.of("5.0.12", "5.0.15"),
@@ -174,10 +202,10 @@ public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
 
     return PackageFinderRules.empty()
             .withRules(
-                    armRule,
+                    armDevRule, armRule,
                     firstRule,
                     thirdRule,
-                    fourthRule,
+                    fourthDevRule, fourthRule,
                     failIfNothingMatches
             );
   }

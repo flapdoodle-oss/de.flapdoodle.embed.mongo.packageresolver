@@ -55,11 +55,28 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 	private static ImmutablePackageFinderRules rules(final Command command) {
 		final ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
+		DistributionMatch amazon2ArmDevMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0"),
+			VersionRange.of("6.3.1")
+		);
+
+		final PackageFinderRule amazon2ArmDev = PackageFinderRule.builder()
+			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2).andThen(amazon2ArmDevMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-aarch64-amazon2-{version}.tgz")
+				.isDevVersion(true)
+				.build())
+			.build();
+
 		DistributionMatch amazon2ArmMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.5"),
+			VersionRange.of("6.0.1", "6.0.6"),
+			VersionRange.of("5.0.18"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.22"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -87,11 +104,28 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 				.build())
 			.build();
 
+		DistributionMatch amazon2DevMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0"),
+			VersionRange.of("6.3.1")
+		);
+
+		final PackageFinderRule amazon2Dev = PackageFinderRule.builder()
+			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux2).andThen(amazon2DevMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-x86_64-amazon2-{version}.tgz")
+				.isDevVersion(true)
+				.build())
+			.build();
+
 		DistributionMatch amazon2MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.1", "6.0.5"),
+			VersionRange.of("6.0.1", "6.0.6"),
+			VersionRange.of("5.0.18"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.22"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -123,9 +157,11 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 
 		DistributionMatch amazonMongoVersions = DistributionMatch.any(
+			VersionRange.of("5.0.18"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
+			VersionRange.of("4.4.22"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -173,7 +209,9 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 			default:
 				return PackageFinderRules.empty()
 					.withRules(
+						amazon2ArmDev,
 						amazon2Arm,
+						amazon2Dev,
 						amazon2,
 						amazon
 					);

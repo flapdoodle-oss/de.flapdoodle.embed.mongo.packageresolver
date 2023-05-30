@@ -36,16 +36,23 @@ public abstract class UrlTemplatePackageResolver implements PackageFinder, HasEx
   protected abstract FileSet fileSet();
   abstract String urlTemplate();
 
+  @Value.Default
+  protected boolean isDevVersion() {
+    return false;
+  }
+
   @Override
   public Optional<Package> packageFor(Distribution distribution) {
     String path=render(urlTemplate(), distribution);
-    return Optional.of(Package.of(archiveType(), fileSet(), path));
+    return Optional.of(isDevVersion()
+      ? Package.of(archiveType(), fileSet(), path, "Development Version / Release Candidate")
+      : Package.of(archiveType(), fileSet(), path));
   }
 
   @Value.Auxiliary
   @Override
   public String explain() {
-    return "url="+urlTemplate()+" ("+archiveType().name()+")";
+    return "url=" + urlTemplate() + " (" + archiveType().name() + (isDevVersion() ? "(DEV)" : "") + ")";
   }
 
   private static String render(String urlTemplate, Distribution distribution) {

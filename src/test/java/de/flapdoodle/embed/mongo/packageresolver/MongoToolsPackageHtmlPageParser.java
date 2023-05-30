@@ -21,6 +21,7 @@
 package de.flapdoodle.embed.mongo.packageresolver;
 
 import com.google.common.io.Resources;
+import de.flapdoodle.types.Pair;
 import de.flapdoodle.types.Try;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -38,22 +39,22 @@ import java.util.stream.Collectors;
 
 public class MongoToolsPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		public static void main(String[] args) throws IOException {
-			List<String> resources = Arrays.asList(
-				"versions/react/mongotools-versions-2021-10-28.html",
-				"versions/react/mongotools-versions-2022-09-25.html",
-				"versions/react/mongotools-versions-2022-10-14.html",
-				"versions/react/mongotools-versions-2022-11-27.html",
-				"versions/react/mongotools-versions-2023-02-12.html",
-				"versions/react/mongotools-versions-2023-03-16.html"
+			List<Pair<String, Boolean>> resources = Arrays.asList(
+				Pair.of("versions/react/mongotools-versions-2021-10-28.html", false),
+				Pair.of("versions/react/mongotools-versions-2022-09-25.html", false),
+				Pair.of("versions/react/mongotools-versions-2022-10-14.html", false),
+				Pair.of("versions/react/mongotools-versions-2022-11-27.html", false),
+				Pair.of("versions/react/mongotools-versions-2023-02-12.html", false),
+				Pair.of("versions/react/mongotools-versions-2023-03-16.html", false)
 			);
 
 			List<List<ParsedVersion>> allVersions = resources.stream()
 				//.map(it -> Try.supplier(() -> parse(Jsoup.parse(Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8)))))
-				.map(it -> Try.supplier(() -> Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8))
+				.map(it -> it.mapFirst(path -> Try.supplier(() -> Resources.toString(Resources.getResource(path), StandardCharsets.UTF_8))
 					.mapToUncheckedException(RuntimeException::new)
-					.get())
-				.map(Jsoup::parse)
-				.map(MongoToolsPackageHtmlPageParser::parse)
+					.get()))
+				.map(it -> it.mapFirst(Jsoup::parse))
+				.map(it -> MongoToolsPackageHtmlPageParser.parse(it.first(), it.second()))
 				.collect(Collectors.toList());
 
 			ParsedVersions versions = new ParsedVersions(mergeAll(allVersions));
@@ -87,7 +88,7 @@ public class MongoToolsPackageHtmlPageParser extends AbstractPackageHtmlParser {
 				});
 		}
 
-		static List<ParsedVersion> parse(Document document) {
+		static List<ParsedVersion> parse(Document document, boolean isDevVersion) {
 				List<ParsedVersion> versions=new ArrayList<>();
 				Elements divs = document.select("div > div");
 				for (Element div : divs) {
@@ -123,7 +124,7 @@ public class MongoToolsPackageHtmlPageParser extends AbstractPackageHtmlParser {
 										}
 										parsedDists.add(new ParsedDist(name, parsedUrls));
 								}
-								versions.add(new ParsedVersion(version, parsedDists));
+								versions.add(new ParsedVersion(version, isDevVersion, parsedDists));
 						} else {
 //        System.out.println("##############");
 //        System.out.println(div);

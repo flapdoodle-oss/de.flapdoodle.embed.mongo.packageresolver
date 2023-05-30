@@ -79,10 +79,12 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
             .build();
 
     DistributionMatch windows64MongoVersions = DistributionMatch.any(
-      VersionRange.of("6.0.1", "6.0.5"),
+      VersionRange.of("6.0.1", "6.0.6"),
+      VersionRange.of("5.0.18"),
       VersionRange.of("5.0.12", "5.0.15"),
       VersionRange.of("5.0.5", "5.0.6"),
       VersionRange.of("5.0.0", "5.0.2"),
+      VersionRange.of("4.4.22"),
       VersionRange.of("4.4.16", "4.4.19"),
       VersionRange.of("4.4.13", "4.4.13"),
       VersionRange.of("4.4.11", "4.4.11"),
@@ -97,7 +99,22 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
                     .build())
             .build();
 
-      ImmutablePackageFinderRule tools_windows_x64_rule = PackageFinderRule.builder()
+    DistributionMatch windows64devMongoVersions = DistributionMatch.any(
+      VersionRange.of("7.0.0"),
+      VersionRange.of("6.3.1")
+    );
+
+    ImmutablePackageFinderRule windows_x64_dev_rule = PackageFinderRule.builder()
+      .match(match(BitSize.B64).andThen(windows64devMongoVersions))
+      .finder(UrlTemplatePackageResolver.builder()
+        .fileSet(fileSet)
+        .archiveType(archiveType)
+        .urlTemplate("/windows/mongodb-windows-x86_64-{version}.zip")
+        .isDevVersion(true)
+        .build())
+      .build();
+
+    ImmutablePackageFinderRule tools_windows_x64_rule = PackageFinderRule.builder()
           .match(match(BitSize.B64).andThen(windows64MongoVersions))
           .finder(UrlTemplatePackageResolver.builder()
               .fileSet(fileSet)
@@ -216,7 +233,7 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
       return PackageFinderRules.empty()
             .withRules(
                     win_x86_64,
-                    windows_x64_rule,
+                    windows_x64_dev_rule, windows_x64_rule,
                     windows_x64_2012ssl_rule,
                     windows_x64_2008ssl_rule,
                     windowsServer_2008_rule,

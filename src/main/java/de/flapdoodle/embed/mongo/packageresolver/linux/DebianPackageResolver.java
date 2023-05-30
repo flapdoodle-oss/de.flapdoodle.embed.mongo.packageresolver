@@ -61,9 +61,11 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
         final ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
     DistributionMatch debian9MongoVersions = DistributionMatch.any(
+      VersionRange.of("5.0.18"),
       VersionRange.of("5.0.12", "5.0.15"),
       VersionRange.of("5.0.5", "5.0.6"),
       VersionRange.of("5.0.0", "5.0.2"),
+      VersionRange.of("4.4.22"),
       VersionRange.of("4.4.16", "4.4.19"),
       VersionRange.of("4.4.13", "4.4.13"),
       VersionRange.of("4.4.11", "4.4.11"),
@@ -96,10 +98,12 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                 .build();
 
     DistributionMatch debian10MongoVersions = DistributionMatch.any(
-      VersionRange.of("6.0.1", "6.0.5"),
+      VersionRange.of("6.0.1", "6.0.6"),
+      VersionRange.of("5.0.18"),
       VersionRange.of("5.0.12", "5.0.15"),
       VersionRange.of("5.0.5", "5.0.6"),
       VersionRange.of("5.0.0", "5.0.2"),
+      VersionRange.of("4.4.22"),
       VersionRange.of("4.4.16", "4.4.19"),
       VersionRange.of("4.4.13", "4.4.13"),
       VersionRange.of("4.4.11", "4.4.11"),
@@ -118,7 +122,22 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                         .build())
                 .build();
 
-        final PackageFinderRule debian10tools = PackageFinderRule.builder()
+    DistributionMatch debian10devMongoVersions = DistributionMatch.any(
+      VersionRange.of("7.0.0"),
+      VersionRange.of("6.3.1")
+    );
+
+    final PackageFinderRule debian10dev = PackageFinderRule.builder()
+      .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian10devMongoVersions))
+      .finder(UrlTemplatePackageResolver.builder()
+        .fileSet(fileSet)
+        .archiveType(ArchiveType.TGZ)
+        .urlTemplate("/linux/mongodb-linux-x86_64-debian10-{version}.tgz")
+        .isDevVersion(true)
+        .build())
+      .build();
+
+    final PackageFinderRule debian10tools = PackageFinderRule.builder()
                 .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian10MongoVersions))
                 .finder(UrlTemplatePackageResolver.builder()
                         .fileSet(fileSet)
@@ -128,7 +147,8 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                 .build();
 
     DistributionMatch debian11MongoVersions = DistributionMatch.any(
-      VersionRange.of("6.0.1", "6.0.5"),
+      VersionRange.of("6.0.1", "6.0.6"),
+      VersionRange.of("5.0.18"),
       VersionRange.of("5.0.12", "5.0.15")
     );
 
@@ -138,6 +158,21 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
         .fileSet(fileSet)
         .archiveType(ArchiveType.TGZ)
         .urlTemplate("/linux/mongodb-linux-x86_64-debian11-{version}.tgz")
+        .build())
+      .build();
+
+    DistributionMatch debian11devMongoVersions = DistributionMatch.any(
+      VersionRange.of("7.0.0"),
+      VersionRange.of("6.3.1")
+    );
+
+    final PackageFinderRule debian11dev = PackageFinderRule.builder()
+      .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian11devMongoVersions))
+      .finder(UrlTemplatePackageResolver.builder()
+        .fileSet(fileSet)
+        .archiveType(ArchiveType.TGZ)
+        .urlTemplate("/linux/mongodb-linux-x86_64-debian11-{version}.tgz")
+        .isDevVersion(true)
         .build())
       .build();
 
@@ -163,7 +198,9 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
             default:
                 return PackageFinderRules.empty()
                         .withRules(
+                          debian11dev,
                           debian11,
+                          debian10dev,
                           debian10,
                           debian9
                         );

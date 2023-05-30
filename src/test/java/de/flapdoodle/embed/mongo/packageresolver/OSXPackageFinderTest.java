@@ -31,13 +31,25 @@ class OSXPackageFinderTest {
 
   /*
     https://fastdl.mongodb.org/osx/mongodb-macos-arm64-{}.tgz
-    6.0.1 -> 6.0.5
+    "6.0.1 -> 6.0.6"
    */
   @ParameterizedTest
-  @ValueSource(strings = {"6.0.1 -> 6.0.5"})
+  @ValueSource(strings = {"6.0.1 -> 6.0.6"})
   public void armSet(String version) {
     assertThat(osx(CommonArchitecture.ARM_64), version)
       .resolvesTo("/osx/mongodb-macos-arm64-{}.tgz");
+  }
+
+  /*
+    dev
+    https://fastdl.mongodb.org/osx/mongodb-macos-arm64-{}.tgz
+    "7.0.0", "6.3.1"
+   */
+  @ParameterizedTest
+  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  public void armDev(String version) {
+    assertThat(osx(CommonArchitecture.ARM_64), version)
+      .resolveDevPackageTo("/osx/mongodb-macos-arm64-{}.tgz");
   }
 
   /*
@@ -53,7 +65,7 @@ class OSXPackageFinderTest {
 
   /*
     https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-{}.tgz|https://fastdl.mongodb.org/osx/mongodb-osx-x86_64-{}.tgz
-    3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.0 -> 3.2.22, 3.0.4 -> 3.0.15
+    "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.4 -> 3.0.15"
   */
   @ParameterizedTest
   @ValueSource(strings = {"3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.4 -> 3.0.15"})
@@ -75,15 +87,26 @@ class OSXPackageFinderTest {
 
   /*
     https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-{}.tgz
-    6.0.1 -> 6.0.5, 5.0.12 -> 5.0.15, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.19, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.24, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3
+    "6.0.1 -> 6.0.6", "5.0.18", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3"
   */
   @ParameterizedTest
-  @ValueSource(strings = {"6.0.1 -> 6.0.5", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3"})
+  @ValueSource(strings = {"6.0.1 -> 6.0.6", "5.0.18", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3"})
   public void fourthSet(String version) {
     assertThat(version)
             .resolvesTo("/osx/mongodb-macos-x86_64-{}.tgz");
   }
 
+  /*
+    dev
+    https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-{}.tgz
+    "7.0.0", "6.3.1"
+  */
+  @ParameterizedTest
+  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  public void fourthSetDev(String version) {
+    assertThat(version)
+      .resolveDevPackageTo("/osx/mongodb-macos-x86_64-{}.tgz");
+  }
 
   private static Platform osx() {
     return osx(CommonArchitecture.X86_64);
