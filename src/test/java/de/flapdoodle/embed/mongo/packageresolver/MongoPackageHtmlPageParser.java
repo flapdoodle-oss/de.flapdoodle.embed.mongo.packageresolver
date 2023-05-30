@@ -57,7 +57,8 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 			Pair.of("versions/react/mongo-db-versions-2023-02-12.html", false),
 			Pair.of("versions/react/mongo-db-versions-2023-03-16.html", false),
 			Pair.of("versions/react/mongo-db-versions-2023-05-21.html", false),
-			Pair.of("versions/react/mongo-db-versions-2023-05-21-dev.html", true)
+			Pair.of("versions/react/mongo-db-versions-2023-05-21-dev.html", true),
+			Pair.of("versions/react/mongo-db-versions-2023-05-30-dev.html", true)
 		);
 
 		List<List<ParsedVersion>> allVersions = resources.stream()
@@ -299,6 +300,10 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		if (name.contains("Amazon Linux 2")) {
 			os = Optional.of(CommonOS.Linux);
 			versions = Optional.of(AmazonVersion.AmazonLinux2);
+		}
+		if (name.contains("amazon2023")) {
+			os = Optional.of(CommonOS.Linux);
+			versions = Optional.of(AmazonVersion.AmazonLinux2023);
 		}
 
 		if (name.contains("Debian 7.1") || name.contains("Debian 8.1") || name.contains("CentOS 5.5")) {

@@ -118,11 +118,14 @@ public final class ExplainRules {
 	}
 
 	private static String explainVersionRange(VersionRange versionRange) {
+		if (versionRange.min().isEqual(versionRange.max())) {
+			return asHumanReadable(versionRange.min());
+		}
 		return asHumanReadable(versionRange.min())+"-"+asHumanReadable(versionRange.max());
 	}
 
 	private static String asHumanReadable(NumericVersion version) {
-		return version.major()+"."+version.minor()+"."+version.patch();
+		return version.asString();
 	}
 
 	private static String indent(int level) {

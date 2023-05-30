@@ -43,10 +43,10 @@ class OSXPackageFinderTest {
   /*
     dev
     https://fastdl.mongodb.org/osx/mongodb-macos-arm64-{}.tgz
-    "7.0.0", "6.3.1"
+    "7.0.0-rc2", "7.0.0-rc1", "6.3.1"
    */
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void armDev(String version) {
     assertThat(osx(CommonArchitecture.ARM_64), version)
       .resolveDevPackageTo("/osx/mongodb-macos-arm64-{}.tgz");
@@ -99,10 +99,10 @@ class OSXPackageFinderTest {
   /*
     dev
     https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-{}.tgz
-    "7.0.0", "6.3.1"
+    "7.0.0-rc2", "7.0.0-rc1", "6.3.1"
   */
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void fourthSetDev(String version) {
     assertThat(version)
       .resolveDevPackageTo("/osx/mongodb-macos-x86_64-{}.tgz");

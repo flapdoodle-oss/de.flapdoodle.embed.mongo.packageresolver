@@ -200,7 +200,8 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 			.build();
 
 		DistributionMatch ubuntu18xxArmDevMongoVersions = DistributionMatch.any(
-			VersionRange.of("7.0.0"),
+			VersionRange.of("7.0.0-rc2"),
+			VersionRange.of("7.0.0-rc1"),
 			VersionRange.of("6.3.1")
 			);
 
@@ -255,7 +256,8 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 					.build();
 
 		DistributionMatch ubuntu18xxDevMongoVersions = DistributionMatch.any(
-			VersionRange.of("7.0.0"),
+			VersionRange.of("7.0.0-rc2"),
+			VersionRange.of("7.0.0-rc1"),
 			VersionRange.of("6.3.1")
 		);
 
@@ -302,7 +304,8 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 					.build();
 
 		DistributionMatch ubuntu20xxDevMongoVersions = DistributionMatch.any(
-			VersionRange.of("7.0.0"),
+			VersionRange.of("7.0.0-rc2"),
+			VersionRange.of("7.0.0-rc1"),
 			VersionRange.of("6.3.1")
 		);
 
@@ -373,7 +376,8 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 			.build();
 
 		DistributionMatch ubuntu22xxDevMongoVersions = DistributionMatch.any(
-			VersionRange.of("7.0.0"),
+			VersionRange.of("7.0.0-rc2"),
+			VersionRange.of("7.0.0-rc1"),
 			VersionRange.of("6.3.1")
 		);
 

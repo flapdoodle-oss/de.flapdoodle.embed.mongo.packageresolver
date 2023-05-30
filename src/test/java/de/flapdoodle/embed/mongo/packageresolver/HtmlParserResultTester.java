@@ -59,9 +59,9 @@ public class HtmlParserResultTester {
   public void resolvesTo(String url) {
     versions.forEach(versionGenerator -> {
       versionGenerator.forEach(version -> {
-        Optional<Package> result = testee.packageFor(distributionWithVersion.apply(asString(version)));
+        Optional<Package> result = testee.packageFor(distributionWithVersion.apply(version.asString()));
         assertThat(result).describedAs("package for "+version).isPresent();
-        String expectedUrl = url.replace("{}", asString(version));
+        String expectedUrl = url.replace("{}", version.asString());
         assertThat(result.get().url()).isEqualTo(expectedUrl);
       });
     });
@@ -70,18 +70,14 @@ public class HtmlParserResultTester {
   public void resolveDevPackageTo(String url) {
     versions.forEach(versionGenerator -> {
       versionGenerator.forEach(version -> {
-        Optional<Package> optionalPackage = testee.packageFor(distributionWithVersion.apply(asString(version)));
+        Optional<Package> optionalPackage = testee.packageFor(distributionWithVersion.apply(version.asString()));
         assertThat(optionalPackage).describedAs("package for "+version).isPresent();
-        String expectedUrl = url.replace("{}", asString(version));
+        String expectedUrl = url.replace("{}", version.asString());
         Package aPackage = optionalPackage.get();
         assertThat(aPackage.url()).isEqualTo(expectedUrl);
         assertThat(aPackage.hint()).isPresent().hasValue("Development Version / Release Candidate");
       });
     });
-  }
-
-  private static String asString(NumericVersion version) {
-    return version.major()+"."+version.minor()+"."+version.patch();
   }
 
   private static class VersionGenerator {
@@ -107,15 +103,15 @@ public class HtmlParserResultTester {
         min = NumericVersion.of(minMax[0].trim());
         max = NumericVersion.of(minMax[1].trim());
       } else {
-        if (versionRange.contains("-")) {
-          String[] maxMin = versionRange.split("-");
-          Preconditions.checkArgument(maxMin.length==2,"invalid version range: %s",versionRange);
-          min = NumericVersion.of(maxMin[1].trim());
-          max = NumericVersion.of(maxMin[0].trim());
-        } else {
+//        if (versionRange.contains("-")) {
+//          String[] maxMin = versionRange.split("-");
+//          Preconditions.checkArgument(maxMin.length==2,"invalid version range: %s",versionRange);
+//          min = NumericVersion.of(maxMin[1].trim());
+//          max = NumericVersion.of(maxMin[0].trim());
+//        } else {
           min = NumericVersion.of(versionRange.trim());
           max = null;
-        }
+//        }
       }
       return new VersionGenerator(min, max);
     }

@@ -55,8 +55,40 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 	private static ImmutablePackageFinderRules rules(final Command command) {
 		final ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
+		DistributionMatch amazon2023ArmDevMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0-rc2")
+		);
+
+		final PackageFinderRule amazon2023ArmDev = PackageFinderRule.builder()
+			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2023).andThen(amazon2023ArmDevMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-aarch64-amazon2023-{version}.tgz")
+				.isDevVersion(true)
+				.build())
+			.build();
+
+		DistributionMatch amazon2023DevMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0-rc2"),
+			VersionRange.of("7.0.0-rc1"),
+			VersionRange.of("6.3.1")
+		);
+
+		final PackageFinderRule amazon2023Dev = PackageFinderRule.builder()
+			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux2023).andThen(amazon2023DevMongoVersions))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/linux/mongodb-linux-x86_64-amazon2023-{version}.tgz")
+				.isDevVersion(true)
+				.build())
+			.build();
+
+
 		DistributionMatch amazon2ArmDevMongoVersions = DistributionMatch.any(
-			VersionRange.of("7.0.0"),
+			VersionRange.of("7.0.0-rc2"),
+			VersionRange.of("7.0.0-rc1"),
 			VersionRange.of("6.3.1")
 		);
 
@@ -105,7 +137,8 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 			.build();
 
 		DistributionMatch amazon2DevMongoVersions = DistributionMatch.any(
-			VersionRange.of("7.0.0"),
+			VersionRange.of("7.0.0-rc2"),
+			VersionRange.of("7.0.0-rc1"),
 			VersionRange.of("6.3.1")
 		);
 
@@ -209,8 +242,10 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 			default:
 				return PackageFinderRules.empty()
 					.withRules(
+						amazon2023ArmDev,
 						amazon2ArmDev,
 						amazon2Arm,
+						amazon2023Dev,
 						amazon2Dev,
 						amazon2,
 						amazon

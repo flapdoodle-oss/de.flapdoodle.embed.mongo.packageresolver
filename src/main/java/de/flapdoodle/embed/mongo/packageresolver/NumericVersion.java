@@ -22,6 +22,8 @@ package de.flapdoodle.embed.mongo.packageresolver;
 
 import org.immutables.value.Value;
 
+import java.util.Optional;
+
 import static java.lang.Math.abs;
 
 @Value.Immutable
@@ -35,16 +37,20 @@ public interface NumericVersion extends Comparable<NumericVersion> {
 	@Value.Parameter
 	int patch();
 
+	Optional<String> build();
+
 	@Override
 	@Value.Auxiliary
 	default int compareTo(NumericVersion other) {
 		int mc = Integer.compare(major(), other.major());
 		int mm = Integer.compare(minor(), other.minor());
 		int mp = Integer.compare(patch(), other.patch());
+		int build = build().orElse("").compareTo(other.build().orElse(""));
 
 		return mc != 0 ? mc
 			: mm != 0 ? mm
-			: mp;
+			: mp != 0 ? mp
+			: build;
 	}
 
 	static NumericVersion of(int major, int minor, int patch) {
@@ -55,6 +61,7 @@ public interface NumericVersion extends Comparable<NumericVersion> {
 		int major;
 		int minor;
 		int patch;
+		Optional<String> build=Optional.empty();
 
 		if ("latest".equals(versionString)) {
 			major = Integer.MAX_VALUE;
@@ -65,15 +72,18 @@ public interface NumericVersion extends Comparable<NumericVersion> {
 			major = Integer.parseInt(semverParts[0], 10);
 			minor = Integer.parseInt(semverParts[1], 10);
 			String semverPart3 = semverParts[2];
+
 			final int idxOfDash = semverPart3.indexOf('-');
 			// cut any -RC/-M
 			if (idxOfDash > 0) {
+				build = Optional.of(semverPart3.substring(idxOfDash+1));
 				semverPart3 = semverPart3.substring(0, idxOfDash);
 			}
 			patch = Integer.parseInt(semverPart3, 10);
 		}
 
-		return of(major, minor, patch);
+		return ImmutableNumericVersion.of(major, minor, patch)
+			.withBuild(build);
 	}
 
 	default boolean isNewerOrEqual(int major, int minor, int patch) {
@@ -108,5 +118,12 @@ public interface NumericVersion extends Comparable<NumericVersion> {
 		if (major() != other.major()) return false;
 		if (minor() != other.minor()) return false;
 		return abs(patch() - other.patch()) == 1;
+	}
+
+	default String asString() {
+		if (build().isPresent()) {
+			return major()+"."+minor()+"."+patch()+"-"+build().get();
+		}
+		return major()+"."+minor()+"."+patch();
 	}
 }

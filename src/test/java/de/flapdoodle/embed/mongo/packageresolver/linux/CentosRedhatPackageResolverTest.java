@@ -68,10 +68,10 @@ class CentosRedhatPackageResolverTest {
 	/*
 			RedHat / CentOS 7.0 x64 dev
 			https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-{}.tgz
-			"7.0.0", "6.3.1"
+			"7.0.0-rc2", "7.0.0-rc1", "6.3.1"
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0", "6.3.1" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1" })
 	public void centos7dev(String version) {
 		assertThat(linuxWith(CommonArchitecture.X86_64, CentosVersion.CentOS_7), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
@@ -103,7 +103,7 @@ class CentosRedhatPackageResolverTest {
 			"6.0.1 -> 6.0.6", "5.0.18", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.1 -> 4.2.3", "4.0.14 -> 4.0.28", "3.6.17 -> 3.6.23", "3.4.24"
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0", "6.3.1" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1" })
 	public void centos8dev(String version) {
 		assertThat(linuxWith(CommonArchitecture.X86_64, CentosVersion.CentOS_8), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
@@ -143,10 +143,10 @@ class CentosRedhatPackageResolverTest {
 	/*
 		rhel90 x64 dev
 		https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel90-{}.tgz
-		"7.0.0", "6.3.1"
+		"7.0.0-rc2", "7.0.0-rc1", "6.3.1"
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0", "6.3.1" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1" })
 	public void centos9dev(String version) {
 		assertThat(linuxWith(CommonArchitecture.X86_64, CentosVersion.CentOS_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel90-{}.tgz");
@@ -175,10 +175,10 @@ class CentosRedhatPackageResolverTest {
 	/*
 			RedHat / CentOS 8.2 ARM 64 dev
 			https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-rhel82-{}.tgz
-			"7.0.0", "6.3.1"
+			"7.0.0-rc2", "7.0.0-rc1", "6.3.1"
 	*/
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0", "6.3.1" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1" })
 	public void centos8armDev(String version) {
 		assertThat(linuxWith(CommonArchitecture.ARM_64, CentosVersion.CentOS_8), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
@@ -200,7 +200,7 @@ class CentosRedhatPackageResolverTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0", "6.3.1" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1" })
 	public void centos9armDev(String version) {
 		assertThat(linuxWith(CommonArchitecture.ARM_64, CentosVersion.CentOS_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");

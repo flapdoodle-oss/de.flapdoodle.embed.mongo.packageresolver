@@ -57,10 +57,10 @@ class DebianPackageResolverTest {
   /**
    * Debian 10 x64 dev
    * https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian10-{}.tgz
-   * "7.0.0", "6.3.1"
+   * "7.0.0-rc2", "7.0.0-rc1", "6.3.1"
    */
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void debian10x64dev(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, DebianVersion.DEBIAN_10), version)
       .resolveDevPackageTo("/linux/mongodb-linux-x86_64-debian10-{}.tgz");
@@ -84,7 +84,7 @@ class DebianPackageResolverTest {
    * "6.0.1 -> 6.0.6", "5.0.18", "5.0.12 -> 5.0.15"
    */
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void debian11x64dev(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, DebianVersion.DEBIAN_11), version)
       .resolveDevPackageTo("/linux/mongodb-linux-x86_64-debian11-{}.tgz");
@@ -98,7 +98,7 @@ class DebianPackageResolverTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void debian12x64dev(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, DebianVersion.DEBIAN_11), version)
       .resolveDevPackageTo("/linux/mongodb-linux-x86_64-debian11-{}.tgz");

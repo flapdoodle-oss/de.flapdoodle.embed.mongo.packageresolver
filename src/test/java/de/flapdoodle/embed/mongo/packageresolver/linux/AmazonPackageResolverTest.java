@@ -31,6 +31,30 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class AmazonPackageResolverTest {
 	/*
+	 * amazon2023 ARM 64
+	 * https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-amazon2023-{}.tgz
+	 * "7.0.0-rc2"
+	 */
+	@ParameterizedTest
+	@ValueSource(strings = {"7.0.0-rc2"})
+	public void amazon2023LinuxArm(String version) {
+		assertThat(linuxWith(CommonArchitecture.ARM_64, AmazonVersion.AmazonLinux2023), version)
+			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-amazon2023-{}.tgz");
+	}
+
+	/*
+	 * amazon2023 x64
+	 * https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-amazon2023-{}.tgz
+	 * "7.0.0-rc2"
+	 */
+	@ParameterizedTest
+	@ValueSource(strings = {"7.0.0-rc2"})
+	public void amazon2023Linux(String version) {
+		assertThat(linuxWith(CommonArchitecture.X86_64, AmazonVersion.AmazonLinux2023), version)
+			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-amazon2023-{}.tgz");
+	}
+
+	/*
 	 * Amazon Linux 2 ARM 64
 	 * https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-amazon2-{}.tgz
    * 6.0.1 -> 6.0.6, 5.0.18, 5.0.12 -> 5.0.15, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.22, 4.4.16 -> 4.4.19, 4.4.13, 4.4.11, 4.4.4 -> 4.4.9, 4.2.22 -> 4.2.24, 4.2.18 -> 4.2.19, 4.2.13 -> 4.2.16
@@ -48,7 +72,7 @@ class AmazonPackageResolverTest {
 	 * 7.0.0, 6.3.1 (DEV)
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"7.0.0", "6.3.1"})
+	@ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
 	public void amazon2LinuxArmDev(String version) {
 		assertThat(linuxWith(CommonArchitecture.ARM_64, AmazonVersion.AmazonLinux2), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-amazon2-{}.tgz");
@@ -72,7 +96,7 @@ class AmazonPackageResolverTest {
 	 * 7.0.0, 6.3.1 (DEV)
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"7.0.0", "6.3.1"})
+	@ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
 	public void amazon2LinuxDev(String version) {
 		assertThat(linuxWith(CommonArchitecture.X86_64, AmazonVersion.AmazonLinux2), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-amazon2-{}.tgz");

@@ -75,10 +75,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 18.04 ARM 64 dev
     https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz
-    "7.0.0", "6.3.1"
+    "7.0.0-rc2", "7.0.0-rc1", "6.3.1"
   */
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void ubuntu18armDev(String version) {
     assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_18_04), version)
             .resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
@@ -99,10 +99,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 18.04 x64 dev
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz
-    "7.0.0", "6.3.1"
+    "7.0.0-rc2", "7.0.0-rc1", "6.3.1"
   */
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void ubuntu18x64dev(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_04), version)
       .resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
@@ -195,10 +195,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 22.04 ARM 64 dev
     https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz
-    "7.0.0", "6.3.1"
+    "7.0.0-rc2", "7.0.0-rc1", "6.3.1"
   */
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void ubuntu22armDev(String version) {
     assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
       .resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
@@ -216,7 +216,7 @@ class UbuntuPackageResolverTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void ubuntu23armDev(String version) {
     assertThat(linuxWith(CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_04), version)
       .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
@@ -241,10 +241,10 @@ class UbuntuPackageResolverTest {
   /*
     Ubuntu 22.04 x64 dev
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz
-    "7.0.0", "6.3.1"
+    "7.0.0-rc2", "7.0.0-rc1", "6.3.1"
   */
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void ubuntu22x64dev(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
       .resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
@@ -262,7 +262,7 @@ class UbuntuPackageResolverTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void ubuntu23x64dev(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_04), version)
       .resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
@@ -288,7 +288,7 @@ class UbuntuPackageResolverTest {
   }
 
   private static Stream<Arguments> ubuntu2xxxOsDevToMongoVersion() {
-    List<String> versions = Arrays.asList("7.0.0", "6.3.1");
+    List<String> versions = Arrays.asList("7.0.0-rc2", "7.0.0-rc1", "6.3.1");
 
     return Stream.of(
         UbuntuVersion.Ubuntu_20_04,

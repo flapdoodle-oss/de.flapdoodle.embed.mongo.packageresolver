@@ -123,7 +123,8 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                 .build();
 
     DistributionMatch debian10devMongoVersions = DistributionMatch.any(
-      VersionRange.of("7.0.0"),
+      VersionRange.of("7.0.0-rc2"),
+      VersionRange.of("7.0.0-rc1"),
       VersionRange.of("6.3.1")
     );
 
@@ -162,7 +163,8 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
       .build();
 
     DistributionMatch debian11devMongoVersions = DistributionMatch.any(
-      VersionRange.of("7.0.0"),
+      VersionRange.of("7.0.0-rc2"),
+      VersionRange.of("7.0.0-rc1"),
       VersionRange.of("6.3.1")
     );
 

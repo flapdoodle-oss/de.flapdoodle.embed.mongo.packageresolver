@@ -48,7 +48,7 @@ class WindowsPackageFinderTest {
   Windows x64
   https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-{}.zip
   "6.0.1 -> 6.0.6", "5.0.18", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9"
-  "7.0.0", "6.3.1" (DEV)
+  "7.0.0-rc2", "7.0.0-rc1", "6.3.1" (DEV)
   https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-{}.zip
   "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15"
   https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2012plus-{}.zip
@@ -62,7 +62,7 @@ class WindowsPackageFinderTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"7.0.0", "6.3.1"})
+  @ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
   public void windows_x64dev(String version) {
     assertThat(windowsWith(CommonArchitecture.X86_64), version)
       .resolveDevPackageTo("/windows/mongodb-windows-x86_64-{}.zip");

@@ -96,8 +96,10 @@ public abstract class AbstractPackageHtmlParser {
 			//String versionNumbers = versionList.stream().map(it -> it.version).collect(Collectors.joining(", "));
 			List<String> versionNumbers = versionNumbers(versionList, false);
 			String compressedVersions = compressedVersionAsString(versionNumbers);
-			System.out.print(noDownloadUrl ? "* " : "");
-			System.out.println(compressedVersions);
+			if (!compressedVersions.isEmpty()) {
+				System.out.print(noDownloadUrl ? "* " : "");
+				System.out.println(compressedVersions);
+			}
 
 			List<String> devVersionNumbers = versionNumbers(versionList, true);
 			String compressedDevVersions = compressedVersionAsString(devVersionNumbers);
@@ -179,6 +181,9 @@ public abstract class AbstractPackageHtmlParser {
 	}
 
 	static String asString(NumericVersion version) {
+		if (version.build().isPresent()) {
+			return version.major() + "." + version.minor() + "." + version.patch()+"-"+version.build().get();
+		}
 		return version.major() + "." + version.minor() + "." + version.patch();
 	}
 
