@@ -35,4 +35,9 @@ public enum Feature {
 	DISABLE_USE_PREALLOC, /* disable usePreAlloc >= 4.2.0 */
 	DISABLE_USE_SMALL_FILES,  /* disable useSmallFiles >= 4.2.0 */
 	RS_INITIATE, /* rs.initiate() / replSetInitiate >= 4.2.0*/
+	/*
+	* Changed in version 6.1:
+	*  MongoDB always enables journaling. As a result, MongoDB removes the storage.journal.enabled option and the corresponding --journal and --nojournal command-line options.
+  */
+	JOURNAL_ALWAYS_ON,
 }
