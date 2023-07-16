@@ -400,7 +400,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>32.0.0-jre</version>
+            <version>32.1.1-jre</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -426,12 +426,12 @@
         <dependency>
             <groupId>de.flapdoodle</groupId>
             <artifactId>de.flapdoodle.os</artifactId>
-            <version>1.4.0</version>
+            <version>1.4.1</version>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.process</artifactId>
-            <version>4.7.0</version>
+            <version>4.7.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
