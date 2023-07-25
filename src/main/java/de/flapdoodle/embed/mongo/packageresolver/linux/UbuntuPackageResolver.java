@@ -134,7 +134,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 
 		DistributionMatch ubuntu16xxMongoVersions = DistributionMatch.any(
-			VersionRange.of("4.4.22"),
+			VersionRange.of("4.4.22","4.4.23"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13"),
 			VersionRange.of("4.4.11"),
@@ -171,12 +171,13 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 
 
 		DistributionMatch ubuntu18xxArmMongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.8"),
 			VersionRange.of("6.0.1", "6.0.6"),
-			VersionRange.of("5.0.18"),
+			VersionRange.of("5.0.18","5.0.19"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.22"),
+			VersionRange.of("4.4.22","4.4.23"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -202,7 +203,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 		DistributionMatch ubuntu18xxArmDevMongoVersions = DistributionMatch.any(
 			VersionRange.of("7.0.0-rc2"),
 			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1")
+			VersionRange.of("6.3.1","6.3.2")
 			);
 
 		PackageFinderRule ubuntu1804armDev = PackageFinderRule.builder()
@@ -228,12 +229,13 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 					.build();
 
 		DistributionMatch ubuntu18xxMongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.8"),
 			VersionRange.of("6.0.1", "6.0.6"),
-			VersionRange.of("5.0.18"),
+			VersionRange.of("5.0.18","5.0.19"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.22"),
+			VersionRange.of("4.4.22","4.4.23"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -258,7 +260,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 		DistributionMatch ubuntu18xxDevMongoVersions = DistributionMatch.any(
 			VersionRange.of("7.0.0-rc2"),
 			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1")
+			VersionRange.of("6.3.1","6.3.2")
 		);
 
 		PackageFinderRule ubuntu1804x64dev = PackageFinderRule.builder()
@@ -281,12 +283,13 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 					.build();
 
 		DistributionMatch ubuntu20xxMongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.8"),
 			VersionRange.of("6.0.1", "6.0.6"),
-			VersionRange.of("5.0.18"),
+			VersionRange.of("5.0.18","5.0.19"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.22"),
+			VersionRange.of("4.4.22","4.4.23"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -304,9 +307,10 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 					.build();
 
 		DistributionMatch ubuntu20xxDevMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0-rc8"),
 			VersionRange.of("7.0.0-rc2"),
 			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1")
+			VersionRange.of("6.3.1","6.3.2")
 		);
 
 		PackageFinderRule ubuntu20to22armDev = PackageFinderRule.builder()
@@ -362,6 +366,7 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 					.build();
 
 		DistributionMatch ubuntu22xxMongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.8"),
 			VersionRange.of("6.0.4", "6.0.6")
 		);
 
@@ -376,9 +381,10 @@ public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRul
 			.build();
 
 		DistributionMatch ubuntu22xxDevMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0-rc8"),
 			VersionRange.of("7.0.0-rc2"),
 			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1")
+			VersionRange.of("6.3.1","6.3.2")
 		);
 
 		PackageFinderRule ubuntu22armDev = PackageFinderRule.builder()

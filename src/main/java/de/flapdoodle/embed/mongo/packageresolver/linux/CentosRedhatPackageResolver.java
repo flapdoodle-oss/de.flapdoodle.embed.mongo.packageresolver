@@ -32,6 +32,7 @@ import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.Version;
 import de.flapdoodle.os.linux.CentosVersion;
+import de.flapdoodle.os.linux.FedoraVersion;
 import de.flapdoodle.os.linux.OracleVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
 
@@ -83,11 +84,11 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 		);
 
 		PlatformMatch centos9x86_64 = match(BitSize.B64, CPUType.X86,
-			CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
+			CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38
 		);
 
 		DistributionMatch centos6mongoVersions = DistributionMatch.any(
-			VersionRange.of("4.4.22"),
+			VersionRange.of("4.4.22","4.4.23"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -123,12 +124,13 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos7MongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.8"),
 			VersionRange.of("6.0.1", "6.0.6"),
-			VersionRange.of("5.0.18"),
+			VersionRange.of("5.0.18","5.0.19"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.22"),
+			VersionRange.of("4.4.22","4.4.23"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -155,9 +157,10 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos7devMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0-rc8"),
 			VersionRange.of("7.0.0-rc2"),
 			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1")
+			VersionRange.of("6.3.1","6.3.2")
 		);
 
 		PackageFinderRule centos7dev = PackageFinderRule.builder()
@@ -181,12 +184,13 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 
 
 		DistributionMatch centos8MongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.8"),
 			VersionRange.of("6.0.1", "6.0.6"),
-			VersionRange.of("5.0.18"),
+			VersionRange.of("5.0.18","5.0.19"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.22"),
+			VersionRange.of("4.4.22","4.4.23"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -210,9 +214,10 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos8devMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0-rc8"),
 			VersionRange.of("7.0.0-rc2"),
 			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1")
+			VersionRange.of("6.3.1","6.3.2")
 		);
 
 		PackageFinderRule centos8dev = PackageFinderRule.builder()
@@ -235,12 +240,13 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos8ArmMongoVersions = DistributionMatch.any(
+			VersionRange.of("6.0.8"),
 			VersionRange.of("6.0.1", "6.0.6"),
-			VersionRange.of("5.0.18"),
+			VersionRange.of("5.0.18","5.0.19"),
 			VersionRange.of("5.0.12", "5.0.15"),
 			VersionRange.of("5.0.5", "5.0.6"),
 			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.22"),
+			VersionRange.of("4.4.22","4.4.23"),
 			VersionRange.of("4.4.16", "4.4.19"),
 			VersionRange.of("4.4.13", "4.4.13"),
 			VersionRange.of("4.4.11", "4.4.11"),
@@ -257,9 +263,10 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 				.build();
 
 		DistributionMatch centos8armDevMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0-rc8"),
 			VersionRange.of("7.0.0-rc2"),
 			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1")
+			VersionRange.of("6.3.1","6.3.2")
 		);
 
 		PackageFinderRule centos8armDev = PackageFinderRule.builder()
@@ -282,7 +289,8 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 					.build();
 
 		DistributionMatch centos9MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.3", "6.0.6")
+			VersionRange.of("6.0.8"),
+			VersionRange.of("6.0.4", "6.0.6")
 		);
 
 		PackageFinderRule centos9 = PackageFinderRule.builder()
@@ -295,9 +303,10 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 			.build();
 
 		DistributionMatch centos9devMongoVersions = DistributionMatch.any(
+			VersionRange.of("7.0.0-rc8"),
 			VersionRange.of("7.0.0-rc2"),
 			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1")
+			VersionRange.of("6.3.1","6.3.2")
 		);
 
 		PackageFinderRule centos9dev = PackageFinderRule.builder()

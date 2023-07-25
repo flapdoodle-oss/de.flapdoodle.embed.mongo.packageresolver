@@ -33,10 +33,10 @@ class AmazonPackageResolverTest {
 	/*
 	 * amazon2023 ARM 64
 	 * https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-amazon2023-{}.tgz
-	 * "7.0.0-rc2"
+	 * "7.0.0-rc8", "7.0.0-rc2"
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"7.0.0-rc2"})
+	@ValueSource(strings = {"7.0.0-rc8", "7.0.0-rc2"})
 	public void amazon2023LinuxArm(String version) {
 		assertThat(linuxWith(CommonArchitecture.ARM_64, AmazonVersion.AmazonLinux2023), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-amazon2023-{}.tgz");
@@ -45,10 +45,10 @@ class AmazonPackageResolverTest {
 	/*
 	 * amazon2023 x64
 	 * https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-amazon2023-{}.tgz
-	 * "7.0.0-rc2"
+	 * "7.0.0-rc8", "7.0.0-rc2"
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"7.0.0-rc2"})
+	@ValueSource(strings = {"7.0.0-rc8", "7.0.0-rc2"})
 	public void amazon2023Linux(String version) {
 		assertThat(linuxWith(CommonArchitecture.X86_64, AmazonVersion.AmazonLinux2023), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-amazon2023-{}.tgz");
@@ -60,7 +60,7 @@ class AmazonPackageResolverTest {
    * 6.0.1 -> 6.0.6, 5.0.18, 5.0.12 -> 5.0.15, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.22, 4.4.16 -> 4.4.19, 4.4.13, 4.4.11, 4.4.4 -> 4.4.9, 4.2.22 -> 4.2.24, 4.2.18 -> 4.2.19, 4.2.13 -> 4.2.16
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"6.0.1 -> 6.0.6", "5.0.18", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.4 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.13 -> 4.2.16"})
+	@ValueSource(strings = {"6.0.8", "6.0.1 -> 6.0.6", "5.0.18 -> 5.0.19", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22 -> 4.4.23", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.4 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.13 -> 4.2.16"})
 	public void amazon2LinuxArm(String version) {
 		assertThat(linuxWith(CommonArchitecture.ARM_64, AmazonVersion.AmazonLinux2), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-amazon2-{}.tgz");
@@ -72,7 +72,7 @@ class AmazonPackageResolverTest {
 	 * 7.0.0, 6.3.1 (DEV)
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
+	@ValueSource(strings = {"7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2"})
 	public void amazon2LinuxArmDev(String version) {
 		assertThat(linuxWith(CommonArchitecture.ARM_64, AmazonVersion.AmazonLinux2), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-amazon2-{}.tgz");
@@ -84,7 +84,7 @@ class AmazonPackageResolverTest {
    * 6.0.1 -> 6.0.5, 5.0.12 -> 5.0.15, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16 -> 4.4.19, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.24, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.0 -> 4.0.28, 3.6.22 -> 3.6.23
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"6.0.1 -> 6.0.6", "5.0.18", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.22 -> 3.6.23"})
+	@ValueSource(strings = {"6.0.8", "6.0.1 -> 6.0.6", "5.0.18 -> 5.0.19", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.22 -> 3.6.23"})
 	public void amazon2Linux(String version) {
 		assertThat(linuxWith(CommonArchitecture.X86_64, AmazonVersion.AmazonLinux2), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-amazon2-{}.tgz");
@@ -96,7 +96,7 @@ class AmazonPackageResolverTest {
 	 * 7.0.0, 6.3.1 (DEV)
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"7.0.0-rc2", "7.0.0-rc1", "6.3.1"})
+	@ValueSource(strings = {"7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.1"})
 	public void amazon2LinuxDev(String version) {
 		assertThat(linuxWith(CommonArchitecture.X86_64, AmazonVersion.AmazonLinux2), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-amazon2-{}.tgz");
@@ -108,7 +108,7 @@ class AmazonPackageResolverTest {
 	 * 5.0.18, 5.0.12 -> 5.0.15, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.22, 4.4.16 -> 4.4.19, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9, 4.2.22 -> 4.2.24, 4.2.18 -> 4.2.19, 4.2.5 -> 4.2.16, 4.2.0 -> 4.2.3, 4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23, 3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.0 -> 3.2.22, 3.0.0 -> 3.0.15
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"5.0.18", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15"})
+	@ValueSource(strings = {"5.0.18 -> 5.0.19", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22 -> 4.4.23", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15"})
 	public void amazonLinux(String version) {
 		assertThat(linuxWith(CommonArchitecture.X86_64, AmazonVersion.AmazonLinux), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-amazon-{}.tgz");

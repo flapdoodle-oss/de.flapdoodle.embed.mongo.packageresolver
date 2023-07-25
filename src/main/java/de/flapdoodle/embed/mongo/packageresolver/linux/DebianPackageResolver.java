@@ -61,11 +61,11 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
         final ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
     DistributionMatch debian9MongoVersions = DistributionMatch.any(
-      VersionRange.of("5.0.18"),
+      VersionRange.of("5.0.18","5.0.19"),
       VersionRange.of("5.0.12", "5.0.15"),
       VersionRange.of("5.0.5", "5.0.6"),
       VersionRange.of("5.0.0", "5.0.2"),
-      VersionRange.of("4.4.22"),
+      VersionRange.of("4.4.22","4.4.23"),
       VersionRange.of("4.4.16", "4.4.19"),
       VersionRange.of("4.4.13", "4.4.13"),
       VersionRange.of("4.4.11", "4.4.11"),
@@ -98,12 +98,13 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                 .build();
 
     DistributionMatch debian10MongoVersions = DistributionMatch.any(
+      VersionRange.of("6.0.8"),
       VersionRange.of("6.0.1", "6.0.6"),
-      VersionRange.of("5.0.18"),
+      VersionRange.of("5.0.18","5.0.19"),
       VersionRange.of("5.0.12", "5.0.15"),
       VersionRange.of("5.0.5", "5.0.6"),
       VersionRange.of("5.0.0", "5.0.2"),
-      VersionRange.of("4.4.22"),
+      VersionRange.of("4.4.22","4.4.23"),
       VersionRange.of("4.4.16", "4.4.19"),
       VersionRange.of("4.4.13", "4.4.13"),
       VersionRange.of("4.4.11", "4.4.11"),
@@ -123,9 +124,10 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                 .build();
 
     DistributionMatch debian10devMongoVersions = DistributionMatch.any(
+      VersionRange.of("7.0.0-rc8"),
       VersionRange.of("7.0.0-rc2"),
       VersionRange.of("7.0.0-rc1"),
-      VersionRange.of("6.3.1")
+      VersionRange.of("6.3.1","6.3.2")
     );
 
     final PackageFinderRule debian10dev = PackageFinderRule.builder()
@@ -148,8 +150,9 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
                 .build();
 
     DistributionMatch debian11MongoVersions = DistributionMatch.any(
+      VersionRange.of("6.0.8"),
       VersionRange.of("6.0.1", "6.0.6"),
-      VersionRange.of("5.0.18"),
+      VersionRange.of("5.0.18","5.0.19"),
       VersionRange.of("5.0.12", "5.0.15")
     );
 
@@ -163,9 +166,10 @@ public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRul
       .build();
 
     DistributionMatch debian11devMongoVersions = DistributionMatch.any(
+      VersionRange.of("7.0.0-rc8"),
       VersionRange.of("7.0.0-rc2"),
       VersionRange.of("7.0.0-rc1"),
-      VersionRange.of("6.3.1")
+      VersionRange.of("6.3.1","6.3.2")
     );
 
     final PackageFinderRule debian11dev = PackageFinderRule.builder()
