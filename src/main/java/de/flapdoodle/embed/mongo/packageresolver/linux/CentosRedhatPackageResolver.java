@@ -279,7 +279,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 					.build())
 				.build();
 
-		PackageFinderRule tools_centos8arm = PackageFinderRule.builder()
+		PackageFinderRule tools_centos8armDefault = PackageFinderRule.builder()
 					.match(centos8and9arm_64.andThen(centos8ArmMongoVersions))
 					.finder(UrlTemplatePackageResolver.builder()
 							.fileSet(fileSet)
@@ -287,6 +287,19 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 							.urlTemplate("/tools/db/mongodb-database-tools-rhel82-arm64-{tools.version}.tgz")
 							.build())
 					.build();
+
+		PackageFinderRule tools_centos8armNew = PackageFinderRule.builder()
+			.match(centos8and9arm_64.andThen(centos8ArmMongoVersions).andThen(
+				DistributionMatch.any(
+					ToolVersionRange.of("100.7.2", "100.7.4")
+				)
+			))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/tools/db/mongodb-database-tools-rhel82-aarch64-{tools.version}.tgz")
+				.build())
+			.build();
 
 		DistributionMatch centos9MongoVersions = DistributionMatch.any(
 			VersionRange.of("6.0.8"),
@@ -335,7 +348,7 @@ public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMa
 							return PackageFinderRules.empty()
 									.withRules(
 										tools_centos9,
-											tools_centos6, tools_centos7, tools_centos8, tools_centos8arm
+											tools_centos6, tools_centos7, tools_centos8, tools_centos8armNew, tools_centos8armDefault
 									);
 			}
 

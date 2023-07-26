@@ -29,11 +29,15 @@ import java.nio.charset.StandardCharsets;
 
 class PlatformPackageResolverTest {
 
-  private final PlatformPackageResolver testee = new PlatformPackageResolver(Command.Mongo);
-
   @Test
   public void explainSnapshotMustNotChangeWithoutNotice() {
-    Assertions.assertThat(testee.explain())
+    Assertions.assertThat(new PlatformPackageResolver(Command.Mongo).explain())
       .isEqualToIgnoringNewLines(URLs.contentOf(Resources.getResource(PlatformPackageResolverTest.class,"explainedSnapshot.txt"), StandardCharsets.UTF_8));
+  }
+
+  @Test
+  public void explainToolsSnapshotMustNotChangeWithoutNotice() {
+    Assertions.assertThat(new PlatformPackageResolver(Command.MongoImport).explain())
+      .isEqualToIgnoringNewLines(URLs.contentOf(Resources.getResource(PlatformPackageResolverTest.class,"explainedToolsSnapshot.txt"), StandardCharsets.UTF_8));
   }
 }

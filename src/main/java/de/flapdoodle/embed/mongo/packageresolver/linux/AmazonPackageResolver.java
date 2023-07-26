@@ -70,6 +70,20 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 				.build())
 			.build();
 
+		final PackageFinderRule amazon2023ArmToolsSetDefault = PackageFinderRule.builder()
+			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2)
+				.andThen(amazon2023ArmDevMongoVersions)
+				.andThen(DistributionMatch.any(
+					ToolVersionRange.of("100.7.1","100.7.4")
+				)))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/tools/db/mongodb-database-tools-amazon2023-aarch64-{tools.version}.tgz")
+				.build())
+			.build();
+
+
 		DistributionMatch amazon2023DevMongoVersions = DistributionMatch.any(
 			VersionRange.of("7.0.0-rc8"),
 			VersionRange.of("7.0.0-rc2")
@@ -84,6 +98,19 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 				.isDevVersion(true)
 				.build())
 			.build();
+
+		final PackageFinderRule amazon2023ToolsSetDefault = PackageFinderRule.builder()
+			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux2023).andThen(amazon2023DevMongoVersions)
+				.andThen(DistributionMatch.any(
+					ToolVersionRange.of("100.7.1","100.7.4")
+				)))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/tools/db/mongodb-database-tools-amazon2023-x86_64-{tools.version}.tgz")
+				.build())
+			.build();
+
 
 
 		DistributionMatch amazon2ArmDevMongoVersions = DistributionMatch.any(
@@ -129,12 +156,27 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 				.build())
 			.build();
 
-		final PackageFinderRule amazon2ArmTools = PackageFinderRule.builder()
-			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2).andThen(amazon2ArmMongoVersions))
+		final PackageFinderRule amazon2ArmToolsSetDefault = PackageFinderRule.builder()
+			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2)
+				.andThen(amazon2ArmMongoVersions))
 			.finder(UrlTemplatePackageResolver.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-amazon2-arm64-{tools.version}.tgz")
+				.build())
+			.build();
+
+		final PackageFinderRule amazon2ArmToolsSetNew = PackageFinderRule.builder()
+			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2)
+				.andThen(amazon2ArmMongoVersions)
+				.andThen(DistributionMatch.any(
+					ToolVersionRange.of("100.6.1"),
+					ToolVersionRange.of("100.7.0","100.7.4")
+				)))
+			.finder(UrlTemplatePackageResolver.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.TGZ)
+				.urlTemplate("/tools/db/mongodb-database-tools-amazon2-aarch64-{tools.version}.tgz")
 				.build())
 			.build();
 
@@ -239,7 +281,10 @@ public class AmazonPackageResolver implements PackageFinder, HasPlatformMatchRul
 			case MongoRestore:
 				return PackageFinderRules.empty()
 					.withRules(
-						amazon2ArmTools,
+						amazon2023ArmToolsSetDefault,
+						amazon2023ToolsSetDefault,
+						amazon2ArmToolsSetNew,
+						amazon2ArmToolsSetDefault,
 						amazon2tools,
 						amazontools
 					);

@@ -96,6 +96,7 @@ public final class ExplainRules {
 			.orMapIfInstance(DistributionMatch.AndThen.class, andThen -> "" + explainMatch(andThen.first()) + " and " + explainMatch(andThen.second()))
 			.orMapIfInstance(DistributionMatch.Any.class, any -> any.matcher().stream().map(ExplainRules::explainMatch).collect(Collectors.joining(" or ","(",")")))
 			.orMapIfInstance(VersionRange.class, ExplainRules::explainVersionRange)
+			.orMapIfInstance(ToolVersionRange.class, ExplainRules::explainToolsVersionRange)
 			.orMapIfInstance(DistributionMatch.class, it -> it.getClass().getSimpleName())
 			.apply(match)
 			.get();
@@ -122,6 +123,13 @@ public final class ExplainRules {
 			return asHumanReadable(versionRange.min());
 		}
 		return asHumanReadable(versionRange.min())+"-"+asHumanReadable(versionRange.max());
+	}
+
+	private static String explainToolsVersionRange(ToolVersionRange versionRange) {
+		if (versionRange.min().isEqual(versionRange.max())) {
+			return "tools.version "+asHumanReadable(versionRange.min());
+		}
+		return "tools.version "+asHumanReadable(versionRange.min())+"-"+asHumanReadable(versionRange.max());
 	}
 
 	private static String asHumanReadable(NumericVersion version) {
