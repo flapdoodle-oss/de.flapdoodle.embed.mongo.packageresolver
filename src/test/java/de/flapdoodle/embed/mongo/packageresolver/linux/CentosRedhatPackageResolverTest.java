@@ -194,8 +194,8 @@ class CentosRedhatPackageResolverTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.8", "6.0.1 -> 6.0.6", "5.0.18 -> 5.0.19", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22 -> 4.4.23", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.4 -> 4.4.9" })
-	public void centos9arm(String version) {
+	@ValueSource(strings = { "6.0.1 -> 6.0.6", "5.0.18 -> 5.0.19", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22 -> 4.4.23", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.4 -> 4.4.9" })
+	public void centos8for9arm(String version) {
 		assertThat(linuxWith(CommonArchitecture.ARM_64, CentosVersion.CentOS_9), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
 		assertThat(linuxWith(CommonArchitecture.ARM_64, RedhatVersion.Redhat_9), version)
@@ -205,14 +205,36 @@ class CentosRedhatPackageResolverTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2" })
-	public void centos9armDev(String version) {
+	@ValueSource(strings = { "6.0.8"})
+	public void centos9arm(String version) {
+		assertThat(linuxWith(CommonArchitecture.ARM_64, CentosVersion.CentOS_9), version)
+			.resolvesTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
+		assertThat(linuxWith(CommonArchitecture.ARM_64, RedhatVersion.Redhat_9), version)
+			.resolvesTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
+		assertThat(linuxWith(CommonArchitecture.ARM_64, OracleVersion.Oracle_9), version)
+			.resolvesTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { "7.0.0-rc1", "6.3.1 -> 6.3.2" })
+	public void centos8for9armDev(String version) {
 		assertThat(linuxWith(CommonArchitecture.ARM_64, CentosVersion.CentOS_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
 		assertThat(linuxWith(CommonArchitecture.ARM_64, RedhatVersion.Redhat_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
 		assertThat(linuxWith(CommonArchitecture.ARM_64, OracleVersion.Oracle_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { "7.0.0-rc8", "7.0.0-rc2" })
+	public void centos9armDev(String version) {
+		assertThat(linuxWith(CommonArchitecture.ARM_64, CentosVersion.CentOS_9), version)
+			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
+		assertThat(linuxWith(CommonArchitecture.ARM_64, RedhatVersion.Redhat_9), version)
+			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
+		assertThat(linuxWith(CommonArchitecture.ARM_64, OracleVersion.Oracle_9), version)
+			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
 	}
 
 	private static Platform linuxWith(CommonArchitecture architecture, de.flapdoodle.os.Version version) {
