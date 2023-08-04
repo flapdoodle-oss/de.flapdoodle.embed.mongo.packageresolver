@@ -74,20 +74,19 @@ public abstract class MongoPackages {
 	}
 
 	public static ParsedVersions allDbVersions() {
-		List<List<ParsedVersion>> allVersions = mongoDbVersions().stream()
-			//.map(it -> Try.supplier(() -> parse(Jsoup.parse(Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8)))))
+		List<List<ParsedVersion>> allVersions = dbVersionsList();
+
+		return new ParsedVersions(mergeAll(allVersions));
+	}
+
+	public static List<List<ParsedVersion>> dbVersionsList() {
+		return mongoDbVersions().stream()
 			.map(it -> it.mapFirst(path -> Try.supplier(() -> Resources.toString(Resources.getResource(path), StandardCharsets.UTF_8))
 				.mapToUncheckedException(RuntimeException::new)
 				.get()))
 			.map(it -> it.mapFirst(Jsoup::parse))
 			.map(it -> MongoPackages.parseDBVersions(it.first(), it.second()))
 			.collect(Collectors.toList());
-
-		//List<ParsedVersion> versions = mergeAll(allVersions);
-
-		ParsedVersions versions = new ParsedVersions(mergeAll(allVersions));
-
-		return versions;
 	}
 
 	private static List<Pair<String, Boolean>> mongoToolsVersions() {
@@ -114,8 +113,7 @@ public abstract class MongoPackages {
 			.map(it -> MongoPackages.parseToolsVersions(it.first(), it.second()))
 			.collect(Collectors.toList());
 
-		ParsedVersions versions = new ParsedVersions(mergeAll(allVersions));
-		return versions;
+		return new ParsedVersions(mergeAll(allVersions));
 	}
 
 	static List<ParsedVersion> parseDBVersions(Document document, boolean isDevVersion) {
@@ -251,7 +249,8 @@ public abstract class MongoPackages {
 	private static String compressedVersionAsString(List<String> versionNumbers) {
 		return rangesAsString(compressedVersionsList(versionNumbers));
 	}
-	private static String rangesAsString(List<VersionRange> ranges) {
+	
+	public static String rangesAsString(List<VersionRange> ranges) {
 		return ranges.stream()
 			.sorted(Comparator.comparing(VersionRange::min).reversed())
 			.map(r -> r.min().equals(r.max())
@@ -285,7 +284,8 @@ public abstract class MongoPackages {
 			}));
 		return groupedByVersionLessUrl;
 	}
-	static List<VersionRange> compressedVersionsList(Collection<String> numericVersions) {
+
+	public static List<VersionRange> compressedVersionsList(Collection<String> numericVersions) {
 		List<NumericVersion> versions = numericVersions.stream()
 			.map(NumericVersion::of)
 			.sorted(Comparator.reverseOrder())

@@ -231,7 +231,7 @@ public class MongoPackageHtmlPageParser {
 		}
 	}
 
-	private static Optional<PlatformMatch> asPlatformMatch(String name) {
+	public static Optional<PlatformMatch> asPlatformMatch(String name) {
 		Optional<OS> os = Optional.empty();
 		Optional<BitSize> bitsize = Optional.empty();
 		Optional<CPUType> cpuType = Optional.empty();
