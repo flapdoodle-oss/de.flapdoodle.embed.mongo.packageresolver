@@ -1,9 +1,10 @@
 package de.flapdoodle.embed.mongo.packageresolver;
 
+import de.flapdoodle.embed.mongo.packageresolver.parser.PackageCollector;
+import de.flapdoodle.embed.mongo.packageresolver.parser.PackagePlatform;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
-import de.flapdoodle.os.Version;
 import de.flapdoodle.os.linux.AmazonVersion;
 import de.flapdoodle.os.linux.CentosVersion;
 import de.flapdoodle.os.linux.DebianVersion;
@@ -11,148 +12,35 @@ import de.flapdoodle.os.linux.UbuntuVersion;
 import de.flapdoodle.types.Either;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class MongoPackageParser {
 
 	public static void main(String[] args) throws IOException {
 		List<MongoPackages.ParsedVersion> versions = MongoPackages.dbVersionsList().stream()
-			.flatMap(it -> it.stream())
+			.flatMap(Collection::stream)
 			.collect(Collectors.toList());
 
-		PlatformMatchCollector collector = new PlatformMatchCollector();
+		PackageCollector collector=new PackageCollector();
 
-		versions.forEach(v -> {
-			v.dists.forEach(d -> {
-				Either<PlatformMatch, String> result = parseDist(d.name);
-				
-				if (result.isLeft()) {
-					if (d.urls.size()!=1) {
-						throw new IllegalArgumentException("more or less then one url: "+d.urls);
-					}
-					String url = d.urls.get(0).url.replace(v.version, "{}");
-					collector.add(result.left(), v.version, v.isDevVersion, url);
-				}
-			});
-		});
+		versions.forEach(v -> v.dists.forEach(d -> {
+			Either<PackagePlatform, String> result = parseDist(d.name);
+			if (result.isLeft()) {
+				String url = d.singleUrl().replace(v.version, "{}");
+				collector.add(result.left(), v.version, v.isDevVersion, url);
+			} else {
+				collector.skip(result.right());
+			}
+		}));
 
+//		collector.dump();
+//		System.out.println("Skipped: "+skipped);
 		collector.dump();
 	}
 
-	static class PlatformMatchCollector {
-		private Map<PlatformMatch, VersionUrlMap> map=new LinkedHashMap<>();
-
-		public void add(PlatformMatch platformMatch, String version, boolean isDevVersion, String normalizedUrl) {
-			map.compute(platformMatch, (key,val) -> {
-				VersionUrlMap versionMap = val != null ? val : new VersionUrlMap();
-				versionMap.add(new Version(version, isDevVersion), normalizedUrl);
-				return versionMap;
-			});
-		}
-
-		public void dump() {
-			map.forEach((platform, versions) -> {
-				System.out.println("-----------------------------");
-				System.out.println(platform);
-				versions.map.forEach((url, list) -> {
-					System.out.println("  "+url);
-					String versionList = MongoPackages.rangesAsString(MongoPackages.compressedVersionsList(
-						list.stream().filter(it -> !it.isDevVersion).map(it -> it.version).collect(Collectors.toList())));
-					String devVersionList = MongoPackages.rangesAsString(MongoPackages.compressedVersionsList(
-						list.stream().filter(it -> it.isDevVersion).map(it -> it.version).collect(Collectors.toList())));
-					if (!versionList.isEmpty()) {
-						System.out.println("    "+versionList);
-					}
-					if (!devVersionList.isEmpty()) {
-						System.out.println("    (DEV) " + devVersionList);
-					}
-				});
-			});
-		}
-	}
-
-	static class VersionUrlMap {
-		private Map<String, Set<Version>> map=new LinkedHashMap<>();
-
-		public void add(Version version, String normalizedUrl) {
-			map.compute(normalizedUrl, (key, val) -> {
-				Set<Version> versions = val!=null ? val : new LinkedHashSet<>();
-				versions.add(version);
-				return versions;
-			});
-		}
-	}
-
-	static class Version {
-		private final String version;
-		private final boolean isDevVersion;
-
-		public Version(String version, boolean isDevVersion) {
-			this.version = version;
-			this.isDevVersion = isDevVersion;
-		}
-
-		@Override
-		public String toString() {
-			return version + (isDevVersion ? " (DEV)" : "");
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-			Version version1 = (Version) o;
-			return isDevVersion == version1.isDevVersion && Objects.equals(version, version1.version);
-		}
-
-		@Override
-		public int hashCode() {
-			return Objects.hash(version, isDevVersion);
-		}
-	}
-//
-//	static class Platform {
-//
-//		private final String name;
-//		private final Optional<PlatformMatch> match;
-//		private final boolean ignore;
-//
-//		public Platform(String name, Optional<PlatformMatch> match, boolean ignore) {
-//			this.name = name;
-//			this.match = match;
-//			this.ignore = ignore;
-//		}
-//
-//		public boolean hasMatch() {
-//			return match.isPresent();
-//		}
-//
-//		public boolean isIgnore() {
-//			return ignore;
-//		}
-//		@Override
-//		public String toString() {
-//			return (match.isPresent() ? match.get().toString() : (name + (ignore ? "" : "!!!")));
-//		}
-//	}
-//
-//	static Version versionOf(MongoPackages.ParsedVersion src) {
-//		return new Version(src.version, src.isDevVersion);
-//	}
-//
-//	private static Platform distOf(MongoPackages.ParsedDist src) {
-//		Optional<PlatformMatch> match = MongoPackageHtmlPageParser.asPlatformMatch(src.name);
-//		boolean ignore = false;
-//		if (!match.isPresent()) {
-//			if (src.name.contains("SUSE")) {
-//				ignore = true;
-//			}
-//		}
-//		return new Platform(src.name, match, ignore);
-//	}
-
-	private static Either<PlatformMatch, String> parseDist(String name) {
+	private static Either<PackagePlatform, String> parseDist(String name) {
 		switch (name) {
 			case "Ubuntu 12.04 x64":
 			case "Ubuntu 14.04 x64":
@@ -177,7 +65,7 @@ public class MongoPackageParser {
 		}
 	}
 
-	private static PlatformMatch platformOf(String name) {
+	private static PackagePlatform platformOf(String name) {
 		if (name.startsWith("Ubuntu") || name.startsWith("ubuntu")) {
 			return parseUbuntu(name);
 		}
@@ -214,7 +102,7 @@ public class MongoPackageParser {
 		}
 	}
 
-	private static PlatformMatch parseDebian(String name) {
+	private static PackagePlatform parseDebian(String name) {
 		switch (name) {
 			case "Debian 9.2 x64":
 				return linux(DebianVersion.DEBIAN_9, CPUType.X86, BitSize.B64);
@@ -227,7 +115,7 @@ public class MongoPackageParser {
 		}
 	}
 
-	private static PlatformMatch parseAmazon(String name) {
+	private static PackagePlatform parseAmazon(String name) {
 		switch (name) {
 			case "Amazon Linux x64":
 				return linux(AmazonVersion.AmazonLinux, CPUType.X86, BitSize.B64);
@@ -246,7 +134,7 @@ public class MongoPackageParser {
 		}
 	}
 
-	private static PlatformMatch parseCentos(String name) {
+	private static PackagePlatform parseCentos(String name) {
 		switch (name) {
 			case "RedHat / CentOS 7.0 x64":
 				return linux(CentosVersion.CentOS_7, CPUType.X86, BitSize.B64);
@@ -264,7 +152,7 @@ public class MongoPackageParser {
 		}
 	}
 
-	private static PlatformMatch parseUbuntu(String name) {
+	private static PackagePlatform parseUbuntu(String name) {
 		switch (name) {
 			case "Ubuntu 16.04 x64":
 				return linux(UbuntuVersion.Ubuntu_16_04, CPUType.X86, BitSize.B64);
@@ -287,16 +175,20 @@ public class MongoPackageParser {
 		}
 	}
 
-	private static PlatformMatch os(de.flapdoodle.os.OS os, CPUType cpu, BitSize bits) {
-		return PlatformMatch.withOs(os)
-			.withCpuType(cpu)
-			.withBitSize(bits);
+	private static PackagePlatform os(de.flapdoodle.os.OS os, CPUType cpu, BitSize bits) {
+		return PackagePlatform.builder()
+			.os(os)
+			.cpuType(cpu)
+			.bitSize(bits)
+			.build();
 	}
 
-	private static PlatformMatch linux(de.flapdoodle.os.Version version, CPUType cpu, BitSize bits) {
-		return PlatformMatch.withOs(CommonOS.Linux)
-			.withVersion(version)
-			.withCpuType(cpu)
-			.withBitSize(bits);
+	private static PackagePlatform linux(de.flapdoodle.os.Version version, CPUType cpu, BitSize bits) {
+		return PackagePlatform.builder()
+			.os(CommonOS.Linux)
+			.version(version)
+			.cpuType(cpu)
+			.bitSize(bits)
+			.build();
 	}
 }

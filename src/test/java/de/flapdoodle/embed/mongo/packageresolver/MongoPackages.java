@@ -351,6 +351,13 @@ public abstract class MongoPackages {
 				throw new IllegalArgumentException("url collisions: "+urls+"("+urlsAsSet+")");
 			}
 		}
+
+		public String singleUrl() {
+			if (urls.size()!=1) {
+				throw new IllegalArgumentException("more or less than one url: "+urls);
+			}
+			return urls.get(0).url;
+		}
 	}
 
 	static class ParsedVersion implements Comparable<ParsedVersion> {
