@@ -2,6 +2,7 @@ package de.flapdoodle.embed.mongo.packageresolver;
 
 import de.flapdoodle.embed.mongo.packageresolver.parser.PackagePlatform;
 import de.flapdoodle.embed.mongo.packageresolver.parser.PackageTree;
+import de.flapdoodle.embed.mongo.packageresolver.parser.SourceCodeGenerator;
 import de.flapdoodle.types.Either;
 
 import java.io.IOException;
@@ -31,5 +32,7 @@ public class MongoPackageParser {
 		}
 
 		tree.dump();
+
+		new SourceCodeGenerator().generate(tree);
 	}
 }
