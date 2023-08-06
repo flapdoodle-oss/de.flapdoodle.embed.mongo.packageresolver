@@ -50,7 +50,18 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 		if (version instanceof UbuntuVersion) {
 			return upgradeableUbuntuVersions((UbuntuVersion) version);
 		}
+		if (version instanceof DebianVersion) {
+			return upgradeableDebianVersions((DebianVersion) version);
+		}
 		return Collections.singletonList(version);
+	}
+
+	private static List<Version> upgradeableDebianVersions(DebianVersion version) {
+		List<DebianVersion> all = Arrays.asList(DebianVersion.values());
+
+		return all.stream()
+			.filter(it -> it.ordinal()>=version.ordinal())
+			.collect(Collectors.toList());
 	}
 
 	private static boolean hasLibCrypt1_1(UbuntuVersion version) {
