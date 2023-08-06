@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 	private static Comparator<PackagePlatform> COMPARATOR=Comparator.comparing(PackagePlatform::os, Comparator.comparing(OS::name))
 		.thenComparing(PackagePlatform::version, Versions.versionByPrioOrdinalOrNameComparator())
-		.thenComparing(PackagePlatform::cpuType)
+		.thenComparing(Comparator.comparing(PackagePlatform::cpuType).reversed())
 		.thenComparing(Comparator.comparing(PackagePlatform::bitSize).reversed());
 
 	public abstract OS os();
