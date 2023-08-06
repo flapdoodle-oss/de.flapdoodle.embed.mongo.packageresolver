@@ -1,10 +1,7 @@
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
 import de.flapdoodle.os.*;
-import de.flapdoodle.os.linux.AmazonVersion;
-import de.flapdoodle.os.linux.CentosVersion;
-import de.flapdoodle.os.linux.DebianVersion;
-import de.flapdoodle.os.linux.UbuntuVersion;
+import de.flapdoodle.os.linux.*;
 import de.flapdoodle.types.Either;
 import org.checkerframework.checker.units.qual.A;
 import org.immutables.value.Value;
@@ -53,7 +50,32 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 		if (version instanceof DebianVersion) {
 			return upgradeableDebianVersions((DebianVersion) version);
 		}
+		if (version instanceof CentosVersion) {
+			return upgradeableCentosVersions((CentosVersion) version);
+		}
+		
 		return Collections.singletonList(version);
+	}
+
+	private static List<Version> upgradeableCentosVersions(CentosVersion version) {
+		List<CentosVersion> all = Arrays.asList(CentosVersion.values());
+
+		return all.stream()
+			.filter(it -> it.ordinal()>=version.ordinal())
+			.flatMap(it -> {
+				switch (it) {
+					case CentOS_6:
+						return Stream.of(CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6);
+					case CentOS_7:
+						return Stream.of(CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7);
+					case CentOS_8:
+						return Stream.of(CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8);
+					case CentOS_9:
+						return Stream.of(CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38);
+				}
+				return Stream.of(it);
+			})
+			.collect(Collectors.toList());
 	}
 
 	private static List<Version> upgradeableDebianVersions(DebianVersion version) {
@@ -100,7 +122,6 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 			case "SUSE 15 x64":
 
 			case "RedHat / CentOS 5.5 x64":
-			case "RedHat / CentOS 6.2+ x64":
 			case "RedHat / CentOS 6.7 s390x":
 			case "RedHat / CentOS 7.2 s390x":
 			// Tools
@@ -192,6 +213,8 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 
 	private static PackagePlatform parseCentos(String name) {
 		switch (name) {
+			case "RedHat / CentOS 6.2+ x64":
+				return linux(CentosVersion.CentOS_6, CPUType.X86, BitSize.B64);
 			case "RedHat / CentOS 7.0 x64":
 				return linux(CentosVersion.CentOS_7, CPUType.X86, BitSize.B64);
 			case "RedHat / CentOS 8.0 x64":

@@ -23,374 +23,454 @@ package de.flapdoodle.embed.mongo.packageresolver.linux;
 import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
-import de.flapdoodle.embed.process.config.store.ImmutableFileSet;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
+import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
-import de.flapdoodle.os.Version;
+import de.flapdoodle.os.linux.*;
 import de.flapdoodle.os.linux.CentosVersion;
-import de.flapdoodle.os.linux.FedoraVersion;
-import de.flapdoodle.os.linux.OracleVersion;
-import de.flapdoodle.os.linux.RedhatVersion;
 
+
+import java.util.Optional;
+
+/**
+* this file is generated, please don't touch
+*/
 public class CentosRedhatPackageFinder extends AbstractPackageFinder {
-	
-	public CentosRedhatPackageFinder(final Command command) {
-		super(command, rules(command));
-	}
 
-  private static ImmutablePackageFinderRules rules(Command command) {
-    ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
+  public CentosRedhatPackageFinder(final Command command) {
+    super(command, rules(command));
+  }
 
-		PlatformMatch centos6x86_64 = match(BitSize.B64, CPUType.X86,
-			CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6);
+  private static FileSet fileSetOf(Command command) {
+    return FileSet.builder()
+            .addEntry(FileType.Executable, command.commandName())
+            .build();
+  }
 
-		PlatformMatch centos7x86_64 = match(BitSize.B64, CPUType.X86,
-			CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7
-		);
+  private static ImmutablePackageFinderRules rules(final Command command) {
+    FileSet fileSet = fileSetOf(command);
 
-		PlatformMatch centos8and9x86_64 = match(BitSize.B64, CPUType.X86,
-			CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8,
-			CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
-		);
+    PackageFinderRule devRule_CentOS_9_ARM_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("7.0.0-rc8"),
+                  VersionRange.of("7.0.0-rc2"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-aarch64-rhel90-{version}.tgz")
+            .isDevVersion(true)
+            .build())
+        .build();
 
-		PlatformMatch centos8and9arm_64 = match(BitSize.B64, CPUType.ARM,
-			CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8,
-			CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
-		);
+    PackageFinderRule rule_CentOS_9_ARM_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("6.0.8"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-aarch64-rhel90-{version}.tgz")
+            .build())
+        .build();
 
-		PlatformMatch centos9x86_64 = match(BitSize.B64, CPUType.X86,
-			CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38
-		);
+ 
+    PackageFinderRule tools_CentOS_9_ARM_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.7.2", "100.7.4"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel90-aarch64-{tools.version}.tgz")
+            .build())
+        .build();
 
-		PlatformMatch centos9arm_64 = match(BitSize.B64, CPUType.ARM,
-			CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9
-		);
-
-		DistributionMatch centos6mongoVersions = DistributionMatch.any(
-			VersionRange.of("4.4.22","4.4.23"),
-			VersionRange.of("4.4.16", "4.4.19"),
-			VersionRange.of("4.4.13", "4.4.13"),
-			VersionRange.of("4.4.11", "4.4.11"),
-			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.22", "4.2.24"),
-			VersionRange.of("4.2.18", "4.2.19"),
-			VersionRange.of("4.2.5", "4.2.16"),
-			VersionRange.of("4.2.0", "4.2.3"),
-			VersionRange.of("4.0.0", "4.0.28"),
-			VersionRange.of("3.6.0", "3.6.23"),
-			VersionRange.of("3.4.9", "3.4.24"),
-			VersionRange.of("3.4.0", "3.4.7"),
-			VersionRange.of("3.2.0", "3.2.22"),
-			VersionRange.of("3.0.0", "3.0.15")
-		);
-
-		PackageFinderRule centos6 = PackageFinderRule.builder()
-			.match(centos6x86_64.andThen(centos6mongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-x86_64-rhel62-{version}.tgz")
-				.build())
-			.build();
-
-		PackageFinderRule tools_centos6 = PackageFinderRule.builder()
-			.match(centos6x86_64.andThen(centos6mongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/tools/db/mongodb-database-tools-rhel62-x86_64-{tools.version}.tgz")
-				.build())
-			.build();
-
-		DistributionMatch centos7MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.8"),
-			VersionRange.of("6.0.1", "6.0.6"),
-			VersionRange.of("5.0.18","5.0.19"),
-			VersionRange.of("5.0.12", "5.0.15"),
-			VersionRange.of("5.0.5", "5.0.6"),
-			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.22","4.4.23"),
-			VersionRange.of("4.4.16", "4.4.19"),
-			VersionRange.of("4.4.13", "4.4.13"),
-			VersionRange.of("4.4.11", "4.4.11"),
-			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.22", "4.2.24"),
-			VersionRange.of("4.2.18", "4.2.19"),
-			VersionRange.of("4.2.5", "4.2.16"),
-			VersionRange.of("4.2.0", "4.2.3"),
-			VersionRange.of("4.0.0", "4.0.28"),
-			VersionRange.of("3.6.0", "3.6.23"),
-			VersionRange.of("3.4.9", "3.4.24"),
-			VersionRange.of("3.4.0", "3.4.7"),
-			VersionRange.of("3.2.0", "3.2.22"),
-			VersionRange.of("3.0.0", "3.0.15")
-		);
-
-		PackageFinderRule centos7 = PackageFinderRule.builder()
-			.match(centos7x86_64.andThen(centos7MongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-x86_64-rhel70-{version}.tgz")
-				.build())
-			.build();
-
-		DistributionMatch centos7devMongoVersions = DistributionMatch.any(
-			VersionRange.of("7.0.0-rc8"),
-			VersionRange.of("7.0.0-rc2"),
-			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1","6.3.2")
-		);
-
-		PackageFinderRule centos7dev = PackageFinderRule.builder()
-			.match(centos7x86_64.andThen(centos7devMongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-x86_64-rhel70-{version}.tgz")
-				.isDevVersion(true)
-				.build())
-			.build();
-
-		PackageFinderRule tools_centos7 = PackageFinderRule.builder()
-			.match(centos7x86_64.andThen(centos7MongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/tools/db/mongodb-database-tools-rhel70-x86_64-{tools.version}.tgz")
-				.build())
-			.build();
+    PackageFinderRule tools_CentOS_9_ARM_B64_1 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.7.1"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel90-arm64-{tools.version}.tgz")
+            .build())
+        .build();
 
 
-		DistributionMatch centos8MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.8"),
-			VersionRange.of("6.0.1", "6.0.6"),
-			VersionRange.of("5.0.18","5.0.19"),
-			VersionRange.of("5.0.12", "5.0.15"),
-			VersionRange.of("5.0.5", "5.0.6"),
-			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.22","4.4.23"),
-			VersionRange.of("4.4.16", "4.4.19"),
-			VersionRange.of("4.4.13", "4.4.13"),
-			VersionRange.of("4.4.11", "4.4.11"),
-			VersionRange.of("4.4.0", "4.4.9"),
-			VersionRange.of("4.2.22", "4.2.24"),
-			VersionRange.of("4.2.18", "4.2.19"),
-			VersionRange.of("4.2.5", "4.2.16"),
-			VersionRange.of("4.2.1", "4.2.3"),
-			VersionRange.of("4.0.14", "4.0.28"),
-			VersionRange.of("3.6.17", "3.6.23"),
-			VersionRange.of("3.4.24", "3.4.24")
-		);
+    PackageFinderRule devRule_CentOS_9_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("7.0.0-rc8"),
+                  VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc1"),
+                  VersionRange.of("6.3.1", "6.3.2"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-rhel90-{version}.tgz")
+            .isDevVersion(true)
+            .build())
+        .build();
 
-		PackageFinderRule centos8 = PackageFinderRule.builder()
-			.match(centos8and9x86_64.andThen(centos8MongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-x86_64-rhel80-{version}.tgz")
-				.build())
-			.build();
+    PackageFinderRule rule_CentOS_9_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("6.0.8"),
+                  VersionRange.of("6.0.4", "6.0.6"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-rhel90-{version}.tgz")
+            .build())
+        .build();
 
-		DistributionMatch centos8devMongoVersions = DistributionMatch.any(
-			VersionRange.of("7.0.0-rc8"),
-			VersionRange.of("7.0.0-rc2"),
-			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1","6.3.2")
-		);
+ 
+    PackageFinderRule tools_CentOS_9_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.6.0", "100.6.1"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel90-x86_64-{tools.version}.tgz")
+            .build())
+        .build();
 
-		PackageFinderRule centos8dev = PackageFinderRule.builder()
-			.match(centos8and9x86_64.andThen(centos8devMongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-x86_64-rhel80-{version}.tgz")
-				.isDevVersion(true)
-				.build())
-			.build();
 
-		PackageFinderRule tools_centos8 = PackageFinderRule.builder()
-			.match(centos8and9x86_64.andThen(centos8MongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/tools/db/mongodb-database-tools-rhel80-x86_64-{tools.version}.tgz")
-				.build())
-			.build();
+    PackageFinderRule devRule_CentOS_8_ARM_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("7.0.0-rc8"),
+                  VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc1"),
+                  VersionRange.of("6.3.1", "6.3.2"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-aarch64-rhel82-{version}.tgz")
+            .isDevVersion(true)
+            .build())
+        .build();
 
-		DistributionMatch centos8ArmMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.8"),
-			VersionRange.of("6.0.1", "6.0.6"),
-			VersionRange.of("5.0.18","5.0.19"),
-			VersionRange.of("5.0.12", "5.0.15"),
-			VersionRange.of("5.0.5", "5.0.6"),
-			VersionRange.of("5.0.0", "5.0.2"),
-			VersionRange.of("4.4.22","4.4.23"),
-			VersionRange.of("4.4.16", "4.4.19"),
-			VersionRange.of("4.4.13", "4.4.13"),
-			VersionRange.of("4.4.11", "4.4.11"),
-			VersionRange.of("4.4.4", "4.4.9")
-		);
+    PackageFinderRule rule_CentOS_8_ARM_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("6.0.8"),
+                  VersionRange.of("6.0.1", "6.0.6"),
+                  VersionRange.of("5.0.18", "5.0.19"),
+                  VersionRange.of("5.0.12", "5.0.15"),
+                  VersionRange.of("5.0.5", "5.0.6"),
+                  VersionRange.of("5.0.0", "5.0.2"),
+                  VersionRange.of("4.4.22", "4.4.23"),
+                  VersionRange.of("4.4.16", "4.4.19"),
+                  VersionRange.of("4.4.13"),
+                  VersionRange.of("4.4.11"),
+                  VersionRange.of("4.4.4", "4.4.9"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-aarch64-rhel82-{version}.tgz")
+            .build())
+        .build();
 
-		PackageFinderRule centos8arm = PackageFinderRule.builder()
-				.match(centos8and9arm_64.andThen(centos8ArmMongoVersions))
-				.finder(UrlTemplatePackageFinder.builder()
-					.fileSet(fileSet)
-					.archiveType(ArchiveType.TGZ)
-					.urlTemplate("/linux/mongodb-linux-aarch64-rhel82-{version}.tgz")
-					.build())
-				.build();
+ 
+    PackageFinderRule tools_CentOS_8_ARM_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.7.0", "100.7.1"),
+                  ToolVersionRange.of("100.6.0", "100.6.1"),
+                  ToolVersionRange.of("100.5.0", "100.5.4"),
+                  ToolVersionRange.of("100.4.0", "100.4.1"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel82-arm64-{tools.version}.tgz")
+            .build())
+        .build();
 
-		DistributionMatch centos8armDevMongoVersions = DistributionMatch.any(
-			VersionRange.of("7.0.0-rc8"),
-			VersionRange.of("7.0.0-rc2"),
-			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1","6.3.2")
-		);
+    PackageFinderRule tools_CentOS_8_ARM_B64_1 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.7.2", "100.7.4"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel82-aarch64-{tools.version}.tgz")
+            .build())
+        .build();
 
-		PackageFinderRule centos8armDev = PackageFinderRule.builder()
-				.match(centos8and9arm_64.andThen(centos8armDevMongoVersions))
-				.finder(UrlTemplatePackageFinder.builder()
-					.fileSet(fileSet)
-					.archiveType(ArchiveType.TGZ)
-					.urlTemplate("/linux/mongodb-linux-aarch64-rhel82-{version}.tgz")
-					.isDevVersion(true)
-					.build())
-				.build();
 
-		PackageFinderRule tools_centos8armDefault = PackageFinderRule.builder()
-					.match(centos8and9arm_64.andThen(centos8ArmMongoVersions))
-					.finder(UrlTemplatePackageFinder.builder()
-							.fileSet(fileSet)
-							.archiveType(ArchiveType.TGZ)
-							.urlTemplate("/tools/db/mongodb-database-tools-rhel82-arm64-{tools.version}.tgz")
-							.build())
-					.build();
+    PackageFinderRule devRule_CentOS_8_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("7.0.0-rc8"),
+                  VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc1"),
+                  VersionRange.of("6.3.1", "6.3.2"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-rhel80-{version}.tgz")
+            .isDevVersion(true)
+            .build())
+        .build();
 
-		PackageFinderRule tools_centos8armNew = PackageFinderRule.builder()
-			.match(centos8and9arm_64.andThen(centos8ArmMongoVersions).andThen(
-				DistributionMatch.any(
-					ToolVersionRange.of("100.7.2", "100.7.4")
-				)
-			))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/tools/db/mongodb-database-tools-rhel82-aarch64-{tools.version}.tgz")
-				.build())
-			.build();
+    PackageFinderRule rule_CentOS_8_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("6.0.8"),
+                  VersionRange.of("6.0.1", "6.0.6"),
+                  VersionRange.of("5.0.18", "5.0.19"),
+                  VersionRange.of("5.0.12", "5.0.15"),
+                  VersionRange.of("5.0.5", "5.0.6"),
+                  VersionRange.of("5.0.0", "5.0.2"),
+                  VersionRange.of("4.4.22", "4.4.23"),
+                  VersionRange.of("4.4.16", "4.4.19"),
+                  VersionRange.of("4.4.13"),
+                  VersionRange.of("4.4.11"),
+                  VersionRange.of("4.4.0", "4.4.9"),
+                  VersionRange.of("4.2.22", "4.2.24"),
+                  VersionRange.of("4.2.18", "4.2.19"),
+                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("4.2.1", "4.2.3"),
+                  VersionRange.of("4.0.14", "4.0.28"),
+                  VersionRange.of("3.6.17", "3.6.23"),
+                  VersionRange.of("3.4.24"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-rhel80-{version}.tgz")
+            .build())
+        .build();
 
-		DistributionMatch centos9MongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.8"),
-			VersionRange.of("6.0.4", "6.0.6")
-		);
+ 
+    PackageFinderRule tools_CentOS_8_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.6.0", "100.6.1"),
+                  ToolVersionRange.of("100.5.0", "100.5.4"),
+                  ToolVersionRange.of("100.4.0", "100.4.1"),
+                  ToolVersionRange.of("100.3.0", "100.3.1"),
+                  ToolVersionRange.of("100.2.0", "100.2.1"),
+                  ToolVersionRange.of("100.1.0", "100.1.1"),
+                  ToolVersionRange.of("100.0.0", "100.0.2"),
+                  ToolVersionRange.of("99.0.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel80-x86_64-{tools.version}.tgz")
+            .build())
+        .build();
 
-		PackageFinderRule centos9 = PackageFinderRule.builder()
-			.match(centos9x86_64.andThen(centos9MongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-x86_64-rhel90-{version}.tgz")
-				.build())
-			.build();
 
-		DistributionMatch centos9devMongoVersions = DistributionMatch.any(
-			VersionRange.of("7.0.0-rc8"),
-			VersionRange.of("7.0.0-rc2"),
-			VersionRange.of("7.0.0-rc1"),
-			VersionRange.of("6.3.1","6.3.2")
-		);
+    PackageFinderRule devRule_CentOS_7_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("7.0.0-rc8"),
+                  VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc1"),
+                  VersionRange.of("6.3.1", "6.3.2"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-rhel70-{version}.tgz")
+            .isDevVersion(true)
+            .build())
+        .build();
 
-		PackageFinderRule centos9dev = PackageFinderRule.builder()
-			.match(centos9x86_64.andThen(centos9devMongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-x86_64-rhel90-{version}.tgz")
-				.isDevVersion(true)
-				.build())
-			.build();
+    PackageFinderRule rule_CentOS_7_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("6.0.8"),
+                  VersionRange.of("6.0.1", "6.0.6"),
+                  VersionRange.of("5.0.18", "5.0.19"),
+                  VersionRange.of("5.0.12", "5.0.15"),
+                  VersionRange.of("5.0.5", "5.0.6"),
+                  VersionRange.of("5.0.0", "5.0.2"),
+                  VersionRange.of("4.4.22", "4.4.23"),
+                  VersionRange.of("4.4.16", "4.4.19"),
+                  VersionRange.of("4.4.13"),
+                  VersionRange.of("4.4.11"),
+                  VersionRange.of("4.4.0", "4.4.9"),
+                  VersionRange.of("4.2.22", "4.2.24"),
+                  VersionRange.of("4.2.18", "4.2.19"),
+                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("4.2.0", "4.2.3"),
+                  VersionRange.of("4.0.0", "4.0.28"),
+                  VersionRange.of("3.6.0", "3.6.23"),
+                  VersionRange.of("3.4.9", "3.4.24"),
+                  VersionRange.of("3.4.0", "3.4.7"),
+                  VersionRange.of("3.2.0", "3.2.22"),
+                  VersionRange.of("3.0.0", "3.0.15"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-rhel70-{version}.tgz")
+            .build())
+        .build();
 
-		DistributionMatch centos9ArmMongoVersions = DistributionMatch.any(
-			VersionRange.of("6.0.8")
-		);
+ 
+    PackageFinderRule tools_CentOS_7_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.6.0", "100.6.1"),
+                  ToolVersionRange.of("100.5.0", "100.5.4"),
+                  ToolVersionRange.of("100.4.0", "100.4.1"),
+                  ToolVersionRange.of("100.3.0", "100.3.1"),
+                  ToolVersionRange.of("100.2.0", "100.2.1"),
+                  ToolVersionRange.of("100.1.0", "100.1.1"),
+                  ToolVersionRange.of("100.0.0", "100.0.2"),
+                  ToolVersionRange.of("99.0.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel70-x86_64-{tools.version}.tgz")
+            .build())
+        .build();
 
-		PackageFinderRule centos9arm = PackageFinderRule.builder()
-			.match(centos9arm_64.andThen(centos9ArmMongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-aarch64-rhel90-{version}.tgz")
-				.build())
-			.build();
 
-		DistributionMatch centos9armDevMongoVersions = DistributionMatch.any(
-			VersionRange.of("7.0.0-rc8"),
-			VersionRange.of("7.0.0-rc2")
-		);
+    PackageFinderRule rule_CentOS_6_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("4.4.22", "4.4.23"),
+                  VersionRange.of("4.4.16", "4.4.19"),
+                  VersionRange.of("4.4.13"),
+                  VersionRange.of("4.4.11"),
+                  VersionRange.of("4.4.0", "4.4.9"),
+                  VersionRange.of("4.2.22", "4.2.24"),
+                  VersionRange.of("4.2.18", "4.2.19"),
+                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("4.2.0", "4.2.3"),
+                  VersionRange.of("4.0.0", "4.0.28"),
+                  VersionRange.of("3.6.0", "3.6.23"),
+                  VersionRange.of("3.4.9", "3.4.24"),
+                  VersionRange.of("3.4.0", "3.4.7"),
+                  VersionRange.of("3.2.0", "3.2.22"),
+                  VersionRange.of("3.0.0", "3.0.15"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-rhel62-{version}.tgz")
+            .build())
+        .build();
 
-		PackageFinderRule centos9armDev = PackageFinderRule.builder()
-			.match(centos9arm_64.andThen(centos9armDevMongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-aarch64-rhel90-{version}.tgz")
-				.isDevVersion(true)
-				.build())
-			.build();
+ 
+    PackageFinderRule tools_CentOS_6_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.6.0", "100.6.1"),
+                  ToolVersionRange.of("100.5.0", "100.5.4"),
+                  ToolVersionRange.of("100.4.0", "100.4.1"),
+                  ToolVersionRange.of("100.3.0", "100.3.1"),
+                  ToolVersionRange.of("100.2.0", "100.2.1"),
+                  ToolVersionRange.of("100.1.0", "100.1.1"),
+                  ToolVersionRange.of("100.0.0", "100.0.2"),
+                  ToolVersionRange.of("99.0.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel62-x86_64-{tools.version}.tgz")
+            .build())
+        .build();
 
-		PackageFinderRule tools_centos9armDefault = PackageFinderRule.builder()
-			.match(centos9arm_64.andThen(centos9ArmMongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/tools/db/mongodb-database-tools-rhel90-arm64-{tools.version}.tgz")
-				.build())
-			.build();
 
-		PackageFinderRule tools_centos9armNew = PackageFinderRule.builder()
-			.match(centos9arm_64.andThen(centos9ArmMongoVersions).andThen(
-				DistributionMatch.any(
-					ToolVersionRange.of("100.7.2", "100.7.4")
-				)
-			))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/tools/db/mongodb-database-tools-rhel90-aarch64-{tools.version}.tgz")
-				.build())
-			.build();
-
-		PackageFinderRule tools_centos9 = PackageFinderRule.builder()
-			.match(centos9x86_64.andThen(centos9MongoVersions))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/tools/db/mongodb-database-tools-rhel90-x86_64-{tools.version}.tgz")
-				.build())
-			.build();
-
-			switch (command) {
-					case MongoDump:
-					case MongoImport:
-					case MongoRestore:
-							return PackageFinderRules.empty()
-									.withRules(
-										tools_centos9, tools_centos9armNew, tools_centos9armDefault,
-											tools_centos6, tools_centos7, tools_centos8, tools_centos8armNew, tools_centos8armDefault
-									);
-			}
-
-    return PackageFinderRules.empty()
-            .withRules(
-							centos9dev, centos9,
-							centos9armDev, centos9arm,
-							centos6,
-							centos7dev, centos7,
-							centos8dev, centos8,
-							centos8armDev, centos8arm
+    switch (command) {
+      case MongoDump:
+      case MongoImport:
+      case MongoRestore:
+        return PackageFinderRules.empty()
+            .withAdditionalRules(
+                tools_CentOS_9_ARM_B64, tools_CentOS_9_ARM_B64_1
+            )
+            .withAdditionalRules(
+                tools_CentOS_9_X86_B64
+            )
+            .withAdditionalRules(
+                tools_CentOS_8_ARM_B64, tools_CentOS_8_ARM_B64_1
+            )
+            .withAdditionalRules(
+                tools_CentOS_8_X86_B64
+            )
+            .withAdditionalRules(
+                tools_CentOS_7_X86_B64
+            )
+            .withAdditionalRules(
+                tools_CentOS_6_X86_B64
+            )
+            .withAdditionalRules(
+                devRule_CentOS_9_ARM_B64, rule_CentOS_9_ARM_B64
+            ).withAdditionalRules(
+                devRule_CentOS_9_X86_B64, rule_CentOS_9_X86_B64
+            ).withAdditionalRules(
+                devRule_CentOS_8_ARM_B64, rule_CentOS_8_ARM_B64
+            ).withAdditionalRules(
+                devRule_CentOS_8_X86_B64, rule_CentOS_8_X86_B64
+            ).withAdditionalRules(
+                devRule_CentOS_7_X86_B64, rule_CentOS_7_X86_B64
+            ).withAdditionalRules(
+                rule_CentOS_6_X86_B64
             );
+      default:
+        return PackageFinderRules.empty()
+            .withAdditionalRules(
+                devRule_CentOS_9_ARM_B64, rule_CentOS_9_ARM_B64
+            ).withAdditionalRules(
+                devRule_CentOS_9_X86_B64, rule_CentOS_9_X86_B64
+            ).withAdditionalRules(
+                devRule_CentOS_8_ARM_B64, rule_CentOS_8_ARM_B64
+            ).withAdditionalRules(
+                devRule_CentOS_8_X86_B64, rule_CentOS_8_X86_B64
+            ).withAdditionalRules(
+                devRule_CentOS_7_X86_B64, rule_CentOS_7_X86_B64
+            ).withAdditionalRules(
+                rule_CentOS_6_X86_B64
+            );
+    }
   }
 }

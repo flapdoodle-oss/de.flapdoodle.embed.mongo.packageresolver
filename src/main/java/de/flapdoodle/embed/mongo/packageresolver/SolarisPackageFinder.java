@@ -29,6 +29,7 @@ import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
+import de.flapdoodle.os.linux.*;
 
 import java.util.Optional;
 
