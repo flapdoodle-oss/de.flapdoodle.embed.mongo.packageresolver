@@ -46,7 +46,7 @@ public class <it.name> extends AbstractPackageFinder {
 
   private static FileSet fileSetOf(Command command) {
     return FileSet.builder()
-            .addEntry(FileType.Executable, command.commandName()<if(it.executableExtension)> + <it.executableExtension><endif>)
+            .addEntry(FileType.Executable, command.commandName()<if(it.executableExtension)> + "<it.executableExtension>"<endif>)
             .build();
   }
 
@@ -104,9 +104,13 @@ public class <it.name> extends AbstractPackageFinder {
       case MongoImport:
       case MongoRestore:
         return PackageFinderRules.empty()
-<package.entries:{ pair |
+<package.entries:{ pair | <if(pair.urlVersions.toolEntries)>
             .withAdditionalRules(
                 <pair.urlVersions.toolEntries:{ urlAndVersions | <if(urlAndVersions.versions.hasVersions)>tools_<pair.platform.variableName><urlAndVersions.index><endif>}; separator=", ">
+            )<endif>}>
+<package.entries:{ pair |
+            .withAdditionalRules(
+                <pair.urlVersions.entries:{ urlAndVersions | <if(urlAndVersions.versions.hasDevVersions)>devRule_<pair.platform.variableName><urlAndVersions.index><endif><if(urlAndVersions.versions.hasDevVersions && urlAndVersions.versions.hasVersions)>, <endif><if(urlAndVersions.versions.hasVersions)>rule_<pair.platform.variableName><urlAndVersions.index><endif>}; separator=", ">
             )}>;
       default:
         return PackageFinderRules.empty()

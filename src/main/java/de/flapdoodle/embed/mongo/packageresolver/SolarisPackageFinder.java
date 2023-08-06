@@ -74,6 +74,7 @@ public class SolarisPackageFinder extends AbstractPackageFinder {
       case MongoRestore:
         return PackageFinderRules.empty()
             .withAdditionalRules(
+                rule_Solaris_X86_B64
             );
       default:
         return PackageFinderRules.empty()
