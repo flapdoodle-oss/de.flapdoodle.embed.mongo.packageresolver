@@ -1,6 +1,7 @@
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
 import de.flapdoodle.embed.mongo.packageresolver.MongoPackages;
+import de.flapdoodle.embed.mongo.packageresolver.NumericVersion;
 import de.flapdoodle.embed.mongo.packageresolver.VersionRange;
 import org.immutables.value.Value;
 
@@ -21,6 +22,11 @@ public abstract class PackageVersions {
 	@Value.Derived
 	public boolean hasVersions() {
 		return list().stream().anyMatch(version -> !version.devVersion());
+	}
+
+	@Value.Auxiliary
+	public boolean hasVersionOlderThan(NumericVersion version) {
+		return list().stream().anyMatch(v -> NumericVersion.of(v.version()).isOlder(version));
 	}
 
 	@Value.Auxiliary

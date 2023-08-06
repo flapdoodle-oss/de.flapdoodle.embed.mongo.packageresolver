@@ -210,7 +210,8 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
             )
             .withAdditionalRules(
                 devRule_Windows_X86_B64, rule_Windows_X86_B64, rule_Windows_X86_B64_1, rule_Windows_X86_B64_2, rule_Windows_X86_B64_3, rule_Windows_X86_B64_4
-            ).withAdditionalRules(
+            )
+            .withAdditionalRules(
                 rule_Windows_X86_B32
             );
       default:

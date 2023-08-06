@@ -234,10 +234,9 @@ public class DebianPackageFinder extends AbstractPackageFinder {
                 tools_DEBIAN_9_X86_B64
             )
             .withAdditionalRules(
-                devRule_DEBIAN_11_X86_B64, rule_DEBIAN_11_X86_B64
-            ).withAdditionalRules(
                 devRule_DEBIAN_10_X86_B64, rule_DEBIAN_10_X86_B64
-            ).withAdditionalRules(
+            )
+            .withAdditionalRules(
                 rule_DEBIAN_9_X86_B64
             );
       default:

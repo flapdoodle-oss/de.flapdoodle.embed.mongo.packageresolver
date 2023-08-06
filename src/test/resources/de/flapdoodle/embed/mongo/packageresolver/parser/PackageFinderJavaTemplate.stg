@@ -110,10 +110,11 @@ public class <it.name> extends AbstractPackageFinder {
             .withAdditionalRules(
                 <pair.urlVersions.toolEntries:{ urlAndVersions | <if(urlAndVersions.versions.hasVersions)>tools_<pair.platform.variableName><urlAndVersions.index><endif>}; separator=", ">
             )<endif>}>
-<package.entries:{ pair |
+<package.entries:{ pair | <if(pair.urlVersions.toolsBundled)>
             .withAdditionalRules(
-                <pair.urlVersions.entries:{ urlAndVersions | <if(urlAndVersions.versions.hasDevVersions)>devRule_<pair.platform.variableName><urlAndVersions.index><endif><if(urlAndVersions.versions.hasDevVersions && urlAndVersions.versions.hasVersions)>, <endif><if(urlAndVersions.versions.hasVersions)>rule_<pair.platform.variableName><urlAndVersions.index><endif>}; separator=", ">
-            )}>;
+                <pair.urlVersions.entries:{ urlAndVersions | <if(urlAndVersions.
+                versions.toolsBundled)><if(urlAndVersions.versions.hasDevVersions)>devRule_<pair.platform.variableName><urlAndVersions.index><endif><if(urlAndVersions.versions.hasDevVersions && urlAndVersions.versions.hasVersions)>, <endif><if(urlAndVersions.versions.hasVersions)>rule_<pair.platform.variableName><urlAndVersions.index><endif><endif>}; separator=", ">
+            )<endif>}>;
       default:
         return PackageFinderRules.empty()
 <package.entries:{ pair |

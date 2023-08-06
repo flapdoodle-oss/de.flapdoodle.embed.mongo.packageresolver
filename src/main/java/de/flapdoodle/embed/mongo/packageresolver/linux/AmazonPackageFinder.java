@@ -332,14 +332,12 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
                 tools_AmazonLinux_X86_B64
             )
             .withAdditionalRules(
-                devRule_AmazonLinux2023_ARM_B64
-            ).withAdditionalRules(
-                devRule_AmazonLinux2023_X86_B64
-            ).withAdditionalRules(
                 devRule_AmazonLinux2_ARM_B64, rule_AmazonLinux2_ARM_B64
-            ).withAdditionalRules(
+            )
+            .withAdditionalRules(
                 devRule_AmazonLinux2_X86_B64, rule_AmazonLinux2_X86_B64
-            ).withAdditionalRules(
+            )
+            .withAdditionalRules(
                 rule_AmazonLinux_X86_B64
             );
       default:

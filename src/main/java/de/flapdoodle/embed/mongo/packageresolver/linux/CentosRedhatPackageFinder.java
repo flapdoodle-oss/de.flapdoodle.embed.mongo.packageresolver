@@ -444,16 +444,12 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
                 tools_CentOS_6_X86_B64
             )
             .withAdditionalRules(
-                devRule_CentOS_9_ARM_B64, rule_CentOS_9_ARM_B64
-            ).withAdditionalRules(
-                devRule_CentOS_9_X86_B64, rule_CentOS_9_X86_B64
-            ).withAdditionalRules(
-                devRule_CentOS_8_ARM_B64, rule_CentOS_8_ARM_B64
-            ).withAdditionalRules(
                 devRule_CentOS_8_X86_B64, rule_CentOS_8_X86_B64
-            ).withAdditionalRules(
+            )
+            .withAdditionalRules(
                 devRule_CentOS_7_X86_B64, rule_CentOS_7_X86_B64
-            ).withAdditionalRules(
+            )
+            .withAdditionalRules(
                 rule_CentOS_6_X86_B64
             );
       default:

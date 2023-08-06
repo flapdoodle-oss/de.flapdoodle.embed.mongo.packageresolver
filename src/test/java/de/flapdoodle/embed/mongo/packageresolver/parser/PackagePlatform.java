@@ -1,5 +1,6 @@
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
+import de.flapdoodle.embed.mongo.packageresolver.NumericVersion;
 import de.flapdoodle.os.*;
 import de.flapdoodle.os.linux.*;
 import de.flapdoodle.types.Either;
@@ -103,6 +104,10 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 		return all.stream()
 			.filter(it -> it.ordinal()>=version.ordinal() && (hasLibCrypt1_1(version) == hasLibCrypt1_1(it)))
 			.collect(Collectors.toList());
+	}
+
+	public static NumericVersion firstMongoDbVersionWithoutBundledTools() {
+		return NumericVersion.of(4,4,0);
 	}
 
 	public static Either<PackagePlatform, String> parse(String name) {

@@ -98,7 +98,8 @@ public class LinuxLegacyPackageFinder extends AbstractPackageFinder {
         return PackageFinderRules.empty()
             .withAdditionalRules(
                 rule_Linux_X86_B64
-            ).withAdditionalRules(
+            )
+            .withAdditionalRules(
                 rule_Linux_X86_B32
             );
       default:

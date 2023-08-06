@@ -224,8 +224,6 @@ public class OSXPackageFinder extends AbstractPackageFinder {
                 tools_OS_X_X86_B64, tools_OS_X_X86_B64_1
             )
             .withAdditionalRules(
-                devRule_OS_X_ARM_B64, rule_OS_X_ARM_B64
-            ).withAdditionalRules(
                 devRule_OS_X_X86_B64, rule_OS_X_X86_B64, rule_OS_X_X86_B64_1, rule_OS_X_X86_B64_2
             );
       default:

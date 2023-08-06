@@ -145,6 +145,10 @@ public class TypesafeModelAdapters {
 					}
 					return ret;
 				}
+				case "toolsBundled": {
+					return urlVersions.entries().stream()
+						.anyMatch(pair -> pair.second().hasVersionOlderThan(PackagePlatform.firstMongoDbVersionWithoutBundledTools()));
+				}
 			}
 			throw new IllegalArgumentException("unknown property: '" + name + "'");
 		});
@@ -161,6 +165,10 @@ public class TypesafeModelAdapters {
 					return versions.hasVersions();
 				case "hasDevVersions":
 					return versions.hasDevVersions();
+				case "toolsBundled": {
+					return versions.hasVersionOlderThan(PackagePlatform.firstMongoDbVersionWithoutBundledTools());
+				}
+
 			}
 			throw new IllegalArgumentException("unknown property: '" + name + "'");
 		});
