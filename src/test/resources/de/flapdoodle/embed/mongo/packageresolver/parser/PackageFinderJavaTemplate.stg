@@ -21,6 +21,7 @@ class(it, package) ::= <<
  */
 package de.flapdoodle.embed.mongo.packageresolver<if(it.package.is)>.<it.package.get><endif>;
 
+import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.Package;
@@ -88,7 +89,7 @@ public class <it.name> extends AbstractPackageFinder {
     PackageFinderRule tools_<pair.platform.variableName><toolsUrlAndVersions.index> = PackageFinderRule.builder()
         .match(<matchPackage(pair.platform)>
             .andThen(
-                <versionRanges(toolsUrlAndVersions.versions.versions)>
+                <toolsVersionRanges(toolsUrlAndVersions.versions.versions)>
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -127,3 +128,7 @@ matchPackage(package) ::= <<match(CommonOS.<package.os>, BitSize.<package.bitSiz
 versionRanges(versions) ::= <<DistributionMatch.any(
   <versions: {version | <versionRange(version)>}; separator=",\n">)>>
 versionRange(version) ::= <<VersionRange.of(<if(version.isExact)>"<version.min>"<else>"<version.min>", "<version.max>"<endif>)>>
+toolsVersionRanges(versions) ::= <<DistributionMatch.any(
+  <versions: {version | <toolsVersionRange(version)>}; separator=",\n">)>>
+toolsVersionRange(version) ::= <<ToolVersionRange.of(<if(version.isExact)>"<version.min>"<else>"<version.min>", "<version.max>"<endif>)>>
+

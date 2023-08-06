@@ -88,71 +88,9 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 			.finder(new AmazonPackageFinder(command))
 			.build();
 
-    /*
-      Linux (legacy) undefined
-      https://fastdl.mongodb.org/linux/mongodb-linux-i686-{}.tgz
-			3.2.0 -> 3.2.22, 3.0.0 -> 3.0.15, 2.6.0 -> 2.6.12
-    */
-		PackageFinderRule legacy32 = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(CommonOS.Linux).withBitSize(BitSize.B32).andThen(DistributionMatch.any(
-					VersionRange.of("3.2.0", "3.2.22"),
-					VersionRange.of("3.0.0", "3.0.15"),
-					VersionRange.of("2.6.0", "2.6.12")
-				)))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-i686-{version}.tgz")
-				.build())
-			.build();
-
-  /*
-    Linux (legacy) x64
-    https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-{}.tgz
-    4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23, 3.4.9 -> 3.4.24, 3.4.0 -> 3.4.7, 3.2.0 -> 3.2.22, 3.0.0 -> 3.0.15, 2.6.0 -> 2.6.12
-   */
-		PackageFinderRule legacy64 = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(CommonOS.Linux).withBitSize(BitSize.B64)
-				.andThen(DistributionMatch.any(
-					VersionRange.of("4.0.0", "4.0.28"),
-					VersionRange.of("3.6.0", "3.6.23"),
-					VersionRange.of("3.4.9", "3.4.24"),
-					VersionRange.of("3.4.0", "3.4.7"),
-					VersionRange.of("3.2.0", "3.2.22"),
-					VersionRange.of("3.0.0", "3.0.15"),
-					VersionRange.of("2.6.0", "2.6.12")
-				)))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-x86_64-{version}.tgz")
-				.build())
-			.build();
-
-		PackageFinderRule hiddenLegacy64 = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(CommonOS.Linux).withBitSize(BitSize.B64)
-				.andThen(DistributionMatch.any(
-					VersionRange.of("3.3.1", "3.3.1"),
-					VersionRange.of("3.5.5", "3.5.5")
-				)))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-x86_64-{version}.tgz")
-				.build())
-			.build();
-
-		PackageFinderRule hiddenLegacy32 = PackageFinderRule.builder()
-			.match(PlatformMatch.withOs(CommonOS.Linux).withBitSize(BitSize.B32)
-				.andThen(DistributionMatch.any(
-					VersionRange.of("3.3.1", "3.3.1"),
-					VersionRange.of("3.5.5", "3.5.5")
-				)))
-			.finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.TGZ)
-				.urlTemplate("/linux/mongodb-linux-i686-{version}.tgz")
-				.build())
+		ImmutablePackageFinderRule linuxLegacyRule = PackageFinderRule.builder()
+			.match(PlatformMatch.withOs(CommonOS.Linux))
+			.finder(new LinuxLegacyPackageFinder(command))
 			.build();
 
 		PackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
@@ -167,10 +105,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 				debianRule,
 				centosRedhatOracleRule,
 				amazonRule,
-				legacy64,
-				legacy32,
-				hiddenLegacy64,
-				hiddenLegacy32,
+				linuxLegacyRule,
 				failIfNothingMatches
 			);
 	}

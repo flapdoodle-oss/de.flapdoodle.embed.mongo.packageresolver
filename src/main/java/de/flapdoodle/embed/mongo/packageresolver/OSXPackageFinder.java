@@ -20,6 +20,7 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
+import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.Package;
@@ -85,7 +86,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("100.7.1", "100.7.4"))
+                  ToolVersionRange.of("100.7.1", "100.7.4"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -179,13 +180,13 @@ public class OSXPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("100.7.0", "100.7.4"),
-                  VersionRange.of("100.6.0", "100.6.1"),
-                  VersionRange.of("100.5.0", "100.5.4"),
-                  VersionRange.of("100.4.0", "100.4.1"),
-                  VersionRange.of("100.3.0", "100.3.1"),
-                  VersionRange.of("100.2.0", "100.2.1"),
-                  VersionRange.of("100.1.0", "100.1.1"))
+                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.6.0", "100.6.1"),
+                  ToolVersionRange.of("100.5.0", "100.5.4"),
+                  ToolVersionRange.of("100.4.0", "100.4.1"),
+                  ToolVersionRange.of("100.3.0", "100.3.1"),
+                  ToolVersionRange.of("100.2.0", "100.2.1"),
+                  ToolVersionRange.of("100.1.0", "100.1.1"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -198,9 +199,9 @@ public class OSXPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("100.0.0-alpha1", "100.0.2"),
-                  VersionRange.of("100.0.0"),
-                  VersionRange.of("99.0.0"))
+                  ToolVersionRange.of("100.0.0-alpha1", "100.0.2"),
+                  ToolVersionRange.of("100.0.0"),
+                  ToolVersionRange.of("99.0.0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
