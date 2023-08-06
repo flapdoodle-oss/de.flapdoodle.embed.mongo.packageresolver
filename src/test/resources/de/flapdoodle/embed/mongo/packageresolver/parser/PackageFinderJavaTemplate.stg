@@ -20,8 +20,7 @@ public class <it.name> extends AbstractPackageFinder {
 	}
 
 	private static ImmutablePackageFinderRules rules(final Command command) {
-<package.entries:{ pair |
-<pair.second.entries:{ urlAndVersions |
+<package.entries:{ pair | <pair.second.entries:{ urlAndVersions |
 <if(urlAndVersions.versions.hasDevVersions)>
         PackageFinderRule devRule_<pair.first.variableName><urlAndVersions.index> = PackageFinderRule.builder()
             .match(<matchPackage(pair.first)>
@@ -37,6 +36,7 @@ public class <it.name> extends AbstractPackageFinder {
 			.build();
 
 <endif>
+<if(urlAndVersions.versions.hasVersions)>
         PackageFinderRule rule_<pair.first.variableName><urlAndVersions.index> = PackageFinderRule.builder()
             .match(<matchPackage(pair.first)>
                 .andThen(
@@ -48,11 +48,27 @@ public class <it.name> extends AbstractPackageFinder {
 				.urlTemplate("<urlAndVersions.url>")
 				.build())
 			.build();
-
-
-}>
-}>
+<endif>
+}>}>
+    switch (command) {
+      case MongoDump:
+      case MongoImport:
+      case MongoRestore:
+        return PackageFinderRules.empty()
+            .withRules(
+              tools_ubuntu22arm, tools_ubuntu22x64,
+              tools_ubuntu20to22arm, tools_ubuntu20to22x64,
+              tools_ubuntu1804arm, tools_ubuntu1804x64,
+              tools_ubuntu1604arm, tools_ubuntu1604x64
+            );
+      default:
+        return PackageFinderRules.empty()
+<package.entries:{ pair |
+            .withRules(
+                <pair.second.entries:{ urlAndVersions | <if(urlAndVersions.versions.hasDevVersions)>devRule_<pair.first.variableName><urlAndVersions.index><endif><if(urlAndVersions.versions.hasDevVersions && urlAndVersions.versions.hasVersions)>, <endif><if(urlAndVersions.versions.hasVersions)>rule_<pair.first.variableName><urlAndVersions.index><endif>}; separator=", ">
+            )}>;
 	}
+  }
 }
 >>
 

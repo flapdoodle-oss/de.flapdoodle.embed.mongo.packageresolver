@@ -11,7 +11,8 @@ public class SourceCodeGenerator {
 
 	public void generate(PackageTree tree) {
 		tree.map().forEach((osAndVersionType, packagePlatformUrlVersions) -> {
-			if (osAndVersionType.className().startsWith("Ubuntu") || osAndVersionType.className().startsWith("Windows")) {
+
+			if (osAndVersionType.className().startsWith("Amazon")/* || osAndVersionType.className().startsWith("Windows")*/) {
 				System.out.println("generate " + osAndVersionType);
 
 				String javaCode = generateJavaCode(osAndVersionType, packagePlatformUrlVersions);

@@ -6,6 +6,7 @@ import org.immutables.value.Value;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Value.Immutable
@@ -15,6 +16,11 @@ public abstract class PackageVersions {
 	@Value.Derived
 	public boolean hasDevVersions() {
 		return list().stream().anyMatch(PackageVersion::devVersion);
+	}
+
+	@Value.Derived
+	public boolean hasVersions() {
+		return list().stream().anyMatch(version -> !version.devVersion());
 	}
 
 	@Value.Auxiliary

@@ -123,6 +123,8 @@ public class TypesafeModelAdapters {
 					return versions.versionRanges(false);
 				case "devVersions":
 					return versions.versionRanges(true);
+				case "hasVersions":
+					return versions.hasVersions();
 				case "hasDevVersions":
 					return versions.hasDevVersions();
 			}
