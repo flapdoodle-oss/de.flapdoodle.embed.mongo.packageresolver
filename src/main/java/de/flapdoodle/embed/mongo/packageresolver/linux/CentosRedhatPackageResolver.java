@@ -38,25 +38,11 @@ import de.flapdoodle.os.linux.RedhatVersion;
 
 import java.util.Optional;
 
-public class CentosRedhatPackageResolver implements PackageFinder, HasPlatformMatchRules {
-
-  private final Command command;
-  private final ImmutablePackageFinderRules rules;
-
-  public CentosRedhatPackageResolver(Command command) {
-    this.command = command;
-    this.rules = rules(command);
-  }
-
-	@Override
-	public PackageFinderRules rules() {
-		return rules;
+public class CentosRedhatPackageResolver extends AbstractPackageFinder {
+	
+	public CentosRedhatPackageResolver(final Command command) {                          
+		super(command, rules(command));
 	}
-
-	@Override
-  public Optional<Package> packageFor(Distribution distribution) {
-    return rules.packageFor(distribution);
-  }
 
 	private static PlatformMatch match(BitSize bitSize, CPUType cpuType, Version... versions) {
 		return PlatformMatch.withOs(CommonOS.Linux).withBitSize(bitSize).withCpuType(cpuType)

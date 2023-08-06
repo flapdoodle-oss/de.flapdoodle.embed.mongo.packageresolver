@@ -34,24 +34,10 @@ import de.flapdoodle.os.linux.UbuntuVersion;
 
 import java.util.Optional;
 
-public class UbuntuPackageResolver implements PackageFinder, HasPlatformMatchRules {
-
-  private final Command command;
-  private final ImmutablePackageFinderRules rules;
+public class UbuntuPackageResolver extends AbstractPackageFinder {
 
   public UbuntuPackageResolver(Command command) {
-    this.command = command;
-    this.rules = rules(command);
-  }
-
-	@Override
-	public PackageFinderRules rules() {
-		return rules;
-	}
-
-	@Override
-  public Optional<Package> packageFor(Distribution distribution) {
-    return rules.packageFor(distribution);
+    super(command, rules(command));
   }
 
 	private static PlatformMatch match(BitSize bitSize, CPUType cpuType, UbuntuVersion... versions) {

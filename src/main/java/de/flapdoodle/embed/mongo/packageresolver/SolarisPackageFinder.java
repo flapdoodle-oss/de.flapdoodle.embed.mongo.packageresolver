@@ -30,23 +30,10 @@ import de.flapdoodle.os.CommonOS;
 
 import java.util.Optional;
 
-public class SolarisPackageFinder implements PackageFinder, HasPlatformMatchRules {
-  private final Command command;
-  private final PackageFinderRules rules;
+public class SolarisPackageFinder extends AbstractPackageFinder {
 
   public SolarisPackageFinder(Command command) {
-    this.command = command;
-    this.rules = rules(command);
-  }
-
-  @Override
-  public PackageFinderRules rules() {
-    return rules;
-  }
-
-  @Override
-  public Optional<Package> packageFor(Distribution distribution) {
-    return rules.packageFor(distribution);
+    super(command, rules(command));
   }
 
   private static FileSet fileSetOf(Command command) {

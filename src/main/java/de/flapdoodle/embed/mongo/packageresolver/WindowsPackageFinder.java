@@ -30,23 +30,10 @@ import de.flapdoodle.os.CommonOS;
 
 import java.util.Optional;
 
-public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRules {
-  private final Command command;
-  private final ImmutablePackageFinderRules rules;
+public class WindowsPackageFinder extends AbstractPackageFinder {
 
   public WindowsPackageFinder(Command command) {
-    this.command = command;
-    this.rules = rules(command);
-  }
-
-  @Override
-  public PackageFinderRules rules() {
-    return rules;
-  }
-
-  @Override
-  public Optional<Package> packageFor(Distribution distribution) {
-    return rules.packageFor(distribution);
+    super(command, rules(command));
   }
 
   private static FileSet fileSetOf(Command command) {

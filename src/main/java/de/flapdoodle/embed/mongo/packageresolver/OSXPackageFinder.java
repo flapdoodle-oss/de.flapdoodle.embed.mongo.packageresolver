@@ -31,23 +31,10 @@ import de.flapdoodle.os.CommonOS;
 
 import java.util.Optional;
 
-public class OSXPackageFinder implements PackageFinder, HasPlatformMatchRules {
-  private final Command command;
-  private final ImmutablePackageFinderRules rules;
+public class OSXPackageFinder extends AbstractPackageFinder {
 
   public OSXPackageFinder(Command command) {
-    this.command = command;
-    this.rules = rules(command);
-  }
-
-  @Override
-  public PackageFinderRules rules() {
-    return rules;
-  }
-
-  @Override
-  public Optional<Package> packageFor(Distribution distribution) {
-    return rules.packageFor(distribution);
+    super(command, rules(command));
   }
 
   private static FileSet fileSetOf(Command command) {

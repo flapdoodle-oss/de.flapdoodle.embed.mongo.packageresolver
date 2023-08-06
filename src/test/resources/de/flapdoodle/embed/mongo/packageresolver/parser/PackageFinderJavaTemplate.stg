@@ -1,2 +1,17 @@
-class(this) ::= <<public class $Name$
->>
+class(it, package) ::= <<
+package de.flapdoodle.embed.mongo.packageresolver<if(it.package.is)>.<it.package.get><endif>;
+
+<!
+import de.flapdoodle.embed.process.config.store.FileSet;
+import de.flapdoodle.embed.process.config.store.FileType;
+import de.flapdoodle.embed.process.config.store.Package;
+import de.flapdoodle.embed.process.distribution.ArchiveType;
+import de.flapdoodle.embed.process.distribution.Distribution;
+import de.flapdoodle.os.BitSize;
+import de.flapdoodle.os.CommonOS;
+
+import java.util.Optional;
+!>
+
+public class <it.name> {
+}>>

@@ -34,23 +34,11 @@ import de.flapdoodle.os.linux.DebianVersion;
 
 import java.util.Optional;
 
-public class DebianPackageResolver implements PackageFinder, HasPlatformMatchRules {
+public class DebianPackageResolver extends AbstractPackageFinder {
 
-    private final ImmutablePackageFinderRules rules;
-
-    public DebianPackageResolver(final Command command) {
-        this.rules = rules(command);
-    }
-
-    @Override
-    public PackageFinderRules rules() {
-      return rules;
-    }
-
-  @Override
-    public Optional<Package> packageFor(final Distribution distribution) {
-        return rules.packageFor(distribution);
-    }
+  public DebianPackageResolver(final Command command) {
+    super(command, rules(command));
+  }
 
   private static PlatformMatch match(BitSize bitSize, CPUType cpuType, DebianVersion... versions) {
     return PlatformMatch.withOs(CommonOS.Linux).withBitSize(bitSize).withCpuType(cpuType)

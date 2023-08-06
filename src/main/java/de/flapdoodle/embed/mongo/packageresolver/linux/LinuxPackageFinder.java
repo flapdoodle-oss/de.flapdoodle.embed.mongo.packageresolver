@@ -40,28 +40,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LinuxPackageFinder implements PackageFinder, HasPlatformMatchRules {
+public class LinuxPackageFinder extends AbstractPackageFinder {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(LinuxPackageFinder.class);
 
-	private final Command command;
-	private final ImmutablePackageFinderRules rules;
-
 	public LinuxPackageFinder(Command command) {
-		this.command = command;
-		this.rules = rules(command);
+		super(command, rules(command));
 	}
 
-	@Override
-	public PackageFinderRules rules() {
-		return rules;
-	}
-
-	@Override
-	public Optional<Package> packageFor(Distribution distribution) {
-		return rules.packageFor(distribution);
-	}
-	
 	private static ImmutablePackageFinderRules rules(Command command) {
 		ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
