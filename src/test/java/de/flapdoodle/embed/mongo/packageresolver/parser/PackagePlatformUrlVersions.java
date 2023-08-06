@@ -28,6 +28,19 @@ public abstract class PackagePlatformUrlVersions {
 	}
 
 	@Value.Auxiliary
+	public PackagePlatformUrlVersions addTools(PackagePlatform platform, String version, String normalizedUrl) {
+		UrlVersions current = Optional.ofNullable(map().get(platform))
+			.orElseGet(UrlVersions::empty)
+			.putTools(normalizedUrl, version);
+
+		return ImmutablePackagePlatformUrlVersions.builder()
+			.osAndVersionType(osAndVersionType())
+			.putMap(platform, current)
+			.putAllMap(Maps.filterEntries(map(), it -> !it.getKey().equals(platform)))
+			.build();
+	}
+
+	@Value.Auxiliary
 	public void dump() {
 		map().forEach((platform, urlVersions) -> {
 			System.out.println("  "+platform);

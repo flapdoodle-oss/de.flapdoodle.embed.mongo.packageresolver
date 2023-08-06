@@ -4,13 +4,12 @@ import de.flapdoodle.embed.mongo.packageresolver.MongoPackages;
 import de.flapdoodle.embed.mongo.packageresolver.NumericVersion;
 import de.flapdoodle.embed.mongo.packageresolver.VersionRange;
 import de.flapdoodle.embed.mongo.packageresolver.parser.*;
+import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.types.Pair;
 import org.stringtemplate.v4.STGroup;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TypesafeModelAdapters {
 	public static TypesafeModelAdapter<Optional> optionals() {
@@ -67,6 +66,24 @@ public class TypesafeModelAdapters {
 		});
 	}
 
+	public static TypesafeModelAdapter<UrlAndToolsVersions> urlAndToolsVersions() {
+		return TypesafeModelAdapter.of(UrlAndToolsVersions.class, (it, name) -> {
+			if (name.equals("index")) {
+				return it.index();
+			}
+			if (name.equals("url")) {
+				return it.url();
+			}
+			if (name.equals("versions")) {
+				return it.versions();
+			}
+			if (name.equals("archiveType")) {
+				return it.archiveType();
+			}
+			throw new IllegalArgumentException("unknown property: '" + name + "' - use 'first', 'second' or 'index'");
+		});
+	}
+
 	public static TypesafeModelAdapter<PackageOsAndVersionType> packageOsAndVersionType() {
 		return TypesafeModelAdapter.of(PackageOsAndVersionType.class, (osAndVersionType, name) -> {
 			switch (name) {
@@ -74,6 +91,10 @@ public class TypesafeModelAdapters {
 					return osAndVersionType.packageName();
 				case "name":
 					return osAndVersionType.className();
+				case "osName":
+					return osAndVersionType.os().name();
+				case "executableExtension":
+					return osAndVersionType.os() == CommonOS.Windows ? ".exe" : null;
 			}
 			throw new IllegalArgumentException("unknown property: '" + name + "'");
 		});
@@ -111,6 +132,15 @@ public class TypesafeModelAdapters {
 					}
 					return ret;
 				}
+				case "toolEntries": {
+					List<Pair<String, Collection<String>>> src = urlVersions.toolEntries();
+					ArrayList<UrlAndToolsVersions> ret = new ArrayList<>();
+					for (int i = 0; i < src.size(); i++) {
+						Pair<String, Collection<String>> pair = src.get(i);
+						ret.add(new UrlAndToolsVersions(i, pair.first(), ToolsVersions.of(pair.second())));
+					}
+					return ret;
+				}
 			}
 			throw new IllegalArgumentException("unknown property: '" + name + "'");
 		});
@@ -127,6 +157,18 @@ public class TypesafeModelAdapters {
 					return versions.hasVersions();
 				case "hasDevVersions":
 					return versions.hasDevVersions();
+			}
+			throw new IllegalArgumentException("unknown property: '" + name + "'");
+		});
+	}
+
+	public static TypesafeModelAdapter<ToolsVersions> toolsVersions() {
+		return TypesafeModelAdapter.of(ToolsVersions.class, (versions, name) -> {
+			switch (name) {
+				case "versions":
+					return versions.versionRanges();
+				case "hasVersions":
+					return versions.hasVersions();
 			}
 			throw new IllegalArgumentException("unknown property: '" + name + "'");
 		});
@@ -160,7 +202,21 @@ public class TypesafeModelAdapters {
 		return TypesafeModelAdapter.of(PackagePlatformUrlVersions.class, (packagePlatformUrlVersions, name) -> {
 			switch (name) {
 				case "entries":
-					return packagePlatformUrlVersions.entries();
+					return packagePlatformUrlVersions.entries().stream()
+						.map(pair -> new PackagePlatformAndUrlVersions(pair.first(), pair.second()))
+						.collect(Collectors.toList());
+			}
+			throw new IllegalArgumentException("unknown property: '" + name + "'");
+		});
+	}
+
+	public static TypesafeModelAdapter<PackagePlatformAndUrlVersions> packagePlatformAndUrlVersions() {
+		return TypesafeModelAdapter.of(PackagePlatformAndUrlVersions.class, (it, name) -> {
+			switch (name) {
+				case "platform":
+					return it.platform();
+				case "urlVersions":
+					return it.urlVersions();
 			}
 			throw new IllegalArgumentException("unknown property: '" + name + "'");
 		});
@@ -171,12 +227,15 @@ public class TypesafeModelAdapters {
 				optionals(),
 				pairs(),
 				urlAndPackageVersions(),
+				urlAndToolsVersions(),
 				enums(),
 				packageOsAndVersionType(),
 				packagePlatform(),
 				packagePlatformUrlVersions(),
+				packagePlatformAndUrlVersions(),
 				urlVersions(),
 				packageVersions(),
+				toolsVersions(),
 				packageVersion(),
 				versionRange()
 			)

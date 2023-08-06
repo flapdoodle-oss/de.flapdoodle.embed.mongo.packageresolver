@@ -38,6 +38,13 @@ public abstract class PackageFinderRules {
       .build();
   }
 
+  public ImmutablePackageFinderRules withAdditionalRules(PackageFinderRule ... rules) {
+    return builder()
+      .rules(rules())
+      .addRules(rules)
+      .build();
+  }
+
   @Value.Auxiliary
   public Optional<Package> packageFor(Distribution distribution) {
     for (PackageFinderRule rule : rules()) {

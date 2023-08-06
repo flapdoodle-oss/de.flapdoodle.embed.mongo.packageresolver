@@ -104,16 +104,19 @@ public abstract class MongoPackages {
 	}
 
 	public static ParsedVersions allToolsVersions() {
-		List<List<ParsedVersion>> allVersions = mongoToolsVersions().stream()
-			//.map(it -> Try.supplier(() -> parse(Jsoup.parse(Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8)))))
+		List<List<ParsedVersion>> allVersions = toolsVersionsList();
+
+		return new ParsedVersions(mergeAll(allVersions));
+	}
+
+	public static List<List<ParsedVersion>> toolsVersionsList() {
+		return mongoToolsVersions().stream()
 			.map(it -> it.mapFirst(path -> Try.supplier(() -> Resources.toString(Resources.getResource(path), StandardCharsets.UTF_8))
 				.mapToUncheckedException(RuntimeException::new)
 				.get()))
 			.map(it -> it.mapFirst(Jsoup::parse))
 			.map(it -> MongoPackages.parseToolsVersions(it.first(), it.second()))
 			.collect(Collectors.toList());
-
-		return new ParsedVersions(mergeAll(allVersions));
 	}
 
 	static List<ParsedVersion> parseDBVersions(Document document, boolean isDevVersion) {

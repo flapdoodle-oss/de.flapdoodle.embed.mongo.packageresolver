@@ -17,6 +17,11 @@ public class MongoPackageParser {
 			.flatMap(Collection::stream)
 			.collect(Collectors.toList());
 
+		List<MongoPackages.ParsedVersion> toolsVersions = MongoPackages.toolsVersionsList().stream()
+			.flatMap(Collection::stream)
+			.collect(Collectors.toList());
+
+
 		PackageTree tree = PackageTree.empty();
 
 		for (MongoPackages.ParsedVersion v : versions) {
@@ -29,6 +34,20 @@ public class MongoPackageParser {
 					tree = tree.add(result.left(), v.version, v.isDevVersion, url);
 				} else {
 					tree = tree.skip(result.right());
+				}
+			}
+		}
+
+		for (MongoPackages.ParsedVersion v : toolsVersions) {
+			for (MongoPackages.ParsedDist d : v.dists) {
+				Either<PackagePlatform, String> result = PackagePlatform.parse(d.name);
+				if (result.isLeft()) {
+					String url = d.singleUrl()
+						.replace(v.version, "{tools.version}")
+						.replace("https://fastdl.mongodb.org","");
+					tree = tree.addTools(result.left(), v.version, url);
+				} else {
+					tree = tree.skipTools(result.right());
 				}
 			}
 		}

@@ -12,12 +12,21 @@ import java.util.stream.Collectors;
 @Value.Immutable
 public abstract class UrlVersions {
 	public abstract Multimap<String, PackageVersion> map();
+	public abstract Multimap<String, String> toolsMap();
 
 	@Value.Auxiliary
 	public ImmutableUrlVersions put(String url, PackageVersion version) {
 		return ImmutableUrlVersions.builder()
 			.from(this)
 			.putMap(url, version)
+			.build();
+	}
+
+	@Value.Auxiliary
+	public ImmutableUrlVersions putTools(String url, String version) {
+		return ImmutableUrlVersions.builder()
+			.from(this)
+			.putToolsMap(url, version)
 			.build();
 	}
 
@@ -38,12 +47,25 @@ public abstract class UrlVersions {
 			}
 
 		});
+
+		toolsMap().asMap().forEach((url, versions) -> {
+			System.out.println("    "+url);
+			String versionList = MongoPackages.rangesAsString(MongoPackages.compressedVersionsList(versions));
+			System.out.println("      "+versionList);
+		});
 	}
 
 	@Value.Auxiliary
 	public List<Pair<String, PackageVersions>> entries() {
 		return map().asMap().entrySet().stream()
 			.map(it -> Pair.of(it.getKey(), PackageVersions.of(it.getValue())))
+			.collect(Collectors.toList());
+	}
+
+	@Value.Auxiliary
+	public List<Pair<String, Collection<String>>> toolEntries() {
+		return toolsMap().asMap().entrySet().stream()
+			.map(it -> Pair.of(it.getKey(), it.getValue()))
 			.collect(Collectors.toList());
 	}
 

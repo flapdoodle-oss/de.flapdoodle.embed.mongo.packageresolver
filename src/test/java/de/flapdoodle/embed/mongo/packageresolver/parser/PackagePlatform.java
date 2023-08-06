@@ -78,6 +78,10 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 			case "Ubuntu 14.04 x64":
 			case "ubuntu1410-clang x64":
 			case "Ubuntu 18.04 s390x":
+			// Tools
+			case "Ubuntu 16.04 ppc64le":
+			case "Ubuntu 18.04 ppc64le":
+			case "Ubuntu 16.04 s390x":
 
 			case "SUSE 11 x64":
 			case "SUSE 12 x64":
@@ -88,9 +92,18 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 			case "RedHat / CentOS 6.2+ x64":
 			case "RedHat / CentOS 6.7 s390x":
 			case "RedHat / CentOS 7.2 s390x":
+			// Tools
+			case "RedHat / CentOS 8.3 s390x":
+				
+			// Tools
+			case "RedHat / CentOS 7.1 ppc64le":
+			case "RedHat / CentOS 8.1 ppc64le":
 
 			case "Debian 7.1 x64":
 			case "Debian 8.1 x64":
+
+			// Tools
+			case "x64":
 				return Either.right(name);
 			default:
 				return Either.left(platformOf(name));

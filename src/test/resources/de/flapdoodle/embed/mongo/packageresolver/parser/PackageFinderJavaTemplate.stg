@@ -19,11 +19,19 @@ public class <it.name> extends AbstractPackageFinder {
 		super(command, rules(command));
 	}
 
+    private static FileSet fileSetOf(Command command) {
+      return FileSet.builder()
+            .addEntry(FileType.Executable, command.commandName()<if(it.executableExtension)> + <it.executableExtension><endif>)
+            .build();
+    }
+
 	private static ImmutablePackageFinderRules rules(final Command command) {
-<package.entries:{ pair | <pair.second.entries:{ urlAndVersions |
+	    FileSet fileSet = fileSetOf(command);
+	    
+<package.entries:{ pair | <pair.urlVersions.entries:{ urlAndVersions |
 <if(urlAndVersions.versions.hasDevVersions)>
-        PackageFinderRule devRule_<pair.first.variableName><urlAndVersions.index> = PackageFinderRule.builder()
-            .match(<matchPackage(pair.first)>
+        PackageFinderRule devRule_<pair.platform.variableName><urlAndVersions.index> = PackageFinderRule.builder()
+            .match(<matchPackage(pair.platform)>
                 .andThen(
                     <versionRanges(urlAndVersions.versions.devVersions)>
             ))
@@ -37,8 +45,8 @@ public class <it.name> extends AbstractPackageFinder {
 
 <endif>
 <if(urlAndVersions.versions.hasVersions)>
-        PackageFinderRule rule_<pair.first.variableName><urlAndVersions.index> = PackageFinderRule.builder()
-            .match(<matchPackage(pair.first)>
+        PackageFinderRule rule_<pair.platform.variableName><urlAndVersions.index> = PackageFinderRule.builder()
+            .match(<matchPackage(pair.platform)>
                 .andThen(
                     <versionRanges(urlAndVersions.versions.versions)>
             ))
@@ -49,23 +57,36 @@ public class <it.name> extends AbstractPackageFinder {
 				.build())
 			.build();
 <endif>
+}> <pair.urlVersions.toolEntries:{ toolsUrlAndVersions |
+<if(toolsUrlAndVersions.versions.hasVersions)>
+        PackageFinderRule tools_<pair.platform.variableName><toolsUrlAndVersions.index> = PackageFinderRule.builder()
+            .match(<matchPackage(pair.platform)>
+                .andThen(
+                    <versionRanges(toolsUrlAndVersions.versions.versions)>
+            ))
+            .finder(UrlTemplatePackageFinder.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.<toolsUrlAndVersions.archiveType>)
+				.urlTemplate("<toolsUrlAndVersions.url>")
+				.build())
+			.build();
+			
+<endif>
 }>}>
     switch (command) {
       case MongoDump:
       case MongoImport:
       case MongoRestore:
         return PackageFinderRules.empty()
-            .withRules(
-              tools_ubuntu22arm, tools_ubuntu22x64,
-              tools_ubuntu20to22arm, tools_ubuntu20to22x64,
-              tools_ubuntu1804arm, tools_ubuntu1804x64,
-              tools_ubuntu1604arm, tools_ubuntu1604x64
-            );
+<package.entries:{ pair |
+            .withAdditionalRules(
+                <pair.urlVersions.toolEntries:{ urlAndVersions | <if(urlAndVersions.versions.hasVersions)>tools_<pair.platform.variableName><urlAndVersions.index><endif>}; separator=", ">
+            )}>;
       default:
         return PackageFinderRules.empty()
 <package.entries:{ pair |
-            .withRules(
-                <pair.second.entries:{ urlAndVersions | <if(urlAndVersions.versions.hasDevVersions)>devRule_<pair.first.variableName><urlAndVersions.index><endif><if(urlAndVersions.versions.hasDevVersions && urlAndVersions.versions.hasVersions)>, <endif><if(urlAndVersions.versions.hasVersions)>rule_<pair.first.variableName><urlAndVersions.index><endif>}; separator=", ">
+            .withAdditionalRules(
+                <pair.urlVersions.entries:{ urlAndVersions | <if(urlAndVersions.versions.hasDevVersions)>devRule_<pair.platform.variableName><urlAndVersions.index><endif><if(urlAndVersions.versions.hasDevVersions && urlAndVersions.versions.hasVersions)>, <endif><if(urlAndVersions.versions.hasVersions)>rule_<pair.platform.variableName><urlAndVersions.index><endif>}; separator=", ">
             )}>;
 	}
   }
@@ -73,5 +94,6 @@ public class <it.name> extends AbstractPackageFinder {
 >>
 
 matchPackage(package) ::= <<match(BitSize.<package.bitSize>, CPUType.<package.cpuType><package.versions:{ version |, <version.className>.<version>}>)>>
-versionRanges(versions) ::= << <versions: {version | <versionRange(version)>}; separator=",\n"> >>
+versionRanges(versions) ::= <<DistributionMatch.any(
+  <versions: {version | <versionRange(version)>}; separator=",\n">)>>
 versionRange(version) ::= <<VersionRange.of(<if(version.isExact)>"<version.min>"<else>"<version.min>", "<version.max>"<endif>)>>
