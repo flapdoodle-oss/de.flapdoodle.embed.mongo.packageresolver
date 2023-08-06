@@ -55,6 +55,7 @@ public abstract class MongoPackages {
 
 	private static List<Pair<String, Boolean>> mongoDbVersions() {
 		List<Pair<String, Boolean>> resources = Arrays.asList(
+			Pair.of("versions/react/mongo-db-legacy-versions.html", false),
 			Pair.of("versions/react/mongo-db-versions-2021-10-28.html", false),
 			Pair.of("versions/react/mongo-db-versions-2022-01-16.html", false),
 			Pair.of("versions/react/mongo-db-versions-2022-03-30.html", false),

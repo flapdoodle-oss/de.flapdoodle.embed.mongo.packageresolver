@@ -27,6 +27,7 @@ import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
+import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
 <it.imports:{ import |
 import <import>;

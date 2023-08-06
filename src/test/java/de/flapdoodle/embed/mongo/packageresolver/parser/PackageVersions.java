@@ -30,7 +30,7 @@ public abstract class PackageVersions {
 			list()
 				.stream().filter(it -> it.devVersion()==devVersion)
 				.map(PackageVersion::version)
-				.collect(Collectors.toList()))
+				.collect(Collectors.toSet()))
 			.stream()
 			.sorted(Comparator.comparing(VersionRange::min).reversed())
 			.collect(Collectors.toList());

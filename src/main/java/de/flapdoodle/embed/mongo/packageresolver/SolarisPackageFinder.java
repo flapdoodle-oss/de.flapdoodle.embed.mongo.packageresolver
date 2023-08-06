@@ -22,13 +22,21 @@ package de.flapdoodle.embed.mongo.packageresolver;
 
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
+import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
+import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
+import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
 
+import java.util.Optional;
+
+/**
+* this file is generated, please don't touch
+*/
 public class SolarisPackageFinder extends AbstractPackageFinder {
 
-  public SolarisPackageFinder(Command command) {
+  public SolarisPackageFinder(final Command command) {
     super(command, rules(command));
   }
 
@@ -38,52 +46,40 @@ public class SolarisPackageFinder extends AbstractPackageFinder {
             .build();
   }
 
-  private static PlatformMatch match(BitSize bitSize) {
-    return PlatformMatch.withOs(CommonOS.Solaris).withBitSize(bitSize);
-  }
-
-  private static PackageFinderRules rules(Command command) {
+  private static ImmutablePackageFinderRules rules(final Command command) {
     FileSet fileSet = fileSetOf(command);
-    ArchiveType archiveType = ArchiveType.TGZ;
 
-    ImmutablePackageFinderRule firstRule = PackageFinderRule.builder()
-            .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                            VersionRange.of("3.4.0", "3.4.5"),
-                            VersionRange.of("3.2.0", "3.2.14"),
-                            VersionRange.of("3.0.0", "3.0.15"),
-                            VersionRange.of("2.6.0", "2.6.12")
-                    )))
-            .finder(UrlTemplatePackageFinder.builder()
-                    .fileSet(fileSet)
-                    .archiveType(archiveType)
-                    .urlTemplate("/sunos5/mongodb-sunos5-x86_64-{version}.tgz")
-                    .build())
-            .build();
+    PackageFinderRule rule_Solaris_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Solaris, BitSize.B64, CPUType.X86)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("3.5.5"),
+                  VersionRange.of("3.4.0", "3.4.5"),
+                  VersionRange.of("3.3.1"),
+                  VersionRange.of("3.2.0", "3.2.14"),
+                  VersionRange.of("3.0.0", "3.0.15"),
+                  VersionRange.of("2.6.0", "2.6.12"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/sunos5/mongodb-sunos5-x86_64-{version}.tgz")
+            .build())
+        .build();
 
-    ImmutablePackageFinderRule hiddenLegacyRule = PackageFinderRule.builder()
-            .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                            VersionRange.of("3.3.1", "3.3.1"),
-                            VersionRange.of("3.5.5", "3.5.5")
-                    )))
-            .finder(UrlTemplatePackageFinder.builder()
-                    .fileSet(fileSet)
-                    .archiveType(archiveType)
-                    .urlTemplate("/sunos5/mongodb-sunos5-x86_64-{version}.tgz")
-                    .build())
-            .build();
-
-    PackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
-            .match(PlatformMatch.withOs(CommonOS.Solaris))
-            .finder(PackageFinder.failWithMessage(distribution -> "solaris distribution not supported: " + distribution))
-            .build();
-
-
-    return PackageFinderRules.empty()
-            .withRules(
-                    firstRule,
-                    hiddenLegacyRule,
-                    failIfNothingMatches
+ 
+    switch (command) {
+      case MongoDump:
+      case MongoImport:
+      case MongoRestore:
+        return PackageFinderRules.empty()
+            .withAdditionalRules(
             );
+      default:
+        return PackageFinderRules.empty()
+            .withAdditionalRules(
+                rule_Solaris_X86_B64
+            );
+    }
   }
-
 }

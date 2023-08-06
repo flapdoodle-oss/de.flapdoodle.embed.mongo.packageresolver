@@ -126,9 +126,5 @@
   (os=Linux)
     fallback to Ubuntu_20_04
 (os=Solaris)
-  (os=Solaris and bitSize=B64) and (3.4.0-3.4.5 or 3.2.0-3.2.14 or 3.0.0-3.0.15 or 2.6.0-2.6.12)
+  (os=Solaris and bitSize=B64 and cpuType=X86) and (3.5.5 or 3.4.0-3.4.5 or 3.3.1 or 3.2.0-3.2.14 or 3.0.0-3.0.15 or 2.6.0-2.6.12)
     url=/sunos5/mongodb-sunos5-x86_64-{version}.tgz (TGZ)
-  (os=Solaris and bitSize=B64) and (3.3.1 or 3.5.5)
-    url=/sunos5/mongodb-sunos5-x86_64-{version}.tgz (TGZ)
-  (os=Solaris)
-    fail
