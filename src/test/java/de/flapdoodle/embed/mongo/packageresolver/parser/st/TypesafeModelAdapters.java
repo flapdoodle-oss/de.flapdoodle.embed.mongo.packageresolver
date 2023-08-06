@@ -95,6 +95,8 @@ public class TypesafeModelAdapters {
 					return osAndVersionType.os().name();
 				case "executableExtension":
 					return osAndVersionType.os() == CommonOS.Windows ? ".exe" : null;
+				case "imports":
+					return osAndVersionType.imports();
 			}
 			throw new IllegalArgumentException("unknown property: '" + name + "'");
 		});

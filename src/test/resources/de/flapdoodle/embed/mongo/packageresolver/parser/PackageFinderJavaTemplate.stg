@@ -1,7 +1,6 @@
 class(it, package) ::= <<
 package de.flapdoodle.embed.mongo.packageresolver<if(it.package.is)>.<it.package.get><endif>;
 
-<!
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.Package;
@@ -9,68 +8,74 @@ import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CommonOS;
+<it.imports:{ import |
+import <import>;
+}>
 
 import java.util.Optional;
-!>
 
+/**
+* this file is generated, please don't touch
+*/
 public class <it.name> extends AbstractPackageFinder {
 
-	public <it.name>(final Command command) {
-		super(command, rules(command));
-	}
+  public <it.name>(final Command command) {
+    super(command, rules(command));
+  }
 
-    private static FileSet fileSetOf(Command command) {
-      return FileSet.builder()
+  private static FileSet fileSetOf(Command command) {
+    return FileSet.builder()
             .addEntry(FileType.Executable, command.commandName()<if(it.executableExtension)> + <it.executableExtension><endif>)
             .build();
-    }
+  }
 
-	private static ImmutablePackageFinderRules rules(final Command command) {
-	    FileSet fileSet = fileSetOf(command);
-	    
+  private static ImmutablePackageFinderRules rules(final Command command) {
+    FileSet fileSet = fileSetOf(command);
+        
 <package.entries:{ pair | <pair.urlVersions.entries:{ urlAndVersions |
 <if(urlAndVersions.versions.hasDevVersions)>
-        PackageFinderRule devRule_<pair.platform.variableName><urlAndVersions.index> = PackageFinderRule.builder()
-            .match(<matchPackage(pair.platform)>
-                .andThen(
-                    <versionRanges(urlAndVersions.versions.devVersions)>
-            ))
-            .finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.<urlAndVersions.archiveType>)
-				.urlTemplate("<urlAndVersions.url>")
-				.isDevVersion(true)
-				.build())
-			.build();
+    PackageFinderRule devRule_<pair.platform.variableName><urlAndVersions.index> = PackageFinderRule.builder()
+        .match(<matchPackage(pair.platform)>
+            .andThen(
+                <versionRanges(urlAndVersions.versions.devVersions)>
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.<urlAndVersions.archiveType>)
+            .urlTemplate("<urlAndVersions.url>")
+            .isDevVersion(true)
+            .build())
+        .build();
 
 <endif>
 <if(urlAndVersions.versions.hasVersions)>
-        PackageFinderRule rule_<pair.platform.variableName><urlAndVersions.index> = PackageFinderRule.builder()
-            .match(<matchPackage(pair.platform)>
-                .andThen(
-                    <versionRanges(urlAndVersions.versions.versions)>
-            ))
-            .finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.<urlAndVersions.archiveType>)
-				.urlTemplate("<urlAndVersions.url>")
-				.build())
-			.build();
+    PackageFinderRule rule_<pair.platform.variableName><urlAndVersions.index> = PackageFinderRule.builder()
+        .match(<matchPackage(pair.platform)>
+            .andThen(
+                <versionRanges(urlAndVersions.versions.versions)>
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.<urlAndVersions.archiveType>)
+            .urlTemplate("<urlAndVersions.url>")
+            .build())
+        .build();
+            
 <endif>
 }> <pair.urlVersions.toolEntries:{ toolsUrlAndVersions |
 <if(toolsUrlAndVersions.versions.hasVersions)>
-        PackageFinderRule tools_<pair.platform.variableName><toolsUrlAndVersions.index> = PackageFinderRule.builder()
-            .match(<matchPackage(pair.platform)>
-                .andThen(
-                    <versionRanges(toolsUrlAndVersions.versions.versions)>
-            ))
-            .finder(UrlTemplatePackageFinder.builder()
-				.fileSet(fileSet)
-				.archiveType(ArchiveType.<toolsUrlAndVersions.archiveType>)
-				.urlTemplate("<toolsUrlAndVersions.url>")
-				.build())
-			.build();
-			
+    PackageFinderRule tools_<pair.platform.variableName><toolsUrlAndVersions.index> = PackageFinderRule.builder()
+        .match(<matchPackage(pair.platform)>
+            .andThen(
+                <versionRanges(toolsUrlAndVersions.versions.versions)>
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.<toolsUrlAndVersions.archiveType>)
+            .urlTemplate("<toolsUrlAndVersions.url>")
+            .build())
+        .build();
+            
 <endif>
 }>}>
     switch (command) {
@@ -88,7 +93,7 @@ public class <it.name> extends AbstractPackageFinder {
             .withAdditionalRules(
                 <pair.urlVersions.entries:{ urlAndVersions | <if(urlAndVersions.versions.hasDevVersions)>devRule_<pair.platform.variableName><urlAndVersions.index><endif><if(urlAndVersions.versions.hasDevVersions && urlAndVersions.versions.hasVersions)>, <endif><if(urlAndVersions.versions.hasVersions)>rule_<pair.platform.variableName><urlAndVersions.index><endif>}; separator=", ">
             )}>;
-	}
+    }
   }
 }
 >>

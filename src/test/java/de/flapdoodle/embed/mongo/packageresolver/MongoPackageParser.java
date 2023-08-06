@@ -6,6 +6,10 @@ import de.flapdoodle.embed.mongo.packageresolver.parser.SourceCodeGenerator;
 import de.flapdoodle.types.Either;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +17,12 @@ import java.util.stream.Collectors;
 public class MongoPackageParser {
 
 	public static void main(String[] args) throws IOException {
+		Path targetDirectory = Paths.get("").toAbsolutePath()
+			.resolve("target");
+		if (args.length>0) {
+			targetDirectory = Paths.get(args[0]);
+		}
+
 		List<MongoPackages.ParsedVersion> versions = MongoPackages.dbVersionsList().stream()
 			.flatMap(Collection::stream)
 			.collect(Collectors.toList());
@@ -54,6 +64,7 @@ public class MongoPackageParser {
 
 		tree.dump();
 
-		new SourceCodeGenerator().generate(tree);
+		
+		new SourceCodeGenerator(targetDirectory).generate(tree);
 	}
 }

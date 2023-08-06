@@ -1,11 +1,11 @@
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
+import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.OS;
 import de.flapdoodle.os.Version;
 import org.immutables.value.Value;
 
-import java.util.Comparator;
-import java.util.Optional;
+import java.util.*;
 
 @Value.Immutable
 public abstract class PackageOsAndVersionType implements Comparable<PackageOsAndVersionType> {
@@ -40,10 +40,25 @@ public abstract class PackageOsAndVersionType implements Comparable<PackageOsAnd
 	public String className() {
 		String osName = os().name();
 		String classBaseName = osName.replace("_","");
+		if (os()== CommonOS.Linux && !version().isPresent()) {
+			classBaseName="LinuxLegacy";
+		}
 		if (version().isPresent()) {
 			classBaseName=version().get().getSimpleName().replace("Version","");
 		}
 		return classBaseName+"PackageFinder";
+	}
+
+	@Value.Auxiliary
+	public List<String> imports() {
+		if (version().isPresent()) {
+			return Arrays.asList(asImportClassName(version().get()));
+		}
+		return Collections.emptyList();
+	}
+
+	private static String asImportClassName(Class<?> clazz) {
+		return clazz.getPackage().getName()+"."+clazz.getSimpleName();
 	}
 
 	public static PackageOsAndVersionType of(PackagePlatform platform) {
