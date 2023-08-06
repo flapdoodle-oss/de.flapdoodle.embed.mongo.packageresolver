@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.flapdoodle.embed.mongo.packageresolver;
+package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.FileSet;
@@ -36,9 +36,9 @@ import java.util.Optional;
 /**
 * this file is generated, please don't touch
 */
-public class SolarisPackageFinder extends AbstractPackageFinder {
+public class LinuxLegacyPackageFinder extends AbstractPackageFinder {
 
-  public SolarisPackageFinder(final Command command) {
+  public LinuxLegacyPackageFinder(final Command command) {
     super(command, rules(command));
   }
 
@@ -51,21 +51,42 @@ public class SolarisPackageFinder extends AbstractPackageFinder {
   private static ImmutablePackageFinderRules rules(final Command command) {
     FileSet fileSet = fileSetOf(command);
 
-    PackageFinderRule rule_Solaris_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Solaris, BitSize.B64, CPUType.X86)
+    PackageFinderRule rule_Linux_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("4.0.0", "4.0.28"),
+                  VersionRange.of("3.6.0", "3.6.23"),
                   VersionRange.of("3.5.5"),
-                  VersionRange.of("3.4.0", "3.4.5"),
+                  VersionRange.of("3.4.9", "3.4.24"),
+                  VersionRange.of("3.4.0", "3.4.7"),
                   VersionRange.of("3.3.1"),
-                  VersionRange.of("3.2.0", "3.2.14"),
+                  VersionRange.of("3.2.0", "3.2.22"),
                   VersionRange.of("3.0.0", "3.0.15"),
                   VersionRange.of("2.6.0", "2.6.12"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
-            .urlTemplate("/sunos5/mongodb-sunos5-x86_64-{version}.tgz")
+            .urlTemplate("/linux/mongodb-linux-x86_64-{version}.tgz")
+            .build())
+        .build();
+
+ 
+    PackageFinderRule rule_Linux_X86_B32 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B32, CPUType.X86)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("3.5.5"),
+                  VersionRange.of("3.3.1"),
+                  VersionRange.of("3.2.0", "3.2.22"),
+                  VersionRange.of("3.0.0", "3.0.15"),
+                  VersionRange.of("2.6.0", "2.6.12"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-i686-{version}.tgz")
             .build())
         .build();
 
@@ -76,12 +97,17 @@ public class SolarisPackageFinder extends AbstractPackageFinder {
       case MongoRestore:
         return PackageFinderRules.empty()
             .withAdditionalRules(
-                rule_Solaris_X86_B64
+                rule_Linux_X86_B64
+            )
+            .withAdditionalRules(
+                rule_Linux_X86_B32
             );
       default:
         return PackageFinderRules.empty()
             .withAdditionalRules(
-                rule_Solaris_X86_B64
+                rule_Linux_X86_B64
+            ).withAdditionalRules(
+                rule_Linux_X86_B32
             );
     }
   }

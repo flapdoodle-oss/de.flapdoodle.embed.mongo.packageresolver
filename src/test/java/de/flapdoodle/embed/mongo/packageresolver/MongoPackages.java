@@ -22,16 +22,23 @@ package de.flapdoodle.embed.mongo.packageresolver;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSetMultimap;
+import com.google.common.io.Resources;
 import de.flapdoodle.types.Pair;
+import de.flapdoodle.types.Try;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public abstract class AbstractPackageHtmlParser {
+public abstract class MongoPackages {
 
-	static List<ParsedVersion> mergeAll(List<List<ParsedVersion>> allVersions) {
+	private static List<ParsedVersion> mergeAll(List<List<ParsedVersion>> allVersions) {
 		List<ParsedVersion> flatmapped = allVersions.stream().flatMap(it -> it.stream()).collect(Collectors.toList());
 
 		Set<Pair<String, Boolean>> versions = flatmapped.stream()
@@ -66,8 +73,162 @@ public abstract class AbstractPackageHtmlParser {
 			.collect(Collectors.toList());
 	}
 
+	private static List<Pair<String, Boolean>> mongoDbVersions() {
+		List<Pair<String, Boolean>> resources = Arrays.asList(
+			Pair.of("versions/react/mongo-db-legacy-versions.html", false),
+			Pair.of("versions/react/mongo-db-versions-2021-10-28.html", false),
+			Pair.of("versions/react/mongo-db-versions-2022-01-16.html", false),
+			Pair.of("versions/react/mongo-db-versions-2022-03-30.html", false),
+			Pair.of("versions/react/mongo-db-versions-2022-09-25.html", false),
+			Pair.of("versions/react/mongo-db-versions-2022-10-14.html", false),
+			Pair.of("versions/react/mongo-db-versions-2022-11-27.html", false),
+			Pair.of("versions/react/mongo-db-versions-2023-02-12.html", false),
+			Pair.of("versions/react/mongo-db-versions-2023-03-16.html", false),
+			Pair.of("versions/react/mongo-db-versions-2023-05-21.html", false),
+			Pair.of("versions/react/mongo-db-versions-2023-05-21-dev.html", true),
+			Pair.of("versions/react/mongo-db-versions-2023-05-30-dev.html", true),
+			Pair.of("versions/react/mongo-db-versions-2023-07-25.html", false),
+			Pair.of("versions/react/mongo-db-versions-2023-07-25-dev.html", true)
+		);
 
+		return resources;
+	}
 
+	public static ParsedVersions allDbVersions() {
+		List<List<ParsedVersion>> allVersions = dbVersionsList();
+
+		return new ParsedVersions(mergeAll(allVersions));
+	}
+
+	public static List<List<ParsedVersion>> dbVersionsList() {
+		return mongoDbVersions().stream()
+			.map(it -> it.mapFirst(path -> Try.supplier(() -> Resources.toString(Resources.getResource(path), StandardCharsets.UTF_8))
+				.mapToUncheckedException(RuntimeException::new)
+				.get()))
+			.map(it -> it.mapFirst(Jsoup::parse))
+			.map(it -> MongoPackages.parseDBVersions(it.first(), it.second()))
+			.collect(Collectors.toList());
+	}
+
+	private static List<Pair<String, Boolean>> mongoToolsVersions() {
+		List<Pair<String, Boolean>> resources = Arrays.asList(
+			Pair.of("versions/react/mongotools-versions-2021-10-28.html", false),
+			Pair.of("versions/react/mongotools-versions-2022-09-25.html", false),
+			Pair.of("versions/react/mongotools-versions-2022-10-14.html", false),
+			Pair.of("versions/react/mongotools-versions-2022-11-27.html", false),
+			Pair.of("versions/react/mongotools-versions-2023-02-12.html", false),
+			Pair.of("versions/react/mongotools-versions-2023-03-16.html", false),
+			Pair.of("versions/react/mongotools-versions-2023-07-25.html", false)
+		);
+
+		return resources;
+	}
+
+	public static ParsedVersions allToolsVersions() {
+		List<List<ParsedVersion>> allVersions = toolsVersionsList();
+
+		return new ParsedVersions(mergeAll(allVersions));
+	}
+
+	public static List<List<ParsedVersion>> toolsVersionsList() {
+		return mongoToolsVersions().stream()
+			.map(it -> it.mapFirst(path -> Try.supplier(() -> Resources.toString(Resources.getResource(path), StandardCharsets.UTF_8))
+				.mapToUncheckedException(RuntimeException::new)
+				.get()))
+			.map(it -> it.mapFirst(Jsoup::parse))
+			.map(it -> MongoPackages.parseToolsVersions(it.first(), it.second()))
+			.collect(Collectors.toList());
+	}
+
+	static List<ParsedVersion> parseDBVersions(Document document, boolean isDevVersion) {
+		List<ParsedVersion> versions = new ArrayList<>();
+		Elements divs = document.select("div > div");
+		for (Element div : divs) {
+//      System.out.println("----------------");
+			Element versionElement = div.selectFirst("h3");
+			if (versionElement != null) {
+				String version = versionElement.text();
+//        System.out.println("Version: " + version);
+//        System.out.println(div);
+				List<ParsedDist> parsedDists = new ArrayList<>();
+				Elements entries = div.select("div > ul > li");
+				for (Element entry : entries) {
+//          System.out.println("- - - - - - -");
+					String name = entry.selectFirst("li > p").text();
+//          System.out.println(" Name: " + name);
+//          System.out.println(entry);
+					List<ParsedUrl> parsedUrls = new ArrayList<>();
+					Elements platforms = entry.select("li > ul > li");
+					for (Element platform : platforms) {
+//            System.out.println("~~~~~~~~");
+//            System.out.println(platform);
+						Elements packages = platform.select("li > p");
+						for (Element ppackage : packages) {
+							if (ppackage.text().startsWith("Archive:")) {
+//                System.out.println("*********");
+//                System.out.println(ppackage);
+								Element urlElement = ppackage.selectFirst("a");
+								String platFormUrl = urlElement.attr("href");
+//                System.out.println("  Url: "+platFormUrl);
+								parsedUrls.add(new ParsedUrl(platFormUrl));
+							}
+						}
+					}
+					parsedDists.add(new ParsedDist(name, parsedUrls));
+				}
+				versions.add(new ParsedVersion(version, isDevVersion, parsedDists));
+			} else {
+//        System.out.println("##############");
+//        System.out.println(div);
+			}
+		}
+		return versions;
+	}
+	
+	static List<ParsedVersion> parseToolsVersions(Document document, boolean isDevVersion) {
+		List<ParsedVersion> versions = new ArrayList<>();
+		Elements divs = document.select("div > div");
+		for (Element div : divs) {
+//      System.out.println("----------------");
+			Element versionElement = div.selectFirst("h3");
+			if (versionElement != null) {
+				String version = versionElement.text();
+//        System.out.println("Version: " + version);
+//        System.out.println(div);
+				List<ParsedDist> parsedDists = new ArrayList<>();
+				Elements entries = div.select("div > ul > li");
+				for (Element entry : entries) {
+//          System.out.println("- - - - - - -");
+					String name = entry.selectFirst("li > p").text();
+//          System.out.println(" Name: " + name);
+//          System.out.println(entry);
+					List<ParsedUrl> parsedUrls = new ArrayList<>();
+					Elements platforms = entry.select("li > ul > li");
+					for (Element platform : platforms) {
+//            System.out.println("~~~~~~~~");
+//            System.out.println(platform);
+						Elements packages = platform.select("li");
+						for (Element ppackage : packages) {
+							if (ppackage.text().startsWith("Archive:")) {
+//                System.out.println("*********");
+//                System.out.println(ppackage);
+								Element urlElement = ppackage.selectFirst("a");
+								String platFormUrl = urlElement.attr("href");
+//                System.out.println("  Url: "+platFormUrl);
+								parsedUrls.add(new ParsedUrl(platFormUrl));
+							}
+						}
+					}
+					parsedDists.add(new ParsedDist(name, parsedUrls));
+				}
+				versions.add(new ParsedVersion(version, isDevVersion, parsedDists));
+			} else {
+//        System.out.println("##############");
+//        System.out.println(div);
+			}
+		}
+		return versions;
+	}
 	static void versionAndUrl(ParsedVersions versions) {
 		versions
 			.list()
@@ -86,7 +247,6 @@ public abstract class AbstractPackageHtmlParser {
 				}
 			});
 	}
-
 	static void compressedVersionAndUrl(ParsedVersions versions) {
 		Map<String, List<ParsedVersion>> groupedByVersionLessUrl = versions.groupByVersionLessUrl();
 
@@ -110,12 +270,11 @@ public abstract class AbstractPackageHtmlParser {
 			}
 		});
 	}
-
 	private static String compressedVersionAsString(List<String> versionNumbers) {
 		return rangesAsString(compressedVersionsList(versionNumbers));
 	}
-
-	private static String rangesAsString(List<VersionRange> ranges) {
+	
+	public static String rangesAsString(List<VersionRange> ranges) {
 		return ranges.stream()
 			.sorted(Comparator.comparing(VersionRange::min).reversed())
 			.map(r -> r.min().equals(r.max())
@@ -123,18 +282,15 @@ public abstract class AbstractPackageHtmlParser {
 				: quoted(asString(r.min()) + " -> " + asString(r.max())))
 			.collect(Collectors.joining(", "));
 	}
-
 	private static String quoted(String src) {
 		return "\""+src+"\"";
 	}
-
 	static List<String> versionNumbers(List<ParsedVersion> versions, boolean devVersions) {
 		return versions.stream()
 			.filter(it -> it.isDevVersion == devVersions)
 			.map(it -> it.version)
 			.collect(Collectors.toList());
 	}
-
 	static Map<String, List<ParsedVersion>> groupByVersionLessUrl(List<ParsedVersion> versions) {
 		Map<String, List<ParsedVersion>> groupedByVersionLessUrl = versions.stream()
 			.sorted()
@@ -153,7 +309,7 @@ public abstract class AbstractPackageHtmlParser {
 		return groupedByVersionLessUrl;
 	}
 
-	static List<VersionRange> compressedVersionsList(Collection<String> numericVersions) {
+	public static List<VersionRange> compressedVersionsList(Collection<String> numericVersions) {
 		List<NumericVersion> versions = numericVersions.stream()
 			.map(NumericVersion::of)
 			.sorted(Comparator.reverseOrder())
@@ -179,26 +335,26 @@ public abstract class AbstractPackageHtmlParser {
 		}
 		return ranges;
 	}
-
-	static String asString(NumericVersion version) {
+	
+	public static String asString(NumericVersion version) {
 		if (version.build().isPresent()) {
 			return version.major() + "." + version.minor() + "." + version.patch()+"-"+version.build().get();
 		}
 		return version.major() + "." + version.minor() + "." + version.patch();
 	}
+	private static Set<Map.Entry<String, Pair<String, Boolean>>> urlToVersionSet(ParsedVersion parsedVersion) {
+		Set<Map.Entry<String, Pair<String, Boolean>>> ret = parsedVersion.dists
+			.stream()
+			.flatMap(parsedDist -> parsedDist.urls
+				.stream()
+				.map(parsedUrl -> parsedUrl.url)
+				.collect(Collectors.toSet())
+				.stream())
+			.collect(Collectors.toMap(Function.identity(), entry -> Pair.of(parsedVersion.version, parsedVersion.isDevVersion)))
+			.entrySet();
 
-	static void dump(List<ParsedVersion> versions) {
-		versions.forEach(version -> {
-			System.out.println(version.version);
-			version.dists.forEach(dist -> {
-				System.out.println(" " + dist.name);
-				dist.urls.forEach(packageUrl -> {
-					System.out.println("  " + packageUrl.url);
-				});
-			});
-		});
+		return ret;
 	}
-
 	static class ParsedUrl {
 		final String url;
 
@@ -219,6 +375,13 @@ public abstract class AbstractPackageHtmlParser {
 			if (urlsAsSet.size()!= urls.size()) {
 				throw new IllegalArgumentException("url collisions: "+urls+"("+urlsAsSet+")");
 			}
+		}
+
+		public String singleUrl() {
+			if (urls.size()!=1) {
+				throw new IllegalArgumentException("more or less than one url: "+urls);
+			}
+			return urls.get(0).url;
 		}
 	}
 
@@ -265,14 +428,14 @@ public abstract class AbstractPackageHtmlParser {
 		public ParsedVersions filterByName(String name) {
 			return new ParsedVersions(filter(list, it -> it.name.equals(name)));
 		}
-		
+
 		@Deprecated
 		public List<ParsedVersion> list() {
 			return list;
 		}
 
 		public Map<String, List<ParsedVersion>> groupByVersionLessUrl() {
-			return AbstractPackageHtmlParser.groupByVersionLessUrl(list);
+			return MongoPackages.groupByVersionLessUrl(list);
 		}
 
 		public List<PlatformVersions> groupedByPlatform() {
@@ -291,28 +454,6 @@ public abstract class AbstractPackageHtmlParser {
 				.map(entry -> new UrlAndVersions(entry.getKey(), ImmutableSet.copyOf(entry.getValue())))
 				.collect(Collectors.toList());
 		}
-
-		private static Set<String> versionsForUrl(List<ParsedVersion> list, String url) {
-			return list.stream()
-				.filter(parsedVersion -> parsedVersion.dists.stream().anyMatch(parsedDist -> parsedDist.urls.stream().anyMatch(parsedUrl -> parsedUrl.url.equals(url))))
-				.map(parsedVersion -> parsedVersion.version)
-				.sorted()
-				.collect(Collectors.toCollection(LinkedHashSet::new));
-		}
-	}
-
-	private static Set<Map.Entry<String, Pair<String, Boolean>>> urlToVersionSet(ParsedVersion parsedVersion) {
-		Set<Map.Entry<String, Pair<String, Boolean>>> ret = parsedVersion.dists
-			.stream()
-			.flatMap(parsedDist -> parsedDist.urls
-				.stream()
-				.map(parsedUrl -> parsedUrl.url)
-				.collect(Collectors.toSet())
-				.stream())
-			.collect(Collectors.toMap(Function.identity(), entry -> Pair.of(parsedVersion.version, parsedVersion.isDevVersion)))
-			.entrySet();
-		
-		return ret;
 	}
 
 	static class UrlAndVersions {

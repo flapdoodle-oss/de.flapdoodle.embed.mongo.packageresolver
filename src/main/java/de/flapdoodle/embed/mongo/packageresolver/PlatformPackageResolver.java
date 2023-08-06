@@ -39,8 +39,6 @@ public class PlatformPackageResolver implements PackageResolver, HasPlatformMatc
 
   public PlatformPackageResolver(Command command) {
     // TODO system property finder
-    // TODO put features into this?
-
 		// https://www.mongodb.org/dl/linux
     // https://www.mongodb.org/dl/osx
     // https://www.mongodb.org/dl/windows

@@ -23,7 +23,6 @@ package de.flapdoodle.embed.mongo.packageresolver;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.io.Resources;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.Package;
@@ -32,60 +31,23 @@ import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.*;
 import de.flapdoodle.os.linux.*;
 import de.flapdoodle.types.Pair;
-import de.flapdoodle.types.Try;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
+public class MongoPackageHtmlPageParser {
 
 	public static void main(String[] args) throws IOException {
-		List<Pair<String, Boolean>> resources = Arrays.asList(
-			Pair.of("versions/react/mongo-db-versions-2021-10-28.html", false),
-			Pair.of("versions/react/mongo-db-versions-2022-01-16.html", false),
-			Pair.of("versions/react/mongo-db-versions-2022-03-30.html", false),
-			Pair.of("versions/react/mongo-db-versions-2022-09-25.html", false),
-			Pair.of("versions/react/mongo-db-versions-2022-10-14.html", false),
-			Pair.of("versions/react/mongo-db-versions-2022-11-27.html", false),
-			Pair.of("versions/react/mongo-db-versions-2023-02-12.html", false),
-			Pair.of("versions/react/mongo-db-versions-2023-03-16.html", false),
-			Pair.of("versions/react/mongo-db-versions-2023-05-21.html", false),
-			Pair.of("versions/react/mongo-db-versions-2023-05-21-dev.html", true),
-			Pair.of("versions/react/mongo-db-versions-2023-05-30-dev.html", true),
-			Pair.of("versions/react/mongo-db-versions-2023-07-25.html", false),
-			Pair.of("versions/react/mongo-db-versions-2023-07-25-dev.html", true)
-		);
+		MongoPackages.ParsedVersions versions = MongoPackages.allDbVersions();
 
-		List<List<ParsedVersion>> allVersions = resources.stream()
-			//.map(it -> Try.supplier(() -> parse(Jsoup.parse(Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8)))))
-			.map(it -> it.mapFirst(path -> Try.supplier(() -> Resources.toString(Resources.getResource(path), StandardCharsets.UTF_8))
-				.mapToUncheckedException(RuntimeException::new)
-				.get()))
-			.map(it -> it.mapFirst(Jsoup::parse))
-			.map(it -> MongoPackageHtmlPageParser.parse(it.first(), it.second()))
-			.collect(Collectors.toList());
-
-		//List<ParsedVersion> versions = mergeAll(allVersions);
-
-		ParsedVersions versions = new ParsedVersions(mergeAll(allVersions));
-
-//    List<ParsedVersion> versions = parse(Jsoup.parse(Resources.toString(Resources.getResource("versions/react/mongo-db-versions-2021-10-28.html"), StandardCharsets.UTF_8)));
-
-//    dump(versions);
 		Set<String> names = versions.names();
-//    List<ParsedVersion> filtered = filter(versions, it -> it.name.contains("indows"));
 		names.forEach(name -> {
 			System.out.println("-----------------------------------");
 			System.out.println(name);
-			ParsedVersions filtered = versions.filterByName(name);
-			versionAndUrl(filtered);
+			MongoPackages.ParsedVersions filtered = versions.filterByName(name);
+			MongoPackages.versionAndUrl(filtered);
 		});
 
 		System.out.println();
@@ -97,20 +59,20 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		names.forEach(name -> {
 			System.out.println("-----------------------------------");
 			System.out.println(name);
-			ParsedVersions filtered = versions.filterByName(name);
-			compressedVersionAndUrl(filtered);
+			MongoPackages.ParsedVersions filtered = versions.filterByName(name);
+			MongoPackages.compressedVersionAndUrl(filtered);
 		});
 
 		asPlatformRules(versions);
 	}
 
-	private static void asPlatformRules(ParsedVersions versions) {
+	private static void asPlatformRules(MongoPackages.ParsedVersions versions) {
 		System.out.println();
 		System.out.println();
 		System.out.println("- - - 8<- - - - - - - - ");
-		List<PlatformVersions> byPlatform = versions.groupedByPlatform();
+		List<MongoPackages.PlatformVersions> byPlatform = versions.groupedByPlatform();
 
-		ImmutableListMultimap<PlatformMatch, List<UrlAndVersions>> asPlatformMatchMap = byPlatform.stream()
+		ImmutableListMultimap<PlatformMatch, List<MongoPackages.UrlAndVersions>> asPlatformMatchMap = byPlatform.stream()
 			.map(entry -> new Tuple<>(asPlatformMatch(entry.name()), entry.urlAndVersions()))
 			.filter(tuple -> tuple.a().isPresent())
 			.collect(ImmutableListMultimap.toImmutableListMultimap(tuple -> tuple.a().get(), tuple -> tuple.b()));
@@ -119,8 +81,8 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		System.out.println(explained);
 	}
 
-	private static PackageFinderRules mapAsPlatformRules(ImmutableListMultimap<PlatformMatch, List<UrlAndVersions>> map) {
-    List<Tuple<PlatformMatch, List<UrlAndVersions>>> platformAndVersions = map.asMap()
+	private static PackageFinderRules mapAsPlatformRules(ImmutableListMultimap<PlatformMatch, List<MongoPackages.UrlAndVersions>> map) {
+    List<Tuple<PlatformMatch, List<MongoPackages.UrlAndVersions>>> platformAndVersions = map.asMap()
       .entrySet()
       .stream().map(entry -> new Tuple<>(entry.getKey(), entry.getValue()
         .stream()
@@ -140,10 +102,10 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 			.build();
 	}
 
-	private static PackageFinderRule asPlatformRules(OS os, List<Tuple<PlatformMatch, List<UrlAndVersions>>> platformAndVersions) {
+	private static PackageFinderRule asPlatformRules(OS os, List<Tuple<PlatformMatch, List<MongoPackages.UrlAndVersions>>> platformAndVersions) {
     Optional<OS> osMatch = Optional.of(os);
 
-    List<Tuple<PlatformMatch, List<UrlAndVersions>>> matchingOs = platformAndVersions.stream()
+    List<Tuple<PlatformMatch, List<MongoPackages.UrlAndVersions>>> matchingOs = platformAndVersions.stream()
       .filter(it -> it.a().os().equals(osMatch))
       .collect(Collectors.toList());
 //    if (matchingOs.size()==1) {
@@ -166,7 +128,7 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 //    }
 	}
 
-	private static PackageFinderRule groupedByDist(OS os, List<Tuple<PlatformMatch, List<UrlAndVersions>>> matchingOs) {
+	private static PackageFinderRule groupedByDist(OS os, List<Tuple<PlatformMatch, List<MongoPackages.UrlAndVersions>>> matchingOs) {
 
 		List<PackageFinderRule> list = os.distributions().stream()
 			.map(dist -> PackageFinderRule.of(PlatformMatch.withOs(os).withVersion(dist.versions()), new JustRulesPackageFinder(
@@ -179,7 +141,7 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		return PackageFinderRule.of(PlatformMatch.withOs(os), new JustRulesPackageFinder(PackageFinderRules.empty().withRules(list)));
 	}
 
-	private static PackageFinderRules groupedByVersion(OS os, de.flapdoodle.os.Distribution dist, List<Tuple<PlatformMatch, List<UrlAndVersions>>> matching) {
+	private static PackageFinderRules groupedByVersion(OS os, de.flapdoodle.os.Distribution dist, List<Tuple<PlatformMatch, List<MongoPackages.UrlAndVersions>>> matching) {
 		List<PackageFinderRule> rules = dist.versions().stream()
 			.map(version -> tuple(version, asVersionDetectionRules(PlatformMatch.withOs(os).withVersion(version), matching.stream()
 				.filter(entry -> entry.a().version().contains(version))
@@ -191,7 +153,7 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		return PackageFinderRules.empty().withRules(rules);
 	}
 
-	private static PackageFinderRules asVersionDetectionRules(PlatformMatch parent, List<UrlAndVersions> urlAndVersions) {
+	private static PackageFinderRules asVersionDetectionRules(PlatformMatch parent, List<MongoPackages.UrlAndVersions> urlAndVersions) {
     List<PackageFinderRule> list = urlAndVersions.stream()
 			.flatMap(entry -> {
 				List<String> releaseVersions = entry.versions().stream()
@@ -199,12 +161,12 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 					.map(Pair::first)
 					.collect(Collectors.toList());
 
-        DistributionMatch match = DistributionMatch.any(compressedVersionsList(releaseVersions));
+        DistributionMatch match = DistributionMatch.any(MongoPackages.compressedVersionsList(releaseVersions));
 
 				String url = entry.url();
 				url=url.replace("https://fastdl.mongodb.org","");
 
-				PackageFinderRule releaseRule = PackageFinderRule.of(parent.andThen(match), UrlTemplatePackageResolver.builder()
+				PackageFinderRule releaseRule = PackageFinderRule.of(parent.andThen(match), UrlTemplatePackageFinder.builder()
 					.urlTemplate(url)
 					.fileSet(FileSet.builder()
 						.addEntry(FileType.Executable, "mongod")
@@ -218,9 +180,9 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 					.collect(Collectors.toList());
 
 				if (!devVersions.isEmpty()) {
-					DistributionMatch devMatch = DistributionMatch.any(compressedVersionsList(devVersions));
+					DistributionMatch devMatch = DistributionMatch.any(MongoPackages.compressedVersionsList(devVersions));
 
-					PackageFinderRule devRule = PackageFinderRule.of(parent.andThen(devMatch), UrlTemplatePackageResolver.builder()
+					PackageFinderRule devRule = PackageFinderRule.of(parent.andThen(devMatch), UrlTemplatePackageFinder.builder()
 						.urlTemplate(url)
 						.fileSet(FileSet.builder()
 							.addEntry(FileType.Executable, "mongod")
@@ -269,7 +231,7 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		}
 	}
 
-	private static Optional<PlatformMatch> asPlatformMatch(String name) {
+	public static Optional<PlatformMatch> asPlatformMatch(String name) {
 		Optional<OS> os = Optional.empty();
 		Optional<BitSize> bitsize = Optional.empty();
 		Optional<CPUType> cpuType = Optional.empty();
@@ -424,48 +386,4 @@ public class MongoPackageHtmlPageParser extends AbstractPackageHtmlParser {
 		return new Tuple<>(a,b);
 	}
 
-	static List<ParsedVersion> parse(Document document, boolean isDevVersion) {
-		List<ParsedVersion> versions = new ArrayList<>();
-		Elements divs = document.select("div > div");
-		for (Element div : divs) {
-//      System.out.println("----------------");
-			Element versionElement = div.selectFirst("h3");
-			if (versionElement != null) {
-				String version = versionElement.text();
-//        System.out.println("Version: " + version);
-//        System.out.println(div);
-				List<ParsedDist> parsedDists = new ArrayList<>();
-				Elements entries = div.select("div > ul > li");
-				for (Element entry : entries) {
-//          System.out.println("- - - - - - -");
-					String name = entry.selectFirst("li > p").text();
-//          System.out.println(" Name: " + name);
-//          System.out.println(entry);
-					List<ParsedUrl> parsedUrls = new ArrayList<>();
-					Elements platforms = entry.select("li > ul > li");
-					for (Element platform : platforms) {
-//            System.out.println("~~~~~~~~");
-//            System.out.println(platform);
-						Elements packages = platform.select("li > p");
-						for (Element ppackage : packages) {
-							if (ppackage.text().startsWith("Archive:")) {
-//                System.out.println("*********");
-//                System.out.println(ppackage);
-								Element urlElement = ppackage.selectFirst("a");
-								String platFormUrl = urlElement.attr("href");
-//                System.out.println("  Url: "+platFormUrl);
-								parsedUrls.add(new ParsedUrl(platFormUrl));
-							}
-						}
-					}
-					parsedDists.add(new ParsedDist(name, parsedUrls));
-				}
-				versions.add(new ParsedVersion(version, isDevVersion, parsedDists));
-			} else {
-//        System.out.println("##############");
-//        System.out.println(div);
-			}
-		}
-		return versions;
-	}
 }

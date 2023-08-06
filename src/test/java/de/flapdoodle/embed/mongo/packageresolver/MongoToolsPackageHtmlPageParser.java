@@ -20,45 +20,12 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import com.google.common.io.Resources;
-import de.flapdoodle.types.Pair;
-import de.flapdoodle.types.Try;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-public class MongoToolsPackageHtmlPageParser extends AbstractPackageHtmlParser {
+public class MongoToolsPackageHtmlPageParser {
 		public static void main(String[] args) throws IOException {
-			List<Pair<String, Boolean>> resources = Arrays.asList(
-				Pair.of("versions/react/mongotools-versions-2021-10-28.html", false),
-				Pair.of("versions/react/mongotools-versions-2022-09-25.html", false),
-				Pair.of("versions/react/mongotools-versions-2022-10-14.html", false),
-				Pair.of("versions/react/mongotools-versions-2022-11-27.html", false),
-				Pair.of("versions/react/mongotools-versions-2023-02-12.html", false),
-				Pair.of("versions/react/mongotools-versions-2023-03-16.html", false),
-				Pair.of("versions/react/mongotools-versions-2023-07-25.html", false)
-			);
-
-			List<List<ParsedVersion>> allVersions = resources.stream()
-				//.map(it -> Try.supplier(() -> parse(Jsoup.parse(Resources.toString(Resources.getResource(it), StandardCharsets.UTF_8)))))
-				.map(it -> it.mapFirst(path -> Try.supplier(() -> Resources.toString(Resources.getResource(path), StandardCharsets.UTF_8))
-					.mapToUncheckedException(RuntimeException::new)
-					.get()))
-				.map(it -> it.mapFirst(Jsoup::parse))
-				.map(it -> MongoToolsPackageHtmlPageParser.parse(it.first(), it.second()))
-				.collect(Collectors.toList());
-
-			ParsedVersions versions = new ParsedVersions(mergeAll(allVersions));
+			MongoPackages.ParsedVersions versions = MongoPackages.allToolsVersions();
 
 //			URL url = Resources.getResource("versions/react/mongotools-versions-2021-10-28.html");
 //				System.out.println("-> " + url);
@@ -71,8 +38,8 @@ public class MongoToolsPackageHtmlPageParser extends AbstractPackageHtmlParser {
 				names.forEach(name -> {
 						System.out.println("-----------------------------------");
 						System.out.println(name);
-						ParsedVersions filtered = versions.filterByName(name);
-						versionAndUrl(filtered);
+						MongoPackages.ParsedVersions filtered = versions.filterByName(name);
+						MongoPackages.versionAndUrl(filtered);
 				});
 
 				System.out.println();
@@ -84,54 +51,9 @@ public class MongoToolsPackageHtmlPageParser extends AbstractPackageHtmlParser {
 				names.forEach(name -> {
 						System.out.println("-----------------------------------");
 						System.out.println(name);
-						ParsedVersions filtered = versions.filterByName(name);
-						compressedVersionAndUrl(filtered);
+						MongoPackages.ParsedVersions filtered = versions.filterByName(name);
+						MongoPackages.compressedVersionAndUrl(filtered);
 				});
-		}
-
-		static List<ParsedVersion> parse(Document document, boolean isDevVersion) {
-				List<ParsedVersion> versions=new ArrayList<>();
-				Elements divs = document.select("div > div");
-				for (Element div : divs) {
-//      System.out.println("----------------");
-						Element versionElement = div.selectFirst("h3");
-						if (versionElement != null) {
-								String version = versionElement.text();
-//        System.out.println("Version: " + version);
-//        System.out.println(div);
-								List<ParsedDist> parsedDists=new ArrayList<>();
-								Elements entries = div.select("div > ul > li");
-								for (Element entry : entries) {
-//          System.out.println("- - - - - - -");
-										String name = entry.selectFirst("li > p").text();
-//          System.out.println(" Name: " + name);
-//          System.out.println(entry);
-										List<ParsedUrl> parsedUrls=new ArrayList<>();
-										Elements platforms = entry.select("li > ul > li");
-										for (Element platform : platforms) {
-//            System.out.println("~~~~~~~~");
-//            System.out.println(platform);
-												Elements packages = platform.select("li");
-												for (Element ppackage : packages) {
-														if (ppackage.text().startsWith("Archive:")) {
-//                System.out.println("*********");
-//                System.out.println(ppackage);
-																Element urlElement = ppackage.selectFirst("a");
-																String platFormUrl=urlElement.attr("href");
-//                System.out.println("  Url: "+platFormUrl);
-																parsedUrls.add(new ParsedUrl(platFormUrl));
-														}
-												}
-										}
-										parsedDists.add(new ParsedDist(name, parsedUrls));
-								}
-								versions.add(new ParsedVersion(version, isDevVersion, parsedDists));
-						} else {
-//        System.out.println("##############");
-//        System.out.println(div);
-						}
-				}
-				return versions;
 		}
 
 }

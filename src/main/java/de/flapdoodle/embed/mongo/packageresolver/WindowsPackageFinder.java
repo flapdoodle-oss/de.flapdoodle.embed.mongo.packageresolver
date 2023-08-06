@@ -20,33 +20,26 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
+import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
+import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
+import de.flapdoodle.os.linux.*;
 
 import java.util.Optional;
 
-public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRules {
-  private final Command command;
-  private final ImmutablePackageFinderRules rules;
+/**
+* this file is generated, please don't touch
+*/
+public class WindowsPackageFinder extends AbstractPackageFinder {
 
-  public WindowsPackageFinder(Command command) {
-    this.command = command;
-    this.rules = rules(command);
-  }
-
-  @Override
-  public PackageFinderRules rules() {
-    return rules;
-  }
-
-  @Override
-  public Optional<Package> packageFor(Distribution distribution) {
-    return rules.packageFor(distribution);
+  public WindowsPackageFinder(final Command command) {
+    super(command, rules(command));
   }
 
   private static FileSet fileSetOf(Command command) {
@@ -55,196 +48,179 @@ public class WindowsPackageFinder implements PackageFinder, HasPlatformMatchRule
             .build();
   }
 
-  private static PlatformMatch match(BitSize bitSize) {
-    return PlatformMatch.withOs(CommonOS.Windows).withBitSize(bitSize);
-  }
-
-  private static ImmutablePackageFinderRules rules(Command command) {
+  private static ImmutablePackageFinderRules rules(final Command command) {
     FileSet fileSet = fileSetOf(command);
-    ArchiveType archiveType = ArchiveType.ZIP;
 
-    ImmutablePackageFinderRule windowsServer_2008_rule = PackageFinderRule.builder()
-            .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                    VersionRange.of("3.4.9", "3.4.24"),
-                    VersionRange.of("3.4.0", "3.4.7"),
-                    VersionRange.of("3.2.0", "3.2.22"),
-                    VersionRange.of("3.0.0", "3.0.15"),
-                    VersionRange.of("2.6.0", "2.6.12")
-            )))
-            .finder(UrlTemplatePackageResolver.builder()
-                    .fileSet(fileSet)
-                    .archiveType(archiveType)
-                    .urlTemplate("/win32/mongodb-win32-x86_64-2008plus-{version}.zip")
-                    .build())
-            .build();
+    PackageFinderRule devRule_Windows_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Windows, BitSize.B64, CPUType.X86)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("7.0.0-rc8"),
+                  VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc1"),
+                  VersionRange.of("6.3.1", "6.3.2"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.ZIP)
+            .urlTemplate("/windows/mongodb-windows-x86_64-{version}.zip")
+            .isDevVersion(true)
+            .build())
+        .build();
 
-    DistributionMatch windows64MongoVersions = DistributionMatch.any(
-      VersionRange.of("6.0.8"),
-      VersionRange.of("6.0.1", "6.0.6"),
-      VersionRange.of("5.0.18","5.0.19"),
-      VersionRange.of("5.0.12", "5.0.15"),
-      VersionRange.of("5.0.5", "5.0.6"),
-      VersionRange.of("5.0.0", "5.0.2"),
-      VersionRange.of("4.4.22","4.4.23"),
-      VersionRange.of("4.4.16", "4.4.19"),
-      VersionRange.of("4.4.13", "4.4.13"),
-      VersionRange.of("4.4.11", "4.4.11"),
-      VersionRange.of("4.4.0", "4.4.9")
-    );
-    ImmutablePackageFinderRule windows_x64_rule = PackageFinderRule.builder()
-            .match(match(BitSize.B64).andThen(windows64MongoVersions))
-            .finder(UrlTemplatePackageResolver.builder()
-                    .fileSet(fileSet)
-                    .archiveType(archiveType)
-                    .urlTemplate("/windows/mongodb-windows-x86_64-{version}.zip")
-                    .build())
-            .build();
+    PackageFinderRule rule_Windows_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Windows, BitSize.B64, CPUType.X86)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("6.0.8"),
+                  VersionRange.of("6.0.1", "6.0.6"),
+                  VersionRange.of("5.0.18", "5.0.19"),
+                  VersionRange.of("5.0.12", "5.0.15"),
+                  VersionRange.of("5.0.5", "5.0.6"),
+                  VersionRange.of("5.0.0", "5.0.2"),
+                  VersionRange.of("4.4.22", "4.4.23"),
+                  VersionRange.of("4.4.16", "4.4.19"),
+                  VersionRange.of("4.4.13"),
+                  VersionRange.of("4.4.11"),
+                  VersionRange.of("4.4.0", "4.4.9"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.ZIP)
+            .urlTemplate("/windows/mongodb-windows-x86_64-{version}.zip")
+            .build())
+        .build();
 
-    DistributionMatch windows64devMongoVersions = DistributionMatch.any(
-      VersionRange.of("7.0.0-rc8"),
-      VersionRange.of("7.0.0-rc2"),
-      VersionRange.of("7.0.0-rc1"),
-      VersionRange.of("6.3.1","6.3.2")
-    );
+    PackageFinderRule rule_Windows_X86_B64_1 = PackageFinderRule.builder()
+        .match(match(CommonOS.Windows, BitSize.B64, CPUType.X86)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("4.2.22", "4.2.24"),
+                  VersionRange.of("4.2.18", "4.2.19"),
+                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("4.2.0", "4.2.3"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.ZIP)
+            .urlTemplate("/win32/mongodb-win32-x86_64-2012plus-{version}.zip")
+            .build())
+        .build();
 
-    ImmutablePackageFinderRule windows_x64_dev_rule = PackageFinderRule.builder()
-      .match(match(BitSize.B64).andThen(windows64devMongoVersions))
-      .finder(UrlTemplatePackageResolver.builder()
-        .fileSet(fileSet)
-        .archiveType(archiveType)
-        .urlTemplate("/windows/mongodb-windows-x86_64-{version}.zip")
-        .isDevVersion(true)
-        .build())
-      .build();
+    PackageFinderRule rule_Windows_X86_B64_2 = PackageFinderRule.builder()
+        .match(match(CommonOS.Windows, BitSize.B64, CPUType.X86)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("4.0.0", "4.0.28"),
+                  VersionRange.of("3.6.0", "3.6.23"),
+                  VersionRange.of("3.4.9", "3.4.24"),
+                  VersionRange.of("3.4.0", "3.4.7"),
+                  VersionRange.of("3.2.0", "3.2.22"),
+                  VersionRange.of("3.0.0", "3.0.15"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.ZIP)
+            .urlTemplate("/win32/mongodb-win32-x86_64-2008plus-ssl-{version}.zip")
+            .build())
+        .build();
 
-    ImmutablePackageFinderRule tools_windows_x64_rule = PackageFinderRule.builder()
-          .match(match(BitSize.B64).andThen(windows64MongoVersions))
-          .finder(UrlTemplatePackageResolver.builder()
-              .fileSet(fileSet)
-              .archiveType(archiveType)
-              .urlTemplate("/tools/db/mongodb-database-tools-windows-x86_64-{tools.version}.zip")
-              .build())
-          .build();
+    PackageFinderRule rule_Windows_X86_B64_3 = PackageFinderRule.builder()
+        .match(match(CommonOS.Windows, BitSize.B64, CPUType.X86)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("3.4.9", "3.4.24"),
+                  VersionRange.of("3.4.0", "3.4.7"),
+                  VersionRange.of("3.2.0", "3.2.22"),
+                  VersionRange.of("3.0.0", "3.0.15"),
+                  VersionRange.of("2.6.0", "2.6.12"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.ZIP)
+            .urlTemplate("/win32/mongodb-win32-x86_64-2008plus-{version}.zip")
+            .build())
+        .build();
 
-      ImmutablePackageFinderRule windows_x64_2008ssl_rule = PackageFinderRule.builder()
-            .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                    VersionRange.of("4.0.0", "4.0.28"),
-                    VersionRange.of("3.6.0", "3.6.23"),
-                    VersionRange.of("3.4.9", "3.4.24"),
-                    VersionRange.of("3.4.0", "3.4.7"),
-                    VersionRange.of("3.2.0", "3.2.22"),
-                    VersionRange.of("3.0.0", "3.0.15")
-            )))
-            .finder(UrlTemplatePackageResolver.builder()
-                    .fileSet(fileSet)
-                    .archiveType(archiveType)
-                    .urlTemplate("/win32/mongodb-win32-x86_64-2008plus-ssl-{version}.zip")
-                    .build())
-            .build();
+    PackageFinderRule rule_Windows_X86_B64_4 = PackageFinderRule.builder()
+        .match(match(CommonOS.Windows, BitSize.B64, CPUType.X86)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("3.4.9", "3.4.24"),
+                  VersionRange.of("3.4.0", "3.4.7"),
+                  VersionRange.of("3.2.0", "3.2.22"),
+                  VersionRange.of("3.0.0", "3.0.15"),
+                  VersionRange.of("2.6.0", "2.6.12"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.ZIP)
+            .urlTemplate("/win32/mongodb-win32-x86_64-{version}.zip")
+            .build())
+        .build();
 
-    ImmutablePackageFinderRule windows_x64_2012ssl_rule = PackageFinderRule.builder()
-            .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                    VersionRange.of("4.2.22", "4.2.24"),
-                    VersionRange.of("4.2.18", "4.2.19"),
-                    VersionRange.of("4.2.5", "4.2.16"),
-                    VersionRange.of("4.2.0", "4.2.3")
-            )))
-            .finder(UrlTemplatePackageResolver.builder()
-                    .fileSet(fileSet)
-                    .archiveType(archiveType)
-                    .urlTemplate("/win32/mongodb-win32-x86_64-2012plus-{version}.zip")
-                    .build())
-            .build();
-
-    ImmutablePackageFinderRule win32rule = PackageFinderRule.builder()
-            .match(match(BitSize.B32).andThen(DistributionMatch.any(
-                            VersionRange.of("3.2.0", "3.2.22"),
-                            VersionRange.of("3.0.0", "3.0.15"),
-                            VersionRange.of("2.6.0", "2.6.12")
-                    )))
-            .finder(UrlTemplatePackageResolver.builder()
-                    .fileSet(fileSet)
-                    .archiveType(archiveType)
-                    .urlTemplate("/win32/mongodb-win32-i386-{version}.zip")
-                    .build())
-            .build();
-
-    ImmutablePackageFinderRule hiddenLegacyWin32rule = PackageFinderRule.builder()
-            .match(match(BitSize.B32).andThen(DistributionMatch.any(
-                            VersionRange.of("3.3.1", "3.3.1"),
-                            VersionRange.of("3.5.5", "3.5.5")
-                    )))
-            .finder(UrlTemplatePackageResolver.builder()
-                    .fileSet(fileSet)
-                    .archiveType(archiveType)
-                    .urlTemplate("/win32/mongodb-win32-i386-{version}.zip")
-                    .build())
-            .build();
-
-    ImmutablePackageFinderRule win_x86_64 = PackageFinderRule.builder()
-            .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                    VersionRange.of("3.4.9", "3.4.24"),
-                    VersionRange.of("3.4.0", "3.4.7"),
-                    VersionRange.of("3.2.0", "3.2.22"),
-                    VersionRange.of("3.0.0", "3.0.15"),
-                    VersionRange.of("2.6.0", "2.6.12")
-            )))
-            .finder(UrlTemplatePackageResolver.builder()
-                    .fileSet(fileSet)
-                    .archiveType(archiveType)
-                    .urlTemplate("/win32/mongodb-win32-x86_64-{version}.zip")
-                    .build())
-            .build();
-
-    ImmutablePackageFinderRule hiddenLegacyWin_x86_64 = PackageFinderRule.builder()
-            .match(match(BitSize.B64).andThen(DistributionMatch.any(
-                    VersionRange.of("3.3.1", "3.3.1"),
-                    VersionRange.of("3.5.5", "3.5.5")
-            )))
-            .finder(UrlTemplatePackageResolver.builder()
-                    .fileSet(fileSet)
-                    .archiveType(archiveType)
-                    .urlTemplate("/win32/mongodb-win32-x86_64-{version}.zip")
-                    .build())
-            .build();
-
-    ImmutablePackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
-            .match(PlatformMatch.withOs(CommonOS.Windows))
-            .finder(PackageFinder.failWithMessage(distribution -> "windows distribution not supported: " + distribution))
-            .build();
-
-      switch (command) {
-          case MongoDump:
-          case MongoImport:
-          case MongoRestore:
-              return PackageFinderRules.empty()
-                  .withRules(
-                      tools_windows_x64_rule,
-                      win_x86_64,
-                      windows_x64_rule,
-                      windows_x64_2012ssl_rule,
-                      windows_x64_2008ssl_rule,
-                      windowsServer_2008_rule,
-                      hiddenLegacyWin_x86_64,
-                      win32rule,
-                      hiddenLegacyWin32rule,
-                      failIfNothingMatches
-                  );
-      }
+ 
+    PackageFinderRule tools_Windows_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Windows, BitSize.B64, CPUType.X86)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.6.0", "100.6.1"),
+                  ToolVersionRange.of("100.5.0", "100.5.4"),
+                  ToolVersionRange.of("100.4.0", "100.4.1"),
+                  ToolVersionRange.of("100.3.0", "100.3.1"),
+                  ToolVersionRange.of("100.2.0", "100.2.1"),
+                  ToolVersionRange.of("100.1.0", "100.1.1"),
+                  ToolVersionRange.of("100.0.0", "100.0.2"),
+                  ToolVersionRange.of("99.0.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.ZIP)
+            .urlTemplate("/tools/db/mongodb-database-tools-windows-x86_64-{tools.version}.zip")
+            .build())
+        .build();
 
 
-      return PackageFinderRules.empty()
-            .withRules(
-                    win_x86_64,
-                    windows_x64_dev_rule, windows_x64_rule,
-                    windows_x64_2012ssl_rule,
-                    windows_x64_2008ssl_rule,
-                    windowsServer_2008_rule,
-                    hiddenLegacyWin_x86_64,
-                    win32rule,
-                    hiddenLegacyWin32rule,
-                    failIfNothingMatches
+    PackageFinderRule rule_Windows_X86_B32 = PackageFinderRule.builder()
+        .match(match(CommonOS.Windows, BitSize.B32, CPUType.X86)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("3.5.5"),
+                  VersionRange.of("3.3.1"),
+                  VersionRange.of("3.2.0", "3.2.22"),
+                  VersionRange.of("3.0.0", "3.0.15"),
+                  VersionRange.of("2.6.0", "2.6.12"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.ZIP)
+            .urlTemplate("/win32/mongodb-win32-i386-{version}.zip")
+            .build())
+        .build();
+
+ 
+    switch (command) {
+      case MongoDump:
+      case MongoImport:
+      case MongoRestore:
+        return PackageFinderRules.empty()
+            .withAdditionalRules(
+                tools_Windows_X86_B64
+            )
+            .withAdditionalRules(
+                rule_Windows_X86_B64_1, rule_Windows_X86_B64_2, rule_Windows_X86_B64_3, rule_Windows_X86_B64_4
+            )
+            .withAdditionalRules(
+                rule_Windows_X86_B32
             );
+      default:
+        return PackageFinderRules.empty()
+            .withAdditionalRules(
+                devRule_Windows_X86_B64, rule_Windows_X86_B64, rule_Windows_X86_B64_1, rule_Windows_X86_B64_2, rule_Windows_X86_B64_3, rule_Windows_X86_B64_4
+            ).withAdditionalRules(
+                rule_Windows_X86_B32
+            );
+    }
   }
-
 }

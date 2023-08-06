@@ -29,7 +29,7 @@ import de.flapdoodle.os.linux.LinuxMintVersion;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class LinuxMintPackageResolverTest {
+class LinuxMintPackageFinderTest {
   /*
     Ubuntu 18.04 x64
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz
@@ -56,14 +56,14 @@ class LinuxMintPackageResolverTest {
 
   /*
     Ubuntu 22.04 x64
-    https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz
-    6.0.1, 5.0.12, 5.0.5 -> 5.0.6, 5.0.0 -> 5.0.2, 4.4.16, 4.4.13, 4.4.11, 4.4.0 -> 4.4.9
+    https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz
+    6.0.8, 6.0.4 -> 6.0.6
   */
   @ParameterizedTest
-  @ValueSource(strings = {"6.0.1", " 5.0.12", " 5.0.5 -> 5.0.6", " 5.0.0 -> 5.0.2", " 4.4.16", " 4.4.13", " 4.4.11", " 4.4.0 -> 4.4.9"})
+  @ValueSource(strings = {"6.0.8", "6.0.4 -> 6.0.6"})
   public void ubuntu22x64(String version) {
     assertThat(linuxWith(CommonArchitecture.X86_64, LinuxMintVersion.LINUX_MINT_21_0), version)
-      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
   }
 
   private static Platform linuxWith(CommonArchitecture architecture, de.flapdoodle.os.Version version) {
@@ -76,7 +76,7 @@ class LinuxMintPackageResolverTest {
 
   private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
     return HtmlParserResultTester.with(
-            new LinuxMintPackageResolver(new UbuntuPackageResolver(Command.Mongo)),
+            new LinuxMintPackageFinder(new UbuntuPackageFinder(Command.Mongo)),
             version -> Distribution.of(Version.of(version), platform),
             versionList);
   }

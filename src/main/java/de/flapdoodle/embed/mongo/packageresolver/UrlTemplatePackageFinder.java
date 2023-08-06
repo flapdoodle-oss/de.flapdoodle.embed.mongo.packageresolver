@@ -30,7 +30,7 @@ import org.immutables.value.Value;
 import java.util.Optional;
 
 @Value.Immutable
-public abstract class UrlTemplatePackageResolver implements PackageFinder, HasExplanation {
+public abstract class UrlTemplatePackageFinder implements PackageFinder, HasExplanation {
 
   protected abstract ArchiveType archiveType();
   protected abstract FileSet fileSet();
@@ -71,7 +71,7 @@ public abstract class UrlTemplatePackageResolver implements PackageFinder, HasEx
     return withOrWithoutToolsVersion;
   }
 
-  public static ImmutableUrlTemplatePackageResolver.Builder builder() {
-    return ImmutableUrlTemplatePackageResolver.builder();
+  public static ImmutableUrlTemplatePackageFinder.Builder builder() {
+    return ImmutableUrlTemplatePackageFinder.builder();
   }
 }

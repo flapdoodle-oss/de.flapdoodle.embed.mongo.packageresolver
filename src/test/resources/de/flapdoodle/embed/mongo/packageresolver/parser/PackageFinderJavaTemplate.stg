@@ -1,0 +1,136 @@
+class(it, package) ::= <<
+/**
+ * Copyright (C) 2011
+ *   Michael Mosmann \<michael@mosmann.de>
+ *   Martin Jöhren \<m.joehren@googlemail.com>
+ *
+ * with contributions from
+ * 	konstantin-ba@github,Archimedes Trajano	(trajano@github)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package de.flapdoodle.embed.mongo.packageresolver<if(it.package.is)>.<it.package.get><endif>;
+
+import de.flapdoodle.embed.mongo.packageresolver.*;
+import de.flapdoodle.embed.process.config.store.FileSet;
+import de.flapdoodle.embed.process.config.store.FileType;
+import de.flapdoodle.embed.process.config.store.Package;
+import de.flapdoodle.embed.process.distribution.ArchiveType;
+import de.flapdoodle.embed.process.distribution.Distribution;
+import de.flapdoodle.os.BitSize;
+import de.flapdoodle.os.CPUType;
+import de.flapdoodle.os.CommonOS;
+import de.flapdoodle.os.linux.*;
+<it.imports:{ import |
+import <import>;
+}>
+
+import java.util.Optional;
+
+/**
+* this file is generated, please don't touch
+*/
+public class <it.name> extends AbstractPackageFinder {
+
+  public <it.name>(final Command command) {
+    super(command, rules(command));
+  }
+
+  private static FileSet fileSetOf(Command command) {
+    return FileSet.builder()
+            .addEntry(FileType.Executable, command.commandName()<if(it.executableExtension)> + "<it.executableExtension>"<endif>)
+            .build();
+  }
+
+  private static ImmutablePackageFinderRules rules(final Command command) {
+    FileSet fileSet = fileSetOf(command);
+        
+<package.entries:{ pair | <pair.urlVersions.entries:{ urlAndVersions |
+<if(urlAndVersions.versions.hasDevVersions)>
+    PackageFinderRule devRule_<pair.platform.variableName><urlAndVersions.index> = PackageFinderRule.builder()
+        .match(<matchPackage(pair.platform)>
+            .andThen(
+                <versionRanges(urlAndVersions.versions.devVersions)>
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.<urlAndVersions.archiveType>)
+            .urlTemplate("<urlAndVersions.url>")
+            .isDevVersion(true)
+            .build())
+        .build();
+
+<endif>
+<if(urlAndVersions.versions.hasVersions)>
+    PackageFinderRule rule_<pair.platform.variableName><urlAndVersions.index> = PackageFinderRule.builder()
+        .match(<matchPackage(pair.platform)>
+            .andThen(
+                <versionRanges(urlAndVersions.versions.versions)>
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.<urlAndVersions.archiveType>)
+            .urlTemplate("<urlAndVersions.url>")
+            .build())
+        .build();
+            
+<endif>
+}> <pair.urlVersions.toolEntries:{ toolsUrlAndVersions |
+<if(toolsUrlAndVersions.versions.hasVersions)>
+    PackageFinderRule tools_<pair.platform.variableName><toolsUrlAndVersions.index> = PackageFinderRule.builder()
+        .match(<matchPackage(pair.platform)>
+            .andThen(
+                <toolsVersionRanges(toolsUrlAndVersions.versions.versions)>
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.<toolsUrlAndVersions.archiveType>)
+            .urlTemplate("<toolsUrlAndVersions.url>")
+            .build())
+        .build();
+            
+<endif>
+}>}>
+    switch (command) {
+      case MongoDump:
+      case MongoImport:
+      case MongoRestore:
+        return PackageFinderRules.empty()
+<package.entries:{ pair | <if(pair.urlVersions.toolEntries)>
+            .withAdditionalRules(
+                <pair.urlVersions.toolEntries:{ urlAndVersions | <if(urlAndVersions.versions.hasVersions)>tools_<pair.platform.variableName><urlAndVersions.index><endif>}; separator=", ">
+            )<endif>}>
+<package.entries:{ pair | <if(pair.urlVersions.toolsBundled)>
+            .withAdditionalRules(
+                <pair.urlVersions.entries:{ urlAndVersions | <if(urlAndVersions.
+                versions.toolsBundled)><if(urlAndVersions.versions.hasDevVersions)>devRule_<pair.platform.variableName><urlAndVersions.index><endif><if(urlAndVersions.versions.hasDevVersions && urlAndVersions.versions.hasVersions)>, <endif><if(urlAndVersions.versions.hasVersions)>rule_<pair.platform.variableName><urlAndVersions.index><endif><endif>}; separator=", ">
+            )<endif>}>;
+      default:
+        return PackageFinderRules.empty()
+<package.entries:{ pair |
+            .withAdditionalRules(
+                <pair.urlVersions.entries:{ urlAndVersions | <if(urlAndVersions.versions.hasDevVersions)>devRule_<pair.platform.variableName><urlAndVersions.index><endif><if(urlAndVersions.versions.hasDevVersions && urlAndVersions.versions.hasVersions)>, <endif><if(urlAndVersions.versions.hasVersions)>rule_<pair.platform.variableName><urlAndVersions.index><endif>}; separator=", ">
+            )}>;
+    }
+  }
+}
+>>
+
+matchPackage(package) ::= <<match(CommonOS.<package.os>, BitSize.<package.bitSize>, CPUType.<package.cpuType><package.versions:{ version |, <version.className>.<version>}>)>>
+versionRanges(versions) ::= <<DistributionMatch.any(
+  <versions: {version | <versionRange(version)>}; separator=",\n">)>>
+versionRange(version) ::= <<VersionRange.of(<if(version.isExact)>"<version.min>"<else>"<version.min>", "<version.max>"<endif>)>>
+toolsVersionRanges(versions) ::= <<DistributionMatch.any(
+  <versions: {version | <toolsVersionRange(version)>}; separator=",\n">)>>
+toolsVersionRange(version) ::= <<ToolVersionRange.of(<if(version.isExact)>"<version.min>"<else>"<version.min>", "<version.max>"<endif>)>>
+

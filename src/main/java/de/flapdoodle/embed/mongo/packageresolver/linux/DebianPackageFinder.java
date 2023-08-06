@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.flapdoodle.embed.mongo.packageresolver;
+package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.FileSet;
@@ -30,15 +30,17 @@ import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.linux.*;
+import de.flapdoodle.os.linux.DebianVersion;
+
 
 import java.util.Optional;
 
 /**
 * this file is generated, please don't touch
 */
-public class OSXPackageFinder extends AbstractPackageFinder {
+public class DebianPackageFinder extends AbstractPackageFinder {
 
-  public OSXPackageFinder(final Command command) {
+  public DebianPackageFinder(final Command command) {
     super(command, rules(command));
   }
 
@@ -51,8 +53,8 @@ public class OSXPackageFinder extends AbstractPackageFinder {
   private static ImmutablePackageFinderRules rules(final Command command) {
     FileSet fileSet = fileSetOf(command);
 
-    PackageFinderRule devRule_OS_X_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
+    PackageFinderRule devRule_DEBIAN_11_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
@@ -63,45 +65,48 @@ public class OSXPackageFinder extends AbstractPackageFinder {
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
-            .urlTemplate("/osx/mongodb-macos-arm64-{version}.tgz")
+            .urlTemplate("/linux/mongodb-linux-x86_64-debian11-{version}.tgz")
             .isDevVersion(true)
             .build())
         .build();
 
-    PackageFinderRule rule_OS_X_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
+    PackageFinderRule rule_DEBIAN_11_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.1", "6.0.6"))
+                  VersionRange.of("6.0.1", "6.0.6"),
+                  VersionRange.of("5.0.18", "5.0.19"),
+                  VersionRange.of("5.0.12", "5.0.15"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
-            .urlTemplate("/osx/mongodb-macos-arm64-{version}.tgz")
+            .urlTemplate("/linux/mongodb-linux-x86_64-debian11-{version}.tgz")
             .build())
         .build();
 
  
-    PackageFinderRule tools_OS_X_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
+    PackageFinderRule tools_DEBIAN_11_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.7.1", "100.7.4"))
+                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.6.0", "100.6.1"),
+                  ToolVersionRange.of("100.5.3", "100.5.4"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
-            .archiveType(ArchiveType.ZIP)
-            .urlTemplate("/tools/db/mongodb-database-tools-macos-arm64-{tools.version}.zip")
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-debian11-x86_64-{tools.version}.tgz")
             .build())
         .build();
 
 
-    PackageFinderRule devRule_OS_X_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
+    PackageFinderRule devRule_DEBIAN_10_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
                   VersionRange.of("7.0.0-rc1"),
                   VersionRange.of("6.3.1", "6.3.2"))
@@ -109,13 +114,13 @@ public class OSXPackageFinder extends AbstractPackageFinder {
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
-            .urlTemplate("/osx/mongodb-macos-x86_64-{version}.tgz")
+            .urlTemplate("/linux/mongodb-linux-x86_64-debian10-{version}.tgz")
             .isDevVersion(true)
             .build())
         .build();
 
-    PackageFinderRule rule_OS_X_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
+    PackageFinderRule rule_DEBIAN_10_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("6.0.8"),
@@ -132,53 +137,18 @@ public class OSXPackageFinder extends AbstractPackageFinder {
                   VersionRange.of("4.2.22", "4.2.24"),
                   VersionRange.of("4.2.18", "4.2.19"),
                   VersionRange.of("4.2.5", "4.2.16"),
-                  VersionRange.of("4.2.0", "4.2.3"))
+                  VersionRange.of("4.2.1", "4.2.3"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
-            .urlTemplate("/osx/mongodb-macos-x86_64-{version}.tgz")
-            .build())
-        .build();
-
-    PackageFinderRule rule_OS_X_X86_B64_1 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
-            .andThen(
-                DistributionMatch.any(
-                  VersionRange.of("4.0.0", "4.0.28"),
-                  VersionRange.of("3.6.0", "3.6.23"),
-                  VersionRange.of("3.4.9", "3.4.24"),
-                  VersionRange.of("3.4.0", "3.4.7"),
-                  VersionRange.of("3.2.0", "3.2.22"),
-                  VersionRange.of("3.0.4", "3.0.15"))
-        ))
-        .finder(UrlTemplatePackageFinder.builder()
-            .fileSet(fileSet)
-            .archiveType(ArchiveType.TGZ)
-            .urlTemplate("/osx/mongodb-osx-ssl-x86_64-{version}.tgz")
-            .build())
-        .build();
-
-    PackageFinderRule rule_OS_X_X86_B64_2 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
-            .andThen(
-                DistributionMatch.any(
-                  VersionRange.of("3.4.9", "3.4.24"),
-                  VersionRange.of("3.4.0", "3.4.7"),
-                  VersionRange.of("3.2.0", "3.2.22"),
-                  VersionRange.of("3.0.0", "3.0.15"),
-                  VersionRange.of("2.6.0", "2.6.12"))
-        ))
-        .finder(UrlTemplatePackageFinder.builder()
-            .fileSet(fileSet)
-            .archiveType(ArchiveType.TGZ)
-            .urlTemplate("/osx/mongodb-osx-x86_64-{version}.tgz")
+            .urlTemplate("/linux/mongodb-linux-x86_64-debian10-{version}.tgz")
             .build())
         .build();
 
  
-    PackageFinderRule tools_OS_X_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
+    PackageFinderRule tools_DEBIAN_10_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.7.0", "100.7.4"),
@@ -187,27 +157,64 @@ public class OSXPackageFinder extends AbstractPackageFinder {
                   ToolVersionRange.of("100.4.0", "100.4.1"),
                   ToolVersionRange.of("100.3.0", "100.3.1"),
                   ToolVersionRange.of("100.2.0", "100.2.1"),
-                  ToolVersionRange.of("100.1.0", "100.1.1"))
-        ))
-        .finder(UrlTemplatePackageFinder.builder()
-            .fileSet(fileSet)
-            .archiveType(ArchiveType.ZIP)
-            .urlTemplate("/tools/db/mongodb-database-tools-macos-x86_64-{tools.version}.zip")
-            .build())
-        .build();
-
-    PackageFinderRule tools_OS_X_X86_B64_1 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
-            .andThen(
-                DistributionMatch.any(
-                  ToolVersionRange.of("100.0.0-alpha1", "100.0.2"),
-                  ToolVersionRange.of("100.0.0"),
+                  ToolVersionRange.of("100.1.0", "100.1.1"),
+                  ToolVersionRange.of("100.0.0", "100.0.2"),
                   ToolVersionRange.of("99.0.0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
-            .urlTemplate("/tools/db/mongodb-database-tools-macos-x86_64-{tools.version}.tgz")
+            .urlTemplate("/tools/db/mongodb-database-tools-debian10-x86_64-{tools.version}.tgz")
+            .build())
+        .build();
+
+
+    PackageFinderRule rule_DEBIAN_9_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("5.0.18", "5.0.19"),
+                  VersionRange.of("5.0.12", "5.0.15"),
+                  VersionRange.of("5.0.5", "5.0.6"),
+                  VersionRange.of("5.0.0", "5.0.2"),
+                  VersionRange.of("4.4.22", "4.4.23"),
+                  VersionRange.of("4.4.16", "4.4.19"),
+                  VersionRange.of("4.4.13"),
+                  VersionRange.of("4.4.11"),
+                  VersionRange.of("4.4.0", "4.4.9"),
+                  VersionRange.of("4.2.22", "4.2.24"),
+                  VersionRange.of("4.2.18", "4.2.19"),
+                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("4.2.0", "4.2.3"),
+                  VersionRange.of("4.0.0", "4.0.28"),
+                  VersionRange.of("3.6.5", "3.6.23"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-debian92-{version}.tgz")
+            .build())
+        .build();
+
+ 
+    PackageFinderRule tools_DEBIAN_9_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.6.0", "100.6.1"),
+                  ToolVersionRange.of("100.5.0", "100.5.4"),
+                  ToolVersionRange.of("100.4.0", "100.4.1"),
+                  ToolVersionRange.of("100.3.0", "100.3.1"),
+                  ToolVersionRange.of("100.2.0", "100.2.1"),
+                  ToolVersionRange.of("100.1.0", "100.1.1"),
+                  ToolVersionRange.of("100.0.0", "100.0.2"),
+                  ToolVersionRange.of("99.0.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-debian92-x86_64-{tools.version}.tgz")
             .build())
         .build();
 
@@ -218,20 +225,28 @@ public class OSXPackageFinder extends AbstractPackageFinder {
       case MongoRestore:
         return PackageFinderRules.empty()
             .withAdditionalRules(
-                tools_OS_X_ARM_B64
+                tools_DEBIAN_11_X86_B64
             )
             .withAdditionalRules(
-                tools_OS_X_X86_B64, tools_OS_X_X86_B64_1
+                tools_DEBIAN_10_X86_B64
             )
             .withAdditionalRules(
-                devRule_OS_X_X86_B64, rule_OS_X_X86_B64, rule_OS_X_X86_B64_1, rule_OS_X_X86_B64_2
+                tools_DEBIAN_9_X86_B64
+            )
+            .withAdditionalRules(
+                devRule_DEBIAN_10_X86_B64, rule_DEBIAN_10_X86_B64
+            )
+            .withAdditionalRules(
+                rule_DEBIAN_9_X86_B64
             );
       default:
         return PackageFinderRules.empty()
             .withAdditionalRules(
-                devRule_OS_X_ARM_B64, rule_OS_X_ARM_B64
+                devRule_DEBIAN_11_X86_B64, rule_DEBIAN_11_X86_B64
             ).withAdditionalRules(
-                devRule_OS_X_X86_B64, rule_OS_X_X86_B64, rule_OS_X_X86_B64_1, rule_OS_X_X86_B64_2
+                devRule_DEBIAN_10_X86_B64, rule_DEBIAN_10_X86_B64
+            ).withAdditionalRules(
+                rule_DEBIAN_9_X86_B64
             );
     }
   }
