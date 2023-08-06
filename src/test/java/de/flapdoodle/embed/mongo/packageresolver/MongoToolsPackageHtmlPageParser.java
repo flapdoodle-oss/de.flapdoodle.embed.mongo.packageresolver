@@ -23,6 +23,10 @@ package de.flapdoodle.embed.mongo.packageresolver;
 import java.io.IOException;
 import java.util.Set;
 
+@Deprecated
+/**
+ * @see MongoPackageParser
+ */
 public class MongoToolsPackageHtmlPageParser {
 		public static void main(String[] args) throws IOException {
 			MongoPackages.ParsedVersions versions = MongoPackages.allToolsVersions();
