@@ -1,12 +1,11 @@
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
 import com.google.common.collect.Maps;
+import de.flapdoodle.types.Pair;
 import org.immutables.value.Value;
 
-import java.util.Comparator;
-import java.util.Map;
-import java.util.Optional;
-import java.util.SortedMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Value.Immutable
 public abstract class PackagePlatformUrlVersions {
@@ -35,7 +34,13 @@ public abstract class PackagePlatformUrlVersions {
 			urlVersions.dump();
 		});
 	}
-	
+
+	public List<Pair<PackagePlatform, UrlVersions>> entries() {
+		return map().entrySet().stream()
+			.map(it -> Pair.of(it.getKey(), it.getValue()))
+			.collect(Collectors.toList());
+	}
+
 	public static ImmutablePackagePlatformUrlVersions of(PackageOsAndVersionType osAndVersionType) {
 		return ImmutablePackagePlatformUrlVersions.of(osAndVersionType);
 	}

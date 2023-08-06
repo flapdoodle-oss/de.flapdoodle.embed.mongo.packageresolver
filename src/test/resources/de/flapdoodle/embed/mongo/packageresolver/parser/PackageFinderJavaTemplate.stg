@@ -13,5 +13,49 @@ import de.flapdoodle.os.CommonOS;
 import java.util.Optional;
 !>
 
-public class <it.name> {
-}>>
+public class <it.name> extends AbstractPackageFinder {
+
+	public <it.name>(final Command command) {
+		super(command, rules(command));
+	}
+
+	private static ImmutablePackageFinderRules rules(final Command command) {
+<package.entries:{ pair |
+<pair.second.entries:{ urlAndVersions |
+<if(urlAndVersions.versions.hasDevVersions)>
+        PackageFinderRule devRule_<pair.first.variableName><urlAndVersions.index> = PackageFinderRule.builder()
+            .match(<matchPackage(pair.first)>
+                .andThen(
+                    <versionRanges(urlAndVersions.versions.devVersions)>
+            ))
+            .finder(UrlTemplatePackageFinder.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.<urlAndVersions.archiveType>)
+				.urlTemplate("<urlAndVersions.url>")
+				.isDevVersion(true)
+				.build())
+			.build();
+
+<endif>
+        PackageFinderRule rule_<pair.first.variableName><urlAndVersions.index> = PackageFinderRule.builder()
+            .match(<matchPackage(pair.first)>
+                .andThen(
+                    <versionRanges(urlAndVersions.versions.versions)>
+            ))
+            .finder(UrlTemplatePackageFinder.builder()
+				.fileSet(fileSet)
+				.archiveType(ArchiveType.<urlAndVersions.archiveType>)
+				.urlTemplate("<urlAndVersions.url>")
+				.build())
+			.build();
+
+
+}>
+}>
+	}
+}
+>>
+
+matchPackage(package) ::= <<match(BitSize.<package.bitSize>, CPUType.<package.cpuType><package.versions:{ version |, <version.className>.<version>}>)>>
+versionRanges(versions) ::= << <versions: {version | <versionRange(version)>}; separator=",\n"> >>
+versionRange(version) ::= <<VersionRange.of(<if(version.isExact)>"<version.min>"<else>"<version.min>", "<version.max>"<endif>)>>

@@ -2,8 +2,11 @@ package de.flapdoodle.embed.mongo.packageresolver.parser;
 
 import com.google.common.collect.Multimap;
 import de.flapdoodle.embed.mongo.packageresolver.MongoPackages;
+import de.flapdoodle.types.Pair;
 import org.immutables.value.Value;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Value.Immutable
@@ -35,6 +38,13 @@ public abstract class UrlVersions {
 			}
 
 		});
+	}
+
+	@Value.Auxiliary
+	public List<Pair<String, PackageVersions>> entries() {
+		return map().asMap().entrySet().stream()
+			.map(it -> Pair.of(it.getKey(), PackageVersions.of(it.getValue())))
+			.collect(Collectors.toList());
 	}
 
 	public static ImmutableUrlVersions empty() {

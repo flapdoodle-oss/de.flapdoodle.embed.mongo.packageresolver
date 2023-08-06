@@ -26,6 +26,26 @@ public abstract class PackageOsAndVersionType implements Comparable<PackageOsAnd
 		return COMPARATOR.compare(this, other);
 	}
 
+	@Value.Auxiliary
+	public Optional<String> packageName() {
+		String osName = os().name();
+		Optional<String> packageName= Optional.empty();
+		if (!os().distributions().isEmpty()) {
+			packageName=Optional.of(osName.toLowerCase());
+		}
+		return packageName;
+	};
+
+	@Value.Auxiliary
+	public String className() {
+		String osName = os().name();
+		String classBaseName = osName.replace("_","");
+		if (version().isPresent()) {
+			classBaseName=version().get().getSimpleName().replace("Version","");
+		}
+		return classBaseName+"PackageFinder";
+	}
+
 	public static PackageOsAndVersionType of(PackagePlatform platform) {
 		return ImmutablePackageOsAndVersionType.builder()
 			.os(platform.os())

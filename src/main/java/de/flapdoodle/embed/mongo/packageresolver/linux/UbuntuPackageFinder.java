@@ -36,11 +36,6 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
     super(command, rules(command));
   }
 
-	private static PlatformMatch match(BitSize bitSize, CPUType cpuType, UbuntuVersion... versions) {
-		return PlatformMatch.withOs(CommonOS.Linux).withBitSize(bitSize).withCpuType(cpuType)
-			.withVersion(versions);
-	}
-
   private static ImmutablePackageFinderRules rules(Command command) {
     ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 

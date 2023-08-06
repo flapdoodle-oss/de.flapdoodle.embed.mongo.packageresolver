@@ -6,10 +6,12 @@ import de.flapdoodle.os.linux.CentosVersion;
 import de.flapdoodle.os.linux.DebianVersion;
 import de.flapdoodle.os.linux.UbuntuVersion;
 import de.flapdoodle.types.Either;
+import org.checkerframework.checker.units.qual.A;
 import org.immutables.value.Value;
 
-import java.util.Comparator;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Value.Immutable
 public abstract class PackagePlatform implements Comparable<PackagePlatform> {
@@ -31,20 +33,43 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 		return builder().os(os).build();
 	}
 
+	@Value.Auxiliary
+	public List<Version> versions() {
+		if (version().isPresent()) {
+			return upgradeableVersions(version().get());
+		}
+		return Collections.emptyList();
+	}
+
 	@Override
 	public int compareTo(PackagePlatform other) {
 		return COMPARATOR.compare(this, other);
 	}
 
-	public static Comparator<PackagePlatform> versionByOrdinalOrNameComparator() {
-		return Comparator.comparing((PackagePlatform p) -> {
-			Optional<Version> version = p.version();
-			return version.map(v -> v instanceof VersionWithPriority ? ((VersionWithPriority) v).priority() : 0)
-				.orElse(0);
-		}).thenComparing((PackagePlatform p) -> {
-			Optional<Version> version = p.version();
-			return version.map(v -> v instanceof Enum ? ((Enum<?>) v).ordinal() : 0).orElse(0);
-		}).thenComparing((PackagePlatform p) -> p.version().map(Version::name).orElse(""));
+	private static List<Version> upgradeableVersions(Version version) {
+		if (version instanceof UbuntuVersion) {
+			return upgradeableUbuntuVersions((UbuntuVersion) version);
+		}
+		return Collections.singletonList(version);
+	}
+
+	private static boolean hasLibCrypt1_1(UbuntuVersion version) {
+		switch (version) {
+			case Ubuntu_23_04:
+			case Ubuntu_23_10:
+			case Ubuntu_22_04:
+			case Ubuntu_22_10:
+				return false;
+		}
+		return true;
+	}
+
+	private static List<Version> upgradeableUbuntuVersions(UbuntuVersion version) {
+		List<UbuntuVersion> all = Arrays.asList(UbuntuVersion.values());
+
+		return all.stream()
+			.filter(it -> it.ordinal()>=version.ordinal() && (hasLibCrypt1_1(version) == hasLibCrypt1_1(it)))
+			.collect(Collectors.toList());
 	}
 
 	public static Either<PackagePlatform, String> parse(String name) {

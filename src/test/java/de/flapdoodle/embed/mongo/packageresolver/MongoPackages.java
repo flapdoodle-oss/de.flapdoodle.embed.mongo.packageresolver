@@ -311,7 +311,8 @@ public abstract class MongoPackages {
 		}
 		return ranges;
 	}
-	static String asString(NumericVersion version) {
+	
+	public static String asString(NumericVersion version) {
 		if (version.build().isPresent()) {
 			return version.major() + "." + version.minor() + "." + version.patch()+"-"+version.build().get();
 		}

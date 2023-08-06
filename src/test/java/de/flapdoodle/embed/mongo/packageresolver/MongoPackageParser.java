@@ -23,7 +23,9 @@ public class MongoPackageParser {
 			for (MongoPackages.ParsedDist d : v.dists) {
 				Either<PackagePlatform, String> result = PackagePlatform.parse(d.name);
 				if (result.isLeft()) {
-					String url = d.singleUrl().replace(v.version, "{}");
+					String url = d.singleUrl()
+						.replace(v.version, "{version}")
+						.replace("https://fastdl.mongodb.org","");
 					tree = tree.add(result.left(), v.version, v.isDevVersion, url);
 				} else {
 					tree = tree.skip(result.right());

@@ -27,13 +27,18 @@ import org.immutables.value.Value;
 @Value.Immutable
 public abstract class VersionRange implements DistributionMatch {
   @Value.Parameter
-  abstract NumericVersion min();
+  public abstract NumericVersion min();
   @Value.Parameter
-  abstract NumericVersion max();
+  public abstract NumericVersion max();
 
   @Value.Check
   protected void check() {
     if (min().compareTo(max())>0) throw new IllegalArgumentException(min()+" > "+max());
+  }
+
+  @Value.Auxiliary
+  public boolean isExact() {
+    return min().isEqual(max());
   }
 
   @Override
