@@ -118,7 +118,7 @@ public class <it.name> extends AbstractPackageFinder {
 }
 >>
 
-matchPackage(package) ::= <<match(BitSize.<package.bitSize>, CPUType.<package.cpuType><package.versions:{ version |, <version.className>.<version>}>)>>
+matchPackage(package) ::= <<match(CommonOS.<package.os>, BitSize.<package.bitSize>, CPUType.<package.cpuType><package.versions:{ version |, <version.className>.<version>}>)>>
 versionRanges(versions) ::= <<DistributionMatch.any(
   <versions: {version | <versionRange(version)>}; separator=",\n">)>>
 versionRange(version) ::= <<VersionRange.of(<if(version.isExact)>"<version.min>"<else>"<version.min>", "<version.max>"<endif>)>>

@@ -3,6 +3,7 @@ package de.flapdoodle.embed.mongo.packageresolver.parser;
 import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.OS;
 import de.flapdoodle.os.Version;
+import de.flapdoodle.os.linux.CentosVersion;
 import org.immutables.value.Value;
 
 import java.util.*;
@@ -45,6 +46,9 @@ public abstract class PackageOsAndVersionType implements Comparable<PackageOsAnd
 		}
 		if (version().isPresent()) {
 			classBaseName=version().get().getSimpleName().replace("Version","");
+			if (version().get()== CentosVersion.class) {
+				classBaseName="CentosRedhat";
+			}
 		}
 		return classBaseName+"PackageFinder";
 	}

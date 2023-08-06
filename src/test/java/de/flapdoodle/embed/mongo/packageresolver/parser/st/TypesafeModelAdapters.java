@@ -117,6 +117,8 @@ public class TypesafeModelAdapters {
 					return it.cpuType();
 				case "versions":
 					return it.versions();
+				case "os":
+					return it.os().name();
 			}
 			throw new IllegalArgumentException("unknown property: '" + name + "'");
 		});
