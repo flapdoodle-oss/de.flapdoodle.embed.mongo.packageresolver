@@ -166,7 +166,7 @@ public class MongoPackageHtmlPageParser {
 				String url = entry.url();
 				url=url.replace("https://fastdl.mongodb.org","");
 
-				PackageFinderRule releaseRule = PackageFinderRule.of(parent.andThen(match), UrlTemplatePackageResolver.builder()
+				PackageFinderRule releaseRule = PackageFinderRule.of(parent.andThen(match), UrlTemplatePackageFinder.builder()
 					.urlTemplate(url)
 					.fileSet(FileSet.builder()
 						.addEntry(FileType.Executable, "mongod")
@@ -182,7 +182,7 @@ public class MongoPackageHtmlPageParser {
 				if (!devVersions.isEmpty()) {
 					DistributionMatch devMatch = DistributionMatch.any(MongoPackages.compressedVersionsList(devVersions));
 
-					PackageFinderRule devRule = PackageFinderRule.of(parent.andThen(devMatch), UrlTemplatePackageResolver.builder()
+					PackageFinderRule devRule = PackageFinderRule.of(parent.andThen(devMatch), UrlTemplatePackageFinder.builder()
 						.urlTemplate(url)
 						.fileSet(FileSet.builder()
 							.addEntry(FileType.Executable, "mongod")

@@ -22,13 +22,9 @@ package de.flapdoodle.embed.mongo.packageresolver;
 
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
-import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
-import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CommonOS;
-
-import java.util.Optional;
 
 public class SolarisPackageFinder extends AbstractPackageFinder {
 
@@ -57,7 +53,7 @@ public class SolarisPackageFinder extends AbstractPackageFinder {
                             VersionRange.of("3.0.0", "3.0.15"),
                             VersionRange.of("2.6.0", "2.6.12")
                     )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/sunos5/mongodb-sunos5-x86_64-{version}.tgz")
@@ -69,7 +65,7 @@ public class SolarisPackageFinder extends AbstractPackageFinder {
                             VersionRange.of("3.3.1", "3.3.1"),
                             VersionRange.of("3.5.5", "3.5.5")
                     )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/sunos5/mongodb-sunos5-x86_64-{version}.tgz")

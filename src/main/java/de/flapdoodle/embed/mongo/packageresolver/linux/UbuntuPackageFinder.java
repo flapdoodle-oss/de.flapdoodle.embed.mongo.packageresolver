@@ -24,19 +24,15 @@ import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.ImmutableFileSet;
-import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
-import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.linux.UbuntuVersion;
 
-import java.util.Optional;
+public class UbuntuPackageFinder extends AbstractPackageFinder {
 
-public class UbuntuPackageResolver extends AbstractPackageFinder {
-
-  public UbuntuPackageResolver(Command command) {
+  public UbuntuPackageFinder(Command command) {
     super(command, rules(command));
   }
 
@@ -99,7 +95,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 				.andThen(ubuntu16xxArmMongoVersions
 				)
 			)
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-arm64-ubuntu1604-{version}.tgz")
@@ -110,7 +106,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 			.match(match(BitSize.B64, CPUType.ARM,
 				UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10
 			).andThen(ubuntu16xxArmMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-ubuntu1604-arm64-{tools.version}.tgz")
@@ -138,7 +134,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule ubuntu1604x64 = PackageFinderRule.builder()
 			.match(ubuntu16x86_64.andThen(ubuntu16xxMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-ubuntu1604-{version}.tgz")
@@ -147,7 +143,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule tools_ubuntu1604x64 = PackageFinderRule.builder()
 			.match(ubuntu16x86_64.andThen(ubuntu16xxMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-ubuntu1604-x86_64-{tools.version}.tgz")
@@ -179,7 +175,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 				.andThen(ubuntu18xxArmMongoVersions
 				)
 			)
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-aarch64-ubuntu1804-{version}.tgz")
@@ -197,7 +193,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 				.andThen(ubuntu18xxArmDevMongoVersions
 				)
 			)
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-aarch64-ubuntu1804-{version}.tgz")
@@ -207,7 +203,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 
 			PackageFinderRule tools_ubuntu1804arm = PackageFinderRule.builder()
 					.match(ubuntu18to20arm_64.andThen(ubuntu18xxArmMongoVersions))
-					.finder(UrlTemplatePackageResolver.builder()
+					.finder(UrlTemplatePackageFinder.builder()
 							.fileSet(fileSet)
 							.archiveType(ArchiveType.TGZ)
 							.urlTemplate("/tools/db/mongodb-database-tools-ubuntu1804-arm64-{tools.version}.tgz")
@@ -236,7 +232,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule ubuntu1804x64 = PackageFinderRule.builder()
 					.match(ubuntu18to23x86_64.andThen(ubuntu18xxMongoVersions))
-					.finder(UrlTemplatePackageResolver.builder()
+					.finder(UrlTemplatePackageFinder.builder()
 							.fileSet(fileSet)
 							.archiveType(ArchiveType.TGZ)
 							.urlTemplate("/linux/mongodb-linux-x86_64-ubuntu1804-{version}.tgz")
@@ -251,7 +247,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule ubuntu1804x64dev = PackageFinderRule.builder()
 			.match(ubuntu18to23x86_64.andThen(ubuntu18xxDevMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-ubuntu1804-{version}.tgz")
@@ -261,7 +257,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule tools_ubuntu1804x64 = PackageFinderRule.builder()
 					.match(ubuntu18to23x86_64.andThen(ubuntu18xxMongoVersions))
-					.finder(UrlTemplatePackageResolver.builder()
+					.finder(UrlTemplatePackageFinder.builder()
 							.fileSet(fileSet)
 							.archiveType(ArchiveType.TGZ)
 							.urlTemplate("/tools/db/mongodb-database-tools-ubuntu1804-x86_64-{tools.version}.tgz")
@@ -285,7 +281,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule ubuntu20to22arm = PackageFinderRule.builder()
 					.match(ubuntu20to23arm_64
 						.andThen(ubuntu20xxMongoVersions))
-					.finder(UrlTemplatePackageResolver.builder()
+					.finder(UrlTemplatePackageFinder.builder()
 							.fileSet(fileSet)
 							.archiveType(ArchiveType.TGZ)
 							.urlTemplate("/linux/mongodb-linux-aarch64-ubuntu2004-{version}.tgz")
@@ -302,7 +298,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule ubuntu20to22armDev = PackageFinderRule.builder()
 			.match(ubuntu20to23arm_64
 				.andThen(ubuntu20xxDevMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-aarch64-ubuntu2004-{version}.tgz")
@@ -313,7 +309,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule tools_ubuntu20to22arm = PackageFinderRule.builder()
 					.match(ubuntu20to23arm_64
 						.andThen(ubuntu20xxMongoVersions))
-					.finder(UrlTemplatePackageResolver.builder()
+					.finder(UrlTemplatePackageFinder.builder()
 							.fileSet(fileSet)
 							.archiveType(ArchiveType.TGZ)
 							.urlTemplate("/tools/db/mongodb-database-tools-ubuntu2004-arm64-{tools.version}.tgz")
@@ -323,7 +319,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule ubuntu20To22x64 = PackageFinderRule.builder()
 					.match(ubuntu20to23x86_64
 						.andThen(ubuntu20xxMongoVersions))
-					.finder(UrlTemplatePackageResolver.builder()
+					.finder(UrlTemplatePackageFinder.builder()
 							.fileSet(fileSet)
 							.archiveType(ArchiveType.TGZ)
 							.urlTemplate("/linux/mongodb-linux-x86_64-ubuntu2004-{version}.tgz")
@@ -333,7 +329,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule ubuntu20To22x64dev = PackageFinderRule.builder()
 			.match(ubuntu20to23x86_64
 				.andThen(ubuntu20xxDevMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-ubuntu2004-{version}.tgz")
@@ -344,7 +340,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule tools_ubuntu20to22x64 = PackageFinderRule.builder()
 					.match(ubuntu20to23x86_64
 						.andThen(ubuntu20xxMongoVersions))
-					.finder(UrlTemplatePackageResolver.builder()
+					.finder(UrlTemplatePackageFinder.builder()
 							.fileSet(fileSet)
 							.archiveType(ArchiveType.TGZ)
 							.urlTemplate("/tools/db/mongodb-database-tools-ubuntu2004-x86_64-{tools.version}.tgz")
@@ -359,7 +355,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule ubuntu22arm = PackageFinderRule.builder()
 			.match(ubuntu22to23arm_64
 				.andThen(ubuntu22xxMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-aarch64-ubuntu2204-{version}.tgz")
@@ -376,7 +372,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule ubuntu22armDev = PackageFinderRule.builder()
 			.match(ubuntu22to23arm_64
 				.andThen(ubuntu22xxDevMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-aarch64-ubuntu2204-{version}.tgz")
@@ -387,7 +383,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule tools_ubuntu22arm = PackageFinderRule.builder()
 			.match(ubuntu22to23arm_64
 				.andThen(ubuntu22xxMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-ubuntu2204-arm64-{tools.version}.tgz")
@@ -397,7 +393,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule ubuntu22x64 = PackageFinderRule.builder()
 			.match(ubuntu22to23x86_64
 				.andThen(ubuntu22xxMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-ubuntu2204-{version}.tgz")
@@ -407,7 +403,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule ubuntu22x64dev = PackageFinderRule.builder()
 			.match(ubuntu22to23x86_64
 				.andThen(ubuntu22xxDevMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-ubuntu2204-{version}.tgz")
@@ -418,7 +414,7 @@ public class UbuntuPackageResolver extends AbstractPackageFinder {
 		PackageFinderRule tools_ubuntu22x64 = PackageFinderRule.builder()
 			.match(ubuntu22to23x86_64
 				.andThen(ubuntu22xxMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-ubuntu2204-x86_64-{tools.version}.tgz")

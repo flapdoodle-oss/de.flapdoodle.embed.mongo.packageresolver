@@ -36,12 +36,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class LinuxMintPackageResolver implements PackageFinder, HasExplanation {
+public class LinuxMintPackageFinder implements PackageFinder, HasExplanation {
 
-	private final UbuntuPackageResolver ubuntuPackageResolver;
+	private final UbuntuPackageFinder ubuntuPackageFinder;
 
-	public LinuxMintPackageResolver(UbuntuPackageResolver ubuntuPackageResolver) {
-		this.ubuntuPackageResolver = ubuntuPackageResolver;
+	public LinuxMintPackageFinder(UbuntuPackageFinder ubuntuPackageFinder) {
+		this.ubuntuPackageFinder = ubuntuPackageFinder;
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class LinuxMintPackageResolver implements PackageFinder, HasExplanation {
 			if (currentVersion instanceof LinuxMintVersion) {
 				Distribution asUbuntudistribution = Distribution.of(distribution.version(),
 					ImmutablePlatform.copyOf(distribution.platform()).withVersion(((LinuxMintVersion) currentVersion).matchingUbuntuVersion()));
-				return ubuntuPackageResolver.packageFor(asUbuntudistribution);
+				return ubuntuPackageFinder.packageFor(asUbuntudistribution);
 			} else {
 				throw new IllegalArgumentException("Version is not a "+LinuxMintVersion.class+": "+currentVersion);
 			}

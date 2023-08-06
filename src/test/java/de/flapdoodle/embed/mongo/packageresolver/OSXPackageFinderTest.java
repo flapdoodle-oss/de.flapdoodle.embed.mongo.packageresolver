@@ -20,7 +20,6 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.embed.mongo.packageresolver.linux.UbuntuPackageResolver;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
 import de.flapdoodle.os.*;

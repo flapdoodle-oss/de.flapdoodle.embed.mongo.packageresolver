@@ -35,7 +35,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-class UbuntuPackageResolverTest {
+class UbuntuPackageFinderTest {
   /*
     Ubuntu 16.04 ARM 64
     https://fastdl.mongodb.org/linux/mongodb-linux-arm64-ubuntu1604-{}.tgz
@@ -310,7 +310,7 @@ class UbuntuPackageResolverTest {
 
   private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
     return HtmlParserResultTester.with(
-            new UbuntuPackageResolver(Command.Mongo),
+            new UbuntuPackageFinder(Command.Mongo),
             version -> Distribution.of(Version.of(version), platform),
             versionList);
   }

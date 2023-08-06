@@ -24,9 +24,7 @@ import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.ImmutableFileSet;
-import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
-import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
@@ -36,11 +34,9 @@ import de.flapdoodle.os.linux.FedoraVersion;
 import de.flapdoodle.os.linux.OracleVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
 
-import java.util.Optional;
-
-public class CentosRedhatPackageResolver extends AbstractPackageFinder {
+public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 	
-	public CentosRedhatPackageResolver(final Command command) {                          
+	public CentosRedhatPackageFinder(final Command command) {
 		super(command, rules(command));
 	}
 
@@ -97,7 +93,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule centos6 = PackageFinderRule.builder()
 			.match(centos6x86_64.andThen(centos6mongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-rhel62-{version}.tgz")
@@ -106,7 +102,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule tools_centos6 = PackageFinderRule.builder()
 			.match(centos6x86_64.andThen(centos6mongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-rhel62-x86_64-{tools.version}.tgz")
@@ -139,7 +135,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule centos7 = PackageFinderRule.builder()
 			.match(centos7x86_64.andThen(centos7MongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-rhel70-{version}.tgz")
@@ -155,7 +151,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule centos7dev = PackageFinderRule.builder()
 			.match(centos7x86_64.andThen(centos7devMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-rhel70-{version}.tgz")
@@ -165,7 +161,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule tools_centos7 = PackageFinderRule.builder()
 			.match(centos7x86_64.andThen(centos7MongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-rhel70-x86_64-{tools.version}.tgz")
@@ -196,7 +192,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule centos8 = PackageFinderRule.builder()
 			.match(centos8and9x86_64.andThen(centos8MongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-rhel80-{version}.tgz")
@@ -212,7 +208,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule centos8dev = PackageFinderRule.builder()
 			.match(centos8and9x86_64.andThen(centos8devMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-rhel80-{version}.tgz")
@@ -222,7 +218,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule tools_centos8 = PackageFinderRule.builder()
 			.match(centos8and9x86_64.andThen(centos8MongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-rhel80-x86_64-{tools.version}.tgz")
@@ -245,7 +241,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule centos8arm = PackageFinderRule.builder()
 				.match(centos8and9arm_64.andThen(centos8ArmMongoVersions))
-				.finder(UrlTemplatePackageResolver.builder()
+				.finder(UrlTemplatePackageFinder.builder()
 					.fileSet(fileSet)
 					.archiveType(ArchiveType.TGZ)
 					.urlTemplate("/linux/mongodb-linux-aarch64-rhel82-{version}.tgz")
@@ -261,7 +257,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule centos8armDev = PackageFinderRule.builder()
 				.match(centos8and9arm_64.andThen(centos8armDevMongoVersions))
-				.finder(UrlTemplatePackageResolver.builder()
+				.finder(UrlTemplatePackageFinder.builder()
 					.fileSet(fileSet)
 					.archiveType(ArchiveType.TGZ)
 					.urlTemplate("/linux/mongodb-linux-aarch64-rhel82-{version}.tgz")
@@ -271,7 +267,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule tools_centos8armDefault = PackageFinderRule.builder()
 					.match(centos8and9arm_64.andThen(centos8ArmMongoVersions))
-					.finder(UrlTemplatePackageResolver.builder()
+					.finder(UrlTemplatePackageFinder.builder()
 							.fileSet(fileSet)
 							.archiveType(ArchiveType.TGZ)
 							.urlTemplate("/tools/db/mongodb-database-tools-rhel82-arm64-{tools.version}.tgz")
@@ -284,7 +280,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 					ToolVersionRange.of("100.7.2", "100.7.4")
 				)
 			))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-rhel82-aarch64-{tools.version}.tgz")
@@ -298,7 +294,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule centos9 = PackageFinderRule.builder()
 			.match(centos9x86_64.andThen(centos9MongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-rhel90-{version}.tgz")
@@ -314,7 +310,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule centos9dev = PackageFinderRule.builder()
 			.match(centos9x86_64.andThen(centos9devMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-rhel90-{version}.tgz")
@@ -328,7 +324,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule centos9arm = PackageFinderRule.builder()
 			.match(centos9arm_64.andThen(centos9ArmMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-aarch64-rhel90-{version}.tgz")
@@ -342,7 +338,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule centos9armDev = PackageFinderRule.builder()
 			.match(centos9arm_64.andThen(centos9armDevMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-aarch64-rhel90-{version}.tgz")
@@ -352,7 +348,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule tools_centos9armDefault = PackageFinderRule.builder()
 			.match(centos9arm_64.andThen(centos9ArmMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-rhel90-arm64-{tools.version}.tgz")
@@ -365,7 +361,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 					ToolVersionRange.of("100.7.2", "100.7.4")
 				)
 			))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-rhel90-aarch64-{tools.version}.tgz")
@@ -374,7 +370,7 @@ public class CentosRedhatPackageResolver extends AbstractPackageFinder {
 
 		PackageFinderRule tools_centos9 = PackageFinderRule.builder()
 			.match(centos9x86_64.andThen(centos9MongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-rhel90-x86_64-{tools.version}.tgz")

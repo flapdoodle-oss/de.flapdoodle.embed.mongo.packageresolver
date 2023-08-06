@@ -29,7 +29,7 @@ import de.flapdoodle.os.linux.AmazonVersion;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class AmazonPackageResolverTest {
+class AmazonPackageFinderTest {
 	/*
 	 * amazon2023 ARM 64
 	 * https://fastdl.mongodb.org/linux/mongodb-linux-aarch64-amazon2023-{}.tgz
@@ -124,7 +124,7 @@ class AmazonPackageResolverTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new AmazonPackageResolver(Command.Mongo),
+			new AmazonPackageFinder(Command.Mongo),
 			version -> Distribution.of(Version.of(version), platform),
 			versionList);
 	}

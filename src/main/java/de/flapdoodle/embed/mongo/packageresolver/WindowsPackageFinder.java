@@ -22,13 +22,9 @@ package de.flapdoodle.embed.mongo.packageresolver;
 
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
-import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
-import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CommonOS;
-
-import java.util.Optional;
 
 public class WindowsPackageFinder extends AbstractPackageFinder {
 
@@ -58,7 +54,7 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
                     VersionRange.of("3.0.0", "3.0.15"),
                     VersionRange.of("2.6.0", "2.6.12")
             )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/win32/mongodb-win32-x86_64-2008plus-{version}.zip")
@@ -80,7 +76,7 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
     );
     ImmutablePackageFinderRule windows_x64_rule = PackageFinderRule.builder()
             .match(match(BitSize.B64).andThen(windows64MongoVersions))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/windows/mongodb-windows-x86_64-{version}.zip")
@@ -96,7 +92,7 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
 
     ImmutablePackageFinderRule windows_x64_dev_rule = PackageFinderRule.builder()
       .match(match(BitSize.B64).andThen(windows64devMongoVersions))
-      .finder(UrlTemplatePackageResolver.builder()
+      .finder(UrlTemplatePackageFinder.builder()
         .fileSet(fileSet)
         .archiveType(archiveType)
         .urlTemplate("/windows/mongodb-windows-x86_64-{version}.zip")
@@ -106,7 +102,7 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
 
     ImmutablePackageFinderRule tools_windows_x64_rule = PackageFinderRule.builder()
           .match(match(BitSize.B64).andThen(windows64MongoVersions))
-          .finder(UrlTemplatePackageResolver.builder()
+          .finder(UrlTemplatePackageFinder.builder()
               .fileSet(fileSet)
               .archiveType(archiveType)
               .urlTemplate("/tools/db/mongodb-database-tools-windows-x86_64-{tools.version}.zip")
@@ -122,7 +118,7 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
                     VersionRange.of("3.2.0", "3.2.22"),
                     VersionRange.of("3.0.0", "3.0.15")
             )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/win32/mongodb-win32-x86_64-2008plus-ssl-{version}.zip")
@@ -136,7 +132,7 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
                     VersionRange.of("4.2.5", "4.2.16"),
                     VersionRange.of("4.2.0", "4.2.3")
             )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/win32/mongodb-win32-x86_64-2012plus-{version}.zip")
@@ -149,7 +145,7 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
                             VersionRange.of("3.0.0", "3.0.15"),
                             VersionRange.of("2.6.0", "2.6.12")
                     )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/win32/mongodb-win32-i386-{version}.zip")
@@ -161,7 +157,7 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
                             VersionRange.of("3.3.1", "3.3.1"),
                             VersionRange.of("3.5.5", "3.5.5")
                     )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/win32/mongodb-win32-i386-{version}.zip")
@@ -176,7 +172,7 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
                     VersionRange.of("3.0.0", "3.0.15"),
                     VersionRange.of("2.6.0", "2.6.12")
             )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/win32/mongodb-win32-x86_64-{version}.zip")
@@ -188,7 +184,7 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
                     VersionRange.of("3.3.1", "3.3.1"),
                     VersionRange.of("3.5.5", "3.5.5")
             )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/win32/mongodb-win32-x86_64-{version}.zip")

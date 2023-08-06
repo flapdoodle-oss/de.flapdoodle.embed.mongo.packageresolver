@@ -29,7 +29,7 @@ import de.flapdoodle.os.linux.DebianVersion;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class DebianPackageResolverTest {
+class DebianPackageFinderTest {
   /**
    * Debian 9 x64
    * https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian92-{}.tgz
@@ -128,7 +128,7 @@ class DebianPackageResolverTest {
 
   private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
     return HtmlParserResultTester.with(
-            new DebianPackageResolver(Command.Mongo),
+            new DebianPackageFinder(Command.Mongo),
             version -> Distribution.of(Version.of(version), platform),
             versionList);
   }

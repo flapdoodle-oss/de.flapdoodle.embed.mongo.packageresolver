@@ -29,7 +29,7 @@ import de.flapdoodle.os.linux.LinuxMintVersion;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class LinuxMintPackageResolverTest {
+class LinuxMintPackageFinderTest {
   /*
     Ubuntu 18.04 x64
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz
@@ -76,7 +76,7 @@ class LinuxMintPackageResolverTest {
 
   private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
     return HtmlParserResultTester.with(
-            new LinuxMintPackageResolver(new UbuntuPackageResolver(Command.Mongo)),
+            new LinuxMintPackageFinder(new UbuntuPackageFinder(Command.Mongo)),
             version -> Distribution.of(Version.of(version), platform),
             versionList);
   }

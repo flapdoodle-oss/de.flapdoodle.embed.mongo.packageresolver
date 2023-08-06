@@ -24,19 +24,15 @@ import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.ImmutableFileSet;
-import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
-import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.linux.AmazonVersion;
 
-import java.util.Optional;
+public class AmazonPackageFinder extends AbstractPackageFinder {
 
-public class AmazonPackageResolver extends AbstractPackageFinder {
-
-	public AmazonPackageResolver(final Command command) {
+	public AmazonPackageFinder(final Command command) {
 		super(command, rules(command));
 	}
 
@@ -50,7 +46,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 
 		final PackageFinderRule amazon2023ArmDev = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2023).andThen(amazon2023ArmDevMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-aarch64-amazon2023-{version}.tgz")
@@ -64,7 +60,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 				.andThen(DistributionMatch.any(
 					ToolVersionRange.of("100.7.1","100.7.4")
 				)))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-amazon2023-aarch64-{tools.version}.tgz")
@@ -79,7 +75,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 
 		final PackageFinderRule amazon2023Dev = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux2023).andThen(amazon2023DevMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-amazon2023-{version}.tgz")
@@ -92,7 +88,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 				.andThen(DistributionMatch.any(
 					ToolVersionRange.of("100.7.1","100.7.4")
 				)))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-amazon2023-x86_64-{tools.version}.tgz")
@@ -110,7 +106,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 
 		final PackageFinderRule amazon2ArmDev = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2).andThen(amazon2ArmDevMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-aarch64-amazon2-{version}.tgz")
@@ -137,7 +133,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 
 		final PackageFinderRule amazon2Arm = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2).andThen(amazon2ArmMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-aarch64-amazon2-{version}.tgz")
@@ -147,7 +143,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 		final PackageFinderRule amazon2ArmToolsSetDefault = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.ARM,AmazonVersion.AmazonLinux2)
 				.andThen(amazon2ArmMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-amazon2-arm64-{tools.version}.tgz")
@@ -161,7 +157,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 					ToolVersionRange.of("100.6.1"),
 					ToolVersionRange.of("100.7.0","100.7.4")
 				)))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-amazon2-aarch64-{tools.version}.tgz")
@@ -177,7 +173,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 
 		final PackageFinderRule amazon2Dev = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux2).andThen(amazon2DevMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-amazon2-{version}.tgz")
@@ -206,7 +202,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 		);
 		final PackageFinderRule amazon2 = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux2).andThen(amazon2MongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-amazon2-{version}.tgz")
@@ -215,7 +211,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 
 		final PackageFinderRule amazon2tools = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux2).andThen(amazon2MongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-amazon2-x86_64-{tools.version}.tgz")
@@ -247,7 +243,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 
 		final PackageFinderRule amazon = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux).andThen(amazonMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-amazon-{version}.tgz")
@@ -256,7 +252,7 @@ public class AmazonPackageResolver extends AbstractPackageFinder {
 
 		final PackageFinderRule amazontools = PackageFinderRule.builder()
 			.match(match(BitSize.B64,CPUType.X86,AmazonVersion.AmazonLinux).andThen(amazonMongoVersions))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/tools/db/mongodb-database-tools-amazon-x86_64-{tools.version}.tgz")

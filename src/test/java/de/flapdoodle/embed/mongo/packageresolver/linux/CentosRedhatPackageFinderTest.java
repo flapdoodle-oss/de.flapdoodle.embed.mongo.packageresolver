@@ -32,7 +32,7 @@ import de.flapdoodle.os.linux.RedhatVersion;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class CentosRedhatPackageResolverTest {
+class CentosRedhatPackageFinderTest {
 	/*
 		RedHat / CentOS 6.2+ x64
 		https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-{}.tgz
@@ -247,7 +247,7 @@ class CentosRedhatPackageResolverTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new CentosRedhatPackageResolver(Command.Mongo),
+			new CentosRedhatPackageFinder(Command.Mongo),
 			version -> Distribution.of(Version.of(version), platform),
 			versionList);
 	}

@@ -51,26 +51,26 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 	private static ImmutablePackageFinderRules rules(Command command) {
 		ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
-    UbuntuPackageResolver ubuntuPackageResolver = new UbuntuPackageResolver(command);
+    UbuntuPackageFinder ubuntuPackageFinder = new UbuntuPackageFinder(command);
 
     final ImmutablePackageFinderRule ubuntuRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(UbuntuVersion.values()))
-			.finder(ubuntuPackageResolver)
+			.finder(ubuntuPackageFinder)
 			.build();
 
     final ImmutablePackageFinderRule linuxMintRule = PackageFinderRule.builder()
       .match(PlatformMatch.withOs(CommonOS.Linux)
         .withVersion(LinuxMintVersion.values()))
-      .finder(new LinuxMintPackageResolver(ubuntuPackageResolver))
+      .finder(new LinuxMintPackageFinder(ubuntuPackageFinder))
       .build();
 
     final ImmutablePackageFinderRule debianRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux).withVersion(DebianVersion.values()))
-			.finder(new DebianPackageResolver(command))
+			.finder(new DebianPackageFinder(command))
 			.build();
 
-		CentosRedhatPackageResolver centosRedhatPackageResolver = new CentosRedhatPackageResolver(command);
+		CentosRedhatPackageFinder centosRedhatPackageFinder = new CentosRedhatPackageFinder(command);
 
 		List<Version> centosRedhatAndOracleVersions = Stream.of(Stream.of(CentosVersion.values()), Stream.of(RedhatVersion.values()),
 				Stream.of(OracleVersion.values()))
@@ -79,13 +79,13 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 		ImmutablePackageFinderRule centosRedhatOracleRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(centosRedhatAndOracleVersions))
-			.finder(centosRedhatPackageResolver)
+			.finder(centosRedhatPackageFinder)
 			.build();
 
 		ImmutablePackageFinderRule amazonRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(AmazonVersion.values()))
-			.finder(new AmazonPackageResolver(command))
+			.finder(new AmazonPackageFinder(command))
 			.build();
 
     /*
@@ -99,7 +99,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 					VersionRange.of("3.0.0", "3.0.15"),
 					VersionRange.of("2.6.0", "2.6.12")
 				)))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-i686-{version}.tgz")
@@ -122,7 +122,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 					VersionRange.of("3.0.0", "3.0.15"),
 					VersionRange.of("2.6.0", "2.6.12")
 				)))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-{version}.tgz")
@@ -135,7 +135,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 					VersionRange.of("3.3.1", "3.3.1"),
 					VersionRange.of("3.5.5", "3.5.5")
 				)))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-x86_64-{version}.tgz")
@@ -148,7 +148,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 					VersionRange.of("3.3.1", "3.3.1"),
 					VersionRange.of("3.5.5", "3.5.5")
 				)))
-			.finder(UrlTemplatePackageResolver.builder()
+			.finder(UrlTemplatePackageFinder.builder()
 				.fileSet(fileSet)
 				.archiveType(ArchiveType.TGZ)
 				.urlTemplate("/linux/mongodb-linux-i686-{version}.tgz")
@@ -157,7 +157,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 
 		PackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux))
-			.finder(new FallbackToUbuntuOrFailPackageFinder(ubuntuPackageResolver))
+			.finder(new FallbackToUbuntuOrFailPackageFinder(ubuntuPackageFinder))
 			.build();
 
 		return PackageFinderRules.empty()
@@ -176,11 +176,11 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 	}
 
 	static class FallbackToUbuntuOrFailPackageFinder implements PackageFinder, HasExplanation {
-		private final UbuntuPackageResolver ubuntuPackageResolver;
+		private final UbuntuPackageFinder ubuntuPackageFinder;
 		private final UbuntuVersion fallbackUbuntuVersion = UbuntuVersion.Ubuntu_20_04;
 
-		public FallbackToUbuntuOrFailPackageFinder(UbuntuPackageResolver ubuntuPackageResolver) {
-			this.ubuntuPackageResolver = ubuntuPackageResolver;
+		public FallbackToUbuntuOrFailPackageFinder(UbuntuPackageFinder ubuntuPackageFinder) {
+			this.ubuntuPackageFinder = ubuntuPackageFinder;
 		}
 
 		@Override
@@ -196,7 +196,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 
 			LOGGER.warn("because there is no package for " + distribution + " we fall back to " + ubuntuLTSFallback);
 
-			Optional<Package> resolvedPackage = ubuntuPackageResolver.packageFor(ubuntuLTSFallback);
+			Optional<Package> resolvedPackage = ubuntuPackageFinder.packageFor(ubuntuLTSFallback);
 			if (!resolvedPackage.isPresent()) {
 				throw new IllegalArgumentException("linux distribution not supported: " + distribution + "(with fallback to " + ubuntuLTSFallback + ")");
 			}

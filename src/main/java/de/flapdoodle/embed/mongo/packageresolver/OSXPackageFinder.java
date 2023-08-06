@@ -22,14 +22,10 @@ package de.flapdoodle.embed.mongo.packageresolver;
 
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
-import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
-import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
-
-import java.util.Optional;
 
 public class OSXPackageFinder extends AbstractPackageFinder {
 
@@ -61,7 +57,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
                 VersionRange.of("6.0.8"),
                 VersionRange.of("6.0.1", "6.0.6")
             )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                 .fileSet(fileSet)
                 .archiveType(archiveType)
                 .urlTemplate("/osx/mongodb-macos-arm64-{version}.tgz")
@@ -75,7 +71,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
         VersionRange.of("7.0.0-rc1"),
         VersionRange.of("6.3.1","6.3.2")
       )))
-      .finder(UrlTemplatePackageResolver.builder()
+      .finder(UrlTemplatePackageFinder.builder()
         .fileSet(fileSet)
         .archiveType(archiveType)
         .urlTemplate("/osx/mongodb-macos-arm64-{version}.tgz")
@@ -92,7 +88,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
                             VersionRange.of("3.2.0", "3.2.22"),
                             VersionRange.of("3.0.4", "3.0.15")
                     )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/osx/mongodb-osx-ssl-x86_64-{version}.tgz")
@@ -109,7 +105,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
                             VersionRange.of("3.0.0", "3.0.15"),
                             VersionRange.of("2.6.0", "2.6.12")
                     )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/osx/mongodb-osx-x86_64-{version}.tgz")
@@ -134,7 +130,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
                             VersionRange.of("4.2.5", "4.2.16"),
                             VersionRange.of("4.2.0", "4.2.3")
                     )))
-            .finder(UrlTemplatePackageResolver.builder()
+            .finder(UrlTemplatePackageFinder.builder()
                     .fileSet(fileSet)
                     .archiveType(archiveType)
                     .urlTemplate("/osx/mongodb-macos-x86_64-{version}.tgz")
@@ -148,7 +144,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
         VersionRange.of("7.0.0-rc1"),
         VersionRange.of("6.3.1","6.3.2")
       )))
-      .finder(UrlTemplatePackageResolver.builder()
+      .finder(UrlTemplatePackageFinder.builder()
         .fileSet(fileSet)
         .archiveType(archiveType)
         .urlTemplate("/osx/mongodb-macos-x86_64-{version}.tgz")
@@ -167,7 +163,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
                   VersionRange.of("4.4.11", "4.4.11"),
                   VersionRange.of("4.4.0", "4.4.9")
               )))
-          .finder(UrlTemplatePackageResolver.builder()
+          .finder(UrlTemplatePackageFinder.builder()
               .fileSet(fileSet)
               .archiveType(ArchiveType.ZIP)
               .urlTemplate("/tools/db/mongodb-database-tools-macos-x86_64-{tools.version}.zip")

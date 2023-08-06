@@ -24,19 +24,15 @@ import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
 import de.flapdoodle.embed.process.config.store.ImmutableFileSet;
-import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
-import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.linux.DebianVersion;
 
-import java.util.Optional;
+public class DebianPackageFinder extends AbstractPackageFinder {
 
-public class DebianPackageResolver extends AbstractPackageFinder {
-
-  public DebianPackageResolver(final Command command) {
+  public DebianPackageFinder(final Command command) {
     super(command, rules(command));
   }
 
@@ -68,7 +64,7 @@ public class DebianPackageResolver extends AbstractPackageFinder {
     final PackageFinderRule debian9 = PackageFinderRule.builder()
                 .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9)
                   .andThen(debian9MongoVersions))
-                .finder(UrlTemplatePackageResolver.builder()
+                .finder(UrlTemplatePackageFinder.builder()
                         .fileSet(fileSet)
                         .archiveType(ArchiveType.TGZ)
                         .urlTemplate("/linux/mongodb-linux-x86_64-debian92-{version}.tgz")
@@ -78,7 +74,7 @@ public class DebianPackageResolver extends AbstractPackageFinder {
         final PackageFinderRule debian9tools = PackageFinderRule.builder()
                 .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9)
                   .andThen(debian9MongoVersions))
-                .finder(UrlTemplatePackageResolver.builder()
+                .finder(UrlTemplatePackageFinder.builder()
                         .fileSet(fileSet)
                         .archiveType(ArchiveType.TGZ)
                         .urlTemplate("/tools/db/mongodb-database-tools-debian92-x86_64-{tools.version}.tgz")
@@ -104,7 +100,7 @@ public class DebianPackageResolver extends AbstractPackageFinder {
     );
     final PackageFinderRule debian10 = PackageFinderRule.builder()
                 .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian10MongoVersions))
-                .finder(UrlTemplatePackageResolver.builder()
+                .finder(UrlTemplatePackageFinder.builder()
                         .fileSet(fileSet)
                         .archiveType(ArchiveType.TGZ)
                         .urlTemplate("/linux/mongodb-linux-x86_64-debian10-{version}.tgz")
@@ -120,7 +116,7 @@ public class DebianPackageResolver extends AbstractPackageFinder {
 
     final PackageFinderRule debian10dev = PackageFinderRule.builder()
       .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian10devMongoVersions))
-      .finder(UrlTemplatePackageResolver.builder()
+      .finder(UrlTemplatePackageFinder.builder()
         .fileSet(fileSet)
         .archiveType(ArchiveType.TGZ)
         .urlTemplate("/linux/mongodb-linux-x86_64-debian10-{version}.tgz")
@@ -130,7 +126,7 @@ public class DebianPackageResolver extends AbstractPackageFinder {
 
     final PackageFinderRule debian10tools = PackageFinderRule.builder()
                 .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian10MongoVersions))
-                .finder(UrlTemplatePackageResolver.builder()
+                .finder(UrlTemplatePackageFinder.builder()
                         .fileSet(fileSet)
                         .archiveType(ArchiveType.TGZ)
                         .urlTemplate("/tools/db/mongodb-database-tools-debian10-x86_64-{tools.version}.tgz")
@@ -146,7 +142,7 @@ public class DebianPackageResolver extends AbstractPackageFinder {
 
     final PackageFinderRule debian11 = PackageFinderRule.builder()
       .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian11MongoVersions))
-      .finder(UrlTemplatePackageResolver.builder()
+      .finder(UrlTemplatePackageFinder.builder()
         .fileSet(fileSet)
         .archiveType(ArchiveType.TGZ)
         .urlTemplate("/linux/mongodb-linux-x86_64-debian11-{version}.tgz")
@@ -162,7 +158,7 @@ public class DebianPackageResolver extends AbstractPackageFinder {
 
     final PackageFinderRule debian11dev = PackageFinderRule.builder()
       .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian11devMongoVersions))
-      .finder(UrlTemplatePackageResolver.builder()
+      .finder(UrlTemplatePackageFinder.builder()
         .fileSet(fileSet)
         .archiveType(ArchiveType.TGZ)
         .urlTemplate("/linux/mongodb-linux-x86_64-debian11-{version}.tgz")
@@ -172,7 +168,7 @@ public class DebianPackageResolver extends AbstractPackageFinder {
 
     final PackageFinderRule debian11tools = PackageFinderRule.builder()
       .match(match(BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12).andThen(debian11MongoVersions))
-      .finder(UrlTemplatePackageResolver.builder()
+      .finder(UrlTemplatePackageFinder.builder()
         .fileSet(fileSet)
         .archiveType(ArchiveType.TGZ)
         .urlTemplate("/tools/db/mongodb-database-tools-debian10-x86_64-{tools.version}.tgz")
