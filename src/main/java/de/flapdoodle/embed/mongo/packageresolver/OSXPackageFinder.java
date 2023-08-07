@@ -57,8 +57,10 @@ public class OSXPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -103,8 +105,12 @@ public class OSXPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)

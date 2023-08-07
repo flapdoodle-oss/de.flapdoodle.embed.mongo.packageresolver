@@ -59,8 +59,11 @@ public class DebianPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -109,7 +112,10 @@ public class DebianPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc2"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -168,6 +174,21 @@ public class DebianPackageFinder extends AbstractPackageFinder {
             .build())
         .build();
 
+
+    PackageFinderRule devRule_DEBIAN_9_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-debian92-{version}.tgz")
+            .isDevVersion(true)
+            .build())
+        .build();
 
     PackageFinderRule rule_DEBIAN_9_X86_B64 = PackageFinderRule.builder()
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
@@ -237,7 +258,7 @@ public class DebianPackageFinder extends AbstractPackageFinder {
                 devRule_DEBIAN_10_X86_B64, rule_DEBIAN_10_X86_B64
             )
             .withAdditionalRules(
-                rule_DEBIAN_9_X86_B64
+                devRule_DEBIAN_9_X86_B64, rule_DEBIAN_9_X86_B64
             );
       default:
         return PackageFinderRules.empty()
@@ -246,7 +267,7 @@ public class DebianPackageFinder extends AbstractPackageFinder {
             ).withAdditionalRules(
                 devRule_DEBIAN_10_X86_B64, rule_DEBIAN_10_X86_B64
             ).withAdditionalRules(
-                rule_DEBIAN_9_X86_B64
+                devRule_DEBIAN_9_X86_B64, rule_DEBIAN_9_X86_B64
             );
     }
   }

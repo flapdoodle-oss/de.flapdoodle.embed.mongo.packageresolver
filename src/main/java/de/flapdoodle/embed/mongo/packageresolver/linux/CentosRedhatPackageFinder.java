@@ -58,7 +58,9 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
-                  VersionRange.of("7.0.0-rc2"))
+                  VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
+                  VersionRange.of("6.0.9-rc1"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -115,8 +117,10 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -162,8 +166,12 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -233,8 +241,12 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -303,8 +315,12 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -369,6 +385,20 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
             .build())
         .build();
 
+
+    PackageFinderRule devRule_CentOS_6_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("4.4.24-rc0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-rhel62-{version}.tgz")
+            .isDevVersion(true)
+            .build())
+        .build();
 
     PackageFinderRule rule_CentOS_6_X86_B64 = PackageFinderRule.builder()
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
@@ -450,7 +480,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
                 devRule_CentOS_7_X86_B64, rule_CentOS_7_X86_B64
             )
             .withAdditionalRules(
-                rule_CentOS_6_X86_B64
+                devRule_CentOS_6_X86_B64, rule_CentOS_6_X86_B64
             );
       default:
         return PackageFinderRules.empty()
@@ -465,7 +495,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
             ).withAdditionalRules(
                 devRule_CentOS_7_X86_B64, rule_CentOS_7_X86_B64
             ).withAdditionalRules(
-                rule_CentOS_6_X86_B64
+                devRule_CentOS_6_X86_B64, rule_CentOS_6_X86_B64
             );
     }
   }

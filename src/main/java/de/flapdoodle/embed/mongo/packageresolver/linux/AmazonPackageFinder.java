@@ -58,7 +58,8 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
-                  VersionRange.of("7.0.0-rc2"))
+                  VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -88,7 +89,8 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
-                  VersionRange.of("7.0.0-rc2"))
+                  VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -119,8 +121,12 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -194,8 +200,12 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -256,6 +266,21 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
             .build())
         .build();
 
+
+    PackageFinderRule devRule_AmazonLinux_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-amazon-{version}.tgz")
+            .isDevVersion(true)
+            .build())
+        .build();
 
     PackageFinderRule rule_AmazonLinux_X86_B64 = PackageFinderRule.builder()
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux)
@@ -338,7 +363,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
                 devRule_AmazonLinux2_X86_B64, rule_AmazonLinux2_X86_B64
             )
             .withAdditionalRules(
-                rule_AmazonLinux_X86_B64
+                devRule_AmazonLinux_X86_B64, rule_AmazonLinux_X86_B64
             );
       default:
         return PackageFinderRules.empty()
@@ -351,7 +376,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
             ).withAdditionalRules(
                 devRule_AmazonLinux2_X86_B64, rule_AmazonLinux2_X86_B64
             ).withAdditionalRules(
-                rule_AmazonLinux_X86_B64
+                devRule_AmazonLinux_X86_B64, rule_AmazonLinux_X86_B64
             );
     }
   }

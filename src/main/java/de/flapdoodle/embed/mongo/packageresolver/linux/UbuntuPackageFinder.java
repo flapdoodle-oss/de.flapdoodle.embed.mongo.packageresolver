@@ -59,8 +59,10 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -107,8 +109,10 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -155,8 +159,12 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -216,8 +224,12 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
+                  VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -277,7 +289,10 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc2"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -343,7 +358,10 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc2"),
                   VersionRange.of("7.0.0-rc1"),
-                  VersionRange.of("6.3.1", "6.3.2"))
+                  VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -444,6 +462,20 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .build();
 
 
+    PackageFinderRule devRule_Ubuntu_16_04_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("4.4.24-rc0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-ubuntu1604-{version}.tgz")
+            .isDevVersion(true)
+            .build())
+        .build();
+
     PackageFinderRule rule_Ubuntu_16_04_X86_B64 = PackageFinderRule.builder()
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10)
             .andThen(
@@ -532,7 +564,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
                 rule_Ubuntu_16_04_ARM_B64
             )
             .withAdditionalRules(
-                rule_Ubuntu_16_04_X86_B64
+                devRule_Ubuntu_16_04_X86_B64, rule_Ubuntu_16_04_X86_B64
             );
       default:
         return PackageFinderRules.empty()
@@ -551,7 +583,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
             ).withAdditionalRules(
                 rule_Ubuntu_16_04_ARM_B64
             ).withAdditionalRules(
-                rule_Ubuntu_16_04_X86_B64
+                devRule_Ubuntu_16_04_X86_B64, rule_Ubuntu_16_04_X86_B64
             );
     }
   }

@@ -21,4 +21,6 @@
 
 open https://www.mongodb.com/download-center/community/releases
 open https://www.mongodb.com/download-center/community/releases/development
+open https://www.mongodb.com/download-center/community/releases/archive
+
 open https://www.mongodb.com/download-center/database-tools/releases/archive
