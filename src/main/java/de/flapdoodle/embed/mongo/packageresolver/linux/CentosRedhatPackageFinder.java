@@ -74,7 +74,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"))
+                  VersionRange.of("6.0.7", "6.0.8"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -134,8 +134,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.4", "6.0.6"))
+                  VersionRange.of("6.0.4", "6.0.8"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -185,17 +184,9 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.1", "6.0.6"),
-                  VersionRange.of("5.0.18", "5.0.19"),
-                  VersionRange.of("5.0.12", "5.0.15"),
-                  VersionRange.of("5.0.5", "5.0.6"),
-                  VersionRange.of("5.0.0", "5.0.2"),
-                  VersionRange.of("4.4.22", "4.4.23"),
-                  VersionRange.of("4.4.16", "4.4.19"),
-                  VersionRange.of("4.4.13"),
-                  VersionRange.of("4.4.11"),
-                  VersionRange.of("4.4.4", "4.4.9"))
+                  VersionRange.of("6.0.0", "6.0.8"),
+                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("4.4.4", "4.4.23"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -260,20 +251,10 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.1", "6.0.6"),
-                  VersionRange.of("5.0.18", "5.0.19"),
-                  VersionRange.of("5.0.12", "5.0.15"),
-                  VersionRange.of("5.0.5", "5.0.6"),
-                  VersionRange.of("5.0.0", "5.0.2"),
-                  VersionRange.of("4.4.22", "4.4.23"),
-                  VersionRange.of("4.4.16", "4.4.19"),
-                  VersionRange.of("4.4.13"),
-                  VersionRange.of("4.4.11"),
-                  VersionRange.of("4.4.0", "4.4.9"),
-                  VersionRange.of("4.2.22", "4.2.24"),
-                  VersionRange.of("4.2.18", "4.2.19"),
-                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("6.0.0", "6.0.8"),
+                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("4.4.0", "4.4.23"),
+                  VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.1", "4.2.3"),
                   VersionRange.of("4.0.14", "4.0.28"),
                   VersionRange.of("3.6.17", "3.6.23"),
@@ -334,20 +315,10 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.1", "6.0.6"),
-                  VersionRange.of("5.0.18", "5.0.19"),
-                  VersionRange.of("5.0.12", "5.0.15"),
-                  VersionRange.of("5.0.5", "5.0.6"),
-                  VersionRange.of("5.0.0", "5.0.2"),
-                  VersionRange.of("4.4.22", "4.4.23"),
-                  VersionRange.of("4.4.16", "4.4.19"),
-                  VersionRange.of("4.4.13"),
-                  VersionRange.of("4.4.11"),
-                  VersionRange.of("4.4.0", "4.4.9"),
-                  VersionRange.of("4.2.22", "4.2.24"),
-                  VersionRange.of("4.2.18", "4.2.19"),
-                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("6.0.0", "6.0.8"),
+                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("4.4.0", "4.4.23"),
+                  VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.0", "4.2.3"),
                   VersionRange.of("4.0.0", "4.0.28"),
                   VersionRange.of("3.6.0", "3.6.23"),
@@ -404,14 +375,8 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("4.4.22", "4.4.23"),
-                  VersionRange.of("4.4.16", "4.4.19"),
-                  VersionRange.of("4.4.13"),
-                  VersionRange.of("4.4.11"),
-                  VersionRange.of("4.4.0", "4.4.9"),
-                  VersionRange.of("4.2.22", "4.2.24"),
-                  VersionRange.of("4.2.18", "4.2.19"),
-                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("4.4.0", "4.4.23"),
+                  VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.0", "4.2.3"),
                   VersionRange.of("4.0.0", "4.0.28"),
                   VersionRange.of("3.6.0", "3.6.23"),

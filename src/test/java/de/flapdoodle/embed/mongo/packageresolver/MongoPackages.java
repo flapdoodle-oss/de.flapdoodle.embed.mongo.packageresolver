@@ -89,6 +89,7 @@ public abstract class MongoPackages {
 			Pair.of("versions/react/mongo-db-versions-2023-05-30-dev.html", true),
 			Pair.of("versions/react/mongo-db-versions-2023-07-25.html", false),
 			Pair.of("versions/react/mongo-db-versions-2023-07-25-dev.html", true),
+			Pair.of("versions/react/mongo-db-versions-2023-08-07-archive.html", false),
 			Pair.of("versions/react/mongo-db-versions-2023-08-07-dev.html", true)
 		);
 

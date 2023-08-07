@@ -76,8 +76,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.4", "6.0.6"))
+                  VersionRange.of("6.0.4", "6.0.8"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -126,8 +125,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.4", "6.0.6"))
+                  VersionRange.of("6.0.4", "6.0.8"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -178,17 +176,9 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.1", "6.0.6"),
-                  VersionRange.of("5.0.18", "5.0.19"),
-                  VersionRange.of("5.0.12", "5.0.15"),
-                  VersionRange.of("5.0.5", "5.0.6"),
-                  VersionRange.of("5.0.0", "5.0.2"),
-                  VersionRange.of("4.4.22", "4.4.23"),
-                  VersionRange.of("4.4.16", "4.4.19"),
-                  VersionRange.of("4.4.13"),
-                  VersionRange.of("4.4.11"),
-                  VersionRange.of("4.4.0", "4.4.9"))
+                  VersionRange.of("6.0.0", "6.0.8"),
+                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("4.4.0", "4.4.23"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -243,17 +233,9 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.1", "6.0.6"),
-                  VersionRange.of("5.0.18", "5.0.19"),
-                  VersionRange.of("5.0.12", "5.0.15"),
-                  VersionRange.of("5.0.5", "5.0.6"),
-                  VersionRange.of("5.0.0", "5.0.2"),
-                  VersionRange.of("4.4.22", "4.4.23"),
-                  VersionRange.of("4.4.16", "4.4.19"),
-                  VersionRange.of("4.4.13"),
-                  VersionRange.of("4.4.11"),
-                  VersionRange.of("4.4.0", "4.4.9"))
+                  VersionRange.of("6.0.0", "6.0.8"),
+                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("4.4.0", "4.4.23"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -306,20 +288,10 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.1", "6.0.6"),
-                  VersionRange.of("5.0.18", "5.0.19"),
-                  VersionRange.of("5.0.12", "5.0.15"),
-                  VersionRange.of("5.0.5", "5.0.6"),
-                  VersionRange.of("5.0.0", "5.0.2"),
-                  VersionRange.of("4.4.22", "4.4.23"),
-                  VersionRange.of("4.4.16", "4.4.19"),
-                  VersionRange.of("4.4.13"),
-                  VersionRange.of("4.4.11"),
-                  VersionRange.of("4.4.0", "4.4.9"),
-                  VersionRange.of("4.2.22", "4.2.24"),
-                  VersionRange.of("4.2.18", "4.2.19"),
-                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("6.0.0", "6.0.8"),
+                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("4.4.0", "4.4.23"),
+                  VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.0", "4.2.3"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -375,20 +347,10 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.1", "6.0.6"),
-                  VersionRange.of("5.0.18", "5.0.19"),
-                  VersionRange.of("5.0.12", "5.0.15"),
-                  VersionRange.of("5.0.5", "5.0.6"),
-                  VersionRange.of("5.0.0", "5.0.2"),
-                  VersionRange.of("4.4.22", "4.4.23"),
-                  VersionRange.of("4.4.16", "4.4.19"),
-                  VersionRange.of("4.4.13"),
-                  VersionRange.of("4.4.11"),
-                  VersionRange.of("4.4.0", "4.4.9"),
-                  VersionRange.of("4.2.22", "4.2.24"),
-                  VersionRange.of("4.2.18", "4.2.19"),
-                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("6.0.0", "6.0.8"),
+                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("4.4.0", "4.4.23"),
+                  VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.0", "4.2.3"),
                   VersionRange.of("4.0.1", "4.0.28"),
                   VersionRange.of("3.6.20", "3.6.23"))
@@ -480,14 +442,8 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("4.4.22", "4.4.23"),
-                  VersionRange.of("4.4.16", "4.4.19"),
-                  VersionRange.of("4.4.13"),
-                  VersionRange.of("4.4.11"),
-                  VersionRange.of("4.4.0", "4.4.9"),
-                  VersionRange.of("4.2.22", "4.2.24"),
-                  VersionRange.of("4.2.18", "4.2.19"),
-                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("4.4.0", "4.4.23"),
+                  VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.0", "4.2.3"),
                   VersionRange.of("4.0.0", "4.0.28"),
                   VersionRange.of("3.6.0", "3.6.23"),

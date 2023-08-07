@@ -77,10 +77,8 @@ public class DebianPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.1", "6.0.6"),
-                  VersionRange.of("5.0.18", "5.0.19"),
-                  VersionRange.of("5.0.12", "5.0.15"))
+                  VersionRange.of("6.0.0", "6.0.8"),
+                  VersionRange.of("5.0.8", "5.0.19"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -129,20 +127,10 @@ public class DebianPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.8"),
-                  VersionRange.of("6.0.1", "6.0.6"),
-                  VersionRange.of("5.0.18", "5.0.19"),
-                  VersionRange.of("5.0.12", "5.0.15"),
-                  VersionRange.of("5.0.5", "5.0.6"),
-                  VersionRange.of("5.0.0", "5.0.2"),
-                  VersionRange.of("4.4.22", "4.4.23"),
-                  VersionRange.of("4.4.16", "4.4.19"),
-                  VersionRange.of("4.4.13"),
-                  VersionRange.of("4.4.11"),
-                  VersionRange.of("4.4.0", "4.4.9"),
-                  VersionRange.of("4.2.22", "4.2.24"),
-                  VersionRange.of("4.2.18", "4.2.19"),
-                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("6.0.0", "6.0.8"),
+                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("4.4.0", "4.4.23"),
+                  VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.1", "4.2.3"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -194,18 +182,9 @@ public class DebianPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("5.0.18", "5.0.19"),
-                  VersionRange.of("5.0.12", "5.0.15"),
-                  VersionRange.of("5.0.5", "5.0.6"),
-                  VersionRange.of("5.0.0", "5.0.2"),
-                  VersionRange.of("4.4.22", "4.4.23"),
-                  VersionRange.of("4.4.16", "4.4.19"),
-                  VersionRange.of("4.4.13"),
-                  VersionRange.of("4.4.11"),
-                  VersionRange.of("4.4.0", "4.4.9"),
-                  VersionRange.of("4.2.22", "4.2.24"),
-                  VersionRange.of("4.2.18", "4.2.19"),
-                  VersionRange.of("4.2.5", "4.2.16"),
+                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("4.4.0", "4.4.23"),
+                  VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.0", "4.2.3"),
                   VersionRange.of("4.0.0", "4.0.28"),
                   VersionRange.of("3.6.5", "3.6.23"))
