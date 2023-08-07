@@ -106,22 +106,20 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 			.collect(Collectors.toList());
 	}
 
-	private static boolean hasLibCrypt1_1(UbuntuVersion version) {
-		switch (version) {
-			case Ubuntu_23_04:
-			case Ubuntu_23_10:
-			case Ubuntu_22_04:
-			case Ubuntu_22_10:
-				return false;
-		}
-		return true;
-	}
+//	private static boolean hasLibCrypt1_1(UbuntuVersion version) {
+//		switch (version) {
+//			case Ubuntu_23_04:
+//			case Ubuntu_23_10:
+//				return false;
+//		}
+//		return true;
+//	}
 
 	private static List<Version> upgradeableUbuntuVersions(UbuntuVersion version) {
 		List<UbuntuVersion> all = Arrays.asList(UbuntuVersion.values());
 
 		return all.stream()
-			.filter(it -> it.ordinal()>=version.ordinal() && (hasLibCrypt1_1(version) == hasLibCrypt1_1(it)))
+			.filter(it -> it.ordinal()>=version.ordinal() /*&& (hasLibCrypt1_1(version) == hasLibCrypt1_1(it))*/)
 			.collect(Collectors.toList());
 	}
 
