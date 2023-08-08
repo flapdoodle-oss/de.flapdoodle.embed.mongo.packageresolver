@@ -87,7 +87,10 @@ public abstract class PackageTree {
 			packagePlatformUrlVersions.dump();
 		});
 
+		System.out.println("-----------------------");
 		System.out.println("skipped: "+skipped());
+		System.out.println("skippedTools: "+skippedTools());
+		System.out.println("-----------------------");
 	}
 
 	public static ImmutablePackageTree empty() {

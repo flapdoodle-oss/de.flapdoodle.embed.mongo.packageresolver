@@ -47,7 +47,7 @@ public abstract class ToolVersionRange implements DistributionMatch {
   @Value.Auxiliary
   public boolean match(Version version) {
     if (version instanceof HasMongotoolsPackage) {
-      Optional<MongotoolsVersion.Main> toolsVersion = ((HasMongotoolsPackage) version).mongotoolsVersion();
+      Optional<? extends Version> toolsVersion = ((HasMongotoolsPackage) version).mongotoolsVersion();
       if (toolsVersion.isPresent()) {
         NumericVersion asNumeric = NumericVersion.of(toolsVersion.get().asInDownloadPath());
         return min().isOlderOrEqual(asNumeric) && asNumeric.isOlderOrEqual(max());

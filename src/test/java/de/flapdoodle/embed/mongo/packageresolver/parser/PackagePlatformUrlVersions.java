@@ -24,9 +24,7 @@ import com.google.common.collect.Maps;
 import de.flapdoodle.types.Pair;
 import org.immutables.value.Value;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.SortedMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Value.Immutable
@@ -65,11 +63,12 @@ public abstract class PackagePlatformUrlVersions {
 	@Value.Auxiliary
 	public void dump() {
 		map().forEach((platform, urlVersions) -> {
-			System.out.println("  "+platform);
+			System.out.println("  " + platform);
 			urlVersions.dump();
 		});
 	}
 
+	@Value.Auxiliary
 	public List<Pair<PackagePlatform, UrlVersions>> entries() {
 		return map().entrySet().stream()
 			.map(it -> Pair.of(it.getKey(), it.getValue()))

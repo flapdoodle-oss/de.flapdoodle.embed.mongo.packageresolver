@@ -23,5 +23,5 @@ package de.flapdoodle.embed.mongo.packageresolver;
 import java.util.Optional;
 
 public interface HasMongotoolsPackage {
-		Optional<MongotoolsVersion.Main> mongotoolsVersion();
+		Optional<? extends de.flapdoodle.embed.process.distribution.Version> mongotoolsVersion();
 }

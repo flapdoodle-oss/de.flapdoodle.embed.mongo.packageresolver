@@ -42,6 +42,32 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 	public abstract CPUType cpuType();
 	public abstract BitSize bitSize();
 
+	@Value.Auxiliary
+	public CommonArchitecture architecture() {
+		switch (cpuType()) {
+			case X86:
+				switch (bitSize()) {
+					case B32:
+						return CommonArchitecture.X86_32;
+					case B64:
+						return CommonArchitecture.X86_64;
+					default:
+						throw new IllegalArgumentException("not supported: "+bitSize());
+				}
+			case ARM:
+				switch (bitSize()) {
+					case B32:
+						return CommonArchitecture.ARM_32;
+					case B64:
+						return CommonArchitecture.ARM_64;
+					default:
+						throw new IllegalArgumentException("not supported: "+bitSize());
+				}
+			default:
+				throw new IllegalArgumentException("not supported: "+cpuType());
+		}
+	}
+
 	public static ImmutablePackagePlatform.Builder builder() {
 		return ImmutablePackagePlatform.builder();
 	}

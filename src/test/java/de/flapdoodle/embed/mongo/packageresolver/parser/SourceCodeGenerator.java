@@ -46,19 +46,26 @@ public class SourceCodeGenerator {
 
 	public void generate(PackageTree tree) {
 		tree.map().forEach((osAndVersionType, packagePlatformUrlVersions) -> {
-			System.out.println("generate " + osAndVersionType.className());
+			System.out.println("generate " + osAndVersionType.className()+" and "+osAndVersionType.className()+"Test");
 
 			Path packageDir = baseDirectory;
 			if (osAndVersionType.packageName().isPresent()) {
 				packageDir=createDirectory(baseDirectory,osAndVersionType.packageName().get());
 			}
-			String javaCode = generateJavaCode(osAndVersionType, packagePlatformUrlVersions);
+			String javaCode = generateJavaCode("PackageFinderJavaTemplate.stg", osAndVersionType, packagePlatformUrlVersions);
 			writeJavaCode(packageDir, osAndVersionType.className() + ".java", javaCode);
+			String testCode = generateJavaCode("PackageFinderJavaTestTemplate.stg", osAndVersionType, packagePlatformUrlVersions);
+			writeJavaCode(packageDir, osAndVersionType.className() + "Test.java", testCode);
+			if (osAndVersionType.className().startsWith("XWindows")) {
+				System.out.println("\n\n\n-------------------------------------");
+				System.out.println(testCode);
+				System.out.println("-------------------------------------");
+			}
 		});
 	}
 
-	private String generateJavaCode(PackageOsAndVersionType packageAndClassName, PackagePlatformUrlVersions packagePlatformUrlVersions) {
-		URL templateUrl = getClass().getResource("PackageFinderJavaTemplate.stg");
+	private String generateJavaCode(String templateFile, PackageOsAndVersionType packageAndClassName, PackagePlatformUrlVersions packagePlatformUrlVersions) {
+		URL templateUrl = getClass().getResource(templateFile);
 		STGroupFile groupFile = new STGroupFile(templateUrl, "UTF-8", '<', '>');
 		TypesafeModelAdapters.registerDefaults(groupFile);
 

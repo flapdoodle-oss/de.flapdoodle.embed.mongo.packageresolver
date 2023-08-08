@@ -76,6 +76,9 @@ public class TypesafeModelAdapters {
 			if (name.equals("url")) {
 				return it.url();
 			}
+			if (name.equals("testUrl")) {
+				return it.url().replace("{version}","{}");
+			}
 			if (name.equals("versions")) {
 				return it.versions();
 			}
@@ -93,6 +96,9 @@ public class TypesafeModelAdapters {
 			}
 			if (name.equals("url")) {
 				return it.url();
+			}
+			if (name.equals("testUrl")) {
+				return it.url().replace("{tools.version}","{}");
 			}
 			if (name.equals("versions")) {
 				return it.versions();
@@ -139,6 +145,8 @@ public class TypesafeModelAdapters {
 					return it.versions();
 				case "os":
 					return it.os().name();
+				case "architecture":
+					return it.architecture();
 			}
 			throw new IllegalArgumentException("unknown property: '" + name + "'");
 		});
