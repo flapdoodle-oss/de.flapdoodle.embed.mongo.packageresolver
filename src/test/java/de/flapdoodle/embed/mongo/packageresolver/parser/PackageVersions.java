@@ -27,11 +27,13 @@ import org.immutables.value.Value;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.SortedSet;
 import java.util.stream.Collectors;
 
 @Value.Immutable
 public abstract class PackageVersions {
-	public abstract List<PackageVersion> list();
+	@Value.NaturalOrder
+	public abstract SortedSet<PackageVersion> list();
 
 	@Value.Derived
 	public boolean hasDevVersions() {

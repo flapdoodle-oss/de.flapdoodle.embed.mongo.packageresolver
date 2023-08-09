@@ -20,10 +20,11 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
+import de.flapdoodle.embed.mongo.packageresolver.NumericVersion;
 import org.immutables.value.Value;
 
 @Value.Immutable
-public abstract class PackageVersion {
+public abstract class PackageVersion implements Comparable<PackageVersion> {
 	public abstract String version();
 	
 	@Value.Default
@@ -31,6 +32,15 @@ public abstract class PackageVersion {
 		return false;
 	}
 
+	@Override
+	@Value.Auxiliary
+	public int compareTo(PackageVersion other) {
+		int compDev = Boolean.compare(devVersion(), other.devVersion());
+
+		return compDev != 0
+			? -compDev
+			: -NumericVersion.of(version()).compareTo(NumericVersion.of(other.version()));
+	}
 	public static PackageVersion of(String version, boolean isDevVersion) {
 		return ImmutablePackageVersion.builder()
 			.version(version)

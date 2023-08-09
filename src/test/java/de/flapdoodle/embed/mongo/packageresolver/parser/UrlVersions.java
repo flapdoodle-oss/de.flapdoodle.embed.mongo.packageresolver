@@ -21,6 +21,7 @@
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
 import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
 import de.flapdoodle.embed.mongo.packageresolver.MongoPackages;
 import de.flapdoodle.types.Pair;
 import org.immutables.value.Value;
@@ -31,8 +32,8 @@ import java.util.stream.Collectors;
 
 @Value.Immutable
 public abstract class UrlVersions {
-	public abstract Multimap<String, PackageVersion> map();
-	public abstract Multimap<String, String> toolsMap();
+	protected abstract SetMultimap<String, PackageVersion> map();
+	protected abstract SetMultimap<String, String> toolsMap();
 
 	@Value.Auxiliary
 	public ImmutableUrlVersions put(String url, PackageVersion version) {
