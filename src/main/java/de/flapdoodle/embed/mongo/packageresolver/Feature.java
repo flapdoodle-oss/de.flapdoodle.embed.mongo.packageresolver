@@ -28,6 +28,7 @@ public enum Feature {
 	NO_CHUNKSIZE_ARG /*mongos since 3.4? does not support --chunkSize argument */, 
 	MONGOS_CONFIGDB_SET_STYLE /* mongos since 3.3.? */,
 	NO_HTTP_INTERFACE_ARG /*not supported since 3.6 https://docs.mongodb.com/manual/release-notes/3.6-compatibility/*/,
+	VERBOSITY_LEVEL /* since 4.2 */,
 
 	NO_SOLARIS_SUPPORT,
 	NO_BIND_IP_TO_LOCALHOST,

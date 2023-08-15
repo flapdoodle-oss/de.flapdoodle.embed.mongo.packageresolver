@@ -59,6 +59,7 @@ public class DefaultFeatureSetResolver implements FeatureSetResolver {
 			enable(Feature.DISABLE_USE_PREALLOC, VersionRange.of("4.2.13", MAX_VERSION)),
 			enable(Feature.DISABLE_USE_SMALL_FILES, VersionRange.of("4.2.13", MAX_VERSION)),
 			enable(Feature.RS_INITIATE, VersionRange.of("4.2.0", MAX_VERSION)),
+			enable(Feature.VERBOSITY_LEVEL, VersionRange.of("4.2.0", MAX_VERSION)),
 			enable(Feature.JOURNAL_ALWAYS_ON, VersionRange.of("6.1.0", MAX_VERSION))
 		));
 	}

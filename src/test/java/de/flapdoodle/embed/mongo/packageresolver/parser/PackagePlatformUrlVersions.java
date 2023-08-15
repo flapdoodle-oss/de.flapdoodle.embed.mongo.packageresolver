@@ -1,16 +1,16 @@
 /**
  * Copyright (C) 2011
- * Michael Mosmann <michael@mosmann.de>
- * Martin Jöhren <m.joehren@googlemail.com>
+ *   Michael Mosmann <michael@mosmann.de>
+ *   Martin Jöhren <m.joehren@googlemail.com>
  *
  * with contributions from
- * konstantin-ba@github,Archimedes Trajano	(trajano@github)
+ * 	konstantin-ba@github,Archimedes Trajano	(trajano@github)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -76,17 +76,19 @@ public abstract class PackagePlatformUrlVersions {
 
 	@Value.Lazy
 	public List<Pair<PackagePlatform, UrlVersions>> entries() {
-		System.out.println("---------------------");
-		System.out.println(osAndVersionType());
-		System.out.println("---------------------");
-		// TODO ohne Filter
-		return filterUnreachableVersions(map().entrySet().stream()
+		// TODO remove this
+		filteredEntries();
+
+		return map().entrySet().stream()
 			.map(it -> Pair.of(it.getKey(), it.getValue()))
-			.collect(Collectors.toList()));
+			.collect(Collectors.toList());
 	}
 
 	@Value.Lazy
 	public List<Pair<PackagePlatform, UrlVersions>> filteredEntries() {
+		System.out.println("---------------------");
+		System.out.println(osAndVersionType());
+		System.out.println("---------------------");
 		return filterUnreachableVersions(map().entrySet().stream()
 			.map(it -> Pair.of(it.getKey(), it.getValue()))
 			.collect(Collectors.toList()));

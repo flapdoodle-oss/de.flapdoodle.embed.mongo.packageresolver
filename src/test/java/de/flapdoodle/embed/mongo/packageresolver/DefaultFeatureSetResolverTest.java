@@ -63,6 +63,7 @@ class DefaultFeatureSetResolverTest {
 			Arguments.of(Feature.DISABLE_USE_PREALLOC, "4.2.13"),
 			Arguments.of(Feature.DISABLE_USE_SMALL_FILES, "4.2.13"),
 			Arguments.of(Feature.RS_INITIATE, "4.2.0"),
+			Arguments.of(Feature.VERBOSITY_LEVEL, "4.2.0"),
 			Arguments.of(Feature.JOURNAL_ALWAYS_ON, "6.1.0")
 		);
 	}
