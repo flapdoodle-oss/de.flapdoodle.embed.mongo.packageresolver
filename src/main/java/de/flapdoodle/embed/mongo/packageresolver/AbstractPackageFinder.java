@@ -52,6 +52,10 @@ public abstract class AbstractPackageFinder implements PackageFinder, HasPlatfor
 			.withVersion(versions);
 	}
 
+	protected static PlatformMatch match(OS os, BitSize bitSize) {
+		return PlatformMatch.withOs(os).withBitSize(bitSize);
+	}
+
 	protected static PlatformMatch match(BitSize bitSize, CPUType cpuType, Version... versions) {
 		return PlatformMatch.withOs(CommonOS.Linux).withBitSize(bitSize).withCpuType(cpuType)
 			.withVersion(versions);
