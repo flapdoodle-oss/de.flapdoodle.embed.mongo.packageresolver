@@ -100,6 +100,13 @@ class LinuxPackageFinderTest {
   }
 
   @Test
+  public void resolvePopOSPackage() {
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(PopOSVersion.POP_OS_22_4), "6.0.4")
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
+  }
+
+  @Test
   public void resolveAmazonPackageFromSample() {
     assertThat(linuxWith(CommonArchitecture.X86_64)
       .withVersion(AmazonVersion.AmazonLinux2), "5.0.2")
