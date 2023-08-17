@@ -99,7 +99,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_OS_X_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
+        .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc8"),
@@ -120,7 +120,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_OS_X_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
+        .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("6.0.0", "6.0.8"),
@@ -137,7 +137,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_OS_X_X86_B64_1 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
+        .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("4.0.0", "4.0.28"),
@@ -155,7 +155,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_OS_X_X86_B64_2 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
+        .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("3.4.9", "3.4.24"),
@@ -173,7 +173,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_OS_X_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
+        .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.7.0", "100.7.4"),
@@ -192,7 +192,7 @@ public class OSXPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule tools_OS_X_X86_B64_1 = PackageFinderRule.builder()
-        .match(match(CommonOS.OS_X, BitSize.B64, CPUType.X86)
+        .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.0.0-alpha1", "100.0.2"),

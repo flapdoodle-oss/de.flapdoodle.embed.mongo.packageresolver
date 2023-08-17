@@ -77,9 +77,14 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 	@Value.Default
 	public List<Version> versions() {
 		if (version().isPresent()) {
-			return Versions.upgradeableVersions(version().get());
+			return HiddenRules.upgradeableVersions(version().get());
 		}
 		return Collections.emptyList();
+	}
+
+	@Value.Default
+	public boolean ignoreCpuType() {
+		return HiddenRules.ignoreCPUType(os(), cpuType());
 	}
 
 	@Override

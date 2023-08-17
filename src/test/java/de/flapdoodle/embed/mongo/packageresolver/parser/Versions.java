@@ -22,11 +22,8 @@ package de.flapdoodle.embed.mongo.packageresolver.parser;
 
 import de.flapdoodle.os.Version;
 import de.flapdoodle.os.VersionWithPriority;
-import de.flapdoodle.os.linux.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public abstract class Versions {
 	public static Comparator<Optional<? extends Version>> versionByPrioOrdinalOrNameComparator() {
@@ -36,56 +33,11 @@ public abstract class Versions {
 			.thenComparing(Version::name));
 	}
 
+	public static Comparator<Optional<? extends Enum<?>>> byOrdinal() {
+		return nullsFirst(Comparator.comparing(version -> -(version != null ? ((Enum<?>) version).ordinal() : 0)));
+	}
+
 	public static <T> Comparator<Optional<? extends T>> nullsFirst(Comparator<? super T> nonNullComparator) {
 		return Comparator.comparing(opt -> opt.orElse(null), Comparator.nullsFirst(nonNullComparator));
-	}
-
-	static List<Version> upgradeableVersions(Version version) {
-		if (version instanceof UbuntuVersion) {
-			return upgradeableUbuntuVersions((UbuntuVersion) version);
-		}
-		if (version instanceof DebianVersion) {
-			return upgradeableDebianVersions((DebianVersion) version);
-		}
-		if (version instanceof CentosVersion) {
-			return upgradeableCentosVersions((CentosVersion) version);
-		}
-
-		return Collections.singletonList(version);
-	}
-	
-	private static List<Version> upgradeableCentosVersions(CentosVersion version) {
-		List<CentosVersion> all = Arrays.asList(CentosVersion.values());
-
-		return all.stream()
-			.filter(it -> it.ordinal()>=version.ordinal())
-			.flatMap(it -> {
-				switch (it) {
-					case CentOS_6:
-						return Stream.of(CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6);
-					case CentOS_7:
-						return Stream.of(CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7);
-					case CentOS_8:
-						return Stream.of(CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8);
-					case CentOS_9:
-						return Stream.of(CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38);
-				}
-				return Stream.of(it);
-			})
-			.collect(Collectors.toList());
-	}
-	private static List<Version> upgradeableDebianVersions(DebianVersion version) {
-		List<DebianVersion> all = Arrays.asList(DebianVersion.values());
-
-		return all.stream()
-			.filter(it -> it.ordinal()>=version.ordinal())
-			.collect(Collectors.toList());
-	}
-	private static List<Version> upgradeableUbuntuVersions(UbuntuVersion version) {
-		List<UbuntuVersion> all = Arrays.asList(UbuntuVersion.values());
-
-		return all.stream()
-			.filter(it -> it.ordinal()>=version.ordinal() /*&& (hasLibCrypt1_1(version) == hasLibCrypt1_1(it))*/)
-			.collect(Collectors.toList());
 	}
 }

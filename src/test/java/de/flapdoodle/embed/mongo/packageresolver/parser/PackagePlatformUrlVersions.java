@@ -20,10 +20,9 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
+import com.google.common.collect.*;
+import de.flapdoodle.os.CPUType;
+import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.Version;
 import de.flapdoodle.types.Pair;
 import org.immutables.value.Value;
@@ -105,7 +104,7 @@ public abstract class PackagePlatformUrlVersions {
 
 		for (Pair<PackagePlatform, UrlVersions> packageAndUrlVersions : src) {
 			PackagePlatform platform = packageAndUrlVersions.first();
-			boolean debug=platform.version().isPresent() && platform.version().get().name().contains("Ubuntu");
+			boolean debug=false && platform.version().isPresent() && platform.version().get().name().contains("Ubuntu");
 
 			List<PackagePlatform> expandedPlatforms = expandVersions(platform);
 			UrlVersions urlVersions = packageAndUrlVersions.second();

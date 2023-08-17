@@ -20,6 +20,7 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.parser.st;
 
+import de.flapdoodle.checks.Preconditions;
 import de.flapdoodle.embed.mongo.packageresolver.MongoPackages;
 import de.flapdoodle.embed.mongo.packageresolver.NumericVersion;
 import de.flapdoodle.embed.mongo.packageresolver.VersionRange;
@@ -141,6 +142,8 @@ public class TypesafeModelAdapters {
 					return it.bitSize();
 				case "cpuType":
 					return it.cpuType();
+				case "ignoreCpuType":
+					return it.ignoreCpuType();
 				case "versions":
 					return it.versions();
 				case "os":

@@ -1,5 +1,5 @@
 class(it, package) ::= <<
-/**
+/*
  * Copyright (C) 2011
  *   Michael Mosmann \<michael@mosmann.de>
  *   Martin Jöhren \<m.joehren@googlemail.com>
@@ -130,6 +130,7 @@ public class <it.name>Test {
 >>
 
 assertThat(package,url) ::= <<
+<!
 <if (package.versions)>
 <package.versions:{ version | assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
   .resolvesTo("<url>");}; separator="\n\n">
@@ -137,9 +138,11 @@ assertThat(package,url) ::= <<
 assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>), version)
   .resolvesTo("<url>");
 <endif>
+!>
 >>
 
 assertThatTools(package,url) ::= <<
+<!
 <if (package.versions)>
 <package.versions:{ version | assertThatTools(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
   .resolvesTo("<url>"); }; separator="\n\n">
@@ -147,6 +150,7 @@ assertThatTools(package,url) ::= <<
 assertThatTools(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>), version)
   .resolvesTo("<url>");
 <endif>
+!>
 >>
 
 versionRanges(versions) ::= <<
