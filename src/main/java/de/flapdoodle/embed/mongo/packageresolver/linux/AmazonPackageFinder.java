@@ -69,12 +69,26 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
             .build())
         .build();
 
+    PackageFinderRule rule_AmazonLinux2023_ARM_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2023)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("7.0.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-aarch64-amazon2023-{version}.tgz")
+            .build())
+        .build();
+
  
     PackageFinderRule tools_AmazonLinux2023_ARM_B64 = PackageFinderRule.builder()
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.7.1", "100.7.4"))
+                  ToolVersionRange.of("100.8.0"),
+                  ToolVersionRange.of("100.7.1", "100.7.5"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -100,12 +114,26 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
             .build())
         .build();
 
+    PackageFinderRule rule_AmazonLinux2023_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2023)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("7.0.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-amazon2023-{version}.tgz")
+            .build())
+        .build();
+
  
     PackageFinderRule tools_AmazonLinux2023_X86_B64 = PackageFinderRule.builder()
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.7.1", "100.7.4"))
+                  ToolVersionRange.of("100.8.0"),
+                  ToolVersionRange.of("100.7.1", "100.7.5"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -140,8 +168,9 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.0", "6.0.8"),
-                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("7.0.0"),
+                  VersionRange.of("6.0.0", "6.0.9"),
+                  VersionRange.of("5.0.0", "5.0.20"),
                   VersionRange.of("4.4.4", "4.4.23"),
                   VersionRange.of("4.2.13", "4.2.24"))
         ))
@@ -173,7 +202,8 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.8.0"),
+                  ToolVersionRange.of("100.7.0", "100.7.5"),
                   ToolVersionRange.of("100.6.1"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -209,8 +239,9 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.0", "6.0.8"),
-                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("7.0.0"),
+                  VersionRange.of("6.0.0", "6.0.9"),
+                  VersionRange.of("5.0.0", "5.0.20"),
                   VersionRange.of("4.4.0", "4.4.23"),
                   VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.0", "4.2.3"),
@@ -229,7 +260,8 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.8.0"),
+                  ToolVersionRange.of("100.7.0", "100.7.5"),
                   ToolVersionRange.of("100.6.0", "100.6.1"),
                   ToolVersionRange.of("100.5.0", "100.5.4"),
                   ToolVersionRange.of("100.4.0", "100.4.1"),
@@ -266,7 +298,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("5.0.0", "5.0.20"),
                   VersionRange.of("4.4.0", "4.4.23"),
                   VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.0", "4.2.3"),
@@ -289,7 +321,8 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.8.0"),
+                  ToolVersionRange.of("100.7.0", "100.7.5"),
                   ToolVersionRange.of("100.6.0", "100.6.1"),
                   ToolVersionRange.of("100.5.0", "100.5.4"),
                   ToolVersionRange.of("100.4.0", "100.4.1"),
@@ -339,9 +372,9 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
       default:
         return PackageFinderRules.empty()
             .withAdditionalRules(
-                devRule_AmazonLinux2023_ARM_B64
+                devRule_AmazonLinux2023_ARM_B64, rule_AmazonLinux2023_ARM_B64
             ).withAdditionalRules(
-                devRule_AmazonLinux2023_X86_B64
+                devRule_AmazonLinux2023_X86_B64, rule_AmazonLinux2023_X86_B64
             ).withAdditionalRules(
                 devRule_AmazonLinux2_ARM_B64, rule_AmazonLinux2_ARM_B64
             ).withAdditionalRules(

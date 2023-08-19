@@ -77,8 +77,9 @@ public class DebianPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.0", "6.0.8"),
-                  VersionRange.of("5.0.8", "5.0.19"))
+                  VersionRange.of("7.0.0"),
+                  VersionRange.of("6.0.0", "6.0.9"),
+                  VersionRange.of("5.0.8", "5.0.20"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -92,7 +93,8 @@ public class DebianPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.8.0"),
+                  ToolVersionRange.of("100.7.0", "100.7.5"),
                   ToolVersionRange.of("100.6.0", "100.6.1"),
                   ToolVersionRange.of("100.5.3", "100.5.4"))
         ))
@@ -127,8 +129,8 @@ public class DebianPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.0", "6.0.8"),
-                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("6.0.0", "6.0.9"),
+                  VersionRange.of("5.0.0", "5.0.20"),
                   VersionRange.of("4.4.0", "4.4.23"),
                   VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.1", "4.2.3"))
@@ -145,7 +147,8 @@ public class DebianPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.8.0"),
+                  ToolVersionRange.of("100.7.0", "100.7.5"),
                   ToolVersionRange.of("100.6.0", "100.6.1"),
                   ToolVersionRange.of("100.5.0", "100.5.4"),
                   ToolVersionRange.of("100.4.0", "100.4.1"),
@@ -182,7 +185,7 @@ public class DebianPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("5.0.0", "5.0.20"),
                   VersionRange.of("4.4.0", "4.4.23"),
                   VersionRange.of("4.2.5", "4.2.24"),
                   VersionRange.of("4.2.0", "4.2.3"),
@@ -201,7 +204,8 @@ public class DebianPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.8.0"),
+                  ToolVersionRange.of("100.7.0", "100.7.5"),
                   ToolVersionRange.of("100.6.0", "100.6.1"),
                   ToolVersionRange.of("100.5.0", "100.5.4"),
                   ToolVersionRange.of("100.4.0", "100.4.1"),

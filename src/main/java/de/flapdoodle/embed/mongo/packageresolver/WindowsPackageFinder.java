@@ -76,8 +76,9 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Windows, BitSize.B64, CPUType.X86)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.0", "6.0.8"),
-                  VersionRange.of("5.0.0", "5.0.19"),
+                  VersionRange.of("7.0.0"),
+                  VersionRange.of("6.0.0", "6.0.9"),
+                  VersionRange.of("5.0.0", "5.0.20"),
                   VersionRange.of("4.4.0", "4.4.23"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -158,7 +159,8 @@ public class WindowsPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Windows, BitSize.B64, CPUType.X86)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.7.0", "100.7.4"),
+                  ToolVersionRange.of("100.8.0"),
+                  ToolVersionRange.of("100.7.0", "100.7.5"),
                   ToolVersionRange.of("100.6.0", "100.6.1"),
                   ToolVersionRange.of("100.5.0", "100.5.4"),
                   ToolVersionRange.of("100.4.0", "100.4.1"),
