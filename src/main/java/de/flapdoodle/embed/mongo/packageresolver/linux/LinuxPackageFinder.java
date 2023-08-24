@@ -78,13 +78,9 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 
 		CentosRedhatPackageFinder centosRedhatPackageFinder = new CentosRedhatPackageFinder(command);
 
-		List<Version> centosRedhatAndOracleVersions = Stream.of(Stream.of(CentosVersion.values()), Stream.of(RedhatVersion.values()),
-				Stream.of(OracleVersion.values()))
-			.flatMap(it -> it).collect(Collectors.toList());
-
 		ImmutablePackageFinderRule centosRedhatOracleRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
-				.withVersion(centosRedhatAndOracleVersions))
+				.withVersion(CentosRedhatPackageFinder.knownVersions()))
 			.finder(centosRedhatPackageFinder)
 			.build();
 

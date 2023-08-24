@@ -23,17 +23,17 @@ package de.flapdoodle.embed.mongo.packageresolver.linux;
 import de.flapdoodle.embed.mongo.packageresolver.*;
 import de.flapdoodle.embed.process.config.store.FileSet;
 import de.flapdoodle.embed.process.config.store.FileType;
-import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
-import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
+import de.flapdoodle.os.Version;
 import de.flapdoodle.os.linux.*;
 import de.flapdoodle.os.linux.CentosVersion;
 
-
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
 * this file is generated, please don't touch
@@ -48,6 +48,16 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
     return FileSet.builder()
             .addEntry(FileType.Executable, command.commandName())
             .build();
+  }
+
+  public static List<Version> knownVersions() {
+    return Stream.of(
+        Stream.of(CentosVersion.values()),
+        Stream.of(RedhatVersion.values()),
+        Stream.of(OracleVersion.values()),
+        Stream.of(FedoraVersion.values()))
+      .flatMap(it -> it)
+      .collect(Collectors.toList());
   }
 
   private static ImmutablePackageFinderRules rules(final Command command) {
