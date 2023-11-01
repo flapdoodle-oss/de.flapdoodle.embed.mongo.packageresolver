@@ -20,114 +20,133 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
+import de.flapdoodle.embed.mongo.packageresolver.Command;
+import de.flapdoodle.embed.mongo.packageresolver.HasMongotoolsPackage;
+import de.flapdoodle.embed.mongo.packageresolver.HtmlParserResultTester;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
 import de.flapdoodle.os.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Optional;
+
+/**
+* this file is generated, please don't touch
+*/
 class OSXPackageFinderTest {
-
-  /*
-    https://fastdl.mongodb.org/osx/mongodb-macos-arm64-{}.tgz
-    "6.0.8", "6.0.1 -> 6.0.6"
-   */
-  @ParameterizedTest
-  @ValueSource(strings = {"6.0.8", "6.0.1 -> 6.0.6"})
-  public void armSet(String version) {
-    assertThat(osx(CommonArchitecture.ARM_64), version)
-      .resolvesTo("/osx/mongodb-macos-arm64-{}.tgz");
-  }
-
-  /*
-    dev
-    https://fastdl.mongodb.org/osx/mongodb-macos-arm64-{}.tgz
-    "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2"
-   */
-  @ParameterizedTest
-  @ValueSource(strings = {"7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2"})
-  public void armDev(String version) {
-    assertThat(osx(CommonArchitecture.ARM_64), version)
-      .resolveDevPackageTo("/osx/mongodb-macos-arm64-{}.tgz");
-  }
-
-  /*
-    https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-{}.tgz
-    4.0.0 -> 4.0.28, 3.6.0 -> 3.6.23
-  */
-  @ParameterizedTest
-  @ValueSource(strings = {"4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23"})
-  public void firstSet(String version) {
-    assertThat(version)
-            .resolvesTo("/osx/mongodb-osx-ssl-x86_64-{}.tgz");
-  }
-
-  /*
-    https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-{}.tgz|https://fastdl.mongodb.org/osx/mongodb-osx-x86_64-{}.tgz
-    "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.4 -> 3.0.15"
-  */
-  @ParameterizedTest
-  @ValueSource(strings = {"3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.4 -> 3.0.15"})
-  public void secondSet(String version) {
-    assertThat(version)
-            .resolvesTo("/osx/mongodb-osx-ssl-x86_64-{}.tgz");
-  }
-
-  /*
-    https://fastdl.mongodb.org/osx/mongodb-osx-x86_64-{}.tgz
-    3.0.0 -> 3.0.3, 2.6.0 -> 2.6.12
-  */
-  @ParameterizedTest
-  @ValueSource(strings = {"3.0.0 -> 3.0.3", "2.6.0 -> 2.6.12"})
-  public void thirdSet(String version) {
-    assertThat(version)
-            .resolvesTo("/osx/mongodb-osx-x86_64-{}.tgz");
-  }
-
-  /*
-    https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-{}.tgz
-    "6.0.8", "6.0.1 -> 6.0.6", "5.0.18 -> 5.0.19", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22 -> 4.4.23", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3"
-  */
-  @ParameterizedTest
-  @ValueSource(strings = {"6.0.8", "6.0.1 -> 6.0.6", "5.0.18 -> 5.0.19", "5.0.12 -> 5.0.15", "5.0.5 -> 5.0.6", "5.0.0 -> 5.0.2", "4.4.22 -> 4.4.23", "4.4.16 -> 4.4.19", "4.4.13", "4.4.11", "4.4.0 -> 4.4.9", "4.2.22 -> 4.2.24", "4.2.18 -> 4.2.19", "4.2.5 -> 4.2.16", "4.2.0 -> 4.2.3"})
-  public void fourthSet(String version) {
-    assertThat(version)
-            .resolvesTo("/osx/mongodb-macos-x86_64-{}.tgz");
-  }
-
-  /*
-    dev
-    https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-{}.tgz
-    "7.0.0-rc2", "7.0.0-rc1", "6.3.1"
-  */
-  @ParameterizedTest
-  @ValueSource(strings = {"7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2"})
-  public void fourthSetDev(String version) {
-    assertThat(version)
-      .resolveDevPackageTo("/osx/mongodb-macos-x86_64-{}.tgz");
-  }
-
-  private static Platform osx() {
-    return osx(CommonArchitecture.X86_64);
-  }
-
-  private static Platform osx(Architecture architecture) {
-    return ImmutablePlatform.builder()
-      .operatingSystem(CommonOS.OS_X)
-      .architecture(architecture)
-      .build();
-  }
-
-  private static HtmlParserResultTester assertThat(String versionList) {
-    return assertThat(osx(), versionList);
-  }
-
-  private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
-    return HtmlParserResultTester.with(
-      new OSXPackageFinder(Command.Mongo),
-      version -> Distribution.of(Version.of(version), platform),
-      versionList);
-  }
+	@ParameterizedTest
+	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
+	public void OS_XArmDev(String version) {
+		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.ARM_64), version)
+		  .resolvesTo("/osx/mongodb-macos-arm64-{}.tgz");
+	}
+	@ParameterizedTest
+	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11" })
+	public void OS_XArm(String version) {
+		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.ARM_64), version)
+		  .resolvesTo("/osx/mongodb-macos-arm64-{}.tgz");
+	}
 
 
+	@ParameterizedTest
+	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.1 -> 100.7.5" })
+	public void OS_XArmTools(String version) {
+		assertThatTools(withPlatform(CommonOS.OS_X, CommonArchitecture.ARM_64), version)
+			.resolvesTo("/tools/db/mongodb-database-tools-macos-arm64-{}.zip");
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	public void OS_XDev(String version) {
+		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.X86_64), version)
+		  .resolvesTo("/osx/mongodb-macos-x86_64-{}.tgz");
+	}
+	@ParameterizedTest
+	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	public void OS_X(String version) {
+		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.X86_64), version)
+		  .resolvesTo("/osx/mongodb-macos-x86_64-{}.tgz");
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.4 -> 3.0.15" })
+	public void OS_X_1(String version) {
+		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.X86_64), version)
+		  .resolvesTo("/osx/mongodb-osx-ssl-x86_64-{}.tgz");
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { /*"3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15",*/ "2.6.0 -> 2.6.12" })
+	public void OS_X_2(String version) {
+		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.X86_64), version)
+		  .resolvesTo("/osx/mongodb-osx-x86_64-{}.tgz");
+	}
+
+
+	@ParameterizedTest
+	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1" })
+	public void OS_XTools(String version) {
+		assertThatTools(withPlatform(CommonOS.OS_X, CommonArchitecture.X86_64), version)
+			.resolvesTo("/tools/db/mongodb-database-tools-macos-x86_64-{}.zip");
+	}
+	@ParameterizedTest
+	@ValueSource(strings = { "100.0.0-alpha1 -> 100.0.2", "100.0.0", "99.0.0" })
+	public void OS_X_1Tools(String version) {
+		assertThatTools(withPlatform(CommonOS.OS_X, CommonArchitecture.X86_64), version)
+			.resolvesTo("/tools/db/mongodb-database-tools-macos-x86_64-{}.tgz");
+	}
+
+
+	private static Platform withPlatform(OS os, CommonArchitecture architecture) {
+		return ImmutablePlatform.builder()
+			.operatingSystem(os)
+			.architecture(architecture)
+			.build();
+	}
+
+	private static Platform withPlatform(OS os, CommonArchitecture architecture, de.flapdoodle.os.Version version) {
+		return ImmutablePlatform.builder()
+			.operatingSystem(os)
+			.architecture(architecture)
+			.version(version)
+			.build();
+	}
+
+	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
+		return HtmlParserResultTester.with(
+			new OSXPackageFinder(Command.Mongo),
+			version -> Distribution.of(Version.of(version), platform),
+			versionList);
+	}
+
+	private static HtmlParserResultTester assertThatTools(Platform platform, String versionList) {
+		return HtmlParserResultTester.with(
+			new OSXPackageFinder(Command.MongoDump),
+			version -> Distribution.of(ToolsVersion.of(Version.of(version)), platform),
+			versionList);
+	}
+
+	static class ToolsVersion implements Version, HasMongotoolsPackage {
+		private final Version toolsVersion;
+
+		public ToolsVersion(Version toolsVersion) {
+			this.toolsVersion = toolsVersion;
+		}
+
+		@Override
+		public String asInDownloadPath() {
+			return "any";
+		}
+
+		@Override
+		public Optional<? extends Version> mongotoolsVersion() {
+			return Optional.of(toolsVersion);
+		}
+
+		private static ToolsVersion of(Version toolsVersion) {
+			return new ToolsVersion(toolsVersion);
+		}
+	}
 }

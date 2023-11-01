@@ -20,12 +20,14 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.parser.st;
 
-import de.flapdoodle.checks.Preconditions;
 import de.flapdoodle.embed.mongo.packageresolver.MongoPackages;
 import de.flapdoodle.embed.mongo.packageresolver.NumericVersion;
 import de.flapdoodle.embed.mongo.packageresolver.VersionRange;
 import de.flapdoodle.embed.mongo.packageresolver.parser.*;
+import de.flapdoodle.os.BitSize;
+import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
+import de.flapdoodle.os.Version;
 import de.flapdoodle.types.Pair;
 import org.stringtemplate.v4.STGroup;
 
@@ -78,7 +80,7 @@ public class TypesafeModelAdapters {
 				return it.url();
 			}
 			if (name.equals("testUrl")) {
-				return it.url().replace("{version}","{}");
+				return it.url().replace("{version}", "{}");
 			}
 			if (name.equals("versions")) {
 				return it.versions();
@@ -99,7 +101,7 @@ public class TypesafeModelAdapters {
 				return it.url();
 			}
 			if (name.equals("testUrl")) {
-				return it.url().replace("{tools.version}","{}");
+				return it.url().replace("{tools.version}", "{}");
 			}
 			if (name.equals("versions")) {
 				return it.versions();
@@ -136,8 +138,13 @@ public class TypesafeModelAdapters {
 					return (it.version().isPresent()
 						? it.version().get().name()
 						: it.os().name())
-						+"_"+it.cpuType().name()
-						+"_"+it.bitSize().name();
+						+ "_" + it.cpuType().name()
+						+ "_" + it.bitSize().name();
+				case "testMethodName":
+					return (it.version().isPresent()
+						? it.version().get().name()
+						: it.os().name())
+						+ testMethodCpuAndBitsize(it.cpuType(), it.bitSize());
 				case "bitSize":
 					return it.bitSize();
 				case "cpuType":
@@ -146,13 +153,41 @@ public class TypesafeModelAdapters {
 					return it.ignoreCpuType();
 				case "versions":
 					return it.versions();
+				case "compatibleVersions":
+					return compatibleVersions(it.version(), it.versions());
+				case "version":
+					return it.version().isPresent()
+						? Arrays.asList(it.version().get())
+						: Collections.emptyList();
 				case "os":
 					return it.os().name();
 				case "architecture":
 					return it.architecture();
 			}
-			throw new IllegalArgumentException("unknown property: '" + name + "'");
+			throw new IllegalArgumentException("unknown property: '" + name + "' of " + PackagePlatform.class.getSimpleName());
 		});
+	}
+
+	private static List<Version> compatibleVersions(Optional<Version> version, List<Version> versions) {
+		return version.isPresent() && !versions.isEmpty()
+			? versions.stream().filter(it -> it != version.get()).collect(Collectors.toList())
+			: versions;
+	}
+
+	private static String testMethodCpuAndBitsize(CPUType cpuType, BitSize bitSize) {
+		String cpu = "";
+		switch (cpuType) {
+			case X86:
+				cpu = "";
+				break;
+			case ARM:
+				cpu = "Arm";
+				break;
+			default:
+				throw new IllegalArgumentException("not implemented: " + cpuType);
+		}
+		String bits = bitSize == BitSize.B64 ? "" : "32";
+		return cpu + bits;
 	}
 
 	public static TypesafeModelAdapter<UrlVersions> urlVersions() {

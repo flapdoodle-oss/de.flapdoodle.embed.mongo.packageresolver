@@ -21,136 +21,149 @@ class(it, package) ::= <<
  */
 package de.flapdoodle.embed.mongo.packageresolver<if(it.package.is)>.<it.package.get><endif>;
 
-import de.flapdoodle.embed.mongo.packageresolver.*;
-import de.flapdoodle.embed.process.config.store.FileSet;
-import de.flapdoodle.embed.process.config.store.FileType;
-import de.flapdoodle.embed.process.config.store.Package;
-import de.flapdoodle.embed.process.distribution.ArchiveType;
+import de.flapdoodle.embed.mongo.packageresolver.Command;
+import de.flapdoodle.embed.mongo.packageresolver.HasMongotoolsPackage;
+import de.flapdoodle.embed.mongo.packageresolver.HtmlParserResultTester;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
-import de.flapdoodle.os.CommonOS;
-import de.flapdoodle.os.OS;
-import de.flapdoodle.os.CommonArchitecture;
-import de.flapdoodle.os.Platform;
-import de.flapdoodle.os.ImmutablePlatform;
-import de.flapdoodle.os.linux.*;
+import de.flapdoodle.os.*;
 <it.imports:{ import |
 import <import>;
 }>
-
-import java.util.Optional;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Optional;
+
 /**
 * this file is generated, please don't touch
 */
-public class <it.name>Test {
-
+class <it.name>Test {
 <package.entries:{ pair | <pair.urlVersions.entries:{ urlAndVersions |
 <if(urlAndVersions.versions.hasDevVersions)>
-  @ParameterizedTest
-  @ValueSource(strings = {<versionRanges(urlAndVersions.versions.devVersions)>\})
-  public void devUrlOf<pair.platform.variableName><urlAndVersions.index>(String version) {
-    <assertThat(pair.platform, urlAndVersions.testUrl)>
-  \}
-
+	@ParameterizedTest
+	@ValueSource(strings = { <versionRanges(urlAndVersions.versions.devVersions)> \})
+	public void <pair.platform.testMethodName><urlAndVersions.index>Dev(String version) {
+		<assertThatDev(pair.platform, urlAndVersions.testUrl)>
+	\}
+<pair.platform.compatibleVersions:{ version |
+	@ParameterizedTest
+	@ValueSource(strings = { <versionRanges(urlAndVersions.versions.devVersions)> \})
+	public void <version>As<pair.platform.testMethodName><urlAndVersions.index>Dev(String version) {
+		<assertThatVersionDev(pair.platform, version, urlAndVersions.testUrl)>
+	\}
+}>
 <endif>
 <if(urlAndVersions.versions.hasVersions)>
-  @ParameterizedTest
-  @ValueSource(strings = {<versionRanges(urlAndVersions.versions.versions)>\})
-  public void urlOf<pair.platform.variableName><urlAndVersions.index>(String version) {
-    <assertThat(pair.platform, urlAndVersions.testUrl)>
-  \}
-<endif>
+	@ParameterizedTest
+	@ValueSource(strings = { <versionRanges(urlAndVersions.versions.versions)> \})
+	public void <pair.platform.testMethodName><urlAndVersions.index>(String version) {
+		<assertThat(pair.platform, urlAndVersions.testUrl)>
+	\}
+<pair.platform.compatibleVersions:{ version |
+	@ParameterizedTest
+	@ValueSource(strings = { <versionRanges(urlAndVersions.versions.versions)> \})
+	public void <version>As<pair.platform.testMethodName><urlAndVersions.index>(String version) {
+		<assertThatVersion(pair.platform, version, urlAndVersions.testUrl)>
+	\}
 }>
-<pair.urlVersions.toolEntries:{ toolsUrlAndVersions |
-<if(toolsUrlAndVersions.versions.hasVersions)>
-  @ParameterizedTest
-  @ValueSource(strings = {<versionRanges(toolsUrlAndVersions.versions.versions)>\})
-  public void toolsUrlOf<pair.platform.variableName><toolsUrlAndVersions.index>(String version) {
-    <assertThatTools(pair.platform, toolsUrlAndVersions.testUrl)>
-  \}
+
+<endif>
+}><pair.urlVersions.toolEntries:{ toolsUrlAndVersions | <if(toolsUrlAndVersions.versions.hasVersions)>
+	@ParameterizedTest
+	@ValueSource(strings = { <versionRanges(toolsUrlAndVersions.versions.versions)> \})
+	public void <pair.platform.testMethodName><toolsUrlAndVersions.index>Tools(String version) {
+		<assertThatTools(pair.platform, toolsUrlAndVersions.testUrl)>
+	\}
 <endif>
 }>}>
 
-  private static Platform withPlatform(OS os, CommonArchitecture architecture) {
-    return ImmutablePlatform.builder()
-            .operatingSystem(os)
-            .architecture(architecture)
-            .build();
-  }
+	private static Platform withPlatform(OS os, CommonArchitecture architecture) {
+		return ImmutablePlatform.builder()
+			.operatingSystem(os)
+			.architecture(architecture)
+			.build();
+	}
 
-  private static Platform withPlatform(OS os, CommonArchitecture architecture, de.flapdoodle.os.Version version) {
-    return ImmutablePlatform.builder()
-            .operatingSystem(os)
-            .architecture(architecture)
-            .version(version)
-            .build();
-  }
+	private static Platform withPlatform(OS os, CommonArchitecture architecture, de.flapdoodle.os.Version version) {
+		return ImmutablePlatform.builder()
+			.operatingSystem(os)
+			.architecture(architecture)
+			.version(version)
+			.build();
+	}
 
-  private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
-    return HtmlParserResultTester.with(
-            new <it.name>(Command.Mongo),
-            version -> Distribution.of(Version.of(version), platform),
-            versionList);
-  }
+	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
+		return HtmlParserResultTester.with(
+			new <it.name>(Command.Mongo),
+			version -> Distribution.of(Version.of(version), platform),
+			versionList);
+	}
 
-  private static HtmlParserResultTester assertThatTools(Platform platform, String versionList) {
-    return HtmlParserResultTester.with(
-            new <it.name>(Command.MongoDump),
-            version -> Distribution.of(ToolsVersion.of(Version.of(version)), platform),
-            versionList);
-  }
+	private static HtmlParserResultTester assertThatTools(Platform platform, String versionList) {
+		return HtmlParserResultTester.with(
+			new <it.name>(Command.MongoDump),
+			version -> Distribution.of(ToolsVersion.of(Version.of(version)), platform),
+			versionList);
+	}
 
-  static class ToolsVersion implements Version, HasMongotoolsPackage {
-    private final Version toolsVersion;
+	static class ToolsVersion implements Version, HasMongotoolsPackage {
+		private final Version toolsVersion;
 
-    public ToolsVersion(Version toolsVersion) {
-       this.toolsVersion = toolsVersion;
-    }
+		public ToolsVersion(Version toolsVersion) {
+			this.toolsVersion = toolsVersion;
+		}
 
-    @Override
-    public String asInDownloadPath() {
-      return "any";
-    }
+		@Override
+		public String asInDownloadPath() {
+			return "any";
+		}
 
-    @Override
-    public Optional\<? extends Version> mongotoolsVersion() {
-      return Optional.of(toolsVersion);
-    }
+		@Override
+		public Optional\<? extends Version> mongotoolsVersion() {
+			return Optional.of(toolsVersion);
+		}
 
-    private static ToolsVersion of(Version toolsVersion) {
-      return new ToolsVersion(toolsVersion);
-    }
-  }
+		private static ToolsVersion of(Version toolsVersion) {
+			return new ToolsVersion(toolsVersion);
+		}
+	}
 }
 >>
 
 assertThat(package,url) ::= <<
-<!
-<if (package.versions)>
-<package.versions:{ version | assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
-  .resolvesTo("<url>");}; separator="\n\n">
-<else>
+<if (package.version)>
+<package.version:{ version | assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
+	.resolvesTo("<url>");}; separator="\n\n"><else>
 assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>), version)
-  .resolvesTo("<url>");
-<endif>
-!>
+  .resolvesTo("<url>");<endif>
+>>
+
+assertThatVersion(package,version,url) ::= <<
+assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
+	.resolvesTo("<url>");
+>>
+
+assertThatDev(package,url) ::= <<
+<if (package.version)>
+<package.version:{ version | assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
+	.resolveDevPackageTo("<url>");}; separator="\n\n"><else>
+assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>), version)
+  .resolvesTo("<url>");<endif>
+>>
+
+assertThatVersionDev(package,version,url) ::= <<
+assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
+	.resolveDevPackageTo("<url>");
 >>
 
 assertThatTools(package,url) ::= <<
-<!
-<if (package.versions)>
-<package.versions:{ version | assertThatTools(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
-  .resolvesTo("<url>"); }; separator="\n\n">
-<else>
+<if (package.version)>
+<package.version:{ version | assertThatTools(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
+	.resolvesTo("<url>");}; separator="\n\n"><else>
 assertThatTools(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>), version)
-  .resolvesTo("<url>");
-<endif>
-!>
+	.resolvesTo("<url>");<endif>
 >>
 
 versionRanges(versions) ::= <<

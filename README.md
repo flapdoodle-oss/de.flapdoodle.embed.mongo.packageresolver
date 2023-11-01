@@ -16,4 +16,12 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 		<version>4.9.1</version>
 	</dependency>
 
+### Changelog
 
+#### Unreleased
+
+- support for mongodb 7.0.2
+
+#### 4.9.1
+
+- support for mongodb 7.0.0

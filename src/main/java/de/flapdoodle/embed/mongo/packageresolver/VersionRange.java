@@ -50,6 +50,9 @@ public abstract class VersionRange implements DistributionMatch {
   @Value.Auxiliary
   public boolean match(Version version) {
     NumericVersion asNumeric = NumericVersion.of(version.asInDownloadPath());
+    if (asNumeric.build().isPresent()) {
+      return min().isEqual(asNumeric) && max().isEqual(asNumeric);
+    }
     return min().isOlderOrEqual(asNumeric) && asNumeric.isOlderOrEqual(max());
   }
 
