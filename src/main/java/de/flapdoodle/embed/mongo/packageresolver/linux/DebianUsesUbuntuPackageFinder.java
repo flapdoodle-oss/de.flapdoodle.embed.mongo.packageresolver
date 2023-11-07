@@ -21,6 +21,7 @@
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.embed.mongo.packageresolver.HasExplanation;
+import de.flapdoodle.embed.mongo.packageresolver.ImmutablePlatformMatch;
 import de.flapdoodle.embed.mongo.packageresolver.PackageFinder;
 import de.flapdoodle.embed.mongo.packageresolver.PlatformMatch;
 import de.flapdoodle.embed.process.config.store.Package;
@@ -51,12 +52,16 @@ public class DebianUsesUbuntuPackageFinder implements PackageFinder, HasExplanat
 
 	@Override
 	public Optional<Package> packageFor(Distribution distribution) {
-		if (PlatformMatch.withOs(CommonOS.Linux).withVersion(DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13).match(distribution)) {
+		if (platformMatch().match(distribution)) {
 			if (!distribution.platform().version().isPresent()) throw new RuntimeException("version not set: "+distribution);
 			Version currentVersion = distribution.platform().version().get();
-			Distribution asUbuntudistribution = Distribution.of(distribution.version(),
-				ImmutablePlatform.copyOf(distribution.platform()).withVersion(matchingUbuntuVersion((DebianVersion) currentVersion)));
-			return ubuntuPackageFinder.packageFor(asUbuntudistribution);
+			Optional<UbuntuVersion> ubuntuVersion = matchingUbuntuVersion((DebianVersion) currentVersion);
+
+			if (ubuntuVersion.isPresent()) {
+				Distribution asUbuntudistribution = Distribution.of(distribution.version(),
+					ImmutablePlatform.copyOf(distribution.platform()).withVersion(ubuntuVersion));
+				return ubuntuPackageFinder.packageFor(asUbuntudistribution);
+			}
 		}
 
 		return Optional.empty();
@@ -64,25 +69,37 @@ public class DebianUsesUbuntuPackageFinder implements PackageFinder, HasExplanat
 
 	@Override
 	public String explain() {
-		List<UbuntuVersion> ubuntuVersions = Stream.of(DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13).map(DebianUsesUbuntuPackageFinder::matchingUbuntuVersion)
+		List<UbuntuVersion> ubuntuVersions = Stream.of(DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13)
+			.map(DebianUsesUbuntuPackageFinder::matchingUbuntuVersion)
+			.filter(Optional::isPresent)
+			.map(Optional::get)
 			.distinct()
 			.collect(Collectors.toList());
 
 		return ubuntuVersions.stream()
 			.map(uv -> Arrays.stream(DebianVersion.values())
-				.filter(v -> matchingUbuntuVersion(v) == uv)
+				.filter(v -> {
+					Optional<UbuntuVersion> ubuntuVersion = matchingUbuntuVersion(v);
+					return ubuntuVersion.isPresent() && ubuntuVersion.get() == uv;
+				})
 				.map(DebianVersion::name)
 				.collect(Collectors.joining(", ", "" + uv.name() + " for ", "")))
 			.collect(Collectors.joining(" and ", "use ", ""));
 	}
 
-	private static UbuntuVersion matchingUbuntuVersion(DebianVersion debianVersion) {
+	public static ImmutablePlatformMatch platformMatch() {
+		return PlatformMatch.withOs(CommonOS.Linux).withVersion(DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13);
+	}
+
+	private static Optional<UbuntuVersion> matchingUbuntuVersion(DebianVersion debianVersion) {
 		switch (debianVersion) {
 			case DEBIAN_12:
 			case DEBIAN_13:
-				return UbuntuVersion.Ubuntu_22_04;
+				return Optional.of(UbuntuVersion.Ubuntu_22_04);
 			default:
-				throw new IllegalArgumentException("no matching fake ubuntu version for "+debianVersion);
+				return Optional.empty();
 		}
 	}
+
+	
 }

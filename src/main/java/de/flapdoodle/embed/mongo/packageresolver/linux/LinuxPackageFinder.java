@@ -71,6 +71,11 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 			.finder(new PopOSPackageFinder(ubuntuPackageFinder))
 			.build();
 
+		final ImmutablePackageFinderRule debianUsesUbuntuRule = PackageFinderRule.builder()
+			.match(DebianUsesUbuntuPackageFinder.platformMatch())
+			.finder(new DebianUsesUbuntuPackageFinder(ubuntuPackageFinder))
+			.build();
+
 		final ImmutablePackageFinderRule debianRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux).withVersion(DebianVersion.values()))
 			.finder(new DebianPackageFinder(command))
@@ -105,6 +110,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 				ubuntuRule,
 				linuxMintRule,
 				popOsRule,
+				debianUsesUbuntuRule,
 				debianRule,
 				centosRedhatOracleRule,
 				amazonRule,

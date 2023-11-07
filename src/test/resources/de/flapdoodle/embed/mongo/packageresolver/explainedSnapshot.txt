@@ -62,6 +62,8 @@
     use Ubuntu_18_04 for LINUX_MINT_19_0, LINUX_MINT_19_1, LINUX_MINT_19_2, LINUX_MINT_19_3 and Ubuntu_20_04 for LINUX_MINT_20_0, LINUX_MINT_20_1, LINUX_MINT_20_2, LINUX_MINT_20_3 and Ubuntu_22_04 for LINUX_MINT_21_0, LINUX_MINT_21_1, LINUX_MINT_21_2, LINUX_MINT_21_3
   (os=Linux and (version is any of POP_OS_22_4))
     use Ubuntu_22_04 for POP_OS_22_4
+  (os=Linux and (version is any of DEBIAN_12, DEBIAN_13))
+    use Ubuntu_22_04 for DEBIAN_12, DEBIAN_13
   (os=Linux and (version is any of DEBIAN_9, DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13))
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_11, DEBIAN_12, DEBIAN_13)) and (7.1.0 or 7.0.3-rc1 or 7.0.0-rc8 or 7.0.0-rc2 or 7.0.0-rc10 or 7.0.0-rc1 or 6.3.1-6.3.2 or 6.0.9-rc1 or 5.0.20-rc1)
       url=/linux/mongodb-linux-x86_64-debian11-{version}.tgz (TGZ(DEV))

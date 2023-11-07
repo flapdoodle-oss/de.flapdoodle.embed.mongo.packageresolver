@@ -20,6 +20,8 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+- fix support for debian 13 (uses ubuntu version)                   
+
 #### 4.10.0
 
 - support for mongodb 7.0.2
