@@ -56,7 +56,7 @@ public class FedoraPackageFinder implements PackageFinder, HasExplanation {
 					ImmutablePlatform.copyOf(distribution.platform()).withVersion(matchingRedhatVersion(((FedoraVersion) currentVersion))));
 				return centosRedhatPackageFinder.packageFor(asUbuntudistribution);
 			} else {
-				throw new IllegalArgumentException("Version is not a "+LinuxMintVersion.class+": "+currentVersion);
+				throw new IllegalArgumentException("Version is not a "+FedoraVersion.class+": "+currentVersion);
 			}
 		}
 
