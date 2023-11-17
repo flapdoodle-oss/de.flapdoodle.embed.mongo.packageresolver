@@ -36,7 +36,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 class FedoraPackageFinderTest extends AbstractVersionMappedPackageFinderTest<FedoraVersion, RedhatVersion> {
 
   public FedoraPackageFinderTest() {
-    super(new FedoraPackageFinder(new CentosRedhatPackageFinder(Command.Mongo)));
+    super(new FedoraPackageFinder(new RedhatPackageFinder(Command.Mongo)));
   }
 
   @Test

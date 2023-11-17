@@ -66,9 +66,10 @@ public abstract class PackageOsAndVersionType implements Comparable<PackageOsAnd
 		}
 		if (version().isPresent()) {
 			classBaseName=version().get().getSimpleName().replace("Version","");
-			if (version().get()== CentosVersion.class) {
-				classBaseName="CentosRedhat";
-			}
+//			if (version().get()== CentosVersion.class) {
+//				// TODO -> RedHat
+//				classBaseName="CentosRedhat";
+//			}
 		}
 		return classBaseName+"PackageFinder";
 	}

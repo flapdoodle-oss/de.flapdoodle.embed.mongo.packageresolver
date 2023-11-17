@@ -5,7 +5,7 @@ import de.flapdoodle.os.linux.RedhatVersion;
 import de.flapdoodle.types.Pair;
 
 public class OraclePackageFinder extends AbstractVersionMappedPackageFinder<OracleVersion, RedhatVersion> {
-	protected OraclePackageFinder(CentosRedhatPackageFinder delegate) {
+	protected OraclePackageFinder(RedhatPackageFinder delegate) {
 		super(delegate,
 			Pair.of(OracleVersion.Oracle_6, RedhatVersion.Redhat_6),
 			Pair.of(OracleVersion.Oracle_7, RedhatVersion.Redhat_7),

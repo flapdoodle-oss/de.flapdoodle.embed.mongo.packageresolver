@@ -20,18 +20,23 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
-import de.flapdoodle.os.linux.FedoraVersion;
+import de.flapdoodle.embed.mongo.packageresolver.Command;
+import de.flapdoodle.os.linux.CentosVersion;
+import de.flapdoodle.os.linux.OracleVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
-import de.flapdoodle.types.Pair;
+import org.junit.jupiter.api.Test;
 
-public class FedoraPackageFinder extends AbstractVersionMappedPackageFinder<FedoraVersion, RedhatVersion> {
+class CentosPackageFinderTest extends AbstractVersionMappedPackageFinderTest<CentosVersion, RedhatVersion> {
 
-	public FedoraPackageFinder(RedhatPackageFinder centosRedhatPackageFinder) {
-		super(centosRedhatPackageFinder,
-			Pair.of(FedoraVersion.Fedora_38, RedhatVersion.Redhat_9),
-			Pair.of(FedoraVersion.Fedora_39, RedhatVersion.Redhat_9),
-			Pair.of(FedoraVersion.Fedora_40, RedhatVersion.Redhat_9),
-			Pair.of(FedoraVersion.Fedora_41, RedhatVersion.Redhat_9)
-		);
+	public CentosPackageFinderTest() {
+		super(new CentosPackageFinder(new RedhatPackageFinder(Command.Mongo)));
+	}
+	
+	@Test
+	public void oracleToRedHatMapping() {
+		assertMappedVersion(CentosVersion.CentOS_6, RedhatVersion.Redhat_6);
+		assertMappedVersion(CentosVersion.CentOS_7, RedhatVersion.Redhat_7);
+		assertMappedVersion(CentosVersion.CentOS_8, RedhatVersion.Redhat_8);
+		assertMappedVersion(CentosVersion.CentOS_9, RedhatVersion.Redhat_9);
 	}
 }

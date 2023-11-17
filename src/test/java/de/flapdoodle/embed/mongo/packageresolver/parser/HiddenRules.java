@@ -40,32 +40,34 @@ public abstract class HiddenRules {
 		if (version instanceof DebianVersion) {
 			return upgradeableDebianVersions((DebianVersion) version);
 		}
-		if (version instanceof CentosVersion) {
-			return upgradeableCentosVersions((CentosVersion) version);
+		if (version instanceof RedhatVersion) {
+			return upgradeableCentosVersions((RedhatVersion) version);
 		}
 
 		return Collections.singletonList(version);
 	}
-	private static List<Version> upgradeableCentosVersions(CentosVersion version) {
-		List<CentosVersion> all = Arrays.asList(CentosVersion.values());
+
+	private static List<Version> upgradeableCentosVersions(RedhatVersion version) {
+		List<RedhatVersion> all = Arrays.asList(RedhatVersion.values());
 
 		return all.stream()
 			.filter(it -> it.ordinal()>=version.ordinal())
-			.flatMap(it -> {
-				switch (it) {
-					case CentOS_6:
-						return Stream.of(CentosVersion.CentOS_6, RedhatVersion.Redhat_6);
-					case CentOS_7:
-						return Stream.of(CentosVersion.CentOS_7, RedhatVersion.Redhat_7);
-					case CentOS_8:
-						return Stream.of(CentosVersion.CentOS_8, RedhatVersion.Redhat_8);
-					case CentOS_9:
-						return Stream.of(CentosVersion.CentOS_9, RedhatVersion.Redhat_9);
-				}
-				return Stream.of(it);
-			})
+//			.flatMap(it -> {
+//				switch (it) {
+//					case CentOS_6:
+//						return Stream.of(CentosVersion.CentOS_6, RedhatVersion.Redhat_6);
+//					case CentOS_7:
+//						return Stream.of(CentosVersion.CentOS_7, RedhatVersion.Redhat_7);
+//					case CentOS_8:
+//						return Stream.of(CentosVersion.CentOS_8, RedhatVersion.Redhat_8);
+//					case CentOS_9:
+//						return Stream.of(CentosVersion.CentOS_9, RedhatVersion.Redhat_9);
+//				}
+//				return Stream.of(it);
+//			})
 			.collect(Collectors.toList());
 	}
+
 	private static List<Version> upgradeableDebianVersions(DebianVersion version) {
 		List<DebianVersion> all = Arrays.asList(DebianVersion.values());
 

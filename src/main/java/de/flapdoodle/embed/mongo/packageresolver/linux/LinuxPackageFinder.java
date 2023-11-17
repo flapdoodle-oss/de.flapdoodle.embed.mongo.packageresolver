@@ -81,11 +81,11 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 			.finder(new DebianPackageFinder(command))
 			.build();
 
-		CentosRedhatPackageFinder centosRedhatPackageFinder = new CentosRedhatPackageFinder(command);
+		RedhatPackageFinder centosRedhatPackageFinder = new RedhatPackageFinder(command);
 
-		ImmutablePackageFinderRule centosRedhatOracleRule = PackageFinderRule.builder()
+		ImmutablePackageFinderRule redhatRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
-				.withVersion(CentosRedhatPackageFinder.knownVersions()))
+				.withVersion(RedhatVersion.values()))
 			.finder(centosRedhatPackageFinder)
 			.build();
 
@@ -99,6 +99,12 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(OracleVersion.values()))
 			.finder(new OraclePackageFinder(centosRedhatPackageFinder))
+			.build();
+
+		ImmutablePackageFinderRule centosRule = PackageFinderRule.builder()
+			.match(PlatformMatch.withOs(CommonOS.Linux)
+				.withVersion(CentosVersion.values()))
+			.finder(new CentosPackageFinder(centosRedhatPackageFinder))
 			.build();
 
 		ImmutablePackageFinderRule amazonRule = PackageFinderRule.builder()
@@ -124,9 +130,10 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 				popOsRule,
 				debianUsesUbuntuRule,
 				debianRule,
-				centosRedhatOracleRule,
+				redhatRule,
 				fedoraRule,
 				oracleRule,
+				centosRule,
 				amazonRule,
 				linuxLegacyRule,
 				failIfNothingMatches
