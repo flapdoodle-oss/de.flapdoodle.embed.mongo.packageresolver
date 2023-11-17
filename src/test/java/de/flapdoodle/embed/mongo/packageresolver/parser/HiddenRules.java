@@ -54,13 +54,13 @@ public abstract class HiddenRules {
 			.flatMap(it -> {
 				switch (it) {
 					case CentOS_6:
-						return Stream.of(CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6);
+						return Stream.of(CentosVersion.CentOS_6, RedhatVersion.Redhat_6);
 					case CentOS_7:
-						return Stream.of(CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7);
+						return Stream.of(CentosVersion.CentOS_7, RedhatVersion.Redhat_7);
 					case CentOS_8:
-						return Stream.of(CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8);
+						return Stream.of(CentosVersion.CentOS_8, RedhatVersion.Redhat_8);
 					case CentOS_9:
-						return Stream.of(CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9);
+						return Stream.of(CentosVersion.CentOS_9, RedhatVersion.Redhat_9);
 				}
 				return Stream.of(it);
 			})
