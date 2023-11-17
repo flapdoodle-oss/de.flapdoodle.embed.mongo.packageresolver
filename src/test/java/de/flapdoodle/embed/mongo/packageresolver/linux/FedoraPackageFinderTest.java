@@ -27,37 +27,23 @@ import de.flapdoodle.embed.process.distribution.Version;
 import de.flapdoodle.os.*;
 import de.flapdoodle.os.linux.FedoraVersion;
 import de.flapdoodle.os.linux.LinuxMintVersion;
+import de.flapdoodle.os.linux.OracleVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class FedoraPackageFinderTest {
-  @ParameterizedTest
-  @ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "6.0.9-rc1" })
-  public void Fedora38AsRedHat_9ArmDev(String version) {
-    assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, FedoraVersion.Fedora_38), version)
-      .resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
+class FedoraPackageFinderTest extends AbstractVersionMappedPackageFinderTest<FedoraVersion, RedhatVersion> {
+
+  public FedoraPackageFinderTest() {
+    super(new FedoraPackageFinder(new CentosRedhatPackageFinder(Command.Mongo)));
   }
 
-  @ParameterizedTest
-  @ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
-  public void Fedora38AsCentOS_9Dev(String version) {
-    assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, FedoraVersion.Fedora_38), version)
-      .resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel90-{}.tgz");
-  }
-
-  private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
-    return HtmlParserResultTester.with(
-            new FedoraPackageFinder(new CentosRedhatPackageFinder(Command.Mongo)),
-            version -> Distribution.of(Version.of(version), platform),
-            versionList);
-  }
-
-  private static Platform withPlatform(OS os, CommonArchitecture architecture, de.flapdoodle.os.Version version) {
-    return ImmutablePlatform.builder()
-      .operatingSystem(os)
-      .architecture(architecture)
-      .version(version)
-      .build();
+  @Test
+  public void fedoraToRedHatMapping() {
+    assertMappedVersion(FedoraVersion.Fedora_38, RedhatVersion.Redhat_9);
+    assertMappedVersion(FedoraVersion.Fedora_39, RedhatVersion.Redhat_9);
+    assertMappedVersion(FedoraVersion.Fedora_40, RedhatVersion.Redhat_9);
+    assertMappedVersion(FedoraVersion.Fedora_41, RedhatVersion.Redhat_9);
   }
 }

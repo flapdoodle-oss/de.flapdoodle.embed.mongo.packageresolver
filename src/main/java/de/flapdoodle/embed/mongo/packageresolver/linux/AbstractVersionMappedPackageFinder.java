@@ -33,6 +33,11 @@ public abstract class AbstractVersionMappedPackageFinder<S extends Version, D ex
 
 	@Override
 	public Optional<Package> packageFor(Distribution distribution) {
+		return mapDistribution(distribution)
+			.flatMap(delegate::packageFor);
+	}
+
+	protected Optional<Distribution> mapDistribution(Distribution distribution) {
 		if (PlatformMatch.withOs(CommonOS.Linux).withVersion(map.keySet()).match(distribution)) {
 			if (!distribution.platform().version().isPresent()) throw new RuntimeException("version not set: "+distribution);
 
@@ -42,9 +47,9 @@ public abstract class AbstractVersionMappedPackageFinder<S extends Version, D ex
 
 			Distribution asDestinationDist = Distribution.of(distribution.version(),
 				ImmutablePlatform.copyOf(distribution.platform()).withVersion(destinationVersion));
-			return delegate.packageFor(asDestinationDist);
-		}
 
+			return Optional.of(asDestinationDist);
+		}
 		return Optional.empty();
 	}
 

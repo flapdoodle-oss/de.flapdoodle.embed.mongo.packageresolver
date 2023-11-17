@@ -20,72 +20,18 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
-import de.flapdoodle.embed.mongo.packageresolver.HasExplanation;
-import de.flapdoodle.embed.mongo.packageresolver.PackageFinder;
-import de.flapdoodle.embed.mongo.packageresolver.PlatformMatch;
-import de.flapdoodle.embed.process.config.store.Package;
-import de.flapdoodle.embed.process.distribution.Distribution;
-import de.flapdoodle.os.CommonOS;
-import de.flapdoodle.os.ImmutablePlatform;
-import de.flapdoodle.os.Version;
 import de.flapdoodle.os.linux.FedoraVersion;
-import de.flapdoodle.os.linux.LinuxMintVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
-import de.flapdoodle.os.linux.UbuntuVersion;
+import de.flapdoodle.types.Pair;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-public class FedoraPackageFinder implements PackageFinder, HasExplanation {
-
-	private final CentosRedhatPackageFinder centosRedhatPackageFinder;
+public class FedoraPackageFinder extends AbstractVersionMappedPackageFinder<FedoraVersion, RedhatVersion> {
 
 	public FedoraPackageFinder(CentosRedhatPackageFinder centosRedhatPackageFinder) {
-		this.centosRedhatPackageFinder = centosRedhatPackageFinder;
-	}
-
-	@Override
-	public Optional<Package> packageFor(Distribution distribution) {
-		if (PlatformMatch.withOs(CommonOS.Linux).withVersion(FedoraVersion.values()).match(distribution)) {
-			if (!distribution.platform().version().isPresent()) throw new RuntimeException("version not set: "+distribution);
-			Version currentVersion = distribution.platform().version().get();
-			if (currentVersion instanceof FedoraVersion) {
-				Distribution asUbuntudistribution = Distribution.of(distribution.version(),
-					ImmutablePlatform.copyOf(distribution.platform()).withVersion(matchingRedhatVersion(((FedoraVersion) currentVersion))));
-				return centosRedhatPackageFinder.packageFor(asUbuntudistribution);
-			} else {
-				throw new IllegalArgumentException("Version is not a "+FedoraVersion.class+": "+currentVersion);
-			}
-		}
-
-		return Optional.empty();
-	}
-
-	private RedhatVersion matchingRedhatVersion(FedoraVersion currentVersion) {
-		switch (currentVersion) {
-			case Fedora_38:
-			case Fedora_39:
-			case Fedora_40:
-			case Fedora_41:
-				return RedhatVersion.Redhat_9;
-		}
-		throw new IllegalArgumentException("could not map "+currentVersion+" to any redhat version");
-	}
-
-	@Override
-	public String explain() {
-		List<RedhatVersion> ubuntuVersions = Arrays.stream(FedoraVersion.values())
-			.map(this::matchingRedhatVersion)
-			.distinct()
-			.collect(Collectors.toList());
-
-		return ubuntuVersions.stream()
-			.map(uv -> Arrays.stream(FedoraVersion.values())
-				.filter(v -> matchingRedhatVersion(v) == uv)
-				.map(FedoraVersion::name)
-				.collect(Collectors.joining(", ", "" + uv.name() + " for ", "")))
-			.collect(Collectors.joining(" and ", "use ", ""));
+		super(centosRedhatPackageFinder,
+			Pair.of(FedoraVersion.Fedora_38, RedhatVersion.Redhat_9),
+			Pair.of(FedoraVersion.Fedora_39, RedhatVersion.Redhat_9),
+			Pair.of(FedoraVersion.Fedora_40, RedhatVersion.Redhat_9),
+			Pair.of(FedoraVersion.Fedora_41, RedhatVersion.Redhat_9)
+		);
 	}
 }
