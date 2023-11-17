@@ -54,8 +54,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
     return Stream.of(
         Stream.of(CentosVersion.values()),
         Stream.of(RedhatVersion.values()),
-        Stream.of(OracleVersion.values()),
-        Stream.of(FedoraVersion.values()))
+        Stream.of(OracleVersion.values()))
       .flatMap(it -> it)
       .collect(Collectors.toList());
   }
@@ -64,7 +63,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
     FileSet fileSet = fileSetOf(command);
 
     PackageFinderRule devRule_CentOS_9_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.1.0"),
@@ -83,7 +82,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_CentOS_9_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.2"),
@@ -98,7 +97,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_CentOS_9_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0"),
@@ -113,7 +112,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule tools_CentOS_9_ARM_B64_1 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.7.1"))
@@ -127,7 +126,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_CentOS_9_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.1.0"),
@@ -148,7 +147,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_CentOS_9_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.2"),
@@ -163,7 +162,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_CentOS_9_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0"),
@@ -180,7 +179,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_CentOS_8_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.1.0"),
@@ -203,7 +202,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_CentOS_8_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.2"),
@@ -220,7 +219,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_CentOS_8_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.7.0", "100.7.1"),
@@ -236,7 +235,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule tools_CentOS_8_ARM_B64_1 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0"),
@@ -252,7 +251,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_CentOS_8_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.1.0"),
@@ -275,7 +274,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_CentOS_8_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.2"),
@@ -297,7 +296,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_CentOS_8_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0"),
@@ -321,7 +320,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_CentOS_7_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.1.0"),
@@ -344,7 +343,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_CentOS_7_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.2"),
@@ -369,7 +368,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_CentOS_7_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0"),
@@ -393,7 +392,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_CentOS_6_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("4.4.24-rc0"))
@@ -407,7 +406,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_CentOS_6_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("4.4.0", "4.4.25"),
@@ -429,7 +428,7 @@ public class CentosRedhatPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_CentOS_6_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, CentosVersion.CentOS_6, RedhatVersion.Redhat_6, OracleVersion.Oracle_6, CentosVersion.CentOS_7, RedhatVersion.Redhat_7, OracleVersion.Oracle_7, CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8, CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0"),

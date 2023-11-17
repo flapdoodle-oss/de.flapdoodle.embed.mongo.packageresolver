@@ -60,7 +60,7 @@ public abstract class HiddenRules {
 					case CentOS_8:
 						return Stream.of(CentosVersion.CentOS_8, RedhatVersion.Redhat_8, OracleVersion.Oracle_8);
 					case CentOS_9:
-						return Stream.of(CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9, FedoraVersion.Fedora_38);
+						return Stream.of(CentosVersion.CentOS_9, RedhatVersion.Redhat_9, OracleVersion.Oracle_9);
 				}
 				return Stream.of(it);
 			})

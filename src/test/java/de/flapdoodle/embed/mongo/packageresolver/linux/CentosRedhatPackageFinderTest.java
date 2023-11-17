@@ -58,12 +58,6 @@ class CentosRedhatPackageFinderTest {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, OracleVersion.Oracle_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
 	}
-	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "6.0.9-rc1" })
-	public void Fedora_38AsCentOS_9ArmDev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, FedoraVersion.Fedora_38), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
-	}
 
 	@ParameterizedTest
 	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.7 -> 6.0.11" })
@@ -81,12 +75,6 @@ class CentosRedhatPackageFinderTest {
 	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.7 -> 6.0.11" })
 	public void Oracle_9AsCentOS_9Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, OracleVersion.Oracle_9), version)
-			.resolvesTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.7 -> 6.0.11" })
-	public void Fedora_38AsCentOS_9Arm(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, FedoraVersion.Fedora_38), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
 	}
 
@@ -123,12 +111,6 @@ class CentosRedhatPackageFinderTest {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, OracleVersion.Oracle_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel90-{}.tgz");
 	}
-	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
-	public void Fedora_38AsCentOS_9Dev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, FedoraVersion.Fedora_38), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel90-{}.tgz");
-	}
 
 	@ParameterizedTest
 	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.4 -> 6.0.11" })
@@ -146,12 +128,6 @@ class CentosRedhatPackageFinderTest {
 	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.4 -> 6.0.11" })
 	public void Oracle_9AsCentOS_9(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, OracleVersion.Oracle_9), version)
-			.resolvesTo("/linux/mongodb-linux-x86_64-rhel90-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.4 -> 6.0.11" })
-	public void Fedora_38AsCentOS_9(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, FedoraVersion.Fedora_38), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel90-{}.tgz");
 	}
 
@@ -200,12 +176,6 @@ class CentosRedhatPackageFinderTest {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, OracleVersion.Oracle_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
 	}
-	@ParameterizedTest
-	@ValueSource(strings = { /*"7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10",*/ "7.0.0-rc1", "6.3.1 -> 6.3.2", /*"6.0.9-rc1",*/ "5.0.20-rc1", "4.4.24-rc0" })
-	public void Fedora_38AsCentOS_8ArmDev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, FedoraVersion.Fedora_38), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
-	}
 
 	@ParameterizedTest
 	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.4 -> 4.4.25" })
@@ -241,12 +211,6 @@ class CentosRedhatPackageFinderTest {
 	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.4 -> 4.4.25" })
 	public void Oracle_9AsCentOS_8Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, OracleVersion.Oracle_9), version)
-			.resolvesTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.4 -> 4.4.25" })
-	public void Fedora_38AsCentOS_8Arm(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, FedoraVersion.Fedora_38), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
 	}
 
@@ -301,12 +265,6 @@ class CentosRedhatPackageFinderTest {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, OracleVersion.Oracle_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
 	}
-	@ParameterizedTest
-	@ValueSource(strings = { /*"7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.24-rc0" })
-	public void Fedora_38AsCentOS_8Dev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, FedoraVersion.Fedora_38), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
-	}
 
 	@ParameterizedTest
 	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.1 -> 4.2.3", "4.0.14 -> 4.0.28", "3.6.17 -> 3.6.23", "3.4.24" })
@@ -342,12 +300,6 @@ class CentosRedhatPackageFinderTest {
 	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.1 -> 4.2.3", "4.0.14 -> 4.0.28", "3.6.17 -> 3.6.23", "3.4.24" })
 	public void Oracle_9AsCentOS_8(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, OracleVersion.Oracle_9), version)
-			.resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.1 -> 4.2.3", "4.0.14 -> 4.0.28", "3.6.17 -> 3.6.23", "3.4.24" })
-	public void Fedora_38AsCentOS_8(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, FedoraVersion.Fedora_38), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
 	}
 
@@ -420,13 +372,6 @@ class CentosRedhatPackageFinderTest {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, OracleVersion.Oracle_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
 	}
-	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
-	@Disabled
-	public void Fedora_38AsCentOS_7Dev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, FedoraVersion.Fedora_38), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
-	}
 
 	@ParameterizedTest
 	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
@@ -480,12 +425,6 @@ class CentosRedhatPackageFinderTest {
 	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24",*/ "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
 	public void Oracle_9AsCentOS_7(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, OracleVersion.Oracle_9), version)
-			.resolvesTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24",*/ "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
-	public void Fedora_38AsCentOS_7(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, FedoraVersion.Fedora_38), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
 	}
 
@@ -579,13 +518,6 @@ class CentosRedhatPackageFinderTest {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, OracleVersion.Oracle_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
 	}
-	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
-	@Disabled
-	public void Fedora_38AsCentOS_6Dev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, FedoraVersion.Fedora_38), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
-	}
 
 	@ParameterizedTest
 	@ValueSource(strings = { "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
@@ -666,13 +598,6 @@ class CentosRedhatPackageFinderTest {
 	@Disabled
 	public void Oracle_9AsCentOS_6(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, OracleVersion.Oracle_9), version)
-			.resolvesTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
-	@Disabled
-	public void Fedora_38AsCentOS_6(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, FedoraVersion.Fedora_38), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
 	}
 

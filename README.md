@@ -20,6 +20,9 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+- fedora 39,40,41 support
+- create centos and oracle mapping resolver
+
 #### 4.10.1
 
 - fix support for debian 13 (uses ubuntu version)
