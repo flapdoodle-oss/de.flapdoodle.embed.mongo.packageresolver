@@ -57,7 +57,8 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.1.0"),
+                  VersionRange.of("7.2.0-rc3"),
+                  VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
@@ -75,7 +76,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.2"))
+                  VersionRange.of("7.0.0", "7.0.4"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -89,7 +90,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.9.0"),
+                  ToolVersionRange.of("100.9.0", "100.9.4"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.1", "100.7.5"))
         ))
@@ -105,7 +106,8 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.1.0"),
+                  VersionRange.of("7.2.0-rc3"),
+                  VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
@@ -123,7 +125,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.2"))
+                  VersionRange.of("7.0.0", "7.0.4"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -137,7 +139,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.9.0"),
+                  ToolVersionRange.of("100.9.0", "100.9.4"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.1", "100.7.5"))
         ))
@@ -153,7 +155,8 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.1.0"),
+                  VersionRange.of("7.2.0-rc3"),
+                  VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
@@ -162,6 +165,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
                   VersionRange.of("6.3.1", "6.3.2"),
                   VersionRange.of("6.0.9-rc1"),
                   VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.27-rc0"),
                   VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -176,11 +180,11 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.2"),
-                  VersionRange.of("6.0.0", "6.0.11"),
-                  VersionRange.of("5.0.0", "5.0.22"),
-                  VersionRange.of("4.4.4", "4.4.25"),
-                  VersionRange.of("4.2.13", "4.2.24"))
+                  VersionRange.of("7.0.0", "7.0.4"),
+                  VersionRange.of("6.0.0", "6.0.12"),
+                  VersionRange.of("5.0.0", "5.0.23"),
+                  VersionRange.of("4.4.4", "4.4.26"),
+                  VersionRange.of("4.2.13", "4.2.25"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -210,7 +214,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.9.0"),
+                  ToolVersionRange.of("100.9.0", "100.9.4"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
                   ToolVersionRange.of("100.6.1"))
@@ -227,7 +231,8 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.1.0"),
+                  VersionRange.of("7.2.0-rc3"),
+                  VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
@@ -236,6 +241,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
                   VersionRange.of("6.3.1", "6.3.2"),
                   VersionRange.of("6.0.9-rc1"),
                   VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.27-rc0"),
                   VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -250,11 +256,11 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.2"),
-                  VersionRange.of("6.0.0", "6.0.11"),
-                  VersionRange.of("5.0.0", "5.0.22"),
-                  VersionRange.of("4.4.0", "4.4.25"),
-                  VersionRange.of("4.2.5", "4.2.24"),
+                  VersionRange.of("7.0.0", "7.0.4"),
+                  VersionRange.of("6.0.0", "6.0.12"),
+                  VersionRange.of("5.0.0", "5.0.23"),
+                  VersionRange.of("4.4.0", "4.4.26"),
+                  VersionRange.of("4.2.5", "4.2.25"),
                   VersionRange.of("4.2.0", "4.2.3"),
                   VersionRange.of("4.0.0", "4.0.28"),
                   VersionRange.of("3.6.22", "3.6.23"))
@@ -271,7 +277,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.9.0"),
+                  ToolVersionRange.of("100.9.0", "100.9.4"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
                   ToolVersionRange.of("100.6.0", "100.6.1"),
@@ -296,6 +302,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("5.0.20-rc1"),
+                  VersionRange.of("4.4.27-rc0"),
                   VersionRange.of("4.4.24-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -310,9 +317,9 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("5.0.0", "5.0.22"),
-                  VersionRange.of("4.4.0", "4.4.25"),
-                  VersionRange.of("4.2.5", "4.2.24"),
+                  VersionRange.of("5.0.0", "5.0.23"),
+                  VersionRange.of("4.4.0", "4.4.26"),
+                  VersionRange.of("4.2.5", "4.2.25"),
                   VersionRange.of("4.2.0", "4.2.3"),
                   VersionRange.of("4.0.0", "4.0.28"),
                   VersionRange.of("3.6.0", "3.6.23"),
@@ -333,7 +340,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder {
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.9.0"),
+                  ToolVersionRange.of("100.9.0", "100.9.4"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
                   ToolVersionRange.of("100.6.0", "100.6.1"),

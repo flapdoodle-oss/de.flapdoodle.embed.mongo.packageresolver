@@ -71,6 +71,11 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 			.finder(new PopOSPackageFinder(ubuntuPackageFinder))
 			.build();
 
+		final ImmutablePackageFinderRule debian12DevRule = PackageFinderRule.builder()
+			.match(PlatformMatch.withOs(CommonOS.Linux).withVersion(DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13))
+			.finder(new Debian12DevPackageFinder(command))
+			.build();
+
 		final ImmutablePackageFinderRule debianUsesUbuntuRule = PackageFinderRule.builder()
 			.match(DebianUsesUbuntuPackageFinder.platformMatch())
 			.finder(new DebianUsesUbuntuPackageFinder(ubuntuPackageFinder))
@@ -128,6 +133,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 				ubuntuRule,
 				linuxMintRule,
 				popOsRule,
+				debian12DevRule,
 				debianUsesUbuntuRule,
 				debianRule,
 				redhatRule,

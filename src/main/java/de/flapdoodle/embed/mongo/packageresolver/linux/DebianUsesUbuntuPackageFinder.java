@@ -88,7 +88,8 @@ public class DebianUsesUbuntuPackageFinder implements PackageFinder, HasExplanat
 	}
 
 	public static ImmutablePlatformMatch platformMatch() {
-		return PlatformMatch.withOs(CommonOS.Linux).withVersion(DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13);
+		return PlatformMatch.withOs(CommonOS.Linux)
+			.withVersion(DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13);
 	}
 
 	private static Optional<UbuntuVersion> matchingUbuntuVersion(DebianVersion debianVersion) {

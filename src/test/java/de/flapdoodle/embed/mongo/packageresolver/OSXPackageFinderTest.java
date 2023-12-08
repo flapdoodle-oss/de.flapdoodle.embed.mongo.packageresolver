@@ -37,13 +37,13 @@ import java.util.Optional;
 */
 class OSXPackageFinderTest {
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
 	public void OS_XArmDev(String version) {
 		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.ARM_64), version)
 		  .resolvesTo("/osx/mongodb-macos-arm64-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12" })
 	public void OS_XArm(String version) {
 		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.ARM_64), version)
 		  .resolvesTo("/osx/mongodb-macos-arm64-{}.tgz");
@@ -51,20 +51,20 @@ class OSXPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.1 -> 100.7.5" })
+	@ValueSource(strings = { "100.9.0 -> 100.9.4", "100.8.0", "100.7.1 -> 100.7.5" })
 	public void OS_XArmTools(String version) {
 		assertThatTools(withPlatform(CommonOS.OS_X, CommonArchitecture.ARM_64), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-macos-arm64-{}.zip");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void OS_XDev(String version) {
 		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.X86_64), version)
 		  .resolvesTo("/osx/mongodb-macos-x86_64-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void OS_X(String version) {
 		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.X86_64), version)
 		  .resolvesTo("/osx/mongodb-macos-x86_64-{}.tgz");
@@ -86,7 +86,7 @@ class OSXPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1" })
+	@ValueSource(strings = { "100.9.0 -> 100.9.4", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1" })
 	public void OS_XTools(String version) {
 		assertThatTools(withPlatform(CommonOS.OS_X, CommonArchitecture.X86_64), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-macos-x86_64-{}.zip");

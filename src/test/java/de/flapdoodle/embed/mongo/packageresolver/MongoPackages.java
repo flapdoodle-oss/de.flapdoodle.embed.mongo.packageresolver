@@ -95,7 +95,10 @@ public abstract class MongoPackages {
 			Pair.of("versions/react/mongo-db-versions-2023-08-19-archive.html", false),
 			Pair.of("versions/react/mongo-db-versions-2023-10-30.html", false),
 			Pair.of("versions/react/mongo-db-versions-2023-10-30-archive.html", false),
-			Pair.of("versions/react/mongo-db-versions-2023-10-30-dev.html", true)
+			Pair.of("versions/react/mongo-db-versions-2023-10-30-dev.html", true),
+			Pair.of("versions/react/mongo-db-versions-2023-12-08.html", false),
+			Pair.of("versions/react/mongo-db-versions-2023-12-08-archive.html", false),
+			Pair.of("versions/react/mongo-db-versions-2023-12-08-dev.html", true)
 		);
 
 		return resources;
@@ -127,7 +130,8 @@ public abstract class MongoPackages {
 			Pair.of("versions/react/mongotools-versions-2023-03-16.html", false),
 			Pair.of("versions/react/mongotools-versions-2023-07-25.html", false),
 			Pair.of("versions/react/mongotools-versions-2023-08-19.html", false),
-			Pair.of("versions/react/mongotools-versions-2023-10-30.html", false)
+			Pair.of("versions/react/mongotools-versions-2023-10-30.html", false),
+			Pair.of("versions/react/mongotools-versions-2023-12-08.html", false)
 		);
 
 		return resources;

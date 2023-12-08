@@ -23,7 +23,6 @@ package de.flapdoodle.embed.mongo.packageresolver;
 import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.*;
-import de.flapdoodle.os.linux.UbuntuVersion;
 
 import java.util.Optional;
 
@@ -47,7 +46,7 @@ public abstract class AbstractPackageFinder implements PackageFinder, HasPlatfor
 		return rules.packageFor(distribution);
 	}
 
-	protected static PlatformMatch match(OS os, BitSize bitSize, CPUType cpuType, Version... versions) {
+	public static PlatformMatch match(OS os, BitSize bitSize, CPUType cpuType, Version... versions) {
 		return PlatformMatch.withOs(os).withBitSize(bitSize).withCpuType(cpuType)
 			.withVersion(versions);
 	}

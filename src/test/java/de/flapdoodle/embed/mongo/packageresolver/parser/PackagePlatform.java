@@ -140,7 +140,7 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 		if (name.startsWith("RedHat") || name.startsWith("rhel")) {
 			return parseRedhat(name);
 		}
-		if (name.startsWith("Debian")) {
+		if (name.startsWith("Debian") || name.startsWith("debian")) {
 			return parseDebian(name);
 		}
 		if (name.startsWith("Amazon") || name.startsWith("amazon")) {
@@ -178,6 +178,8 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 				return linux(DebianVersion.DEBIAN_10, CPUType.X86, BitSize.B64);
 			case "Debian 11.0 x64":
 				return linux(DebianVersion.DEBIAN_11, CPUType.X86, BitSize.B64);
+			case "debian12 x64":
+				return linux(DebianVersion.DEBIAN_12, CPUType.X86, BitSize.B64);
 			default:
 				throw new IllegalArgumentException("could not parse "+name);
 		}

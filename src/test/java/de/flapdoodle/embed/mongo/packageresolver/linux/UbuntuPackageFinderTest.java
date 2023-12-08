@@ -44,50 +44,50 @@ import java.util.stream.Stream;
 */
 class UbuntuPackageFinderTest {
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
 	public void Ubuntu_22_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
 	public void Ubuntu_22_10AsUbuntu_22_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
 	public void Ubuntu_23_04AsUbuntu_22_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
 	public void Ubuntu_23_10AsUbuntu_22_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.4 -> 6.0.11" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.4 -> 6.0.12" })
 	public void Ubuntu_22_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.4 -> 6.0.11" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.4 -> 6.0.12" })
 	public void Ubuntu_22_10AsUbuntu_22_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.4 -> 6.0.11" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.4 -> 6.0.12" })
 	public void Ubuntu_23_04AsUbuntu_22_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.4 -> 6.0.11" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.4 -> 6.0.12" })
 	public void Ubuntu_23_10AsUbuntu_22_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
@@ -96,57 +96,57 @@ class UbuntuPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.4" })
+	@ValueSource(strings = { "100.9.0 -> 100.9.4", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.4" })
 	public void Ubuntu_22_04ArmTools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-ubuntu2204-arm64-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
 	public void Ubuntu_22_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
 	public void Ubuntu_22_10AsUbuntu_22_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
 	public void Ubuntu_23_04AsUbuntu_22_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1" })
 	public void Ubuntu_23_10AsUbuntu_22_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.4 -> 6.0.11" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.4 -> 6.0.12" })
 	public void Ubuntu_22_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.4 -> 6.0.11" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.4 -> 6.0.12" })
 	public void Ubuntu_22_10AsUbuntu_22_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.4 -> 6.0.11" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.4 -> 6.0.12" })
 	public void Ubuntu_23_04AsUbuntu_22_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.4 -> 6.0.11" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.4 -> 6.0.12" })
 	public void Ubuntu_23_10AsUbuntu_22_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
@@ -155,105 +155,105 @@ class UbuntuPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.4" })
+	@ValueSource(strings = { "100.9.0 -> 100.9.4", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.4" })
 	public void Ubuntu_22_04Tools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-ubuntu2204-x86_64-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_20_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_20_10AsUbuntu_20_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_21_04AsUbuntu_20_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_21_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_21_10AsUbuntu_20_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_21_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { /*"7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_22_04AsUbuntu_20_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { /*"7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_22_10AsUbuntu_20_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { /*"7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_23_04AsUbuntu_20_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { /*"7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_23_10AsUbuntu_20_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_20_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_20_10AsUbuntu_20_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_21_04AsUbuntu_20_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_21_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_21_10AsUbuntu_20_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_21_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12",*/ "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_22_04AsUbuntu_20_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12",*/ "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_22_10AsUbuntu_20_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12",*/ "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_23_04AsUbuntu_20_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12",*/ "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_23_10AsUbuntu_20_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
@@ -262,105 +262,105 @@ class UbuntuPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1" })
+	@ValueSource(strings = { "100.9.0 -> 100.9.4", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1" })
 	public void Ubuntu_20_04ArmTools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-ubuntu2004-arm64-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_20_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_20_10AsUbuntu_20_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_21_04AsUbuntu_20_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_21_10AsUbuntu_20_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { /*"7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_22_04AsUbuntu_20_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { /*"7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_22_10AsUbuntu_20_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { /*"7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_23_04AsUbuntu_20_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.1.0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { /*"7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_23_10AsUbuntu_20_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_20_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_20_10AsUbuntu_20_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_21_04AsUbuntu_20_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_21_10AsUbuntu_20_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12",*/ "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_22_04AsUbuntu_20_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12",*/ "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_22_10AsUbuntu_20_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12",*/ "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_23_04AsUbuntu_20_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.2", "6.0.0 -> 6.0.11",*/ "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25" })
+	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12",*/ "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26" })
 	public void Ubuntu_23_10AsUbuntu_20_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
@@ -369,87 +369,87 @@ class UbuntuPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1" })
+	@ValueSource(strings = { "100.9.0 -> 100.9.4", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1" })
 	public void Ubuntu_20_04Tools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-ubuntu2004-x86_64-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_18_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_18_10AsUbuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_18_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_19_04AsUbuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_19_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_19_10AsUbuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_19_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_20_04AsUbuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_20_10AsUbuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_21_04AsUbuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_21_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_21_10AsUbuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_21_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_22_04AsUbuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_22_10AsUbuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_23_04AsUbuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_23_10AsUbuntu_18_04ArmDev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_10), version)
@@ -457,73 +457,73 @@ class UbuntuPackageFinderTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_18_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_18_10AsUbuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_18_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_19_04AsUbuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_19_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_19_10AsUbuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_19_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_20_04AsUbuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_20_10AsUbuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_21_04AsUbuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_21_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_21_10AsUbuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_21_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_22_04AsUbuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_22_10AsUbuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_23_04AsUbuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_23_10AsUbuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_23_10), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
@@ -532,87 +532,87 @@ class UbuntuPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
+	@ValueSource(strings = { "100.9.0 -> 100.9.4", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
 	public void Ubuntu_18_04ArmTools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_18_04), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-ubuntu1804-arm64-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_18_10AsUbuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_19_04AsUbuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_19_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_19_10AsUbuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_19_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_20_04AsUbuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_20_10AsUbuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_21_04AsUbuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_21_10AsUbuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_22_04AsUbuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_22_10AsUbuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_23_04AsUbuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.24-rc0" })
+	@ValueSource(strings = { "7.0.0-rc2", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_23_10AsUbuntu_18_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_10), version)
@@ -620,73 +620,73 @@ class UbuntuPackageFinderTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_18_10AsUbuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_19_04AsUbuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_19_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_19_10AsUbuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_19_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_20_04AsUbuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_20_10AsUbuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_21_04AsUbuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_21_10AsUbuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25",*/ "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_22_04AsUbuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_22_10AsUbuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25",*/ "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_23_04AsUbuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"6.0.0 -> 6.0.11", "5.0.0 -> 5.0.22", "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24",*/ "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { /*"6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26",*/ "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_23_10AsUbuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
@@ -695,7 +695,7 @@ class UbuntuPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
+	@ValueSource(strings = { "100.9.0 -> 100.9.4", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
 	public void Ubuntu_18_04Tools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_04), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-ubuntu1804-x86_64-{}.tgz");
@@ -789,103 +789,103 @@ class UbuntuPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
+	@ValueSource(strings = { "100.9.0 -> 100.9.4", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
 	public void Ubuntu_16_04ArmTools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_16_04), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-ubuntu1604-arm64-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_16_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	public void Ubuntu_16_10AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_16_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_18_04AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_18_10AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_19_04AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_19_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_19_10AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_19_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_20_04AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_20_10AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_21_04AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_21_10AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_22_04AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_22_10AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_23_04AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.24-rc0" })
+	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
 	@Disabled
 	public void Ubuntu_23_10AsUbuntu_16_04Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_10), version)
@@ -893,85 +893,85 @@ class UbuntuPackageFinderTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_16_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_16_10AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_16_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_18_04AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_18_10AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_19_04AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_19_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_19_10AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_19_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_20_04AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_20_10AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_21_04AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_21_10AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_21_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_22_04AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_22_10AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_23_04AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"4.4.0 -> 4.4.25", "4.2.5 -> 4.2.24", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
+	@ValueSource(strings = { /*"4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23",*/ "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.7 -> 3.2.22" })
 	public void Ubuntu_23_10AsUbuntu_16_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_23_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1604-{}.tgz");
@@ -980,7 +980,7 @@ class UbuntuPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.9.0", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
+	@ValueSource(strings = { "100.9.0 -> 100.9.4", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
 	public void Ubuntu_16_04Tools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_16_04), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-ubuntu1604-x86_64-{}.tgz");

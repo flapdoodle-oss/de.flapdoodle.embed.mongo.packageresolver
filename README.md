@@ -20,6 +20,8 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+- latest mongodb version, debian 12 dev version
+
 #### 4.10.2
 
 - fedora 39,40,41 support
