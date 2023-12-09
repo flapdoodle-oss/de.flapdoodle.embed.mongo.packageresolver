@@ -84,7 +84,6 @@ public class MongoPackageParser {
 
 		tree.dump();
 
-		
 		new SourceCodeGenerator(targetDirectory).generate(tree);
 	}
 }

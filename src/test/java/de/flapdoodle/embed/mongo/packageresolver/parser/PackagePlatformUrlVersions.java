@@ -21,15 +21,13 @@
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
 import com.google.common.collect.*;
-import de.flapdoodle.os.CPUType;
-import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.Version;
 import de.flapdoodle.types.Pair;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.immutables.value.Value;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Value.Immutable
 public abstract class PackagePlatformUrlVersions {

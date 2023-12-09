@@ -20,8 +20,11 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

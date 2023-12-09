@@ -27,6 +27,7 @@ import de.flapdoodle.types.Either;
 import org.immutables.value.Value;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Value.Immutable
 public abstract class PackagePlatform implements Comparable<PackagePlatform> {
@@ -90,6 +91,21 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 	@Override
 	public int compareTo(PackagePlatform other) {
 		return COMPARATOR.compare(this, other);
+	}
+
+	@Value.Auxiliary
+	public List<PackagePlatform> flatmapVersions() {
+		return versions().isEmpty()
+			? Arrays.asList(this)
+			: versions().stream()
+			.map(v -> ImmutablePackagePlatform.builder()
+				.os(os())
+				.cpuType(cpuType())
+				.bitSize(bitSize())
+				.version(v)
+				.addVersions(v)
+				.build())
+			.collect(Collectors.toList());
 	}
 
 	public static NumericVersion firstMongoDbVersionWithoutBundledTools() {

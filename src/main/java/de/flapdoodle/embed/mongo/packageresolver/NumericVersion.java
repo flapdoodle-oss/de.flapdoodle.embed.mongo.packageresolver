@@ -121,9 +121,8 @@ public interface NumericVersion extends Comparable<NumericVersion> {
 	}
 
 	default String asString() {
-		if (build().isPresent()) {
-			return major()+"."+minor()+"."+patch()+"-"+build().get();
-		}
-		return major()+"."+minor()+"."+patch();
+		return build().isPresent()
+			? major() + "." + minor() + "." + patch() + "-" + build().get()
+			: major() + "." + minor() + "." + patch();
 	}
 }
