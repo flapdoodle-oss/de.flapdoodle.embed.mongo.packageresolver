@@ -38,10 +38,15 @@ import java.util.Optional;
 /**
 * this file is generated, please don't touch
 */
-public class DebianPackageFinder extends AbstractPackageFinder {
+public class DebianPackageFinder extends AbstractPackageFinder implements HasLabel {
 
   public DebianPackageFinder(final Command command) {
     super(command, rules(command));
+  }
+
+  @Override
+  public String label() {
+    return getClass().getSimpleName();
   }
 
   private static FileSet fileSetOf(Command command) {

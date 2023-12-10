@@ -38,10 +38,15 @@ import java.util.Optional;
 /**
 * this file is generated, please don't touch
 */
-public class RedhatPackageFinder extends AbstractPackageFinder {
+public class RedhatPackageFinder extends AbstractPackageFinder implements HasLabel {
 
   public RedhatPackageFinder(final Command command) {
     super(command, rules(command));
+  }
+
+  @Override
+  public String label() {
+    return getClass().getSimpleName();
   }
 
   private static FileSet fileSetOf(Command command) {
@@ -172,7 +177,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_Redhat_8_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.2.0-rc3"),
@@ -197,7 +202,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_Redhat_8_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.4"),
@@ -214,7 +219,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Redhat_8_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.7.0", "100.7.1"),
@@ -230,7 +235,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule tools_Redhat_8_ARM_B64_1 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -246,7 +251,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_Redhat_8_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.2.0-rc3"),
@@ -271,7 +276,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_Redhat_8_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.4"),
@@ -293,7 +298,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Redhat_8_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -317,7 +322,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_Redhat_7_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.1.0", "7.1.1"),
@@ -341,7 +346,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_Redhat_7_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.4"),
@@ -366,7 +371,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Redhat_7_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -390,7 +395,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_Redhat_6_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_6, RedhatVersion.Redhat_7, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_6)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("4.4.27-rc0"),
@@ -405,7 +410,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_Redhat_6_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_6, RedhatVersion.Redhat_7, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_6)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("4.4.0", "4.4.26"),
@@ -427,7 +432,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Redhat_6_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_6, RedhatVersion.Redhat_7, RedhatVersion.Redhat_8, RedhatVersion.Redhat_9)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_6)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),

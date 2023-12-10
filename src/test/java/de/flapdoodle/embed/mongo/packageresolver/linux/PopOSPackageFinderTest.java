@@ -56,7 +56,7 @@ class PopOSPackageFinderTest {
 
   private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
     return HtmlParserResultTester.with(
-            new PopOSPackageFinder(new UbuntuPackageFinder(Command.Mongo)),
+            new PopOSPackageFinder(new UbuntuFallbackToOlderVersionPackageFinder(new UbuntuPackageFinder(Command.Mongo))),
             version -> Distribution.of(Version.of(version), platform),
             versionList);
   }

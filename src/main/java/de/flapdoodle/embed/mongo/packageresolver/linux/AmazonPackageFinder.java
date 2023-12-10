@@ -38,10 +38,15 @@ import java.util.Optional;
 /**
 * this file is generated, please don't touch
 */
-public class AmazonPackageFinder extends AbstractPackageFinder {
+public class AmazonPackageFinder extends AbstractPackageFinder implements HasLabel {
 
   public AmazonPackageFinder(final Command command) {
     super(command, rules(command));
+  }
+
+  @Override
+  public String label() {
+    return getClass().getSimpleName();
   }
 
   private static FileSet fileSetOf(Command command) {

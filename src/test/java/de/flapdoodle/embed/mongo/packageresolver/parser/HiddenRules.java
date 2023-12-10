@@ -34,15 +34,12 @@ import java.util.stream.Stream;
 
 public abstract class HiddenRules {
 	static List<Version> upgradeableVersions(Version version) {
-		if (version instanceof UbuntuVersion) {
-			return upgradeableUbuntuVersions((UbuntuVersion) version);
-		}
 		if (version instanceof DebianVersion) {
 			return upgradeableDebianVersions((DebianVersion) version);
 		}
-		if (version instanceof RedhatVersion) {
-			return upgradeableCentosVersions((RedhatVersion) version);
-		}
+//		if (version instanceof RedhatVersion) {
+//			return upgradeableCentosVersions((RedhatVersion) version);
+//		}
 
 		return Collections.singletonList(version);
 	}
@@ -73,13 +70,6 @@ public abstract class HiddenRules {
 
 		return all.stream()
 			.filter(it -> it.ordinal()>=version.ordinal())
-			.collect(Collectors.toList());
-	}
-	private static List<Version> upgradeableUbuntuVersions(UbuntuVersion version) {
-		List<UbuntuVersion> all = Arrays.asList(UbuntuVersion.values());
-
-		return all.stream()
-			.filter(it -> it.ordinal()>=version.ordinal() /*&& (hasLibCrypt1_1(version) == hasLibCrypt1_1(it))*/)
 			.collect(Collectors.toList());
 	}
 

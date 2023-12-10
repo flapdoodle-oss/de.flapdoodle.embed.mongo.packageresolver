@@ -31,6 +31,16 @@ public final class ExplainRules {
 		// no instance
 	}
 
+	public interface Context {
+		Context oneDeeper();
+
+		void label(String label);
+
+		void matching(String explainMatch);
+
+		void finder(String finderExplained);
+	}
+
 	private static class Output {
 		private final StringBuilder sb=new StringBuilder();
 		private final String NEW_LINE=System.lineSeparator();
@@ -39,20 +49,24 @@ public final class ExplainRules {
 			return sb.toString();
 		}
 
-		public Context root() {
-			return new Context(0);
+		public ContextImpl root() {
+			return new ContextImpl(0);
 		}
 
-		class Context {
+		class ContextImpl implements Context {
 
 			private final int level;
 
-			public Context(int level) {
+			public ContextImpl(int level) {
 				this.level = level;
 			}
 
-			public Context oneDeeper() {
-				return new Context(level+1);
+			public ContextImpl oneDeeper() {
+				return new ContextImpl(level+1);
+			}
+
+			public void label(String label) {
+				sb.append(indent(level)).append("'").append(label).append("'").append(NEW_LINE);
 			}
 
 			public void matching(String explainMatch) {
@@ -71,23 +85,35 @@ public final class ExplainRules {
 		return output.asString();
 	}
 
-	static void explain(Output.Context context, PackageFinderRules rules) {
+	static void explain(Context context, PackageFinderRules rules) {
 		rules.rules().forEach(rule -> {
 			context.matching(explainMatch(rule.match()));
 			PackageFinder finder = rule.finder();
-
-			if (finder instanceof HasPlatformMatchRules) {
-				explain(context.oneDeeper(), ((HasPlatformMatchRules) finder).rules());
-			} else {
-				context.finder(packageFinderName(finder));
-			}
+			explain(context, finder);
 		});
 	}
 
-	private static String packageFinderName(PackageFinder packageFinder) {
-		return packageFinder instanceof HasExplanation
-			? ((HasExplanation) packageFinder).explain()
-			: packageFinder.getClass().getSimpleName();
+	public static void explain(Context context, PackageFinder finder) {
+		if (finder instanceof HasLabel) {
+			context.label(((HasLabel) finder).label());
+		}
+		if (finder instanceof HasPlatformMatchRules) {
+			explain(context.oneDeeper(), ((HasPlatformMatchRules) finder).rules());
+		} else {
+			context.finder(finder(finder));
+		}
+	}
+
+	public static String finder(PackageFinder finder) {
+		return finder instanceof HasExplanation
+			? ((HasExplanation) finder).explain()
+			: finder.getClass().getSimpleName();
+	}
+
+	public static String finderLabel(PackageFinder finder) {
+		return finder instanceof HasLabel
+			? ((HasLabel) finder).label()
+			: finder.getClass().getSimpleName();
 	}
 
 	static String explainMatch(DistributionMatch match) {

@@ -18,20 +18,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.flapdoodle.embed.mongo.packageresolver.linux;
+package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.os.linux.CentosVersion;
-import de.flapdoodle.os.linux.OracleVersion;
-import de.flapdoodle.os.linux.RedhatVersion;
-import de.flapdoodle.types.Pair;
-
-public class CentosPackageFinder extends AbstractVersionMappedPackageFinder<CentosVersion, RedhatVersion> {
-	protected CentosPackageFinder(RedhatFallbackToOlderVersionPackageFinder delegate) {
-		super(delegate,
-			Pair.of(CentosVersion.CentOS_6, RedhatVersion.Redhat_6),
-			Pair.of(CentosVersion.CentOS_7, RedhatVersion.Redhat_7),
-			Pair.of(CentosVersion.CentOS_8, RedhatVersion.Redhat_8),
-			Pair.of(CentosVersion.CentOS_9, RedhatVersion.Redhat_9)
-		);
-	}
+public interface HasLabel {
+	String label();
 }

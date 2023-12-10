@@ -93,25 +93,11 @@ class RedhatPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10",*/ "7.0.0-rc1", "6.3.1 -> 6.3.2", /*"6.0.9-rc1",*/ "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
-	public void Redhat_9AsRedhat_8ArmDev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, RedhatVersion.Redhat_9), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
-	}
-
-	@ParameterizedTest
 	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.4 -> 4.4.26" })
 	public void Redhat_8Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, RedhatVersion.Redhat_8), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
 	}
-	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12",*/ "5.0.0 -> 5.0.23", "4.4.4 -> 4.4.26" })
-	public void Redhat_9AsRedhat_8Arm(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, RedhatVersion.Redhat_9), version)
-			.resolvesTo("/linux/mongodb-linux-aarch64-rhel82-{}.tgz");
-	}
-
 
 
 	@ParameterizedTest
@@ -134,25 +120,11 @@ class RedhatPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { /*"7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1",*/ "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
-	public void Redhat_9AsRedhat_8Dev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_9), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
-	}
-
-	@ParameterizedTest
 	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.1 -> 4.2.3", "4.0.14 -> 4.0.28", "3.6.17 -> 3.6.23", "3.4.24" })
 	public void Redhat_8(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_8), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
 	}
-	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12",*/ "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.1 -> 4.2.3", "4.0.14 -> 4.0.28", "3.6.17 -> 3.6.23", "3.4.24" })
-	public void Redhat_9AsRedhat_8(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_9), version)
-			.resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
-	}
-
 
 
 	@ParameterizedTest
@@ -169,40 +141,11 @@ class RedhatPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
-	@Disabled
-	public void Redhat_8AsRedhat_7Dev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_8), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { "7.1.0 -> 7.1.1", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.9-rc1", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
-	@Disabled
-	public void Redhat_9AsRedhat_7Dev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_9), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
-	}
-
-	@ParameterizedTest
 	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
-	@Disabled
 	public void Redhat_7(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_7), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
 	}
-	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24",*/ "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
-	public void Redhat_8AsRedhat_7(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_8), version)
-			.resolvesTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { /*"7.0.0 -> 7.0.4", "6.0.0 -> 6.0.12", "5.0.0 -> 5.0.23", "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24",*/ "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
-	public void Redhat_9AsRedhat_7(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_9), version)
-			.resolvesTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
-	}
-
 
 
 	@ParameterizedTest
@@ -219,55 +162,11 @@ class RedhatPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
-	@Disabled
-	public void Redhat_7AsRedhat_6Dev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_7), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
-	@Disabled
-	public void Redhat_8AsRedhat_6Dev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_8), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { "4.4.27-rc0", "4.4.24-rc0" })
-	@Disabled
-	public void Redhat_9AsRedhat_6Dev(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_9), version)
-			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
-	}
-
-	@ParameterizedTest
 	@ValueSource(strings = { "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
 	public void Redhat_6(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_6), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
 	}
-	@ParameterizedTest
-	@ValueSource(strings = { "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
-	@Disabled
-	public void Redhat_7AsRedhat_6(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_7), version)
-			.resolvesTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
-	@Disabled
-	public void Redhat_8AsRedhat_6(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_8), version)
-			.resolvesTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
-	}
-	@ParameterizedTest
-	@ValueSource(strings = { "4.4.0 -> 4.4.26", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
-	@Disabled
-	public void Redhat_9AsRedhat_6(String version) {
-		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_9), version)
-			.resolvesTo("/linux/mongodb-linux-x86_64-rhel62-{}.tgz");
-	}
-
 
 
 	@ParameterizedTest

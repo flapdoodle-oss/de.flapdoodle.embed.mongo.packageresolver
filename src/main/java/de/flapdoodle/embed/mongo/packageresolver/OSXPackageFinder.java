@@ -36,10 +36,15 @@ import java.util.Optional;
 /**
 * this file is generated, please don't touch
 */
-public class OSXPackageFinder extends AbstractPackageFinder {
+public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel {
 
   public OSXPackageFinder(final Command command) {
     super(command, rules(command));
+  }
+
+  @Override
+  public String label() {
+    return getClass().getSimpleName();
   }
 
   private static FileSet fileSetOf(Command command) {

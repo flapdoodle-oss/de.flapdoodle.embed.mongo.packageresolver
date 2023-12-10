@@ -21,6 +21,7 @@
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.checks.Preconditions;
+import de.flapdoodle.embed.mongo.packageresolver.ExplainRules;
 import de.flapdoodle.embed.mongo.packageresolver.HasExplanation;
 import de.flapdoodle.embed.mongo.packageresolver.PackageFinder;
 import de.flapdoodle.embed.mongo.packageresolver.PlatformMatch;
@@ -84,7 +85,7 @@ public abstract class AbstractVersionMappedPackageFinder<S extends Version, D ex
 			.map(uv -> mappings.stream()
 				.filter(v -> v.second() == uv)
 				.map(it -> it.first().name())
-				.collect(Collectors.joining(", ", "" + uv.name() + " for ", "")))
-			.collect(Collectors.joining(" and ", "use ", ""));
+				.collect(Collectors.joining(", ", uv.name() + " for ", "")))
+			.collect(Collectors.joining(" and ", "use '"+ ExplainRules.finderLabel(delegate)+"' with ", ""));
 	}
 }

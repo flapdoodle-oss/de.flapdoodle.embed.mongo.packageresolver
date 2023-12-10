@@ -44,9 +44,9 @@ import java.util.stream.Stream;
 @Deprecated
 public class DebianUsesUbuntuPackageFinder implements PackageFinder, HasExplanation {
 
-	private final UbuntuPackageFinder ubuntuPackageFinder;
+	private final UbuntuFallbackToOlderVersionPackageFinder ubuntuPackageFinder;
 
-	public DebianUsesUbuntuPackageFinder(UbuntuPackageFinder ubuntuPackageFinder) {
+	public DebianUsesUbuntuPackageFinder(UbuntuFallbackToOlderVersionPackageFinder ubuntuPackageFinder) {
 		this.ubuntuPackageFinder = ubuntuPackageFinder;
 	}
 
@@ -83,8 +83,8 @@ public class DebianUsesUbuntuPackageFinder implements PackageFinder, HasExplanat
 					return ubuntuVersion.isPresent() && ubuntuVersion.get() == uv;
 				})
 				.map(DebianVersion::name)
-				.collect(Collectors.joining(", ", "" + uv.name() + " for ", "")))
-			.collect(Collectors.joining(" and ", "use ", ""));
+				.collect(Collectors.joining(", ", uv.name() + " for ", "")))
+			.collect(Collectors.joining(" and ", "use '"+ubuntuPackageFinder.label()+"' with ", ""));
 	}
 
 	public static ImmutablePlatformMatch platformMatch() {

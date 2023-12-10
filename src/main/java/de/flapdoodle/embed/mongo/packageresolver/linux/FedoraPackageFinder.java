@@ -26,7 +26,7 @@ import de.flapdoodle.types.Pair;
 
 public class FedoraPackageFinder extends AbstractVersionMappedPackageFinder<FedoraVersion, RedhatVersion> {
 
-	public FedoraPackageFinder(RedhatPackageFinder centosRedhatPackageFinder) {
+	public FedoraPackageFinder(RedhatFallbackToOlderVersionPackageFinder centosRedhatPackageFinder) {
 		super(centosRedhatPackageFinder,
 			Pair.of(FedoraVersion.Fedora_38, RedhatVersion.Redhat_9),
 			Pair.of(FedoraVersion.Fedora_39, RedhatVersion.Redhat_9),

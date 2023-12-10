@@ -38,10 +38,15 @@ import java.util.Optional;
 /**
 * this file is generated, please don't touch
 */
-public class UbuntuPackageFinder extends AbstractPackageFinder {
+public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLabel {
 
   public UbuntuPackageFinder(final Command command) {
     super(command, rules(command));
+  }
+
+  @Override
+  public String label() {
+    return getClass().getSimpleName();
   }
 
   private static FileSet fileSetOf(Command command) {
@@ -54,7 +59,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
     FileSet fileSet = fileSetOf(command);
 
     PackageFinderRule devRule_Ubuntu_22_04_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_22_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.2.0-rc3"),
@@ -76,7 +81,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_Ubuntu_22_04_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_22_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.4"),
@@ -91,7 +96,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Ubuntu_22_04_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_22_04)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -109,7 +114,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_Ubuntu_22_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_22_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.2.0-rc3"),
@@ -131,7 +136,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_Ubuntu_22_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_22_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.4"),
@@ -146,7 +151,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Ubuntu_22_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_22_04)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -164,7 +169,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_Ubuntu_20_04_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_20_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.2.0-rc3"),
@@ -189,7 +194,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_Ubuntu_20_04_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_20_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.4"),
@@ -206,7 +211,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Ubuntu_20_04_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_20_04)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -228,7 +233,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_Ubuntu_20_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_20_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.2.0-rc3"),
@@ -253,7 +258,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_Ubuntu_20_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_20_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.4"),
@@ -270,7 +275,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Ubuntu_20_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_20_04)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -292,7 +297,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_Ubuntu_18_04_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_18_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc2"),
@@ -312,7 +317,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_Ubuntu_18_04_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_18_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("6.0.0", "6.0.12"),
@@ -330,7 +335,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Ubuntu_18_04_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_18_04)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -354,7 +359,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_Ubuntu_18_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_18_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc2"),
@@ -374,7 +379,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_Ubuntu_18_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_18_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("6.0.0", "6.0.12"),
@@ -394,7 +399,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Ubuntu_18_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_18_04)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -418,7 +423,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule rule_Ubuntu_16_04_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_16_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("4.0.0", "4.0.28"),
@@ -435,7 +440,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Ubuntu_16_04_ARM_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_16_04)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -459,7 +464,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
 
     PackageFinderRule devRule_Ubuntu_16_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_16_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("4.4.27-rc0"),
@@ -474,7 +479,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
         .build();
 
     PackageFinderRule rule_Ubuntu_16_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_16_04)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("4.4.0", "4.4.26"),
@@ -495,7 +500,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder {
 
  
     PackageFinderRule tools_Ubuntu_16_04_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_16_04, UbuntuVersion.Ubuntu_16_10, UbuntuVersion.Ubuntu_18_04, UbuntuVersion.Ubuntu_18_10, UbuntuVersion.Ubuntu_19_04, UbuntuVersion.Ubuntu_19_10, UbuntuVersion.Ubuntu_20_04, UbuntuVersion.Ubuntu_20_10, UbuntuVersion.Ubuntu_21_04, UbuntuVersion.Ubuntu_21_10, UbuntuVersion.Ubuntu_22_04, UbuntuVersion.Ubuntu_22_10, UbuntuVersion.Ubuntu_23_04, UbuntuVersion.Ubuntu_23_10)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_16_04)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),

@@ -38,9 +38,9 @@ import java.util.stream.Collectors;
 
 public class LinuxMintPackageFinder implements PackageFinder, HasExplanation {
 
-	private final UbuntuPackageFinder ubuntuPackageFinder;
+	private final UbuntuFallbackToOlderVersionPackageFinder ubuntuPackageFinder;
 
-	public LinuxMintPackageFinder(UbuntuPackageFinder ubuntuPackageFinder) {
+	public LinuxMintPackageFinder(UbuntuFallbackToOlderVersionPackageFinder ubuntuPackageFinder) {
 		this.ubuntuPackageFinder = ubuntuPackageFinder;
 	}
 
@@ -71,7 +71,7 @@ public class LinuxMintPackageFinder implements PackageFinder, HasExplanation {
 			.map(uv -> Arrays.stream(LinuxMintVersion.values())
 				.filter(v -> v.matchingUbuntuVersion() == uv)
 				.map(LinuxMintVersion::name)
-				.collect(Collectors.joining(", ", "" + uv.name() + " for ", "")))
-			.collect(Collectors.joining(" and ", "use ", ""));
+				.collect(Collectors.joining(", ", uv.name() + " for ", "")))
+			.collect(Collectors.joining(" and ", "use '"+ubuntuPackageFinder.label()+"' with ", ""));
 	}
 }

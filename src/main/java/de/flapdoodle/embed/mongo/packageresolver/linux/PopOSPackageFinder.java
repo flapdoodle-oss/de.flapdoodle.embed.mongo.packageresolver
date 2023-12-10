@@ -39,9 +39,9 @@ import java.util.stream.Collectors;
 
 public class PopOSPackageFinder implements PackageFinder, HasExplanation {
 
-	private final UbuntuPackageFinder ubuntuPackageFinder;
+	private final UbuntuFallbackToOlderVersionPackageFinder ubuntuPackageFinder;
 
-	public PopOSPackageFinder(UbuntuPackageFinder ubuntuPackageFinder) {
+	public PopOSPackageFinder(UbuntuFallbackToOlderVersionPackageFinder ubuntuPackageFinder) {
 		this.ubuntuPackageFinder = ubuntuPackageFinder;
 	}
 
@@ -72,7 +72,7 @@ public class PopOSPackageFinder implements PackageFinder, HasExplanation {
 			.map(uv -> Arrays.stream(PopOSVersion.values())
 				.filter(v -> v.matchingUbuntuVersion() == uv)
 				.map(PopOSVersion::name)
-				.collect(Collectors.joining(", ", "" + uv.name() + " for ", "")))
-			.collect(Collectors.joining(" and ", "use ", ""));
+				.collect(Collectors.joining(", ", uv.name() + " for ", "")))
+			.collect(Collectors.joining(" and ", "use '"+ubuntuPackageFinder.label()+"' with ", ""));
 	}
 }

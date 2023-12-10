@@ -93,6 +93,13 @@ class LinuxPackageFinderTest {
   }
 
   @Test
+  public void resolveUbuntuForUbuntuPackage() {
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(UbuntuVersion.Ubuntu_23_10), "5.0.2")
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+  }
+
+  @Test
   public void resolveDebianDevPackage() {
     assertThat(linuxWith(CommonArchitecture.X86_64)
       .withVersion(DebianVersion.DEBIAN_12), "7.2.0-rc3")

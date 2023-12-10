@@ -51,24 +51,30 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 	private static ImmutablePackageFinderRules rules(Command command) {
 		ImmutableFileSet fileSet = FileSet.builder().addEntry(FileType.Executable, command.commandName()).build();
 
-    UbuntuPackageFinder ubuntuPackageFinder = new UbuntuPackageFinder(command);
+		UbuntuPackageFinder ubuntuPackageFinder = new UbuntuPackageFinder(command);
+		UbuntuFallbackToOlderVersionPackageFinder ubuntuDowngradingPackageFinder = new UbuntuFallbackToOlderVersionPackageFinder(ubuntuPackageFinder);
 
-    final ImmutablePackageFinderRule ubuntuRule = PackageFinderRule.builder()
+		final ImmutablePackageFinderRule ubuntuRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(UbuntuVersion.values()))
 			.finder(ubuntuPackageFinder)
 			.build();
 
+		final ImmutablePackageFinderRule ubuntuDowngradeRule = PackageFinderRule.builder()
+			.match(UbuntuFallbackToOlderVersionPackageFinder.platformMatch())
+			.finder(ubuntuDowngradingPackageFinder)
+			.build();
+
 		final ImmutablePackageFinderRule linuxMintRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(LinuxMintVersion.values()))
-			.finder(new LinuxMintPackageFinder(ubuntuPackageFinder))
+			.finder(new LinuxMintPackageFinder(ubuntuDowngradingPackageFinder))
 			.build();
 
 		final ImmutablePackageFinderRule popOsRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(PopOSVersion.values()))
-			.finder(new PopOSPackageFinder(ubuntuPackageFinder))
+			.finder(new PopOSPackageFinder(ubuntuDowngradingPackageFinder))
 			.build();
 
 		final ImmutablePackageFinderRule debian12DevRule = PackageFinderRule.builder()
@@ -78,7 +84,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 
 		final ImmutablePackageFinderRule debianUsesUbuntuRule = PackageFinderRule.builder()
 			.match(DebianUsesUbuntuPackageFinder.platformMatch())
-			.finder(new DebianUsesUbuntuPackageFinder(ubuntuPackageFinder))
+			.finder(new DebianUsesUbuntuPackageFinder(ubuntuDowngradingPackageFinder))
 			.build();
 
 		final ImmutablePackageFinderRule debianRule = PackageFinderRule.builder()
@@ -86,30 +92,36 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 			.finder(new DebianPackageFinder(command))
 			.build();
 
-		RedhatPackageFinder centosRedhatPackageFinder = new RedhatPackageFinder(command);
+		RedhatPackageFinder redhatPackageFinder = new RedhatPackageFinder(command);
+		RedhatFallbackToOlderVersionPackageFinder redhatDowngradingPackageFinder = new RedhatFallbackToOlderVersionPackageFinder(redhatPackageFinder);
 
 		ImmutablePackageFinderRule redhatRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(RedhatVersion.values()))
-			.finder(centosRedhatPackageFinder)
+			.finder(redhatPackageFinder)
+			.build();
+
+		final ImmutablePackageFinderRule redhatDowngradeRule = PackageFinderRule.builder()
+			.match(RedhatFallbackToOlderVersionPackageFinder.platformMatch())
+			.finder(redhatDowngradingPackageFinder)
 			.build();
 
 		ImmutablePackageFinderRule fedoraRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(FedoraVersion.values()))
-			.finder(new FedoraPackageFinder(centosRedhatPackageFinder))
+			.finder(new FedoraPackageFinder(redhatDowngradingPackageFinder))
 			.build();
 
 		ImmutablePackageFinderRule oracleRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(OracleVersion.values()))
-			.finder(new OraclePackageFinder(centosRedhatPackageFinder))
+			.finder(new OraclePackageFinder(redhatDowngradingPackageFinder))
 			.build();
 
 		ImmutablePackageFinderRule centosRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(CentosVersion.values()))
-			.finder(new CentosPackageFinder(centosRedhatPackageFinder))
+			.finder(new CentosPackageFinder(redhatDowngradingPackageFinder))
 			.build();
 
 		ImmutablePackageFinderRule amazonRule = PackageFinderRule.builder()
@@ -125,18 +137,20 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 
 		PackageFinderRule failIfNothingMatches = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux))
-			.finder(new FallbackToUbuntuOrFailPackageFinder(ubuntuPackageFinder))
+			.finder(new FallbackToUbuntuOrFailPackageFinder(ubuntuDowngradingPackageFinder))
 			.build();
 
 		return PackageFinderRules.empty()
 			.withRules(
 				ubuntuRule,
+				ubuntuDowngradeRule,
 				linuxMintRule,
 				popOsRule,
 				debian12DevRule,
 				debianUsesUbuntuRule,
 				debianRule,
 				redhatRule,
+				redhatDowngradeRule,
 				fedoraRule,
 				oracleRule,
 				centosRule,
@@ -147,10 +161,10 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 	}
 
 	static class FallbackToUbuntuOrFailPackageFinder implements PackageFinder, HasExplanation {
-		private final UbuntuPackageFinder ubuntuPackageFinder;
+		private final UbuntuFallbackToOlderVersionPackageFinder ubuntuPackageFinder;
 		private final UbuntuVersion fallbackUbuntuVersion = UbuntuVersion.Ubuntu_20_04;
 
-		public FallbackToUbuntuOrFailPackageFinder(UbuntuPackageFinder ubuntuPackageFinder) {
+		public FallbackToUbuntuOrFailPackageFinder(UbuntuFallbackToOlderVersionPackageFinder ubuntuPackageFinder) {
 			this.ubuntuPackageFinder = ubuntuPackageFinder;
 		}
 
@@ -175,7 +189,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 		}
 
 		@Override public String explain() {
-			return "fallback to "+fallbackUbuntuVersion;
+			return "fallback to "+fallbackUbuntuVersion+" using '"+ubuntuPackageFinder.label()+"'";
 		}
 	}
 }
