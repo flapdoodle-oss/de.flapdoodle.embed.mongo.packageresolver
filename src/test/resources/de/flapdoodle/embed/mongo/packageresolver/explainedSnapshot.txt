@@ -75,20 +75,23 @@
     use 'UbuntuVersionDowngradePackageFinder' with Ubuntu_22_04 for DEBIAN_12, DEBIAN_13
   (os=Linux and (version is any of DEBIAN_9, DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13))
   'DebianPackageFinder'
-    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_12, DEBIAN_13)) and (7.2.0-rc3)
+    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_12)) and (7.2.0-rc3)
       url=/linux/mongodb-linux-x86_64-debian12-{version}.tgz (TGZ(DEV))
-    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_11, DEBIAN_12, DEBIAN_13)) and (7.2.0-rc3 or 7.1.0-7.1.1 or 7.0.3-rc1 or 7.0.0-rc8 or 7.0.0-rc2 or 7.0.0-rc10 or 7.0.0-rc1 or 6.3.1-6.3.2 or 6.0.9-rc1 or 5.0.20-rc1)
+    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_11)) and (7.2.0-rc3 or 7.1.0-7.1.1 or 7.0.3-rc1 or 7.0.0-rc8 or 7.0.0-rc2 or 7.0.0-rc10 or 7.0.0-rc1 or 6.3.1-6.3.2 or 6.0.9-rc1 or 5.0.20-rc1)
       url=/linux/mongodb-linux-x86_64-debian11-{version}.tgz (TGZ(DEV))
-    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_11, DEBIAN_12, DEBIAN_13)) and (7.0.0-7.0.4 or 6.0.0-6.0.12 or 5.0.8-5.0.23)
+    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_11)) and (7.0.0-7.0.4 or 6.0.0-6.0.12 or 5.0.8-5.0.23)
       url=/linux/mongodb-linux-x86_64-debian11-{version}.tgz (TGZ)
-    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13)) and (7.0.0-rc2 or 7.0.0-rc1 or 6.3.1-6.3.2 or 6.0.9-rc1 or 5.0.20-rc1 or 4.4.27-rc0 or 4.4.24-rc0)
+    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_10)) and (7.0.0-rc2 or 7.0.0-rc1 or 6.3.1-6.3.2 or 6.0.9-rc1 or 5.0.20-rc1 or 4.4.27-rc0 or 4.4.24-rc0)
       url=/linux/mongodb-linux-x86_64-debian10-{version}.tgz (TGZ(DEV))
-    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13)) and (6.0.0-6.0.12 or 5.0.0-5.0.23 or 4.4.0-4.4.26 or 4.2.5-4.2.25 or 4.2.1-4.2.3)
+    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_10)) and (6.0.0-6.0.12 or 5.0.0-5.0.23 or 4.4.0-4.4.26 or 4.2.5-4.2.25 or 4.2.1-4.2.3)
       url=/linux/mongodb-linux-x86_64-debian10-{version}.tgz (TGZ)
-    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_9, DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13)) and (5.0.20-rc1 or 4.4.27-rc0 or 4.4.24-rc0)
+    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_9)) and (5.0.20-rc1 or 4.4.27-rc0 or 4.4.24-rc0)
       url=/linux/mongodb-linux-x86_64-debian92-{version}.tgz (TGZ(DEV))
-    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_9, DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13)) and (5.0.0-5.0.23 or 4.4.0-4.4.26 or 4.2.5-4.2.25 or 4.2.0-4.2.3 or 4.0.0-4.0.28 or 3.6.5-3.6.23)
+    (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_9)) and (5.0.0-5.0.23 or 4.4.0-4.4.26 or 4.2.5-4.2.25 or 4.2.0-4.2.3 or 4.0.0-4.0.28 or 3.6.5-3.6.23)
       url=/linux/mongodb-linux-x86_64-debian92-{version}.tgz (TGZ)
+  (os=Linux and (version is any of DEBIAN_9, DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13))
+  'DebianVersionDowngradePackageFinder'
+    use 'DebianPackageFinder' with DEBIAN_13, DEBIAN_12, DEBIAN_11, DEBIAN_10, DEBIAN_9 until package found.
   (os=Linux and (version is any of Redhat_6, Redhat_7, Redhat_8, Redhat_9))
   'RedhatPackageFinder'
     (os=Linux and bitSize=B64 and cpuType=ARM and (version is any of Redhat_9)) and (7.2.0-rc3 or 7.1.0-7.1.1 or 7.0.3-rc1 or 7.0.0-rc8 or 7.0.0-rc2 or 7.0.0-rc10 or 6.0.9-rc1)

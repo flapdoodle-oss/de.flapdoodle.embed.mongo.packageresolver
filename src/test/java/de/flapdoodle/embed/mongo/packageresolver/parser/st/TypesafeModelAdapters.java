@@ -152,9 +152,6 @@ public class TypesafeModelAdapters {
 				case "ignoreCpuType":
 					return it.ignoreCpuType();
 				case "versions":
-					return it.versions();
-				case "compatibleVersions":
-					return compatibleVersions(it.version(), it.versions());
 				case "version":
 					return it.version().isPresent()
 						? Arrays.asList(it.version().get())

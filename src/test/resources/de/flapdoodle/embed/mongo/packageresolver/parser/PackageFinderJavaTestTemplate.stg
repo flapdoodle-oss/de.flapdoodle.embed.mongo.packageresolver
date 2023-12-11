@@ -47,13 +47,6 @@ class <it.name>Test {
 	public void <pair.platform.testMethodName><urlAndVersions.index>Dev(String version) {
 		<assertThatDev(pair.platform, urlAndVersions.testUrl)>
 	\}
-<pair.platform.compatibleVersions:{ version |
-	@ParameterizedTest
-	@ValueSource(strings = { <versionRanges(urlAndVersions.versions.devVersions)> \})
-	public void <version>As<pair.platform.testMethodName><urlAndVersions.index>Dev(String version) {
-		<assertThatVersionDev(pair.platform, version, urlAndVersions.testUrl)>
-	\}
-}>
 <endif>
 <if(urlAndVersions.versions.hasVersions)>
 	@ParameterizedTest
@@ -61,13 +54,6 @@ class <it.name>Test {
 	public void <pair.platform.testMethodName><urlAndVersions.index>(String version) {
 		<assertThat(pair.platform, urlAndVersions.testUrl)>
 	\}
-<pair.platform.compatibleVersions:{ version |
-	@ParameterizedTest
-	@ValueSource(strings = { <versionRanges(urlAndVersions.versions.versions)> \})
-	public void <version>As<pair.platform.testMethodName><urlAndVersions.index>(String version) {
-		<assertThatVersion(pair.platform, version, urlAndVersions.testUrl)>
-	\}
-}>
 
 <endif>
 }><pair.urlVersions.toolEntries:{ toolsUrlAndVersions | <if(toolsUrlAndVersions.versions.hasVersions)>

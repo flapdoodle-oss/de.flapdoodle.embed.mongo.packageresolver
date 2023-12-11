@@ -59,7 +59,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
     FileSet fileSet = fileSetOf(command);
 
     PackageFinderRule devRule_DEBIAN_12_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.2.0-rc3"))
@@ -74,7 +74,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
 
  
     PackageFinderRule devRule_DEBIAN_11_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.2.0-rc3"),
@@ -97,7 +97,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .build();
 
     PackageFinderRule rule_DEBIAN_11_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0", "7.0.4"),
@@ -113,7 +113,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
 
  
     PackageFinderRule tools_DEBIAN_11_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -131,7 +131,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
 
 
     PackageFinderRule devRule_DEBIAN_10_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("7.0.0-rc2"),
@@ -151,7 +151,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .build();
 
     PackageFinderRule rule_DEBIAN_10_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("6.0.0", "6.0.12"),
@@ -169,7 +169,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
 
  
     PackageFinderRule tools_DEBIAN_10_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),
@@ -193,7 +193,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
 
 
     PackageFinderRule devRule_DEBIAN_9_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("5.0.20-rc1"),
@@ -209,7 +209,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .build();
 
     PackageFinderRule rule_DEBIAN_9_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9)
             .andThen(
                 DistributionMatch.any(
                   VersionRange.of("5.0.0", "5.0.23"),
@@ -228,7 +228,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
 
  
     PackageFinderRule tools_DEBIAN_9_X86_B64 = PackageFinderRule.builder()
-        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9, DebianVersion.DEBIAN_10, DebianVersion.DEBIAN_11, DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13)
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9)
             .andThen(
                 DistributionMatch.any(
                   ToolVersionRange.of("100.9.0", "100.9.4"),

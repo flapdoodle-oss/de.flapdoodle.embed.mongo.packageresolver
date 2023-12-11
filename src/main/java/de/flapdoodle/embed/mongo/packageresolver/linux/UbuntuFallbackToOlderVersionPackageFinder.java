@@ -20,75 +20,17 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
-import de.flapdoodle.embed.mongo.packageresolver.*;
-import de.flapdoodle.embed.process.config.store.Package;
-import de.flapdoodle.embed.process.distribution.Distribution;
-import de.flapdoodle.os.CommonOS;
-import de.flapdoodle.os.ImmutablePlatform;
+import de.flapdoodle.embed.mongo.packageresolver.HasLabel;
 import de.flapdoodle.os.linux.UbuntuVersion;
 
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-public class UbuntuFallbackToOlderVersionPackageFinder implements PackageFinder, HasExplanation, HasLabel {
-
-	private final UbuntuPackageFinder ubuntuPackageFinder;
+public class UbuntuFallbackToOlderVersionPackageFinder extends AbstractFallbackToOlderVersionPackageFinder<UbuntuVersion> implements HasLabel {
 
 	public UbuntuFallbackToOlderVersionPackageFinder(UbuntuPackageFinder ubuntuPackageFinder) {
-		this.ubuntuPackageFinder = ubuntuPackageFinder;
-	}
-
-	@Override
-	public Optional<Package> packageFor(Distribution distribution) {
-		if (platformMatch().match(distribution)) {
-			if (!distribution.platform().version().isPresent()) throw new RuntimeException("version not set: "+distribution);
-			UbuntuVersion startVersion = (UbuntuVersion) distribution.platform().version().get();
-			UbuntuVersion currentVersion = startVersion;
-
-			Optional<Package> matchingPackage;
-			do {
-				Distribution asUbuntudistribution = Distribution.of(distribution.version(),
-					ImmutablePlatform.copyOf(distribution.platform()).withVersion(currentVersion));
-				matchingPackage = ubuntuPackageFinder.packageFor(asUbuntudistribution);
-				if (!matchingPackage.isPresent()) {
-					currentVersion=downgradeVersionFrom(currentVersion).orElse(null);
-				}
-			} while (!matchingPackage.isPresent() && currentVersion!=null);
-
-			return matchingPackage;
-		}
-
-		return Optional.empty();
-	}
-
-	private static Optional<UbuntuVersion> downgradeVersionFrom(UbuntuVersion currentVersion) {
-		UbuntuVersion[] values = UbuntuVersion.values();
-		for (int i = values.length - 1; i >= 0; i--) {
-			UbuntuVersion version = values[i];
-			if (version.ordinal() < currentVersion.ordinal()) {
-				return Optional.of(version);
-			}
-		}
-		return Optional.empty();
+		super(ubuntuPackageFinder, UbuntuVersion::ordinal, UbuntuVersion.values());
 	}
 
 	@Override
 	public String label() {
 		return "UbuntuVersionDowngradePackageFinder";
-	}
-
-	@Override
-	public String explain() {
-		return Stream.of(UbuntuVersion.values())
-			.sorted(Comparator.reverseOrder())
-			.map(UbuntuVersion::name)
-			.collect(Collectors.joining(", ", "use '"+ubuntuPackageFinder.label()+"' with ", " until package found."));
-	}
-
-	public static ImmutablePlatformMatch platformMatch() {
-		return PlatformMatch.withOs(CommonOS.Linux)
-			.withVersion(UbuntuVersion.values());
 	}
 }

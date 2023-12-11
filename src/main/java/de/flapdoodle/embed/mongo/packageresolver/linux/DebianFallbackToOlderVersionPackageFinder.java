@@ -20,27 +20,18 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
-import de.flapdoodle.embed.mongo.packageresolver.*;
-import de.flapdoodle.embed.process.config.store.Package;
-import de.flapdoodle.embed.process.distribution.Distribution;
-import de.flapdoodle.os.CommonOS;
-import de.flapdoodle.os.ImmutablePlatform;
-import de.flapdoodle.os.linux.RedhatVersion;
+import de.flapdoodle.embed.mongo.packageresolver.HasLabel;
+import de.flapdoodle.os.linux.DebianVersion;
 import de.flapdoodle.os.linux.UbuntuVersion;
 
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+public class DebianFallbackToOlderVersionPackageFinder extends AbstractFallbackToOlderVersionPackageFinder<DebianVersion> implements HasLabel {
 
-public class RedhatFallbackToOlderVersionPackageFinder extends AbstractFallbackToOlderVersionPackageFinder<RedhatVersion> implements HasLabel {
-
-	public RedhatFallbackToOlderVersionPackageFinder(RedhatPackageFinder redhatPackageFinder) {
-		super(redhatPackageFinder, RedhatVersion::ordinal, RedhatVersion.values());
+	public DebianFallbackToOlderVersionPackageFinder(DebianPackageFinder debianPackageFinder) {
+		super(debianPackageFinder, DebianVersion::ordinal, DebianVersion.values());
 	}
 
 	@Override
 	public String label() {
-		return "RedhatVersionDowngradePackageFinder";
+		return "DebianVersionDowngradePackageFinder";
 	}
 }

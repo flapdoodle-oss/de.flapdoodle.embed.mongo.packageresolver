@@ -64,6 +64,13 @@ class LinuxPackageFinderTest {
   }
 
   @Test
+  public void resolveRedhatDowngradedPackage() {
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(RedhatVersion.Redhat_9), "5.0.2")
+      .resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
+  }
+
+  @Test
   public void resolveOraclePackage() {
     assertThat(linuxWith(CommonArchitecture.X86_64)
       .withDistribution(LinuxDistribution.Oracle)
@@ -72,9 +79,24 @@ class LinuxPackageFinderTest {
   }
 
   @Test
+  public void resolveOracleDowngradedPackage() {
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withDistribution(LinuxDistribution.Oracle)
+      .withVersion(OracleVersion.Oracle_9), "4.4.9")
+      .resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
+  }
+
+  @Test
   public void resolveCentosPackage() {
     assertThat(linuxWith(CommonArchitecture.X86_64)
       .withVersion(CentosVersion.CentOS_8), "5.0.2")
+      .resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
+  }
+
+  @Test
+  public void resolveCentosDowngradedPackage() {
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(CentosVersion.CentOS_9), "5.0.2")
       .resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
   }
 
@@ -86,6 +108,13 @@ class LinuxPackageFinderTest {
   }
 
   @Test
+  public void resolveDebianDowngradedPackage() {
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(DebianVersion.DEBIAN_11), "5.0.2")
+      .resolvesTo("/linux/mongodb-linux-x86_64-debian10-{}.tgz");
+  }
+
+  @Test
   public void resolveUbuntuForDebianPackage() {
     assertThat(linuxWith(CommonArchitecture.X86_64)
       .withVersion(DebianVersion.DEBIAN_12), "5.0.2")
@@ -93,7 +122,7 @@ class LinuxPackageFinderTest {
   }
 
   @Test
-  public void resolveUbuntuForUbuntuPackage() {
+  public void resolveUbuntuDowngradedPackage() {
     assertThat(linuxWith(CommonArchitecture.X86_64)
       .withVersion(UbuntuVersion.Ubuntu_23_10), "5.0.2")
       .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");

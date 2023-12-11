@@ -76,14 +76,6 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 	}
 
 	@Value.Default
-	public List<Version> versions() {
-		if (version().isPresent()) {
-			return HiddenRules.upgradeableVersions(version().get());
-		}
-		return Collections.emptyList();
-	}
-
-	@Value.Default
 	public boolean ignoreCpuType() {
 		return HiddenRules.ignoreCPUType(os(), cpuType());
 	}
@@ -91,21 +83,6 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 	@Override
 	public int compareTo(PackagePlatform other) {
 		return COMPARATOR.compare(this, other);
-	}
-
-	@Value.Auxiliary
-	public List<PackagePlatform> flatmapVersions() {
-		return versions().isEmpty()
-			? Arrays.asList(this)
-			: versions().stream()
-			.map(v -> ImmutablePackagePlatform.builder()
-				.os(os())
-				.cpuType(cpuType())
-				.bitSize(bitSize())
-				.version(v)
-				.addVersions(v)
-				.build())
-			.collect(Collectors.toList());
 	}
 
 	public static NumericVersion firstMongoDbVersionWithoutBundledTools() {
