@@ -20,6 +20,8 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+- mongotools version up to 100.9.4
+
 #### 4.11.0
 
 - latest mongodb version, debian 12 dev version

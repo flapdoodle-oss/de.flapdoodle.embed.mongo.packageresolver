@@ -27,7 +27,8 @@ public enum MongotoolsVersion implements de.flapdoodle.embed.process.distributio
 		V100_7_0("100.7.0"),
 		V100_7_1("100.7.1"),
 		V100_8_0("100.8.0"),
-		V100_9_0("100.9.0");
+		V100_9_0("100.9.0"),
+		V100_9_4("100.9.4");
 
 		private final String specificVersion;
 		private final NumericVersion numericVersion;
@@ -46,7 +47,8 @@ public enum MongotoolsVersion implements de.flapdoodle.embed.process.distributio
 				V100_5(MongotoolsVersion.V100_5_1),
 				V100_6(MongotoolsVersion.V100_6_0),
 				V100_7(MongotoolsVersion.V100_7_1),
-				V100_8(MongotoolsVersion.V100_8_0);
+				V100_8(MongotoolsVersion.V100_8_0),
+				V100_9(MongotoolsVersion.V100_9_4);
 
 				private final MongotoolsVersion dumpVersion;
 				Main(MongotoolsVersion dumpVersion) {
