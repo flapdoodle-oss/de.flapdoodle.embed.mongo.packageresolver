@@ -156,6 +156,7 @@
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of AmazonLinux)) and (5.0.0-5.0.23 or 4.4.0-4.4.26 or 4.2.5-4.2.25 or 4.2.0-4.2.3 or 4.0.0-4.0.28 or 3.6.0-3.6.23 or 3.4.9-3.4.24 or 3.4.0-3.4.7 or 3.2.0-3.2.22 or 3.0.0-3.0.15)
       url=/linux/mongodb-linux-x86_64-amazon-{version}.tgz (TGZ)
   (os=Linux)
+  'LinuxLegacyPackageFinder'
     (os=Linux and bitSize=B64 and cpuType=X86) and (4.0.0-4.0.28 or 3.6.0-3.6.23 or 3.5.5 or 3.4.9-3.4.24 or 3.4.0-3.4.7 or 3.3.1 or 3.2.0-3.2.22 or 3.0.0-3.0.15 or 2.6.0-2.6.12)
       url=/linux/mongodb-linux-x86_64-{version}.tgz (TGZ)
     (os=Linux and bitSize=B32 and cpuType=X86) and (3.5.5 or 3.3.1 or 3.2.0-3.2.22 or 3.0.0-3.0.15 or 2.6.0-2.6.12)

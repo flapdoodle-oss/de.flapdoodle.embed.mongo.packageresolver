@@ -36,10 +36,15 @@ import java.util.Optional;
 /**
 * this file is generated, please don't touch
 */
-public class LinuxLegacyPackageFinder extends AbstractPackageFinder {
+public class LinuxLegacyPackageFinder extends AbstractPackageFinder implements HasLabel {
 
   public LinuxLegacyPackageFinder(final Command command) {
     super(command, rules(command));
+  }
+
+  @Override
+  public String label() {
+    return getClass().getSimpleName();
   }
 
   private static FileSet fileSetOf(Command command) {
