@@ -132,6 +132,12 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 			.finder(new CentosPackageFinder(redhatDowngradingPackageFinder))
 			.build();
 
+		ImmutablePackageFinderRule almaRule = PackageFinderRule.builder()
+			.match(PlatformMatch.withOs(CommonOS.Linux)
+				.withVersion(AlmaVersion.values()))
+			.finder(new AlmaPackageFinder(redhatDowngradingPackageFinder))
+			.build();
+
 		ImmutablePackageFinderRule amazonRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(AmazonVersion.values()))
@@ -163,6 +169,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 				fedoraRule,
 				oracleRule,
 				centosRule,
+				almaRule,
 				amazonRule,
 				linuxLegacyRule,
 				failIfNothingMatches
