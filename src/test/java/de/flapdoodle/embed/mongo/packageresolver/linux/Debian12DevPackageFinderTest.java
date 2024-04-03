@@ -27,6 +27,7 @@ import de.flapdoodle.os.linux.DebianVersion;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@Deprecated
 class Debian12DevPackageFinderTest {
 	@ParameterizedTest
 	@ValueSource(strings = { "7.2.0-rc3" })

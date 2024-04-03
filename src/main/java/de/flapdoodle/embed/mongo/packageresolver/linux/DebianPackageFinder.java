@@ -62,7 +62,10 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.2.0-rc3"))
+                  VersionRange.of("7.3.1-rc2"),
+                  VersionRange.of("7.3.0"),
+                  VersionRange.of("7.2.0-rc3"),
+                  VersionRange.of("7.0.8-rc0"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -72,13 +75,43 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
             .build())
         .build();
 
+    PackageFinderRule rule_DEBIAN_12_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_12)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("7.0.5", "7.0.7"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-debian12-{version}.tgz")
+            .build())
+        .build();
+
  
+    PackageFinderRule tools_DEBIAN_12_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_12)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.9.2", "100.9.4"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-debian12-x86_64-{tools.version}.tgz")
+            .build())
+        .build();
+
+
     PackageFinderRule devRule_DEBIAN_11_X86_B64 = PackageFinderRule.builder()
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("7.3.1-rc2"),
+                  VersionRange.of("7.3.0"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
                   VersionRange.of("7.0.0-rc2"),
@@ -100,9 +133,9 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.4"),
-                  VersionRange.of("6.0.0", "6.0.12"),
-                  VersionRange.of("5.0.8", "5.0.23"))
+                  VersionRange.of("7.0.0", "7.0.7"),
+                  VersionRange.of("6.0.0", "6.0.14"),
+                  VersionRange.of("5.0.8", "5.0.26"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -154,9 +187,9 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.0", "6.0.12"),
-                  VersionRange.of("5.0.0", "5.0.23"),
-                  VersionRange.of("4.4.0", "4.4.26"),
+                  VersionRange.of("6.0.0", "6.0.14"),
+                  VersionRange.of("5.0.0", "5.0.26"),
+                  VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
                   VersionRange.of("4.2.1", "4.2.3"))
         ))
@@ -212,8 +245,8 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("5.0.0", "5.0.23"),
-                  VersionRange.of("4.4.0", "4.4.26"),
+                  VersionRange.of("5.0.0", "5.0.26"),
+                  VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
                   VersionRange.of("4.2.0", "4.2.3"),
                   VersionRange.of("4.0.0", "4.0.28"),
@@ -257,6 +290,9 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
       case MongoRestore:
         return PackageFinderRules.empty()
             .withAdditionalRules(
+                tools_DEBIAN_12_X86_B64
+            )
+            .withAdditionalRules(
                 tools_DEBIAN_11_X86_B64
             )
             .withAdditionalRules(
@@ -274,7 +310,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
       default:
         return PackageFinderRules.empty()
             .withAdditionalRules(
-                devRule_DEBIAN_12_X86_B64
+                devRule_DEBIAN_12_X86_B64, rule_DEBIAN_12_X86_B64
             ).withAdditionalRules(
                 devRule_DEBIAN_11_X86_B64, rule_DEBIAN_11_X86_B64
             ).withAdditionalRules(

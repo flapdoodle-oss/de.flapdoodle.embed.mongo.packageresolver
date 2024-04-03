@@ -172,6 +172,7 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 			case "Debian 11.0 x64":
 				return linux(DebianVersion.DEBIAN_11, CPUType.X86, BitSize.B64);
 			case "debian12 x64":
+			case "Debian 12.0 x64":
 				return linux(DebianVersion.DEBIAN_12, CPUType.X86, BitSize.B64);
 			default:
 				throw new IllegalArgumentException("could not parse "+name);

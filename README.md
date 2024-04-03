@@ -22,6 +22,7 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 - mongotools version up to 100.9.4
 - alma linux support
+- latest mongodb versions (7.0.7, 7.3.0, etc)
 
 #### 4.11.0
 

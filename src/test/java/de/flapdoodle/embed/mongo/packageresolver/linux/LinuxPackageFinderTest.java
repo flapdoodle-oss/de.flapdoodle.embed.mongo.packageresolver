@@ -26,6 +26,7 @@ import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
 import de.flapdoodle.os.*;
 import de.flapdoodle.os.linux.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -94,6 +95,13 @@ class LinuxPackageFinderTest {
   }
 
   @Test
+  public void resolveAlmaPackage() {
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(AlmaVersion.Alma_8), "5.0.2")
+      .resolvesTo("/linux/mongodb-linux-x86_64-rhel80-{}.tgz");
+  }
+
+  @Test
   public void resolveCentosDowngradedPackage() {
     assertThat(linuxWith(CommonArchitecture.X86_64)
       .withVersion(CentosVersion.CentOS_9), "5.0.2")
@@ -115,6 +123,7 @@ class LinuxPackageFinderTest {
   }
 
   @Test
+  @Disabled("there are debian12 packages now")
   public void resolveUbuntuForDebianPackage() {
     assertThat(linuxWith(CommonArchitecture.X86_64)
       .withVersion(DebianVersion.DEBIAN_12), "5.0.2")

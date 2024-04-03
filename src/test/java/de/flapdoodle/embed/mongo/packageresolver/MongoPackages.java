@@ -98,7 +98,10 @@ public abstract class MongoPackages {
 			Pair.of("versions/react/mongo-db-versions-2023-10-30-dev.html", true),
 			Pair.of("versions/react/mongo-db-versions-2023-12-08.html", false),
 			Pair.of("versions/react/mongo-db-versions-2023-12-08-archive.html", false),
-			Pair.of("versions/react/mongo-db-versions-2023-12-08-dev.html", true)
+			Pair.of("versions/react/mongo-db-versions-2023-12-08-dev.html", true),
+			Pair.of("versions/react/mongo-db-versions-2024-04-03.html", false),
+			Pair.of("versions/react/mongo-db-versions-2024-04-03-archive.html", false),
+			Pair.of("versions/react/mongo-db-versions-2024-04-03-dev.html", true)
 		);
 
 		return resources;
@@ -131,7 +134,8 @@ public abstract class MongoPackages {
 			Pair.of("versions/react/mongotools-versions-2023-07-25.html", false),
 			Pair.of("versions/react/mongotools-versions-2023-08-19.html", false),
 			Pair.of("versions/react/mongotools-versions-2023-10-30.html", false),
-			Pair.of("versions/react/mongotools-versions-2023-12-08.html", false)
+			Pair.of("versions/react/mongotools-versions-2023-12-08.html", false),
+			Pair.of("versions/react/mongotools-versions-2024-04-03.html", false)
 		);
 
 		return resources;
@@ -333,17 +337,22 @@ public abstract class MongoPackages {
 			int start=0;
 			while (start<versions.size()) {
 				NumericVersion max=versions.get(start);
-				NumericVersion min=max;
-				int minFoundAt=start;
-				for (int i=start+1;i<versions.size();i++) {
-					NumericVersion current=versions.get(i);
-					if (current.isNextOrPrevPatch(min)) {
-						min=current;
-						minFoundAt=i;
+				if (!max.build().isPresent()) {
+					NumericVersion min = max;
+					int minFoundAt = start;
+					for (int i = start + 1; i < versions.size(); i++) {
+						NumericVersion current = versions.get(i);
+						if (current.isNextOrPrevPatch(min) && !current.build().isPresent()) {
+							min = current;
+							minFoundAt = i;
+						}
 					}
+					ranges.add(VersionRange.of(min, max));
+					start = minFoundAt + 1;
+				} else {
+					ranges.add(VersionRange.of(max, max));
+					start++;
 				}
-				ranges.add(VersionRange.of(min, max));
-				start=minFoundAt+1;
 			}
 		}
 		return ranges;
