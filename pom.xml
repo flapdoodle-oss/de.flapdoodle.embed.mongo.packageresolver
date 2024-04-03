@@ -146,7 +146,7 @@
                     <dependency>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>extra-enforcer-rules</artifactId>
-                        <version>1.7.0</version>
+                        <version>1.8.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -358,8 +358,8 @@
     </profiles>
 
     <properties>
-        <junit.version>5.10.1</junit.version>
-        <immutables.version>2.10.0</immutables.version>
+        <junit.version>5.10.2</junit.version>
+        <immutables.version>2.10.1</immutables.version>
         <!-- eclipse apt switch -->
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
     </properties>
@@ -393,7 +393,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.24.2</version>
+            <version>3.25.3</version>
             <scope>test</scope>
         </dependency>
 
@@ -401,7 +401,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>32.1.3-jre</version>
+            <version>33.1.0-jre</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -414,7 +414,7 @@
             <!-- jsoup HTML parser library @ https://jsoup.org/ -->
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.17.1</version>
+            <version>1.17.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -434,12 +434,12 @@
         <dependency>
             <groupId>de.flapdoodle</groupId>
             <artifactId>de.flapdoodle.os</artifactId>
-            <version>1.5.3</version>
+            <version>1.5.4</version>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.process</artifactId>
-            <version>4.10.1</version>
+            <version>4.10.4</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
