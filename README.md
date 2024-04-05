@@ -20,6 +20,10 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+#### 4.11.2
+
+- latest mongodb versions (7.0.8) 
+
 #### 4.11.1
 
 - mongotools version up to 100.9.4

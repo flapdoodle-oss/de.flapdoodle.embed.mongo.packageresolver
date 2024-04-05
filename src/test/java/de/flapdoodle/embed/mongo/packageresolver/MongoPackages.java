@@ -101,7 +101,8 @@ public abstract class MongoPackages {
 			Pair.of("versions/react/mongo-db-versions-2023-12-08-dev.html", true),
 			Pair.of("versions/react/mongo-db-versions-2024-04-03.html", false),
 			Pair.of("versions/react/mongo-db-versions-2024-04-03-archive.html", false),
-			Pair.of("versions/react/mongo-db-versions-2024-04-03-dev.html", true)
+			Pair.of("versions/react/mongo-db-versions-2024-04-03-dev.html", true),
+			Pair.of("versions/react/mongo-db-versions-2024-04-05.html", false)
 		);
 
 		return resources;

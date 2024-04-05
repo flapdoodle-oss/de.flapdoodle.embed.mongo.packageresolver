@@ -79,7 +79,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.5", "7.0.7"))
+                  VersionRange.of("7.0.5", "7.0.8"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -133,7 +133,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.7"),
+                  VersionRange.of("7.0.0", "7.0.8"),
                   VersionRange.of("6.0.0", "6.0.14"),
                   VersionRange.of("5.0.8", "5.0.26"))
         ))

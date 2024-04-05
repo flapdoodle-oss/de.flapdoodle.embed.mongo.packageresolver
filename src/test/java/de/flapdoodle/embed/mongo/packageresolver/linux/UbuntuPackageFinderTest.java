@@ -45,7 +45,7 @@ class UbuntuPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.7", "6.0.4 -> 6.0.14" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.8", "6.0.4 -> 6.0.14" })
 	public void Ubuntu_22_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
@@ -66,7 +66,7 @@ class UbuntuPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.7", "6.0.4 -> 6.0.14" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.8", "6.0.4 -> 6.0.14" })
 	public void Ubuntu_22_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
@@ -87,7 +87,7 @@ class UbuntuPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.7", "6.0.0 -> 6.0.14", "5.0.0 -> 5.0.26", "4.4.0 -> 4.4.29" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.8", "6.0.0 -> 6.0.14", "5.0.0 -> 5.0.26", "4.4.0 -> 4.4.29" })
 	public void Ubuntu_20_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
@@ -108,7 +108,7 @@ class UbuntuPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.7", "6.0.0 -> 6.0.14", "5.0.0 -> 5.0.26", "4.4.0 -> 4.4.29" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.8", "6.0.0 -> 6.0.14", "5.0.0 -> 5.0.26", "4.4.0 -> 4.4.29" })
 	public void Ubuntu_20_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");

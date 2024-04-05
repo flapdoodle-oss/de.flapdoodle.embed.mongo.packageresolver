@@ -85,7 +85,7 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.7"),
+                  VersionRange.of("7.0.0", "7.0.8"),
                   VersionRange.of("6.0.0", "6.0.14"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -144,7 +144,7 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.7"),
+                  VersionRange.of("7.0.0", "7.0.8"),
                   VersionRange.of("6.0.0", "6.0.14"),
                   VersionRange.of("5.0.0", "5.0.26"),
                   VersionRange.of("4.4.0", "4.4.29"),

@@ -45,7 +45,7 @@ class AmazonPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-amazon2023-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.7" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.8" })
 	public void AmazonLinux2023Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, AmazonVersion.AmazonLinux2023), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-amazon2023-{}.tgz");
@@ -66,7 +66,7 @@ class AmazonPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-amazon2023-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.7" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.8" })
 	public void AmazonLinux2023(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, AmazonVersion.AmazonLinux2023), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-amazon2023-{}.tgz");
@@ -87,7 +87,7 @@ class AmazonPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-amazon2-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.7", "6.0.0 -> 6.0.14", "5.0.0 -> 5.0.26", "4.4.4 -> 4.4.29", "4.2.13 -> 4.2.25" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.8", "6.0.0 -> 6.0.14", "5.0.0 -> 5.0.26", "4.4.4 -> 4.4.29", "4.2.13 -> 4.2.25" })
 	public void AmazonLinux2Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, AmazonVersion.AmazonLinux2), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-amazon2-{}.tgz");
@@ -114,7 +114,7 @@ class AmazonPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-amazon2-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.7", "6.0.0 -> 6.0.14", "5.0.0 -> 5.0.26", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.22 -> 3.6.23" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.8", "6.0.0 -> 6.0.14", "5.0.0 -> 5.0.26", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.22 -> 3.6.23" })
 	public void AmazonLinux2(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, AmazonVersion.AmazonLinux2), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-amazon2-{}.tgz");

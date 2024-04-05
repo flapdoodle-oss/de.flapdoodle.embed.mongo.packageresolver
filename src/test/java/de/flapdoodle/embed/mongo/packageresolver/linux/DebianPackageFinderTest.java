@@ -45,7 +45,7 @@ class DebianPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-debian12-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.5 -> 7.0.7" })
+	@ValueSource(strings = { "7.0.5 -> 7.0.8" })
 	public void DEBIAN_12(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, DebianVersion.DEBIAN_12), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-debian12-{}.tgz");
@@ -66,7 +66,7 @@ class DebianPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-debian11-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.0 -> 7.0.7", "6.0.0 -> 6.0.14", "5.0.8 -> 5.0.26" })
+	@ValueSource(strings = { "7.0.0 -> 7.0.8", "6.0.0 -> 6.0.14", "5.0.8 -> 5.0.26" })
 	public void DEBIAN_11(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, DebianVersion.DEBIAN_11), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-debian11-{}.tgz");
