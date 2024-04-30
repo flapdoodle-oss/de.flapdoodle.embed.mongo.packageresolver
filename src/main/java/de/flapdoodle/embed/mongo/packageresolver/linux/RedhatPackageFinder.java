@@ -62,8 +62,10 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.0-rc3"),
+                  VersionRange.of("7.3.2-rc1"),
                   VersionRange.of("7.3.1-rc2"),
-                  VersionRange.of("7.3.0"),
+                  VersionRange.of("7.3.0", "7.3.1"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.8-rc0"),
@@ -85,8 +87,8 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.8"),
-                  VersionRange.of("6.0.7", "6.0.14"))
+                  VersionRange.of("7.0.0", "7.0.9"),
+                  VersionRange.of("6.0.7", "6.0.15"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -129,8 +131,10 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.0-rc3"),
+                  VersionRange.of("7.3.2-rc1"),
                   VersionRange.of("7.3.1-rc2"),
-                  VersionRange.of("7.3.0"),
+                  VersionRange.of("7.3.0", "7.3.1"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.8-rc0"),
@@ -154,8 +158,8 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.8"),
-                  VersionRange.of("6.0.4", "6.0.14"))
+                  VersionRange.of("7.0.0", "7.0.9"),
+                  VersionRange.of("6.0.4", "6.0.15"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -186,8 +190,10 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.0-rc3"),
+                  VersionRange.of("7.3.2-rc1"),
                   VersionRange.of("7.3.1-rc2"),
-                  VersionRange.of("7.3.0"),
+                  VersionRange.of("7.3.0", "7.3.1"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.8-rc0"),
@@ -214,8 +220,8 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.8"),
-                  VersionRange.of("6.0.0", "6.0.14"),
+                  VersionRange.of("7.0.0", "7.0.9"),
+                  VersionRange.of("6.0.0", "6.0.15"),
                   VersionRange.of("5.0.0", "5.0.26"),
                   VersionRange.of("4.4.4", "4.4.29"))
         ))
@@ -263,8 +269,10 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.0-rc3"),
+                  VersionRange.of("7.3.2-rc1"),
                   VersionRange.of("7.3.1-rc2"),
-                  VersionRange.of("7.3.0"),
+                  VersionRange.of("7.3.0", "7.3.1"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.8-rc0"),
@@ -291,8 +299,8 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.8"),
-                  VersionRange.of("6.0.0", "6.0.14"),
+                  VersionRange.of("7.0.0", "7.0.9"),
+                  VersionRange.of("6.0.0", "6.0.15"),
                   VersionRange.of("5.0.0", "5.0.26"),
                   VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
@@ -337,8 +345,9 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("7.3.2-rc1"),
                   VersionRange.of("7.3.1-rc2"),
-                  VersionRange.of("7.3.0"),
+                  VersionRange.of("7.3.0", "7.3.1"),
                   VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
@@ -364,8 +373,8 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.0", "7.0.8"),
-                  VersionRange.of("6.0.0", "6.0.14"),
+                  VersionRange.of("7.0.0", "7.0.9"),
+                  VersionRange.of("6.0.0", "6.0.15"),
                   VersionRange.of("5.0.0", "5.0.26"),
                   VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
