@@ -42,6 +42,17 @@ class DefaultFeatureSetResolverTest {
 		}
 	}
 
+	@Test
+	public void noPreallocDisableWith_8_0_0() {
+		assertThat(testee.featuresOf(withVersion("7.3.16"))
+			.enabled(Feature.DISABLE_USE_PREALLOC))
+			.isTrue();
+
+		assertThat(testee.featuresOf(withVersion("8.0.0"))
+			.enabled(Feature.DISABLE_USE_PREALLOC))
+			.isFalse();
+	}
+
 	@ParameterizedTest
 	@MethodSource("featureVersion")
 	public void featureEnabled(Feature feature, String version) {
@@ -74,6 +85,7 @@ class DefaultFeatureSetResolverTest {
 		for (Feature feature : Feature.values()) {
 			switch (feature) {
 				case TEXT_SEARCH:
+				case DISABLE_USE_PREALLOC:
 					assertThat(features.enabled(feature))
 						.describedAs("feature %s", feature).isFalse();
 					break;

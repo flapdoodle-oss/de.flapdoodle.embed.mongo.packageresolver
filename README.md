@@ -20,9 +20,10 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
-#### 4.11.3
+#### 4.11.4
 
-- latest mongodb versions (7.0.9, 8.0.0-rc3) 
+- latest mongodb versions (7.0.9, 8.0.0-rc3)
+- disable --noprealloc with 8.0.0-rc3
 
 #### 4.11.2
 
