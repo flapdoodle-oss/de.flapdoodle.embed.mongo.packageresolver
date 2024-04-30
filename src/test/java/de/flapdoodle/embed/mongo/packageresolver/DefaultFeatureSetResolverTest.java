@@ -48,9 +48,9 @@ class DefaultFeatureSetResolverTest {
 			.enabled(Feature.DISABLE_USE_PREALLOC))
 			.isTrue();
 
-		assertThat(testee.featuresOf(withVersion("8.0.0"))
+		assertThat(testee.featuresOf(withVersion("8.0.0-rc3"))
 			.enabled(Feature.DISABLE_USE_PREALLOC))
-			.isFalse();
+			.isTrue();
 	}
 
 	@ParameterizedTest
@@ -85,7 +85,6 @@ class DefaultFeatureSetResolverTest {
 		for (Feature feature : Feature.values()) {
 			switch (feature) {
 				case TEXT_SEARCH:
-				case DISABLE_USE_PREALLOC:
 					assertThat(features.enabled(feature))
 						.describedAs("feature %s", feature).isFalse();
 					break;

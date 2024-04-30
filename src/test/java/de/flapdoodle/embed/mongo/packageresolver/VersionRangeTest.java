@@ -43,4 +43,18 @@ class VersionRangeTest {
     boolean result = range.match(Distribution.of(Version.of("3.3.1"), Platform.detect(CommonOS.list())));
     assertThat(result).isTrue();
   }
+
+  @Test
+  public void mustMatchVersionRangeIfBuildIsNotOnLatestVersion() {
+    VersionRange range = VersionRange.of("4.0.0", "4.0.26");
+    boolean result = range.match(Distribution.of(Version.of("4.0.25-rc3"), Platform.detect(CommonOS.list())));
+    assertThat(result).isTrue();
+  }
+
+  @Test
+  public void mustNotMatchVersionRangeIfBuildIsOnLatestVersion() {
+    VersionRange range = VersionRange.of("4.0.0", "4.0.26");
+    boolean result = range.match(Distribution.of(Version.of("4.0.26-rc3"), Platform.detect(CommonOS.list())));
+    assertThat(result).isFalse();
+  }
 }

@@ -51,9 +51,13 @@ public abstract class VersionRange implements DistributionMatch {
   public boolean match(Version version) {
     NumericVersion asNumeric = NumericVersion.of(version.asInDownloadPath());
     if (asNumeric.build().isPresent()) {
-      return min().isEqual(asNumeric) && max().isEqual(asNumeric);
+      return min().isOlderOrEqual(asNumeric) && max().isEqual(asNumeric) || nextPatchWithoutBuild(asNumeric).isOlderOrEqual(max());
     }
     return min().isOlderOrEqual(asNumeric) && asNumeric.isOlderOrEqual(max());
+  }
+
+  private static NumericVersion nextPatchWithoutBuild(NumericVersion src) {
+    return NumericVersion.of(src.major(), src.minor(), src.patch() + 1);
   }
 
   public static VersionRange of(NumericVersion min, NumericVersion max) {
