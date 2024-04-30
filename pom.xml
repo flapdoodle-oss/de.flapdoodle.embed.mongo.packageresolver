@@ -439,7 +439,7 @@
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.process</artifactId>
-            <version>4.10.5</version>
+            <version>4.11.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
