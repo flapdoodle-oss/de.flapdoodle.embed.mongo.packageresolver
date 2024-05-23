@@ -120,6 +120,10 @@ class LinuxPackageFinderTest {
     assertThat(linuxWith(CommonArchitecture.X86_64)
       .withVersion(DebianVersion.DEBIAN_11), "5.0.2")
       .resolvesTo("/linux/mongodb-linux-x86_64-debian10-{}.tgz");
+    
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(DebianVersion.DEBIAN_12), "7.0.2")
+      .resolvesTo("/linux/mongodb-linux-x86_64-debian11-{}.tgz");
   }
 
   @Test
