@@ -89,6 +89,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 
 		DebianPackageFinder debianPackageFinder = new DebianPackageFinder(command);
 		DebianFallbackToOlderVersionPackageFinder debianDowngradingPackageFinder = new DebianFallbackToOlderVersionPackageFinder(debianPackageFinder);
+		DebianUsesUbuntuOnArmPackageFinder debianUsesUbuntuOnArmPackageFinder = new DebianUsesUbuntuOnArmPackageFinder(ubuntuDowngradingPackageFinder);
 
 		final ImmutablePackageFinderRule debianRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux).withVersion(DebianVersion.values()))
@@ -98,6 +99,11 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 		final ImmutablePackageFinderRule debianDowngradeRule = PackageFinderRule.builder()
 			.match(debianDowngradingPackageFinder.platformMatch())
 			.finder(debianDowngradingPackageFinder)
+			.build();
+
+		final ImmutablePackageFinderRule debianArmUsesUbuntuRule = PackageFinderRule.builder()
+			.match(debianUsesUbuntuOnArmPackageFinder.platformMatch())
+			.finder(debianUsesUbuntuOnArmPackageFinder)
 			.build();
 
 		RedhatPackageFinder redhatPackageFinder = new RedhatPackageFinder(command);
@@ -168,6 +174,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 				popOsRule,
 //				debian12DevRule,
 //				debianUsesUbuntuRule,
+				debianArmUsesUbuntuRule,
 				debianRule,
 				debianDowngradeRule,
 				redhatRule,

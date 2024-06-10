@@ -68,6 +68,9 @@
     use 'UbuntuVersionDowngradePackageFinder' with Ubuntu_18_04 for LINUX_MINT_19_0, LINUX_MINT_19_1, LINUX_MINT_19_2, LINUX_MINT_19_3 and Ubuntu_20_04 for LINUX_MINT_20_0, LINUX_MINT_20_1, LINUX_MINT_20_2, LINUX_MINT_20_3 and Ubuntu_22_04 for LINUX_MINT_21_0, LINUX_MINT_21_1, LINUX_MINT_21_2, LINUX_MINT_21_3
   (os=Linux and (version is any of POP_OS_22_4))
     use 'UbuntuVersionDowngradePackageFinder' with Ubuntu_22_04 for POP_OS_22_4
+  (os=Linux and bitSize=B64 and cpuType=ARM and (version is any of DEBIAN_12, DEBIAN_13))
+  'DebianUsesUbuntuOnArmPackageFinder'
+    use 'UbuntuVersionDowngradePackageFinder' with Ubuntu_22_04 for DEBIAN_12, DEBIAN_13
   (os=Linux and (version is any of DEBIAN_9, DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13))
   'DebianPackageFinder'
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_12)) and (tools.version 100.9.2-100.9.4)
@@ -87,7 +90,7 @@
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_9)) and (5.0.0-5.0.26 or 4.4.0-4.4.29 or 4.2.5-4.2.25 or 4.2.0-4.2.3 or 4.0.0-4.0.28 or 3.6.5-3.6.23)
       url=/linux/mongodb-linux-x86_64-debian92-{version}.tgz (TGZ)
   (os=Linux and (version is any of DEBIAN_9, DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13))
-  'DebianVersionDowngradePackageFinder'
+  'DebianFallbackToOlderVersionPackageFinder'
     use 'DebianPackageFinder' with DEBIAN_13, DEBIAN_12, DEBIAN_11, DEBIAN_10, DEBIAN_9 until package found.
   (os=Linux and (version is any of Redhat_6, Redhat_7, Redhat_8, Redhat_9))
   'RedhatPackageFinder'

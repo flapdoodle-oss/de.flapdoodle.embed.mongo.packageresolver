@@ -145,7 +145,7 @@ class LinuxPackageFinderTest {
   public void resolveUbuntuForDebianPackageIfArchIsArm() {
     assertThat(linuxWith(CommonArchitecture.ARM_64)
       .withVersion(DebianVersion.DEBIAN_12), "7.0.0")
-      .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
+      .resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
   }
 
   @Test

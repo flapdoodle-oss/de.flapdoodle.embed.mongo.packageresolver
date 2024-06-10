@@ -32,6 +32,6 @@ public class DebianFallbackToOlderVersionPackageFinder extends AbstractFallbackT
 
 	@Override
 	public String label() {
-		return "DebianVersionDowngradePackageFinder";
+		return getClass().getSimpleName();
 	}
 }
