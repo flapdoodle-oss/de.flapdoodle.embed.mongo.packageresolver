@@ -60,10 +60,11 @@ public class WindowsPackageFinder extends AbstractPackageFinder implements HasLa
         .match(match(CommonOS.Windows, BitSize.B64, CPUType.X86)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.0-rc7"),
                   VersionRange.of("8.0.0-rc3"),
+                  VersionRange.of("7.3.3-rc0"),
                   VersionRange.of("7.3.2-rc1"),
-                  VersionRange.of("7.3.1-rc2"),
-                  VersionRange.of("7.3.0", "7.3.1"),
+                  VersionRange.of("7.3.0", "7.3.2"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.8-rc0"),
@@ -73,6 +74,7 @@ public class WindowsPackageFinder extends AbstractPackageFinder implements HasLa
                   VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
                   VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.16-rc0"),
                   VersionRange.of("6.0.9-rc1"),
                   VersionRange.of("5.0.20-rc1"),
                   VersionRange.of("4.4.27-rc0"),
@@ -90,9 +92,10 @@ public class WindowsPackageFinder extends AbstractPackageFinder implements HasLa
         .match(match(CommonOS.Windows, BitSize.B64, CPUType.X86)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("7.0.11"),
                   VersionRange.of("7.0.0", "7.0.9"),
                   VersionRange.of("6.0.0", "6.0.15"),
-                  VersionRange.of("5.0.0", "5.0.26"),
+                  VersionRange.of("5.0.0", "5.0.27"),
                   VersionRange.of("4.4.0", "4.4.29"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
