@@ -126,6 +126,8 @@
     use 'RedhatVersionDowngradePackageFinder' with Redhat_6 for CentOS_6 and Redhat_7 for CentOS_7 and Redhat_8 for CentOS_8 and Redhat_9 for CentOS_9
   (os=Linux and (version is any of Alma_8, Alma_9))
     use 'RedhatVersionDowngradePackageFinder' with Redhat_8 for Alma_8 and Redhat_9 for Alma_9
+  (os=Linux and (version is any of Rocky_8, Rocky_9))
+    use 'RedhatVersionDowngradePackageFinder' with Redhat_8 for Rocky_8 and Redhat_9 for Rocky_9
   (os=Linux and (version is any of AmazonLinux, AmazonLinux2, AmazonLinux2023))
   'AmazonPackageFinder'
     (os=Linux and bitSize=B64 and cpuType=ARM and (version is any of AmazonLinux2023)) and (8.0.0-rc3 or 7.3.2-rc1 or 7.3.1-rc2 or 7.3.0-7.3.1 or 7.2.0-rc3 or 7.1.0-7.1.1 or 7.0.8-rc0 or 7.0.3-rc1 or 7.0.0-rc8 or 7.0.0-rc2 or 7.0.0-rc10)
