@@ -20,6 +20,10 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+#### 4.13.0
+
+- 7.0.11, 8.0.0-rcX versions added
+
 #### 4.12.0
 
 - version range check fix, works with versions like 8.0.0-rc3
