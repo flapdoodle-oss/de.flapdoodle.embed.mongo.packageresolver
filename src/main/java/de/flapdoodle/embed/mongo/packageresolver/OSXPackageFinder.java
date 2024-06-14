@@ -241,7 +241,6 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
 
 
     switch (command) {
-      case Mongo:
       case MongoDump:
       case MongoImport:
       case MongoRestore:

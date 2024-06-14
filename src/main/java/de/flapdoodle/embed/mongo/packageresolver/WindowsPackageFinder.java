@@ -215,7 +215,6 @@ public class WindowsPackageFinder extends AbstractPackageFinder implements HasLa
 
  
     switch (command) {
-      case Mongo:
       case MongoDump:
       case MongoImport:
       case MongoRestore:

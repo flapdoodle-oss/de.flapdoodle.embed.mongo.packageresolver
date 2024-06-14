@@ -494,7 +494,6 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
 
 
     switch (command) {
-      case Mongo:
       case MongoDump:
       case MongoImport:
       case MongoRestore:

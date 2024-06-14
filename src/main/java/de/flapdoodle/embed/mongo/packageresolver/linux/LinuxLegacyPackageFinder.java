@@ -97,7 +97,6 @@ public class LinuxLegacyPackageFinder extends AbstractPackageFinder implements H
 
  
     switch (command) {
-      case Mongo:
       case MongoDump:
       case MongoImport:
       case MongoRestore:

@@ -107,7 +107,6 @@ public class <it.name> extends AbstractPackageFinder implements HasLabel {
 <endif>
 }>}>
     switch (command) {
-      case Mongo:
       case MongoDump:
       case MongoImport:
       case MongoRestore:

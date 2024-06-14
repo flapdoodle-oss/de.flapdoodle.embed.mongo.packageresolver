@@ -76,7 +76,6 @@ public class SolarisPackageFinder extends AbstractPackageFinder implements HasLa
 
  
     switch (command) {
-      case Mongo:
       case MongoDump:
       case MongoImport:
       case MongoRestore:
