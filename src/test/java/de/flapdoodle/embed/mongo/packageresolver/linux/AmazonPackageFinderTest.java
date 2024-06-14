@@ -167,7 +167,7 @@ class AmazonPackageFinderTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new AmazonPackageFinder(Command.Mongo),
+			new AmazonPackageFinder(Command.MongoD),
 			version -> Distribution.of(Version.of(version), platform),
 			versionList);
 	}

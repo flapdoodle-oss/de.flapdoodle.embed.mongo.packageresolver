@@ -31,7 +31,7 @@ class PlatformPackageResolverTest {
 
   @Test
   public void explainSnapshotMustNotChangeWithoutNotice() {
-    Assertions.assertThat(new PlatformPackageResolver(Command.Mongo).explain())
+    Assertions.assertThat(new PlatformPackageResolver(Command.MongoD).explain())
       .isEqualToIgnoringNewLines(URLs.contentOf(Resources.getResource(PlatformPackageResolverTest.class,"explainedSnapshot.txt"), StandardCharsets.UTF_8));
   }
 

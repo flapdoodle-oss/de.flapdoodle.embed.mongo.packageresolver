@@ -62,7 +62,7 @@ class SolarisPackageFinderTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new SolarisPackageFinder(Command.Mongo),
+			new SolarisPackageFinder(Command.MongoD),
 			version -> Distribution.of(Version.of(version), platform),
 			versionList);
 	}

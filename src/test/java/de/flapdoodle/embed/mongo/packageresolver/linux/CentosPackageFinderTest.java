@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 class CentosPackageFinderTest extends AbstractVersionMappedPackageFinderTest<CentosVersion, RedhatVersion> {
 
 	public CentosPackageFinderTest() {
-		super(new CentosPackageFinder(new RedhatFallbackToOlderVersionPackageFinder(new RedhatPackageFinder(Command.Mongo))));
+		super(new CentosPackageFinder(new RedhatFallbackToOlderVersionPackageFinder(new RedhatPackageFinder(Command.MongoD))));
 	}
 	
 	@Test

@@ -392,6 +392,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
 
 
     switch (command) {
+      case Mongo:
       case MongoDump:
       case MongoImport:
       case MongoRestore:

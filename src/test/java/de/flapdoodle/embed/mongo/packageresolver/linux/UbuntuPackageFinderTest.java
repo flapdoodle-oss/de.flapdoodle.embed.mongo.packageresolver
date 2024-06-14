@@ -218,7 +218,7 @@ class UbuntuPackageFinderTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new UbuntuPackageFinder(Command.Mongo),
+			new UbuntuPackageFinder(Command.MongoD),
 			version -> Distribution.of(Version.of(version), platform),
 			versionList);
 	}

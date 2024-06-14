@@ -46,7 +46,7 @@ class Debian12DevPackageFinderTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new Debian12DevPackageFinder(Command.Mongo),
+			new Debian12DevPackageFinder(Command.MongoD),
 			version -> de.flapdoodle.embed.process.distribution.Distribution.of(de.flapdoodle.embed.process.distribution.Version.of(version), platform),
 			versionList);
 	}

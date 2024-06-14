@@ -76,7 +76,7 @@ class LinuxMintPackageFinderTest {
 
   private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
     return HtmlParserResultTester.with(
-            new LinuxMintPackageFinder(new UbuntuFallbackToOlderVersionPackageFinder(new UbuntuPackageFinder(Command.Mongo))),
+            new LinuxMintPackageFinder(new UbuntuFallbackToOlderVersionPackageFinder(new UbuntuPackageFinder(Command.MongoD))),
             version -> Distribution.of(Version.of(version), platform),
             versionList);
   }

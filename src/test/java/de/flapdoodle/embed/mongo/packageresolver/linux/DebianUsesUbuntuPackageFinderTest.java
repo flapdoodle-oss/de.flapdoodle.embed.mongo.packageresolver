@@ -52,7 +52,7 @@ class DebianUsesUbuntuPackageFinderTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new DebianUsesUbuntuPackageFinder(new UbuntuFallbackToOlderVersionPackageFinder(new UbuntuPackageFinder(Command.Mongo))),
+			new DebianUsesUbuntuPackageFinder(new UbuntuFallbackToOlderVersionPackageFinder(new UbuntuPackageFinder(Command.MongoD))),
 			version -> Distribution.of(Version.of(version), platform),
 			versionList);
 	}

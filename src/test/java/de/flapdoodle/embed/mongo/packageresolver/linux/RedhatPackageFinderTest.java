@@ -194,7 +194,7 @@ class RedhatPackageFinderTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new RedhatPackageFinder(Command.Mongo),
+			new RedhatPackageFinder(Command.MongoD),
 			version -> Distribution.of(Version.of(version), platform),
 			versionList);
 	}

@@ -140,7 +140,7 @@ class DebianPackageFinderTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new DebianPackageFinder(Command.Mongo),
+			new DebianPackageFinder(Command.MongoD),
 			version -> Distribution.of(Version.of(version), platform),
 			versionList);
 	}

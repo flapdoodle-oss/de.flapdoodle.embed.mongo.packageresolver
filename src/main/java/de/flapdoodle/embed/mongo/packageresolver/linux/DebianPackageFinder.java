@@ -293,6 +293,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
 
 
     switch (command) {
+      case Mongo:
       case MongoDump:
       case MongoImport:
       case MongoRestore:

@@ -46,7 +46,7 @@ class DebianFallbackToOlderVersionPackageFinderTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new DebianFallbackToOlderVersionPackageFinder(new DebianPackageFinder(Command.Mongo)),
+			new DebianFallbackToOlderVersionPackageFinder(new DebianPackageFinder(Command.MongoD)),
 			version -> de.flapdoodle.embed.process.distribution.Distribution.of(de.flapdoodle.embed.process.distribution.Version.of(version), platform),
 			versionList);
 	}

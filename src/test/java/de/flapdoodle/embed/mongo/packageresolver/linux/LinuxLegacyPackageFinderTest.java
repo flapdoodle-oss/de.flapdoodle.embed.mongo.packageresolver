@@ -70,7 +70,7 @@ class LinuxLegacyPackageFinderTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new LinuxLegacyPackageFinder(Command.Mongo),
+			new LinuxLegacyPackageFinder(Command.MongoD),
 			version -> Distribution.of(Version.of(version), platform),
 			versionList);
 	}

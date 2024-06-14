@@ -39,7 +39,7 @@ import java.util.Optional;
 class OraclePackageFinderTest extends AbstractVersionMappedPackageFinderTest<OracleVersion, RedhatVersion> {
 
 	public OraclePackageFinderTest() {
-		super(new OraclePackageFinder(new RedhatFallbackToOlderVersionPackageFinder(new RedhatPackageFinder(Command.Mongo))));
+		super(new OraclePackageFinder(new RedhatFallbackToOlderVersionPackageFinder(new RedhatPackageFinder(Command.MongoD))));
 	}
 	
 	@Test

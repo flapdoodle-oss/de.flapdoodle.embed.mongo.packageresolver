@@ -205,7 +205,7 @@ class LinuxPackageFinderTest {
 
   private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
     return HtmlParserResultTester.with(
-            new LinuxPackageFinder(Command.Mongo),
+            new LinuxPackageFinder(Command.MongoD),
             version -> Distribution.of(Version.of(version), platform),
             versionList);
   }

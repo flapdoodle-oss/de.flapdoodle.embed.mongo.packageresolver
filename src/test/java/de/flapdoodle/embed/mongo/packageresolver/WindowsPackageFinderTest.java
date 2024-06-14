@@ -112,7 +112,7 @@ class WindowsPackageFinderTest {
 
 	private static HtmlParserResultTester assertThat(Platform platform, String versionList) {
 		return HtmlParserResultTester.with(
-			new WindowsPackageFinder(Command.Mongo),
+			new WindowsPackageFinder(Command.MongoD),
 			version -> Distribution.of(Version.of(version), platform),
 			versionList);
 	}
