@@ -41,4 +41,8 @@ public enum Feature {
 	*  MongoDB always enables journaling. As a result, MongoDB removes the storage.journal.enabled option and the corresponding --journal and --nojournal command-line options.
   */
 	JOURNAL_ALWAYS_ON,
+	/**
+	 * since version 6.x.x mongoshell (mongo) is not part of the distribution package
+	 */
+	HAS_MONGO_SHELL_BINRAY,
 }

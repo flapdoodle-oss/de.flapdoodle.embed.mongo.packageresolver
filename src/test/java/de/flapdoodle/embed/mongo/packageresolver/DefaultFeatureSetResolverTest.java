@@ -53,6 +53,17 @@ class DefaultFeatureSetResolverTest {
 			.isTrue();
 	}
 
+	@Test
+	public void noMongoShellWithVersion6xx() {
+		assertThat(testee.featuresOf(withVersion("5.9.16"))
+			.enabled(Feature.HAS_MONGO_SHELL_BINRAY))
+			.isTrue();
+
+		assertThat(testee.featuresOf(withVersion("6.0.0"))
+			.enabled(Feature.HAS_MONGO_SHELL_BINRAY))
+			.isFalse();
+	}
+
 	@ParameterizedTest
 	@MethodSource("featureVersion")
 	public void featureEnabled(Feature feature, String version) {
@@ -85,6 +96,7 @@ class DefaultFeatureSetResolverTest {
 		for (Feature feature : Feature.values()) {
 			switch (feature) {
 				case TEXT_SEARCH:
+				case HAS_MONGO_SHELL_BINRAY:
 					assertThat(features.enabled(feature))
 						.describedAs("feature %s", feature).isFalse();
 					break;
