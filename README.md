@@ -13,12 +13,16 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 	<dependency>
 		<groupId>de.flapdoodle.embed</groupId>
 		<artifactId>de.flapdoodle.embed.mongo.packageresolver</artifactId>
-		<version>4.13.1</version>
+		<version>4.14.0</version>
 	</dependency>
 
 ### Changelog
 
 #### Unreleased
+
+#### 4.14.0
+
+- not a bug but some surprise, fixed:)
 
 #### 4.13.1
 
