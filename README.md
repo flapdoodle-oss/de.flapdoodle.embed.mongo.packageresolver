@@ -20,6 +20,9 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+- dep updates
+- alpine linux detection and failure message
+
 #### 4.14.0
 
 - not a bug but some surprise, fixed:)

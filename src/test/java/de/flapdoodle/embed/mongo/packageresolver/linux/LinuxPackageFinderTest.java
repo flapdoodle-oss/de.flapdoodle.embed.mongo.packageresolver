@@ -26,10 +26,13 @@ import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
 import de.flapdoodle.os.*;
 import de.flapdoodle.os.linux.*;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LinuxPackageFinderTest {
 
@@ -194,6 +197,14 @@ class LinuxPackageFinderTest {
   public void resolveFallbackPackage() {
     assertThat(linuxWith(CommonArchitecture.X86_64), "5.0.2")
       .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+  }
+
+  @Test
+  public void failIfAlpineLinux() {
+    HtmlParserResultTester tester = assertThat(linuxWith(CommonArchitecture.X86_64).withVersion(AlpineVersion.ALPINE_3_21), "5.0.2");
+    assertThatThrownBy(() -> tester.resolvesTo("will always fail"))
+      .isInstanceOf(IllegalArgumentException.class)
+      .hasMessageContaining("there is no mongodb distribution for alpine linux");
   }
 
   private static ImmutablePlatform linuxWith(CommonArchitecture architecture) {

@@ -156,6 +156,12 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 			.finder(new AmazonPackageFinder(command))
 			.build();
 
+		ImmutablePackageFinderRule alpineRule = PackageFinderRule.builder()
+			.match(PlatformMatch.withOs(CommonOS.Linux)
+				.withVersion(AlpineVersion.values()))
+			.finder(new AlpinePackageFinder(command))
+			.build();
+
 		ImmutablePackageFinderRule linuxLegacyRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux))
 			.finder(new LinuxLegacyPackageFinder(command))
@@ -185,6 +191,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 				almaRule,
 				rockyRule,
 				amazonRule,
+				alpineRule,
 				linuxLegacyRule,
 				failIfNothingMatches
 			);

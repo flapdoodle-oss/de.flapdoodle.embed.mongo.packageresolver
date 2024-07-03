@@ -393,7 +393,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.25.3</version>
+            <version>3.26.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -401,7 +401,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>33.1.0-jre</version>
+            <version>33.2.1-jre</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -434,12 +434,12 @@
         <dependency>
             <groupId>de.flapdoodle</groupId>
             <artifactId>de.flapdoodle.os</artifactId>
-            <version>1.5.6</version>
+            <version>1.6.0</version>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.process</artifactId>
-            <version>4.11.0</version>
+            <version>4.12.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
