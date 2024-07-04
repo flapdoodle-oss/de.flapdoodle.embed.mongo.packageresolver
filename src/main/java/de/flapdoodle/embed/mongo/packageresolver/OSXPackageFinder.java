@@ -60,11 +60,11 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.0-rc9"),
                   VersionRange.of("8.0.0-rc7"),
                   VersionRange.of("8.0.0-rc3"),
                   VersionRange.of("7.3.3-rc0"),
-                  VersionRange.of("7.3.2-rc1"),
-                  VersionRange.of("7.3.0", "7.3.2"),
+                  VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.8-rc0"),
@@ -89,9 +89,9 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.11"),
+                  VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.15"))
+                  VersionRange.of("6.0.0", "6.0.16"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -105,7 +105,7 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.9.0", "100.9.4"),
+                  ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.1", "100.7.5"))
         ))
@@ -121,11 +121,11 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.0-rc9"),
                   VersionRange.of("8.0.0-rc7"),
                   VersionRange.of("8.0.0-rc3"),
                   VersionRange.of("7.3.3-rc0"),
-                  VersionRange.of("7.3.2-rc1"),
-                  VersionRange.of("7.3.0", "7.3.2"),
+                  VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
                   VersionRange.of("7.0.8-rc0"),
@@ -137,6 +137,7 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
                   VersionRange.of("6.3.1", "6.3.2"),
                   VersionRange.of("6.0.16-rc0"),
                   VersionRange.of("6.0.9-rc1"),
+                  VersionRange.of("5.0.28-rc0"),
                   VersionRange.of("5.0.20-rc1"),
                   VersionRange.of("4.4.27-rc0"),
                   VersionRange.of("4.4.24-rc0"))
@@ -153,9 +154,9 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.11"),
+                  VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.15"),
+                  VersionRange.of("6.0.0", "6.0.16"),
                   VersionRange.of("5.0.0", "5.0.27"),
                   VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
@@ -208,7 +209,7 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.9.0", "100.9.4"),
+                  ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
                   ToolVersionRange.of("100.6.0", "100.6.1"),
