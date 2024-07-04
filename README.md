@@ -13,15 +13,18 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 	<dependency>
 		<groupId>de.flapdoodle.embed</groupId>
 		<artifactId>de.flapdoodle.embed.mongo.packageresolver</artifactId>
-		<version>4.14.0</version>
+		<version>4.15.0</version>
 	</dependency>
 
 ### Changelog
 
 #### Unreleased
 
+#### 4.15.0
+
 - dep updates
 - alpine linux detection and failure message
+- latest mongodb versions
 
 #### 4.14.0
 
