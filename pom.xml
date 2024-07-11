@@ -393,7 +393,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.26.0</version>
+            <version>3.26.3</version>
             <scope>test</scope>
         </dependency>
 
@@ -434,12 +434,12 @@
         <dependency>
             <groupId>de.flapdoodle</groupId>
             <artifactId>de.flapdoodle.os</artifactId>
-            <version>1.6.0</version>
+            <version>1.7.0</version>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.process</artifactId>
-            <version>4.12.0</version>
+            <version>4.13.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
