@@ -28,7 +28,6 @@ import de.flapdoodle.os.CommonArchitecture;
 import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.ImmutablePlatform;
 import de.flapdoodle.os.Platform;
-import de.flapdoodle.os.linux.LinuxMintVersion;
 import de.flapdoodle.os.linux.PopOSVersion;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

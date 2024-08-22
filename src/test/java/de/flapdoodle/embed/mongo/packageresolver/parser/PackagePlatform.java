@@ -22,12 +22,15 @@ package de.flapdoodle.embed.mongo.packageresolver.parser;
 
 import de.flapdoodle.embed.mongo.packageresolver.NumericVersion;
 import de.flapdoodle.os.*;
-import de.flapdoodle.os.linux.*;
+import de.flapdoodle.os.linux.AmazonVersion;
+import de.flapdoodle.os.linux.DebianVersion;
+import de.flapdoodle.os.linux.RedhatVersion;
+import de.flapdoodle.os.linux.UbuntuVersion;
 import de.flapdoodle.types.Either;
 import org.immutables.value.Value;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Comparator;
+import java.util.Optional;
 
 @Value.Immutable
 public abstract class PackagePlatform implements Comparable<PackagePlatform> {

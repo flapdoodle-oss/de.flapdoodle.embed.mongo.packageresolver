@@ -20,7 +20,6 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
-import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
 import de.flapdoodle.embed.mongo.packageresolver.MongoPackages;
 import de.flapdoodle.types.Pair;

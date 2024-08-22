@@ -29,7 +29,10 @@ import de.flapdoodle.embed.process.config.store.Package;
 import de.flapdoodle.embed.process.distribution.ArchiveType;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.*;
-import de.flapdoodle.os.linux.*;
+import de.flapdoodle.os.linux.AmazonVersion;
+import de.flapdoodle.os.linux.CentosVersion;
+import de.flapdoodle.os.linux.DebianVersion;
+import de.flapdoodle.os.linux.UbuntuVersion;
 import de.flapdoodle.types.Pair;
 
 import java.io.IOException;

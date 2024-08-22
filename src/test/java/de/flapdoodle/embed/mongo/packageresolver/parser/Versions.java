@@ -23,7 +23,8 @@ package de.flapdoodle.embed.mongo.packageresolver.parser;
 import de.flapdoodle.os.Version;
 import de.flapdoodle.os.VersionWithPriority;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Optional;
 
 public abstract class Versions {
 	public static Comparator<Optional<? extends Version>> versionByPrioOrdinalOrNameComparator() {

@@ -20,13 +20,9 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
-import de.flapdoodle.embed.mongo.packageresolver.Command;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.*;
-import de.flapdoodle.os.linux.OracleVersion;
-import de.flapdoodle.os.linux.RedhatVersion;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 

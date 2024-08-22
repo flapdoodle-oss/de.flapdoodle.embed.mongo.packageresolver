@@ -20,9 +20,6 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver;
 
-import de.flapdoodle.embed.mongo.packageresolver.Command;
-import de.flapdoodle.embed.mongo.packageresolver.HasMongotoolsPackage;
-import de.flapdoodle.embed.mongo.packageresolver.HtmlParserResultTester;
 import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.embed.process.distribution.Version;
 import de.flapdoodle.os.*;

@@ -21,17 +21,9 @@
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.embed.mongo.packageresolver.Command;
-import de.flapdoodle.embed.mongo.packageresolver.HtmlParserResultTester;
-import de.flapdoodle.embed.process.distribution.Distribution;
-import de.flapdoodle.embed.process.distribution.Version;
-import de.flapdoodle.os.*;
 import de.flapdoodle.os.linux.FedoraVersion;
-import de.flapdoodle.os.linux.LinuxMintVersion;
-import de.flapdoodle.os.linux.OracleVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class FedoraPackageFinderTest extends AbstractVersionMappedPackageFinderTest<FedoraVersion, RedhatVersion> {
 

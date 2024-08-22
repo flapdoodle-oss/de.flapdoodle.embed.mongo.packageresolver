@@ -23,14 +23,6 @@ package de.flapdoodle.embed.mongo.packageresolver.parser;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.OS;
-import de.flapdoodle.os.Version;
-import de.flapdoodle.os.linux.*;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public abstract class HiddenRules {
 	public static boolean ignoreCPUType(OS os, CPUType cpuType) {

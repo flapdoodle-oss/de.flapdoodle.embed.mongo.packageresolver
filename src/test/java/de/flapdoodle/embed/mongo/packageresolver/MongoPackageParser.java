@@ -26,8 +26,6 @@ import de.flapdoodle.embed.mongo.packageresolver.parser.SourceCodeGenerator;
 import de.flapdoodle.types.Either;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;

@@ -21,20 +21,9 @@
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.embed.mongo.packageresolver.Command;
-import de.flapdoodle.embed.mongo.packageresolver.HasMongotoolsPackage;
-import de.flapdoodle.embed.mongo.packageresolver.HtmlParserResultTester;
-import de.flapdoodle.embed.process.distribution.Distribution;
-import de.flapdoodle.embed.process.distribution.Version;
-import de.flapdoodle.os.*;
 import de.flapdoodle.os.linux.OracleVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.Optional;
 
 class OraclePackageFinderTest extends AbstractVersionMappedPackageFinderTest<OracleVersion, RedhatVersion> {
 

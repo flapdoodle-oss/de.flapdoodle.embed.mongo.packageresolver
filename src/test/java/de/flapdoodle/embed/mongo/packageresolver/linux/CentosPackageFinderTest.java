@@ -22,7 +22,6 @@ package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.embed.mongo.packageresolver.Command;
 import de.flapdoodle.os.linux.CentosVersion;
-import de.flapdoodle.os.linux.OracleVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
 import org.junit.jupiter.api.Test;
 

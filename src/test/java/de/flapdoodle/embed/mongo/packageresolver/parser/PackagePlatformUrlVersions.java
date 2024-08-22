@@ -20,11 +20,13 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
-import com.google.common.collect.*;
+import com.google.common.collect.Maps;
 import de.flapdoodle.types.Pair;
 import org.immutables.value.Value;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.SortedMap;
 import java.util.stream.Collectors;
 
 @Value.Immutable
