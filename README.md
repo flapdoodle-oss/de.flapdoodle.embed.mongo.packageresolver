@@ -13,12 +13,16 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 	<dependency>
 		<groupId>de.flapdoodle.embed</groupId>
 		<artifactId>de.flapdoodle.embed.mongo.packageresolver</artifactId>
-		<version>4.16.0</version>
+		<version>4.17.0</version>
 	</dependency>
 
 ### Changelog
 
 #### Unreleased
+
+#### 4.17.0
+
+- dep updates, linux mint detection, amazon detection fix
 
 #### 4.16.0
 
