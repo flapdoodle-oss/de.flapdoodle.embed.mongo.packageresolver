@@ -16,7 +16,7 @@ class KdeNeonPackageFinderTest {
   /*
     Ubuntu 22.04 x64
     https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz
-    6.0
+    6.0.8, 6.0.4 -> 6.0.6
   */
   @ParameterizedTest
   @ValueSource(strings = {"6.0.8", "6.0.4 -> 6.0.6"})
