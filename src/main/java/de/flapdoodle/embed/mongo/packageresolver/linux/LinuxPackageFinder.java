@@ -77,6 +77,12 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 			.finder(new PopOSPackageFinder(ubuntuDowngradingPackageFinder))
 			.build();
 
+		final ImmutablePackageFinderRule kdeNeonRule = PackageFinderRule.builder()
+			.match(PlatformMatch.withOs(CommonOS.Linux)
+				.withVersion(KdeNeonVersion.values()))
+			.finder(new KdeNeonPackageFinder(ubuntuDowngradingPackageFinder))
+			.build();
+
 //		final ImmutablePackageFinderRule debian12DevRule = PackageFinderRule.builder()
 //			.match(PlatformMatch.withOs(CommonOS.Linux).withVersion(DebianVersion.DEBIAN_12, DebianVersion.DEBIAN_13))
 //			.finder(new Debian12DevPackageFinder(command))
@@ -178,6 +184,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 				ubuntuDowngradeRule,
 				linuxMintRule,
 				popOsRule,
+				kdeNeonRule,
 //				debian12DevRule,
 //				debianUsesUbuntuRule,
 				debianArmUsesUbuntuRule,
