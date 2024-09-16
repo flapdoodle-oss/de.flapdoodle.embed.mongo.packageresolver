@@ -434,7 +434,7 @@
         <dependency>
             <groupId>de.flapdoodle</groupId>
             <artifactId>de.flapdoodle.os</artifactId>
-            <version>1.7.2</version>
+            <version>1.7.3</version>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
