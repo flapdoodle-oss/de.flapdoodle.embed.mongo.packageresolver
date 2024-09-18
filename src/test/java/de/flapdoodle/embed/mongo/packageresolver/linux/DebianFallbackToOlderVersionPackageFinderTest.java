@@ -36,6 +36,13 @@ class DebianFallbackToOlderVersionPackageFinderTest {
 			.resolvesTo("/linux/mongodb-linux-x86_64-debian11-{}.tgz");
 	}
 
+	@ParameterizedTest
+	@ValueSource(strings = { "7.0.0 -> 7.0.4", "6.0.0 -> 6.0.15", "5.0.8 -> 5.0.26" })
+	public void DEBIAN_13(String version) {
+		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, DebianVersion.DEBIAN_13), version)
+			.resolvesTo("/linux/mongodb-linux-x86_64-debian11-{}.tgz");
+	}
+
 	private static Platform withPlatform(OS os, CommonArchitecture architecture, de.flapdoodle.os.Version version) {
 		return ImmutablePlatform.builder()
 			.operatingSystem(os)

@@ -131,7 +131,7 @@ public class <it.name> extends AbstractPackageFinder implements HasLabel {
 }
 >>
 
-matchPackage(package) ::= <<match(CommonOS.<package.os>, BitSize.<package.bitSize><if(!package.ignoreCpuType)>, CPUType.<package.cpuType><endif><package.versions:{ version |, <version.className>.<version>}>)>>
+matchPackage(package) ::= <<match(CommonOS.<package.os>, BitSize.<package.bitSize><if(!package.ignoreCpuType)>, CPUType.<package.cpuType><endif><package.versions:{ version |, <version.className>.<version.name>}>)>>
 versionRanges(versions) ::= <<DistributionMatch.any(
   <versions: {version | <versionRange(version)>}; separator=",\n">)>>
 versionRange(version) ::= <<VersionRange.of(<if(version.isExact)>"<version.min>"<else>"<version.min>", "<version.max>"<endif>)>>

@@ -120,33 +120,33 @@ class <it.name>Test {
 
 assertThat(package,url) ::= <<
 <if (package.version)>
-<package.version:{ version | assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
+<package.version:{ version | assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version.name>), version)
 	.resolvesTo("<url>");}; separator="\n\n"><else>
 assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>), version)
   .resolvesTo("<url>");<endif>
 >>
 
 assertThatVersion(package,version,url) ::= <<
-assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
+assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version.name>), version)
 	.resolvesTo("<url>");
 >>
 
 assertThatDev(package,url) ::= <<
 <if (package.version)>
-<package.version:{ version | assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
+<package.version:{ version | assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version.name>), version)
 	.resolveDevPackageTo("<url>");}; separator="\n\n"><else>
 assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>), version)
   .resolvesTo("<url>");<endif>
 >>
 
 assertThatVersionDev(package,version,url) ::= <<
-assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
+assertThat(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version.name>), version)
 	.resolveDevPackageTo("<url>");
 >>
 
 assertThatTools(package,url) ::= <<
 <if (package.version)>
-<package.version:{ version | assertThatTools(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version>), version)
+<package.version:{ version | assertThatTools(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>, <version.className>.<version.name>), version)
 	.resolvesTo("<url>");}; separator="\n\n"><else>
 assertThatTools(withPlatform(CommonOS.<package.os>, CommonArchitecture.<package.architecture>), version)
 	.resolvesTo("<url>");<endif>
