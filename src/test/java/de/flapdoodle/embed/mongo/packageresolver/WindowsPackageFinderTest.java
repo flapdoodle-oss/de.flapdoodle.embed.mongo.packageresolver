@@ -34,13 +34,13 @@ import java.util.Optional;
 */
 class WindowsPackageFinderTest {
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.0-rc9", "8.0.0-rc7", "8.0.0-rc3", "7.3.3-rc0", "7.3.0 -> 7.3.3", "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.8-rc0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.16-rc0", "6.0.9-rc1", "5.0.28-rc0", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
+	@ValueSource(strings = { "8.0.0-rc9", "8.0.0-rc7", "8.0.0-rc3", "7.3.3-rc0", "7.3.0 -> 7.3.3", "7.2.0-rc3", "7.1.0 -> 7.1.1", "7.0.15-rc1", "7.0.8-rc0", "7.0.3-rc1", "7.0.0-rc8", "7.0.0-rc2", "7.0.0-rc10", "7.0.0-rc1", "6.3.1 -> 6.3.2", "6.0.16-rc0", "6.0.9-rc1", "5.0.28-rc0", "5.0.20-rc1", "4.4.27-rc0", "4.4.24-rc0" })
 	public void WindowsDev(String version) {
 		assertThat(withPlatform(CommonOS.Windows, CommonArchitecture.X86_64), version)
 		  .resolvesTo("/windows/mongodb-windows-x86_64-{}.zip");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.16", "5.0.0 -> 5.0.27", "4.4.0 -> 4.4.29" })
+	@ValueSource(strings = { "8.0.0 -> 8.0.1", "7.0.14", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.18", "5.0.0 -> 5.0.29", "4.4.0 -> 4.4.29" })
 	public void Windows(String version) {
 		assertThat(withPlatform(CommonOS.Windows, CommonArchitecture.X86_64), version)
 		  .resolvesTo("/windows/mongodb-windows-x86_64-{}.zip");
@@ -78,7 +78,7 @@ class WindowsPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.9.0 -> 100.9.5", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
+	@ValueSource(strings = { "100.10.0", "100.9.0 -> 100.9.5", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
 	public void WindowsTools(String version) {
 		assertThatTools(withPlatform(CommonOS.Windows, CommonArchitecture.X86_64), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-windows-x86_64-{}.zip");

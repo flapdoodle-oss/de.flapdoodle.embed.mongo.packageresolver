@@ -208,16 +208,21 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 			case "RedHat / CentOS 7.0 x64":
 				return linux(RedhatVersion.Redhat_7, CPUType.X86, BitSize.B64);
 			case "RedHat / CentOS 8.0 x64":
+			case "RedHat / CentOS 8.8 x64":
 				return linux(RedhatVersion.Redhat_8, CPUType.X86, BitSize.B64);
+			case "RedHat / CentOS 8.0 ARM 64":
 			case "RedHat / CentOS 8.2 ARM 64":
+			case "RedHat / CentOS 8.8 ARM 64":
 				return linux(RedhatVersion.Redhat_8, CPUType.ARM, BitSize.B64);
 			case "RedHat / CentOS 9.0 x64":
+			case "RedHat / CentOS 9.3 x64":
 			case "rhel90 x64":
 				return linux(RedhatVersion.Redhat_9, CPUType.X86, BitSize.B64);
 			case "RedHat / CentOS 9.0 ARM 64":
+			case "RedHat / CentOS 9.3 ARM 64":
 				return linux(RedhatVersion.Redhat_9, CPUType.ARM, BitSize.B64);
 			default:
-				throw new IllegalArgumentException("could not parse "+name);
+				throw new IllegalArgumentException("could not parse '"+name+"'");
 		}
 	}
 
@@ -239,6 +244,10 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 				return linux(UbuntuVersion.Ubuntu_22_04, CPUType.X86, BitSize.B64);
 			case "Ubuntu 22.04 ARM 64":
 				return linux(UbuntuVersion.Ubuntu_22_04, CPUType.ARM, BitSize.B64);
+			case "Ubuntu 24.04 x64":
+				return linux(UbuntuVersion.Ubuntu_24_04, CPUType.X86, BitSize.B64);
+			case "Ubuntu 24.04 ARM 64":
+				return linux(UbuntuVersion.Ubuntu_24_04, CPUType.ARM, BitSize.B64);
 			default:
 				throw new IllegalArgumentException("could not parse "+name);
 		}

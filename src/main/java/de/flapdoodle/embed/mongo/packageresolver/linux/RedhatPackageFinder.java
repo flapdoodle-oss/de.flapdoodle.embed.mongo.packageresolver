@@ -69,6 +69,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
@@ -89,14 +90,28 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("7.0.14"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.7", "6.0.16"))
+                  VersionRange.of("6.0.7", "6.0.18"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
             .urlTemplate("/linux/mongodb-linux-aarch64-rhel90-{version}.tgz")
+            .build())
+        .build();
+
+    PackageFinderRule rule_Redhat_9_ARM_B64_1 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_9)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("8.0.0", "8.0.1"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-aarch64-rhel93-{version}.tgz")
             .build())
         .build();
 
@@ -129,6 +144,19 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
             .build())
         .build();
 
+    PackageFinderRule tools_Redhat_9_ARM_B64_2 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_9)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel93-aarch64-{tools.version}.tgz")
+            .build())
+        .build();
+
 
     PackageFinderRule devRule_Redhat_9_X86_B64 = PackageFinderRule.builder()
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_9)
@@ -141,6 +169,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
@@ -163,14 +192,28 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("7.0.14"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.4", "6.0.16"))
+                  VersionRange.of("6.0.4", "6.0.18"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
             .urlTemplate("/linux/mongodb-linux-x86_64-rhel90-{version}.tgz")
+            .build())
+        .build();
+
+    PackageFinderRule rule_Redhat_9_X86_B64_1 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_9)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("8.0.0", "8.0.1"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-rhel93-{version}.tgz")
             .build())
         .build();
 
@@ -188,6 +231,19 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
             .urlTemplate("/tools/db/mongodb-database-tools-rhel90-x86_64-{tools.version}.tgz")
+            .build())
+        .build();
+
+    PackageFinderRule tools_Redhat_9_X86_B64_1 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_9)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel93-x86_64-{tools.version}.tgz")
             .build())
         .build();
 
@@ -232,13 +288,43 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
                   VersionRange.of("6.0.0", "6.0.16"),
-                  VersionRange.of("5.0.0", "5.0.27"),
+                  VersionRange.of("5.0.0", "5.0.28"),
                   VersionRange.of("4.4.4", "4.4.29"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
             .urlTemplate("/linux/mongodb-linux-aarch64-rhel82-{version}.tgz")
+            .build())
+        .build();
+
+    PackageFinderRule devRule_Redhat_8_ARM_B64_1 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("7.0.15-rc1"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-aarch64-rhel8-{version}.tgz")
+            .isDevVersion(true)
+            .build())
+        .build();
+
+    PackageFinderRule rule_Redhat_8_ARM_B64_1 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("8.0.0", "8.0.1"),
+                  VersionRange.of("7.0.14"),
+                  VersionRange.of("6.0.17", "6.0.18"),
+                  VersionRange.of("5.0.29"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-aarch64-rhel8-{version}.tgz")
             .build())
         .build();
 
@@ -271,6 +357,19 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
             .urlTemplate("/tools/db/mongodb-database-tools-rhel82-aarch64-{tools.version}.tgz")
+            .build())
+        .build();
+
+    PackageFinderRule tools_Redhat_8_ARM_B64_2 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel88-aarch64-{tools.version}.tgz")
             .build())
         .build();
 
@@ -315,7 +414,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
                   VersionRange.of("6.0.0", "6.0.16"),
-                  VersionRange.of("5.0.0", "5.0.27"),
+                  VersionRange.of("5.0.0", "5.0.28"),
                   VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
                   VersionRange.of("4.2.1", "4.2.3"),
@@ -327,6 +426,36 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
             .fileSet(fileSet)
             .archiveType(ArchiveType.TGZ)
             .urlTemplate("/linux/mongodb-linux-x86_64-rhel80-{version}.tgz")
+            .build())
+        .build();
+
+    PackageFinderRule devRule_Redhat_8_X86_B64_1 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("7.0.15-rc1"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-rhel8-{version}.tgz")
+            .isDevVersion(true)
+            .build())
+        .build();
+
+    PackageFinderRule rule_Redhat_8_X86_B64_1 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("8.0.0", "8.0.1"),
+                  VersionRange.of("7.0.14"),
+                  VersionRange.of("6.0.17", "6.0.18"),
+                  VersionRange.of("5.0.29"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-rhel8-{version}.tgz")
             .build())
         .build();
 
@@ -354,6 +483,19 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
             .build())
         .build();
 
+    PackageFinderRule tools_Redhat_8_X86_B64_1 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel88-x86_64-{tools.version}.tgz")
+            .build())
+        .build();
+
 
     PackageFinderRule devRule_Redhat_7_X86_B64 = PackageFinderRule.builder()
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7)
@@ -362,6 +504,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.3-rc0"),
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
@@ -388,10 +531,11 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("7.0.14"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.16"),
-                  VersionRange.of("5.0.0", "5.0.27"),
+                  VersionRange.of("6.0.0", "6.0.18"),
+                  VersionRange.of("5.0.0", "5.0.29"),
                   VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
                   VersionRange.of("4.2.0", "4.2.3"),
@@ -414,6 +558,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
@@ -475,6 +620,7 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_6)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
@@ -501,16 +647,16 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
       case MongoRestore:
         return PackageFinderRules.empty()
             .withAdditionalRules(
-                tools_Redhat_9_ARM_B64, tools_Redhat_9_ARM_B64_1
+                tools_Redhat_9_ARM_B64, tools_Redhat_9_ARM_B64_1, tools_Redhat_9_ARM_B64_2
             )
             .withAdditionalRules(
-                tools_Redhat_9_X86_B64
+                tools_Redhat_9_X86_B64, tools_Redhat_9_X86_B64_1
             )
             .withAdditionalRules(
-                tools_Redhat_8_ARM_B64, tools_Redhat_8_ARM_B64_1
+                tools_Redhat_8_ARM_B64, tools_Redhat_8_ARM_B64_1, tools_Redhat_8_ARM_B64_2
             )
             .withAdditionalRules(
-                tools_Redhat_8_X86_B64
+                tools_Redhat_8_X86_B64, tools_Redhat_8_X86_B64_1
             )
             .withAdditionalRules(
                 tools_Redhat_7_X86_B64
@@ -530,13 +676,13 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
       default:
         return PackageFinderRules.empty()
             .withAdditionalRules(
-                devRule_Redhat_9_ARM_B64, rule_Redhat_9_ARM_B64
+                devRule_Redhat_9_ARM_B64, rule_Redhat_9_ARM_B64, rule_Redhat_9_ARM_B64_1
             ).withAdditionalRules(
-                devRule_Redhat_9_X86_B64, rule_Redhat_9_X86_B64
+                devRule_Redhat_9_X86_B64, rule_Redhat_9_X86_B64, rule_Redhat_9_X86_B64_1
             ).withAdditionalRules(
-                devRule_Redhat_8_ARM_B64, rule_Redhat_8_ARM_B64
+                devRule_Redhat_8_ARM_B64, rule_Redhat_8_ARM_B64, devRule_Redhat_8_ARM_B64_1, rule_Redhat_8_ARM_B64_1
             ).withAdditionalRules(
-                devRule_Redhat_8_X86_B64, rule_Redhat_8_X86_B64
+                devRule_Redhat_8_X86_B64, rule_Redhat_8_X86_B64, devRule_Redhat_8_X86_B64_1, rule_Redhat_8_X86_B64_1
             ).withAdditionalRules(
                 devRule_Redhat_7_X86_B64, rule_Redhat_7_X86_B64
             ).withAdditionalRules(

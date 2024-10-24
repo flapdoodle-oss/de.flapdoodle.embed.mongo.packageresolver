@@ -58,6 +58,62 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
   private static ImmutablePackageFinderRules rules(final Command command) {
     FileSet fileSet = fileSetOf(command);
 
+    PackageFinderRule rule_Ubuntu_24_04_ARM_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_24_04)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("8.0.0", "8.0.1"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-aarch64-ubuntu2404-{version}.tgz")
+            .build())
+        .build();
+
+ 
+    PackageFinderRule tools_Ubuntu_24_04_ARM_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_24_04)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-ubuntu2404-arm64-{tools.version}.tgz")
+            .build())
+        .build();
+
+
+    PackageFinderRule rule_Ubuntu_24_04_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_24_04)
+            .andThen(
+                DistributionMatch.any(
+                  VersionRange.of("8.0.0", "8.0.1"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/linux/mongodb-linux-x86_64-ubuntu2404-{version}.tgz")
+            .build())
+        .build();
+
+ 
+    PackageFinderRule tools_Ubuntu_24_04_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_24_04)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-ubuntu2404-x86_64-{tools.version}.tgz")
+            .build())
+        .build();
+
+
     PackageFinderRule devRule_Ubuntu_22_04_ARM_B64 = PackageFinderRule.builder()
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_22_04)
             .andThen(
@@ -69,6 +125,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
@@ -91,9 +148,11 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_22_04)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.0", "8.0.1"),
+                  VersionRange.of("7.0.14"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.4", "6.0.16"))
+                  VersionRange.of("6.0.4", "6.0.18"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -107,6 +166,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_22_04)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
@@ -132,6 +192,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
@@ -154,9 +215,11 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_22_04)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.0", "8.0.1"),
+                  VersionRange.of("7.0.14"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.4", "6.0.16"))
+                  VersionRange.of("6.0.4", "6.0.18"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -170,6 +233,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_22_04)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
@@ -195,6 +259,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
@@ -221,10 +286,12 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_20_04)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.0", "8.0.1"),
+                  VersionRange.of("7.0.14"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.16"),
-                  VersionRange.of("5.0.0", "5.0.27"),
+                  VersionRange.of("6.0.0", "6.0.18"),
+                  VersionRange.of("5.0.0", "5.0.29"),
                   VersionRange.of("4.4.0", "4.4.29"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -239,6 +306,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_20_04)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
@@ -268,6 +336,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
                   VersionRange.of("7.0.0-rc8"),
@@ -294,10 +363,12 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_20_04)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.0", "8.0.1"),
+                  VersionRange.of("7.0.14"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.16"),
-                  VersionRange.of("5.0.0", "5.0.27"),
+                  VersionRange.of("6.0.0", "6.0.18"),
+                  VersionRange.of("5.0.0", "5.0.29"),
                   VersionRange.of("4.4.0", "4.4.29"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -312,6 +383,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_20_04)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
@@ -356,8 +428,8 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_18_04)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.0", "6.0.16"),
-                  VersionRange.of("5.0.0", "5.0.27"),
+                  VersionRange.of("6.0.0", "6.0.18"),
+                  VersionRange.of("5.0.0", "5.0.29"),
                   VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
                   VersionRange.of("4.2.0", "4.2.3"))
@@ -374,6 +446,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_18_04)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
@@ -420,8 +493,8 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_18_04)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("6.0.0", "6.0.16"),
-                  VersionRange.of("5.0.0", "5.0.27"),
+                  VersionRange.of("6.0.0", "6.0.18"),
+                  VersionRange.of("5.0.0", "5.0.29"),
                   VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
                   VersionRange.of("4.2.0", "4.2.3"),
@@ -440,6 +513,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_18_04)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
@@ -481,6 +555,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, UbuntuVersion.Ubuntu_16_04)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
@@ -541,6 +616,7 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, UbuntuVersion.Ubuntu_16_04)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
                   ToolVersionRange.of("100.7.0", "100.7.5"),
@@ -566,6 +642,12 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
       case MongoImport:
       case MongoRestore:
         return PackageFinderRules.empty()
+            .withAdditionalRules(
+                tools_Ubuntu_24_04_ARM_B64
+            )
+            .withAdditionalRules(
+                tools_Ubuntu_24_04_X86_B64
+            )
             .withAdditionalRules(
                 tools_Ubuntu_22_04_ARM_B64
             )
@@ -605,6 +687,10 @@ public class UbuntuPackageFinder extends AbstractPackageFinder implements HasLab
       default:
         return PackageFinderRules.empty()
             .withAdditionalRules(
+                rule_Ubuntu_24_04_ARM_B64
+            ).withAdditionalRules(
+                rule_Ubuntu_24_04_X86_B64
+            ).withAdditionalRules(
                 devRule_Ubuntu_22_04_ARM_B64, rule_Ubuntu_22_04_ARM_B64
             ).withAdditionalRules(
                 devRule_Ubuntu_22_04_X86_B64, rule_Ubuntu_22_04_X86_B64
