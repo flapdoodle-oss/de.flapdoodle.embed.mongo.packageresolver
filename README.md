@@ -13,16 +13,18 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 	<dependency>
 		<groupId>de.flapdoodle.embed</groupId>
 		<artifactId>de.flapdoodle.embed.mongo.packageresolver</artifactId>
-		<version>4.17.0</version>
+		<version>4.18.0</version>
 	</dependency>
 
 ### Changelog
 
 #### Unreleased
 
-- manjaro package finder                      
+#### 4.18.0
+
+- manjaro package finder
 - latest mongodb versions (8.0.x release)
-- 
+ 
 #### 4.17.0
 
 - dep updates, linux mint detection, amazon detection fix
