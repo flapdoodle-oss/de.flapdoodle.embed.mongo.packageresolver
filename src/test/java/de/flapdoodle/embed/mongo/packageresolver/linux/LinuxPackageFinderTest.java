@@ -107,6 +107,13 @@ class LinuxPackageFinderTest {
   }
 
   @Test
+  public void resolveManjaroPackage() {
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(ManjaroVersion.MANJARO_24_0_8), "5.0.2")
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+  }
+
+  @Test
   public void resolveRockyPackage() {
     assertThat(linuxWith(CommonArchitecture.X86_64)
       .withVersion(RockyVersion.Rocky_8), "5.0.2")

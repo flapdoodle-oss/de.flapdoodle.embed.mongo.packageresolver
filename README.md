@@ -20,6 +20,8 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+- manjaro package finder                      
+
 #### 4.17.0
 
 - dep updates, linux mint detection, amazon detection fix
