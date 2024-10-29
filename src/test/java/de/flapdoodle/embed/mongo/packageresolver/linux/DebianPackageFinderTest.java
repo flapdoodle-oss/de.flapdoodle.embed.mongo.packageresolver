@@ -43,7 +43,7 @@ class DebianPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-debian12-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.0 -> 8.0.1", "7.0.14", "7.0.11 -> 7.0.12", "7.0.5 -> 7.0.9" })
+	@ValueSource(strings = { "8.0.3", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.15", "7.0.11 -> 7.0.12", "7.0.5 -> 7.0.9" })
 	public void DEBIAN_12(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, DebianVersion.DEBIAN_12), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-debian12-{}.tgz");
@@ -64,7 +64,7 @@ class DebianPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-debian11-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.14", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.18", "5.0.8 -> 5.0.29" })
+	@ValueSource(strings = { "7.0.14 -> 7.0.15", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.19", "5.0.8 -> 5.0.30" })
 	public void DEBIAN_11(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, DebianVersion.DEBIAN_11), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-debian11-{}.tgz");
@@ -85,7 +85,7 @@ class DebianPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-debian10-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.0 -> 6.0.18", "5.0.0 -> 5.0.29", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.1 -> 4.2.3" })
+	@ValueSource(strings = { "6.0.0 -> 6.0.19", "5.0.0 -> 5.0.30", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.1 -> 4.2.3" })
 	public void DEBIAN_10(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, DebianVersion.DEBIAN_10), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-debian10-{}.tgz");
@@ -106,7 +106,7 @@ class DebianPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-debian92-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "5.0.0 -> 5.0.29", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.5 -> 3.6.23" })
+	@ValueSource(strings = { "5.0.0 -> 5.0.30", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.5 -> 3.6.23" })
 	public void DEBIAN_9(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, DebianVersion.DEBIAN_9), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-debian92-{}.tgz");

@@ -39,7 +39,7 @@ class OSXPackageFinderTest {
 		  .resolvesTo("/osx/mongodb-macos-arm64-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.0 -> 8.0.1", "7.0.14", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.18" })
+	@ValueSource(strings = { "8.0.3", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.15", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.19" })
 	public void OS_XArm(String version) {
 		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.ARM_64), version)
 		  .resolvesTo("/osx/mongodb-macos-arm64-{}.tgz");
@@ -60,7 +60,7 @@ class OSXPackageFinderTest {
 		  .resolvesTo("/osx/mongodb-macos-x86_64-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.0 -> 8.0.1", "7.0.14", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.18", "5.0.0 -> 5.0.29", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { "8.0.3", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.15", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.19", "5.0.0 -> 5.0.30", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void OS_X(String version) {
 		assertThat(withPlatform(CommonOS.OS_X, CommonArchitecture.X86_64), version)
 		  .resolvesTo("/osx/mongodb-macos-x86_64-{}.tgz");

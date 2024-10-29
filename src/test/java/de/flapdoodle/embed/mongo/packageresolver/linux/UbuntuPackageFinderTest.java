@@ -37,7 +37,7 @@ import java.util.Optional;
 */
 class UbuntuPackageFinderTest {
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.0 -> 8.0.1" })
+	@ValueSource(strings = { "8.0.3", "8.0.0 -> 8.0.1" })
 	public void Ubuntu_24_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_24_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2404-{}.tgz");
@@ -52,7 +52,7 @@ class UbuntuPackageFinderTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.0 -> 8.0.1" })
+	@ValueSource(strings = { "8.0.3", "8.0.0 -> 8.0.1" })
 	public void Ubuntu_24_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_24_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2404-{}.tgz");
@@ -73,7 +73,7 @@ class UbuntuPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.0 -> 8.0.1", "7.0.14", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.4 -> 6.0.18" })
+	@ValueSource(strings = { "8.0.3", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.15", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.4 -> 6.0.19" })
 	public void Ubuntu_22_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2204-{}.tgz");
@@ -94,7 +94,7 @@ class UbuntuPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.0 -> 8.0.1", "7.0.14", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.4 -> 6.0.18" })
+	@ValueSource(strings = { "8.0.3", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.15", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.4 -> 6.0.19" })
 	public void Ubuntu_22_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_22_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2204-{}.tgz");
@@ -115,7 +115,7 @@ class UbuntuPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.0 -> 8.0.1", "7.0.14", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.18", "5.0.0 -> 5.0.29", "4.4.0 -> 4.4.29" })
+	@ValueSource(strings = { "8.0.3", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.15", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.19", "5.0.0 -> 5.0.30", "4.4.0 -> 4.4.29" })
 	public void Ubuntu_20_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu2004-{}.tgz");
@@ -136,7 +136,7 @@ class UbuntuPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.0 -> 8.0.1", "7.0.14", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.18", "5.0.0 -> 5.0.29", "4.4.0 -> 4.4.29" })
+	@ValueSource(strings = { "8.0.3", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.15", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.19", "5.0.0 -> 5.0.30", "4.4.0 -> 4.4.29" })
 	public void Ubuntu_20_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_20_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
@@ -157,7 +157,7 @@ class UbuntuPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.0 -> 6.0.18", "5.0.0 -> 5.0.29", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
+	@ValueSource(strings = { "6.0.0 -> 6.0.19", "5.0.0 -> 5.0.30", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3" })
 	public void Ubuntu_18_04Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, UbuntuVersion.Ubuntu_18_04), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-ubuntu1804-{}.tgz");
@@ -178,7 +178,7 @@ class UbuntuPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "6.0.0 -> 6.0.18", "5.0.0 -> 5.0.29", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
+	@ValueSource(strings = { "6.0.0 -> 6.0.19", "5.0.0 -> 5.0.30", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.1 -> 4.0.28", "3.6.20 -> 3.6.23" })
 	public void Ubuntu_18_04(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, UbuntuVersion.Ubuntu_18_04), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-ubuntu1804-{}.tgz");

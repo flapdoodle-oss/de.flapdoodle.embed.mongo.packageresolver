@@ -40,7 +40,7 @@ class WindowsPackageFinderTest {
 		  .resolvesTo("/windows/mongodb-windows-x86_64-{}.zip");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.0 -> 8.0.1", "7.0.14", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.18", "5.0.0 -> 5.0.29", "4.4.0 -> 4.4.29" })
+	@ValueSource(strings = { "8.0.3", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.15", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.19", "5.0.0 -> 5.0.30", "4.4.0 -> 4.4.29" })
 	public void Windows(String version) {
 		assertThat(withPlatform(CommonOS.Windows, CommonArchitecture.X86_64), version)
 		  .resolvesTo("/windows/mongodb-windows-x86_64-{}.zip");

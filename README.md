@@ -20,6 +20,8 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+- latest mongodb versions (8.0.3 release)
+
 #### 4.18.0
 
 - manjaro package finder
