@@ -27,7 +27,10 @@ import de.flapdoodle.types.Pair;
 public class ManjaroPackageFinder extends AbstractVersionMappedPackageFinder<ManjaroVersion, UbuntuVersion> {
 	protected ManjaroPackageFinder(UbuntuFallbackToOlderVersionPackageFinder delegate) {
 		super(delegate,
-			Pair.of(ManjaroVersion.MANJARO_24_0_8, UbuntuVersion.Ubuntu_24_04)
+			Pair.of(ManjaroVersion.MANJARO_24_0, UbuntuVersion.Ubuntu_24_04),
+			Pair.of(ManjaroVersion.MANJARO_24_1, UbuntuVersion.Ubuntu_24_04),
+			Pair.of(ManjaroVersion.MANJARO_24_2, UbuntuVersion.Ubuntu_24_04),
+			Pair.of(ManjaroVersion.MANJARO_24_3, UbuntuVersion.Ubuntu_24_04)
 		);
 	}
 }
