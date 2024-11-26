@@ -111,6 +111,21 @@ class LinuxPackageFinderTest {
     assertThat(linuxWith(CommonArchitecture.X86_64)
       .withVersion(ManjaroVersion.MANJARO_24_0), "5.0.2")
       .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(ManjaroVersion.MANJARO_24_0), "8.0.0")
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2404-{}.tgz");
+  }
+
+  @Test
+  public void resolveArchPackage() {
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(ArchVersion.ROLLING), "5.0.2")
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2004-{}.tgz");
+
+    assertThat(linuxWith(CommonArchitecture.X86_64)
+      .withVersion(ArchVersion.ROLLING), "8.0.0")
+      .resolvesTo("/linux/mongodb-linux-x86_64-ubuntu2404-{}.tgz");
   }
 
   @Test
