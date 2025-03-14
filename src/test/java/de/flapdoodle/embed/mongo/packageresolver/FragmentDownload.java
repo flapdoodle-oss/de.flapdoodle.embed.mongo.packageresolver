@@ -26,7 +26,7 @@ public class FragmentDownload {
 				"--headless",
 				"--virtual-time-budget=5000",
 				"--dump-dom",
-				"https://www.mongodb.com/try/download/community-edition/releases")
+				url)
 			.inheritIO()
 			.redirectOutput(tempFile.toFile())
 			.start();

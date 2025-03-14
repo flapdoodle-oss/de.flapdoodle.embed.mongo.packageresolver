@@ -29,11 +29,12 @@ open https://www.mongodb.com/download-center/database-tools/releases/archive
 
 # Create Resolver and Tests
 
-* grab html-segment <main class="w-max-700 p-h-15 m-auto"> and save to mongo-db-versions-<date>(|-dev|-archive).html
+* use FragmentDownload
+    * or use google-chrome --incognito --proxy-auto-detect --temp-profile --headless --virtual-time-budget=5000  --dump-dom https://www.mongodb.com/try/download/community-edition/releases >releases.txt
+    * or grab html-segment <main class="w-max-700 p-h-15 m-auto"> and save to mongo-db-versions-<date>(|-dev|-archive).html
 * add files to de.flapdoodle.embed.mongo.packageresolver.MongoPackages.mongoDbVersions and de.flapdoodle.embed.mongo.packageresolver.MongoPackages.mongoToolsVersions
 * execute de.flapdoodle.embed.mongo.packageresolver.MongoPackageParser.main
 * compare generated source and testsources (target/generated-package-finder) with src/main/java/de/flapdoodle/embed/mongo/packageresolver and src/test/java/de/flapdoodle/embed/mongo/packageresolver
 * run tests, fix failing tests
 
-google-chrome --incognito --proxy-auto-detect --temp-profile --headless --virtual-time-budget=5000  --dump-dom https://www.mongodb.com/try/download/community-edition/releases >releases.txt
 
