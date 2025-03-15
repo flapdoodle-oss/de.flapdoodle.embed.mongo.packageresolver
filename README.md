@@ -20,6 +20,8 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+- latest mongodb versions (7.0.17, 8.0.5, ...)                    
+
 #### 4.18.2
 
 - manjaro and arch support added

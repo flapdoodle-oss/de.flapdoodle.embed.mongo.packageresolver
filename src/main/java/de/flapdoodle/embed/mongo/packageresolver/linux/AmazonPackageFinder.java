@@ -62,6 +62,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.6-rc2"),
                   VersionRange.of("8.0.0-rc9"),
                   VersionRange.of("8.0.0-rc7"),
                   VersionRange.of("8.0.0-rc3"),
@@ -69,6 +70,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.18-rc0"),
                   VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
@@ -88,9 +90,9 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("8.0.3"),
+                  VersionRange.of("8.0.3", "8.0.5"),
                   VersionRange.of("8.0.0", "8.0.1"),
-                  VersionRange.of("7.0.14", "7.0.15"),
+                  VersionRange.of("7.0.14", "7.0.17"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"))
         ))
@@ -106,6 +108,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.11.0"),
                   ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
@@ -123,6 +126,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.0.6-rc2"),
                   VersionRange.of("8.0.0-rc9"),
                   VersionRange.of("8.0.0-rc7"),
                   VersionRange.of("8.0.0-rc3"),
@@ -130,6 +134,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.18-rc0"),
                   VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
@@ -149,9 +154,9 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("8.0.3"),
+                  VersionRange.of("8.0.3", "8.0.5"),
                   VersionRange.of("8.0.0", "8.0.1"),
-                  VersionRange.of("7.0.14", "7.0.15"),
+                  VersionRange.of("7.0.14", "7.0.17"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"))
         ))
@@ -167,6 +172,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2023)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.11.0"),
                   ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
@@ -188,6 +194,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.18-rc0"),
                   VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
@@ -196,6 +203,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
                   VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.21-rc1"),
                   VersionRange.of("6.0.16-rc0"),
                   VersionRange.of("6.0.9-rc1"),
                   VersionRange.of("5.0.28-rc0"),
@@ -215,11 +223,11 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.14", "7.0.15"),
+                  VersionRange.of("7.0.14", "7.0.17"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.19"),
-                  VersionRange.of("5.0.0", "5.0.30"),
+                  VersionRange.of("6.0.0", "6.0.20"),
+                  VersionRange.of("5.0.0", "5.0.31"),
                   VersionRange.of("4.4.4", "4.4.29"),
                   VersionRange.of("4.2.13", "4.2.25"))
         ))
@@ -251,6 +259,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.11.0"),
                   ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
@@ -273,6 +282,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.18-rc0"),
                   VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
                   VersionRange.of("7.0.3-rc1"),
@@ -281,6 +291,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
                   VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.21-rc1"),
                   VersionRange.of("6.0.16-rc0"),
                   VersionRange.of("6.0.9-rc1"),
                   VersionRange.of("5.0.28-rc0"),
@@ -300,11 +311,11 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.14", "7.0.15"),
+                  VersionRange.of("7.0.14", "7.0.17"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.19"),
-                  VersionRange.of("5.0.0", "5.0.30"),
+                  VersionRange.of("6.0.0", "6.0.20"),
+                  VersionRange.of("5.0.0", "5.0.31"),
                   VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
                   VersionRange.of("4.2.0", "4.2.3"),
@@ -323,6 +334,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux2)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.11.0"),
                   ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
@@ -365,7 +377,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("5.0.0", "5.0.30"),
+                  VersionRange.of("5.0.0", "5.0.31"),
                   VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
                   VersionRange.of("4.2.0", "4.2.3"),
@@ -388,6 +400,7 @@ public class AmazonPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, AmazonVersion.AmazonLinux)
             .andThen(
                 DistributionMatch.any(
+                  ToolVersionRange.of("100.11.0"),
                   ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
                   ToolVersionRange.of("100.8.0"),
