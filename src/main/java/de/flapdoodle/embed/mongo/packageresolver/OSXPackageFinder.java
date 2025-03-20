@@ -60,6 +60,7 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.1.0-rc0"),
                   VersionRange.of("8.0.6-rc2"),
                   VersionRange.of("8.0.0-rc9"),
                   VersionRange.of("8.0.0-rc7"),
@@ -98,7 +99,7 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
                   VersionRange.of("7.0.14", "7.0.17"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.20"))
+                  VersionRange.of("6.0.0", "6.0.21"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -130,6 +131,7 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
+                  VersionRange.of("8.1.0-rc0"),
                   VersionRange.of("8.0.6-rc2"),
                   VersionRange.of("8.0.0-rc9"),
                   VersionRange.of("8.0.0-rc7"),
@@ -172,7 +174,7 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
                   VersionRange.of("7.0.14", "7.0.17"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.20"),
+                  VersionRange.of("6.0.0", "6.0.21"),
                   VersionRange.of("5.0.0", "5.0.31"),
                   VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
