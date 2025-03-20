@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 public abstract class MongoPackages {
 
 	private static List<ParsedVersion> mergeAll(List<List<ParsedVersion>> allVersions) {
-		List<ParsedVersion> flatmapped = allVersions.stream().flatMap(it -> it.stream()).collect(Collectors.toList());
+		List<ParsedVersion> flatmapped = allVersions.stream().flatMap(Collection::stream).collect(Collectors.toList());
 
 		Set<Pair<String, Boolean>> versions = flatmapped.stream()
 			.map(it -> Pair.of(it.version, it.isDevVersion))
