@@ -31,7 +31,11 @@ public class FedoraPackageFinder extends AbstractVersionMappedPackageFinder<Fedo
 			Pair.of(FedoraVersion.Fedora_38, RedhatVersion.Redhat_9),
 			Pair.of(FedoraVersion.Fedora_39, RedhatVersion.Redhat_9),
 			Pair.of(FedoraVersion.Fedora_40, RedhatVersion.Redhat_9),
-			Pair.of(FedoraVersion.Fedora_41, RedhatVersion.Redhat_9)
+			Pair.of(FedoraVersion.Fedora_41, RedhatVersion.Redhat_9),
+			Pair.of(FedoraVersion.Fedora_42, RedhatVersion.Redhat_9),
+			Pair.of(FedoraVersion.Fedora_43, RedhatVersion.Redhat_9),
+			Pair.of(FedoraVersion.Fedora_44, RedhatVersion.Redhat_9),
+			Pair.of(FedoraVersion.Fedora_45, RedhatVersion.Redhat_9)
 		);
 	}
 }

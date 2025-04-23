@@ -37,5 +37,9 @@ class FedoraPackageFinderTest extends AbstractVersionMappedPackageFinderTest<Fed
     assertMappedVersion(FedoraVersion.Fedora_39, RedhatVersion.Redhat_9);
     assertMappedVersion(FedoraVersion.Fedora_40, RedhatVersion.Redhat_9);
     assertMappedVersion(FedoraVersion.Fedora_41, RedhatVersion.Redhat_9);
+    assertMappedVersion(FedoraVersion.Fedora_42, RedhatVersion.Redhat_9);
+    assertMappedVersion(FedoraVersion.Fedora_43, RedhatVersion.Redhat_9);
+    assertMappedVersion(FedoraVersion.Fedora_44, RedhatVersion.Redhat_9);
+    assertMappedVersion(FedoraVersion.Fedora_45, RedhatVersion.Redhat_9);
   }
 }
