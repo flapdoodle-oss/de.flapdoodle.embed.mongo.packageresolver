@@ -13,18 +13,21 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 	<dependency>
 		<groupId>de.flapdoodle.embed</groupId>
 		<artifactId>de.flapdoodle.embed.mongo.packageresolver</artifactId>
-		<version>4.19.0</version>
+		<version>4.20.0</version>
 	</dependency>
 
 ### Changelog
 
 #### Unreleased
 
+#### 4.20.0
+
 - fedora 42 until 45 support
+- latest mongodb versions
 
 #### 4.19.0
 
-- latest mongodb versions (7.0.17, 8.0.5, ...)                    
+- latest mongodb versions (7.0.17, 8.0.5, ...)
 
 #### 4.18.2
 
