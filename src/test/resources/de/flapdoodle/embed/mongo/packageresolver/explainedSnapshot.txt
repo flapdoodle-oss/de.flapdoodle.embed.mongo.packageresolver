@@ -147,8 +147,8 @@
   (os=Linux and (version is any of Redhat_6, Redhat_7, Redhat_8, Redhat_9))
   'RedhatVersionDowngradePackageFinder'
     use 'RedhatPackageFinder' with Redhat_9, Redhat_8, Redhat_7, Redhat_6 until package found.
-  (os=Linux and (version is any of Fedora_38, Fedora_39, Fedora_40, Fedora_41))
-    use 'RedhatVersionDowngradePackageFinder' with Redhat_9 for Fedora_38, Fedora_39, Fedora_40, Fedora_41
+  (os=Linux and (version is any of Fedora_38, Fedora_39, Fedora_40, Fedora_41, Fedora_42, Fedora_43, Fedora_44, Fedora_45))
+    use 'RedhatVersionDowngradePackageFinder' with Redhat_9 for Fedora_38, Fedora_39, Fedora_40, Fedora_41, Fedora_42, Fedora_43, Fedora_44, Fedora_45
   (os=Linux and (version is any of Oracle_6, Oracle_7, Oracle_8, Oracle_9))
     use 'RedhatVersionDowngradePackageFinder' with Redhat_6 for Oracle_6 and Redhat_7 for Oracle_7 and Redhat_8 for Oracle_8 and Redhat_9 for Oracle_9
   (os=Linux and (version is any of CentOS_6, CentOS_7, CentOS_8, CentOS_9))
