@@ -13,14 +13,12 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 	<dependency>
 		<groupId>de.flapdoodle.embed</groupId>
 		<artifactId>de.flapdoodle.embed.mongo.packageresolver</artifactId>
-		<version>4.19.1</version>
+		<version>4.19.0</version>
 	</dependency>
 
 ### Changelog
 
 #### Unreleased
-
-#### 4.19.1
 
 - fedora 42 until 45 support
 
