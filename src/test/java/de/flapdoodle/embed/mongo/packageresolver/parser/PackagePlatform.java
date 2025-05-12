@@ -113,10 +113,12 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 			case "RedHat / CentOS 7.2 s390x":
 			// Tools
 			case "RedHat / CentOS 8.3 s390x":
+			case "RedHat / CentOS 9 s390x":
 				
 			// Tools
 			case "RedHat / CentOS 7.1 ppc64le":
 			case "RedHat / CentOS 8.1 ppc64le":
+			case "RedHat / CentOS 9 ppc64le":
 
 			case "Debian 7.1 x64":
 			case "Debian 8.1 x64":
