@@ -62,8 +62,8 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("8.1.0-rc0"),
-                  VersionRange.of("8.1.0"),
+                  VersionRange.of("8.1.0", "8.1.1"),
+                  VersionRange.of("8.0.10-rc0"),
                   VersionRange.of("8.0.6-rc2"),
                   VersionRange.of("8.0.0-rc9"),
                   VersionRange.of("8.0.0-rc7"),
@@ -71,6 +71,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.3-rc0"),
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
+                  VersionRange.of("7.0.21-rc0"),
                   VersionRange.of("7.0.18-rc0"),
                   VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"))
@@ -105,7 +106,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_12)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.12.0"),
+                  ToolVersionRange.of("100.12.0", "100.12.1"),
                   ToolVersionRange.of("100.11.0"),
                   ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.2", "100.9.5"))
@@ -126,6 +127,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.3.0", "7.3.3"),
                   VersionRange.of("7.2.0-rc3"),
                   VersionRange.of("7.1.0", "7.1.1"),
+                  VersionRange.of("7.0.21-rc0"),
                   VersionRange.of("7.0.18-rc0"),
                   VersionRange.of("7.0.15-rc1"),
                   VersionRange.of("7.0.8-rc0"),
@@ -135,6 +137,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.0.0-rc10"),
                   VersionRange.of("7.0.0-rc1"),
                   VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.24-rc0"),
                   VersionRange.of("6.0.21-rc1"),
                   VersionRange.of("6.0.16-rc0"),
                   VersionRange.of("6.0.9-rc1"),
@@ -171,7 +174,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_11)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.12.0"),
+                  ToolVersionRange.of("100.12.0", "100.12.1"),
                   ToolVersionRange.of("100.11.0"),
                   ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
@@ -195,6 +198,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
                   VersionRange.of("7.0.0-rc2"),
                   VersionRange.of("7.0.0-rc1"),
                   VersionRange.of("6.3.1", "6.3.2"),
+                  VersionRange.of("6.0.24-rc0"),
                   VersionRange.of("6.0.21-rc1"),
                   VersionRange.of("6.0.16-rc0"),
                   VersionRange.of("6.0.9-rc1"),
@@ -233,7 +237,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_10)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.12.0"),
+                  ToolVersionRange.of("100.12.0", "100.12.1"),
                   ToolVersionRange.of("100.11.0"),
                   ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
@@ -296,7 +300,7 @@ public class DebianPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, DebianVersion.DEBIAN_9)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.12.0"),
+                  ToolVersionRange.of("100.12.0", "100.12.1"),
                   ToolVersionRange.of("100.11.0"),
                   ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
