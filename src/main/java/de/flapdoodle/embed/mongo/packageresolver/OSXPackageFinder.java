@@ -60,7 +60,8 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("8.1.0", "8.1.1"),
+                  VersionRange.of("8.2.0-rc0"),
+                  VersionRange.of("8.1.0", "8.1.2"),
                   VersionRange.of("8.0.10-rc0"),
                   VersionRange.of("8.0.6-rc2"),
                   VersionRange.of("8.0.0-rc9"),
@@ -97,12 +98,12 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("8.0.3", "8.0.9"),
+                  VersionRange.of("8.0.3", "8.0.12"),
                   VersionRange.of("8.0.0", "8.0.1"),
-                  VersionRange.of("7.0.14", "7.0.20"),
+                  VersionRange.of("7.0.14", "7.0.22"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.23"))
+                  VersionRange.of("6.0.0", "6.0.25"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -116,7 +117,7 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64, CPUType.ARM)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.12.0", "100.12.1"),
+                  ToolVersionRange.of("100.12.0", "100.12.2"),
                   ToolVersionRange.of("100.11.0"),
                   ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),
@@ -135,7 +136,8 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("8.1.0", "8.1.1"),
+                  VersionRange.of("8.2.0-rc0"),
+                  VersionRange.of("8.1.0", "8.1.2"),
                   VersionRange.of("8.0.10-rc0"),
                   VersionRange.of("8.0.6-rc2"),
                   VersionRange.of("8.0.0-rc9"),
@@ -176,12 +178,12 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("8.0.3", "8.0.9"),
+                  VersionRange.of("8.0.3", "8.0.12"),
                   VersionRange.of("8.0.0", "8.0.1"),
-                  VersionRange.of("7.0.14", "7.0.20"),
+                  VersionRange.of("7.0.14", "7.0.22"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.23"),
+                  VersionRange.of("6.0.0", "6.0.25"),
                   VersionRange.of("5.0.0", "5.0.31"),
                   VersionRange.of("4.4.0", "4.4.29"),
                   VersionRange.of("4.2.5", "4.2.25"),
@@ -234,7 +236,7 @@ public class OSXPackageFinder extends AbstractPackageFinder implements HasLabel 
         .match(match(CommonOS.OS_X, BitSize.B64)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.12.0", "100.12.1"),
+                  ToolVersionRange.of("100.12.0", "100.12.2"),
                   ToolVersionRange.of("100.11.0"),
                   ToolVersionRange.of("100.10.0"),
                   ToolVersionRange.of("100.9.0", "100.9.5"),

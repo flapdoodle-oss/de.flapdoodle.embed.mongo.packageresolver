@@ -45,20 +45,20 @@ class RedhatPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.14 -> 7.0.20", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.7 -> 6.0.23" })
+	@ValueSource(strings = { "7.0.14 -> 7.0.22", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.7 -> 6.0.25" })
 	public void Redhat_9Arm(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, RedhatVersion.Redhat_9), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-rhel90-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "8.1.0 -> 8.1.1", "8.0.10-rc0", "8.0.6-rc2" })
+	@ValueSource(strings = { "8.2.0-rc0", "8.1.0 -> 8.1.2", "8.0.10-rc0", "8.0.6-rc2" })
 	public void Redhat_9Arm_1Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, RedhatVersion.Redhat_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel93-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.3 -> 8.0.9", "8.0.0 -> 8.0.1" })
+	@ValueSource(strings = { "8.0.3 -> 8.0.12", "8.0.0 -> 8.0.1" })
 	public void Redhat_9Arm_1(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, RedhatVersion.Redhat_9), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-rhel93-{}.tgz");
@@ -78,7 +78,7 @@ class RedhatPackageFinderTest {
 			.resolvesTo("/tools/db/mongodb-database-tools-rhel90-arm64-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "100.12.0 -> 100.12.1", "100.11.0", "100.10.0" })
+	@ValueSource(strings = { "100.12.0 -> 100.12.2", "100.11.0", "100.10.0" })
 	public void Redhat_9Arm_2Tools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, RedhatVersion.Redhat_9), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-rhel93-aarch64-{}.tgz");
@@ -91,20 +91,20 @@ class RedhatPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel90-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.14 -> 7.0.20", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.4 -> 6.0.23" })
+	@ValueSource(strings = { "7.0.14 -> 7.0.22", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.4 -> 6.0.25" })
 	public void Redhat_9(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_9), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel90-{}.tgz");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "8.1.0 -> 8.1.1", "8.0.10-rc0", "8.0.6-rc2" })
+	@ValueSource(strings = { "8.2.0-rc0", "8.1.0 -> 8.1.2", "8.0.10-rc0", "8.0.6-rc2" })
 	public void Redhat_9_1Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_9), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel93-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.3 -> 8.0.9", "8.0.0 -> 8.0.1" })
+	@ValueSource(strings = { "8.0.3 -> 8.0.12", "8.0.0 -> 8.0.1" })
 	public void Redhat_9_1(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_9), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel93-{}.tgz");
@@ -118,7 +118,7 @@ class RedhatPackageFinderTest {
 			.resolvesTo("/tools/db/mongodb-database-tools-rhel90-x86_64-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "100.12.0 -> 100.12.1", "100.11.0", "100.10.0" })
+	@ValueSource(strings = { "100.12.0 -> 100.12.2", "100.11.0", "100.10.0" })
 	public void Redhat_9_1Tools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_9), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-rhel93-x86_64-{}.tgz");
@@ -139,13 +139,13 @@ class RedhatPackageFinderTest {
 
 	@ParameterizedTest
 	// partial
-	@ValueSource(strings = { "8.1.0 -> 8.1.1", "8.0.10-rc0", "8.0.6-rc2", /*"7.0.21-rc0", "7.0.18-rc0", "7.0.15-rc1", "6.0.24-rc0", "6.0.21-rc1"*/ })
+	@ValueSource(strings = { "8.2.0-rc0", "8.1.0 -> 8.1.2", "8.0.10-rc0", "8.0.6-rc2", /*"7.0.21-rc0", "7.0.18-rc0", "7.0.15-rc1", "6.0.24-rc0", "6.0.21-rc1"*/ })
 	public void Redhat_8Arm_1Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, RedhatVersion.Redhat_8), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-aarch64-rhel8-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.3 -> 8.0.9", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.20", "6.0.17 -> 6.0.23", "5.0.29 -> 5.0.31" })
+	@ValueSource(strings = { "8.0.3 -> 8.0.12", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.22", "6.0.17 -> 6.0.25", "5.0.29 -> 5.0.31" })
 	public void Redhat_8Arm_1(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, RedhatVersion.Redhat_8), version)
 			.resolvesTo("/linux/mongodb-linux-aarch64-rhel8-{}.tgz");
@@ -165,7 +165,7 @@ class RedhatPackageFinderTest {
 			.resolvesTo("/tools/db/mongodb-database-tools-rhel82-aarch64-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "100.12.0 -> 100.12.1", "100.11.0", "100.10.0" })
+	@ValueSource(strings = { "100.12.0 -> 100.12.2", "100.11.0", "100.10.0" })
 	public void Redhat_8Arm_2Tools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.ARM_64, RedhatVersion.Redhat_8), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-rhel88-aarch64-{}.tgz");
@@ -186,13 +186,13 @@ class RedhatPackageFinderTest {
 
 	@ParameterizedTest
 	// partial
-	@ValueSource(strings = { "8.1.0 -> 8.1.1", "8.0.10-rc0", "8.0.6-rc2", /*"7.0.21-rc0", "7.0.18-rc0", "7.0.15-rc1", "6.0.24-rc0", "6.0.21-rc1"*/ })
+	@ValueSource(strings = { "8.2.0-rc0", "8.1.0 -> 8.1.2", "8.0.10-rc0", "8.0.6-rc2", /*"7.0.21-rc0", "7.0.18-rc0", "7.0.15-rc1", "6.0.24-rc0", "6.0.21-rc1"*/ })
 	public void Redhat_8_1Dev(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_8), version)
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel8-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.0.3 -> 8.0.9", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.20", "6.0.17 -> 6.0.23", "5.0.29 -> 5.0.31" })
+	@ValueSource(strings = { "8.0.3 -> 8.0.12", "8.0.0 -> 8.0.1", "7.0.14 -> 7.0.22", "6.0.17 -> 6.0.25", "5.0.29 -> 5.0.31" })
 	public void Redhat_8_1(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_8), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel8-{}.tgz");
@@ -206,7 +206,7 @@ class RedhatPackageFinderTest {
 			.resolvesTo("/tools/db/mongodb-database-tools-rhel80-x86_64-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "100.12.0 -> 100.12.1", "100.11.0", "100.10.0" })
+	@ValueSource(strings = { "100.12.0 -> 100.12.2", "100.11.0", "100.10.0" })
 	public void Redhat_8_1Tools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_8), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-rhel88-x86_64-{}.tgz");
@@ -219,7 +219,7 @@ class RedhatPackageFinderTest {
 			.resolveDevPackageTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "7.0.14 -> 7.0.20", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.23", "5.0.0 -> 5.0.31", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
+	@ValueSource(strings = { "7.0.14 -> 7.0.22", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.25", "5.0.0 -> 5.0.31", "4.4.0 -> 4.4.29", "4.2.5 -> 4.2.25", "4.2.0 -> 4.2.3", "4.0.0 -> 4.0.28", "3.6.0 -> 3.6.23", "3.4.9 -> 3.4.24", "3.4.0 -> 3.4.7", "3.2.0 -> 3.2.22", "3.0.0 -> 3.0.15" })
 	public void Redhat_7(String version) {
 		assertThat(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_7), version)
 			.resolvesTo("/linux/mongodb-linux-x86_64-rhel70-{}.tgz");
@@ -227,7 +227,7 @@ class RedhatPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.12.0 -> 100.12.1", "100.11.0", "100.10.0", "100.9.0 -> 100.9.5", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
+	@ValueSource(strings = { "100.12.0 -> 100.12.2", "100.11.0", "100.10.0", "100.9.0 -> 100.9.5", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
 	public void Redhat_7Tools(String version) {
 		assertThatTools(withPlatform(CommonOS.Linux, CommonArchitecture.X86_64, RedhatVersion.Redhat_7), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-rhel70-x86_64-{}.tgz");
