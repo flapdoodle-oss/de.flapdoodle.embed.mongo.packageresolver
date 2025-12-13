@@ -30,7 +30,8 @@ public class OraclePackageFinder extends AbstractVersionMappedPackageFinder<Orac
 			Pair.of(OracleVersion.Oracle_6, RedhatVersion.Redhat_6),
 			Pair.of(OracleVersion.Oracle_7, RedhatVersion.Redhat_7),
 			Pair.of(OracleVersion.Oracle_8, RedhatVersion.Redhat_8),
-			Pair.of(OracleVersion.Oracle_9, RedhatVersion.Redhat_9)
+			Pair.of(OracleVersion.Oracle_9, RedhatVersion.Redhat_9),
+			Pair.of(OracleVersion.Oracle_10, RedhatVersion.Redhat_10)
 		);
 	}
 }

@@ -77,7 +77,7 @@
   (os=Linux and bitSize=B64 and cpuType=ARM and (version is any of DEBIAN_12, DEBIAN_13))
   'DebianUsesUbuntuOnArmPackageFinder'
     use 'UbuntuVersionDowngradePackageFinder' with Ubuntu_22_04 for DEBIAN_12, DEBIAN_13
-  (os=Linux and (version is any of DEBIAN_9, DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13))
+  (os=Linux and (version is any of DEBIAN_9, DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13, DEBIAN_14))
   'DebianPackageFinder'
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_12)) and (tools.version 100.12.0-100.12.2 or tools.version 100.11.0 or tools.version 100.10.0 or tools.version 100.9.2-100.9.5)
       url=/tools/db/mongodb-database-tools-debian12-x86_64-{tools.version}.tgz (TGZ)
@@ -95,10 +95,10 @@
       url=/linux/mongodb-linux-x86_64-debian92-{version}.tgz (TGZ(DEV))
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of DEBIAN_9)) and (5.0.0-5.0.31 or 4.4.0-4.4.29 or 4.2.5-4.2.25 or 4.2.0-4.2.3 or 4.0.0-4.0.28 or 3.6.5-3.6.23)
       url=/linux/mongodb-linux-x86_64-debian92-{version}.tgz (TGZ)
-  (os=Linux and (version is any of DEBIAN_9, DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13))
+  (os=Linux and (version is any of DEBIAN_9, DEBIAN_10, DEBIAN_11, DEBIAN_12, DEBIAN_13, DEBIAN_14))
   'DebianFallbackToOlderVersionPackageFinder'
-    use 'DebianPackageFinder' with DEBIAN_13, DEBIAN_12, DEBIAN_11, DEBIAN_10, DEBIAN_9 until package found.
-  (os=Linux and (version is any of Redhat_6, Redhat_7, Redhat_8, Redhat_9))
+    use 'DebianPackageFinder' with DEBIAN_14, DEBIAN_13, DEBIAN_12, DEBIAN_11, DEBIAN_10, DEBIAN_9 until package found.
+  (os=Linux and (version is any of Redhat_6, Redhat_7, Redhat_8, Redhat_9, Redhat_10))
   'RedhatPackageFinder'
     (os=Linux and bitSize=B64 and cpuType=ARM and (version is any of Redhat_9)) and (tools.version 100.9.0-100.9.5 or tools.version 100.8.0 or tools.version 100.7.2-100.7.5)
       url=/tools/db/mongodb-database-tools-rhel90-aarch64-{tools.version}.tgz (TGZ)
@@ -136,17 +136,17 @@
       url=/linux/mongodb-linux-x86_64-rhel62-{version}.tgz (TGZ(DEV))
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of Redhat_6)) and (4.4.0-4.4.29 or 4.2.5-4.2.25 or 4.2.0-4.2.3 or 4.0.0-4.0.28 or 3.6.0-3.6.23 or 3.4.9-3.4.24 or 3.4.0-3.4.7 or 3.2.0-3.2.22 or 3.0.0-3.0.15)
       url=/linux/mongodb-linux-x86_64-rhel62-{version}.tgz (TGZ)
-  (os=Linux and (version is any of Redhat_6, Redhat_7, Redhat_8, Redhat_9))
+  (os=Linux and (version is any of Redhat_6, Redhat_7, Redhat_8, Redhat_9, Redhat_10))
   'RedhatVersionDowngradePackageFinder'
-    use 'RedhatPackageFinder' with Redhat_9, Redhat_8, Redhat_7, Redhat_6 until package found.
+    use 'RedhatPackageFinder' with Redhat_10, Redhat_9, Redhat_8, Redhat_7, Redhat_6 until package found.
   (os=Linux and (version is any of Fedora_38, Fedora_39, Fedora_40, Fedora_41, Fedora_42, Fedora_43, Fedora_44, Fedora_45))
     use 'RedhatVersionDowngradePackageFinder' with Redhat_9 for Fedora_38, Fedora_39, Fedora_40, Fedora_41, Fedora_42, Fedora_43, Fedora_44, Fedora_45
-  (os=Linux and (version is any of Oracle_6, Oracle_7, Oracle_8, Oracle_9))
-    use 'RedhatVersionDowngradePackageFinder' with Redhat_6 for Oracle_6 and Redhat_7 for Oracle_7 and Redhat_8 for Oracle_8 and Redhat_9 for Oracle_9
-  (os=Linux and (version is any of CentOS_6, CentOS_7, CentOS_8, CentOS_9))
-    use 'RedhatVersionDowngradePackageFinder' with Redhat_6 for CentOS_6 and Redhat_7 for CentOS_7 and Redhat_8 for CentOS_8 and Redhat_9 for CentOS_9
-  (os=Linux and (version is any of Alma_8, Alma_9))
-    use 'RedhatVersionDowngradePackageFinder' with Redhat_8 for Alma_8 and Redhat_9 for Alma_9
+  (os=Linux and (version is any of Oracle_6, Oracle_7, Oracle_8, Oracle_9, Oracle_10))
+    use 'RedhatVersionDowngradePackageFinder' with Redhat_6 for Oracle_6 and Redhat_7 for Oracle_7 and Redhat_8 for Oracle_8 and Redhat_9 for Oracle_9 and Redhat_10 for Oracle_10
+  (os=Linux and (version is any of CentOS_6, CentOS_7, CentOS_8, CentOS_9, CentOS_10))
+    use 'RedhatVersionDowngradePackageFinder' with Redhat_6 for CentOS_6 and Redhat_7 for CentOS_7 and Redhat_8 for CentOS_8 and Redhat_9 for CentOS_9 and Redhat_10 for CentOS_10
+  (os=Linux and (version is any of Alma_8, Alma_9, Alma_10))
+    use 'RedhatVersionDowngradePackageFinder' with Redhat_8 for Alma_8 and Redhat_9 for Alma_9 and Redhat_10 for Alma_10
   (os=Linux and (version is any of MANJARO_24_0, MANJARO_24_1, MANJARO_24_2, MANJARO_24_3))
     use 'UbuntuVersionDowngradePackageFinder' with Ubuntu_24_04 for MANJARO_24_0, MANJARO_24_1, MANJARO_24_2, MANJARO_24_3
   (os=Linux and (version is any of ROLLING))

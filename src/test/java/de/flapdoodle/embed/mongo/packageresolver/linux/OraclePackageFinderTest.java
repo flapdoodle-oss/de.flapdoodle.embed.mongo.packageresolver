@@ -37,5 +37,6 @@ class OraclePackageFinderTest extends AbstractVersionMappedPackageFinderTest<Ora
 		assertMappedVersion(OracleVersion.Oracle_7, RedhatVersion.Redhat_7);
 		assertMappedVersion(OracleVersion.Oracle_8, RedhatVersion.Redhat_8);
 		assertMappedVersion(OracleVersion.Oracle_9, RedhatVersion.Redhat_9);
+		assertMappedVersion(OracleVersion.Oracle_10, RedhatVersion.Redhat_10);
 	}
 }

@@ -31,7 +31,8 @@ public class CentosPackageFinder extends AbstractVersionMappedPackageFinder<Cent
 			Pair.of(CentosVersion.CentOS_6, RedhatVersion.Redhat_6),
 			Pair.of(CentosVersion.CentOS_7, RedhatVersion.Redhat_7),
 			Pair.of(CentosVersion.CentOS_8, RedhatVersion.Redhat_8),
-			Pair.of(CentosVersion.CentOS_9, RedhatVersion.Redhat_9)
+			Pair.of(CentosVersion.CentOS_9, RedhatVersion.Redhat_9),
+			Pair.of(CentosVersion.CentOS_10, RedhatVersion.Redhat_10)
 		);
 	}
 }

@@ -32,10 +32,11 @@ class CentosPackageFinderTest extends AbstractVersionMappedPackageFinderTest<Cen
 	}
 	
 	@Test
-	public void oracleToRedHatMapping() {
+	public void centosToRedHatMapping() {
 		assertMappedVersion(CentosVersion.CentOS_6, RedhatVersion.Redhat_6);
 		assertMappedVersion(CentosVersion.CentOS_7, RedhatVersion.Redhat_7);
 		assertMappedVersion(CentosVersion.CentOS_8, RedhatVersion.Redhat_8);
 		assertMappedVersion(CentosVersion.CentOS_9, RedhatVersion.Redhat_9);
+		assertMappedVersion(CentosVersion.CentOS_10, RedhatVersion.Redhat_10);
 	}
 }

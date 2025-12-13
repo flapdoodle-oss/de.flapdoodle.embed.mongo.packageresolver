@@ -21,7 +21,6 @@
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.os.linux.AlmaVersion;
-import de.flapdoodle.os.linux.CentosVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
 import de.flapdoodle.types.Pair;
 
@@ -29,7 +28,8 @@ public class AlmaPackageFinder extends AbstractVersionMappedPackageFinder<AlmaVe
 	protected AlmaPackageFinder(RedhatFallbackToOlderVersionPackageFinder delegate) {
 		super(delegate,
 			Pair.of(AlmaVersion.Alma_8, RedhatVersion.Redhat_8),
-			Pair.of(AlmaVersion.Alma_9, RedhatVersion.Redhat_9)
+			Pair.of(AlmaVersion.Alma_9, RedhatVersion.Redhat_9),
+			Pair.of(AlmaVersion.Alma_10, RedhatVersion.Redhat_10)
 		);
 	}
 }
