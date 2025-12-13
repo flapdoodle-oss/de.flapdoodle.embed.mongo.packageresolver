@@ -20,6 +20,10 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+#### 4.22.0
+
+- latest mongodb versions (8.2.2, 8.0.16, 7.0.26, ...)
+
 #### 4.21.0
 
 - latest mongodb versions
