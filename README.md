@@ -20,6 +20,10 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+#### 4.23.1
+
+- dependency updates, PopOS 24 added
+
 #### 4.23.0
 
 - latest mongodb versions to fix CVE-2025-14847
