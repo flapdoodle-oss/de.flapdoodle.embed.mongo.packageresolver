@@ -20,6 +20,10 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+#### 4.33.0
+
+- dependency updates, mongodb 8.3 and 8.2
+
 #### 4.23.1
 
 - dependency updates, PopOS 24 added
