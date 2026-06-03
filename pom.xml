@@ -370,7 +370,7 @@
 
     <properties>
         <junit.version>5.14.1</junit.version>
-        <immutables.version>2.12.1</immutables.version>
+        <immutables.version>2.12.2</immutables.version>
         <!-- eclipse apt switch -->
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
     </properties>
@@ -411,7 +411,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.27.6</version>
+            <version>3.27.7</version>
             <scope>test</scope>
         </dependency>
 
@@ -419,20 +419,20 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>33.5.0-jre</version>
+            <version>33.6.0-jre</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <!-- jsoup HTML parser library @ https://jsoup.org/ -->
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.22.1</version>
+            <version>1.22.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle.testdoc</groupId>
             <artifactId>de.flapdoodle.testdoc</artifactId>
-            <version>1.6.2</version>
+            <version>1.7.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -446,7 +446,7 @@
         <dependency>
             <groupId>de.flapdoodle</groupId>
             <artifactId>de.flapdoodle.os</artifactId>
-            <version>1.10.1</version>
+            <version>1.11.0</version>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>

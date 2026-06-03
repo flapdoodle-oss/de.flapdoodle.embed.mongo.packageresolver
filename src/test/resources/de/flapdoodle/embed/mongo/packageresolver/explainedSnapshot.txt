@@ -29,7 +29,7 @@
   (os=OS_X and bitSize=B64) and (3.4.9-3.4.24 or 3.4.0-3.4.7 or 3.2.0-3.2.22 or 3.0.0-3.0.15 or 2.6.0-2.6.12)
     url=/osx/mongodb-osx-x86_64-{version}.tgz (TGZ)
 (os=Linux)
-  (os=Linux and (version is any of Ubuntu_16_04, Ubuntu_16_10, Ubuntu_18_04, Ubuntu_18_10, Ubuntu_19_04, Ubuntu_19_10, Ubuntu_20_04, Ubuntu_20_10, Ubuntu_21_04, Ubuntu_21_10, Ubuntu_22_04, Ubuntu_22_10, Ubuntu_23_04, Ubuntu_23_10, Ubuntu_24_04, Ubuntu_24_10, Ubuntu_25_04, Ubuntu_25_10))
+  (os=Linux and (version is any of Ubuntu_16_04, Ubuntu_16_10, Ubuntu_18_04, Ubuntu_18_10, Ubuntu_19_04, Ubuntu_19_10, Ubuntu_20_04, Ubuntu_20_10, Ubuntu_21_04, Ubuntu_21_10, Ubuntu_22_04, Ubuntu_22_10, Ubuntu_23_04, Ubuntu_23_10, Ubuntu_24_04, Ubuntu_24_10, Ubuntu_25_04, Ubuntu_25_10, Ubuntu_26_04, Ubuntu_26_10))
   'UbuntuPackageFinder'
     (os=Linux and bitSize=B64 and cpuType=ARM and (version is any of Ubuntu_24_04)) and (8.2.0-rc0 or 8.1.0-8.1.2 or 8.0.10-rc0 or 8.0.6-rc2)
       url=/linux/mongodb-linux-aarch64-ubuntu2404-{version}.tgz (TGZ(DEV))
@@ -69,9 +69,9 @@
       url=/linux/mongodb-linux-x86_64-ubuntu1604-{version}.tgz (TGZ(DEV))
     (os=Linux and bitSize=B64 and cpuType=X86 and (version is any of Ubuntu_16_04)) and (4.4.0-4.4.30 or 4.2.5-4.2.25 or 4.2.0-4.2.3 or 4.0.0-4.0.28 or 3.6.0-3.6.23 or 3.4.9-3.4.24 or 3.4.0-3.4.7 or 3.2.7-3.2.22)
       url=/linux/mongodb-linux-x86_64-ubuntu1604-{version}.tgz (TGZ)
-  (os=Linux and (version is any of Ubuntu_16_04, Ubuntu_16_10, Ubuntu_18_04, Ubuntu_18_10, Ubuntu_19_04, Ubuntu_19_10, Ubuntu_20_04, Ubuntu_20_10, Ubuntu_21_04, Ubuntu_21_10, Ubuntu_22_04, Ubuntu_22_10, Ubuntu_23_04, Ubuntu_23_10, Ubuntu_24_04, Ubuntu_24_10, Ubuntu_25_04, Ubuntu_25_10))
+  (os=Linux and (version is any of Ubuntu_16_04, Ubuntu_16_10, Ubuntu_18_04, Ubuntu_18_10, Ubuntu_19_04, Ubuntu_19_10, Ubuntu_20_04, Ubuntu_20_10, Ubuntu_21_04, Ubuntu_21_10, Ubuntu_22_04, Ubuntu_22_10, Ubuntu_23_04, Ubuntu_23_10, Ubuntu_24_04, Ubuntu_24_10, Ubuntu_25_04, Ubuntu_25_10, Ubuntu_26_04, Ubuntu_26_10))
   'UbuntuVersionDowngradePackageFinder'
-    use 'UbuntuPackageFinder' with Ubuntu_25_10, Ubuntu_25_04, Ubuntu_24_10, Ubuntu_24_04, Ubuntu_23_10, Ubuntu_23_04, Ubuntu_22_10, Ubuntu_22_04, Ubuntu_21_10, Ubuntu_21_04, Ubuntu_20_10, Ubuntu_20_04, Ubuntu_19_10, Ubuntu_19_04, Ubuntu_18_10, Ubuntu_18_04, Ubuntu_16_10, Ubuntu_16_04 until package found.
+    use 'UbuntuPackageFinder' with Ubuntu_26_10, Ubuntu_26_04, Ubuntu_25_10, Ubuntu_25_04, Ubuntu_24_10, Ubuntu_24_04, Ubuntu_23_10, Ubuntu_23_04, Ubuntu_22_10, Ubuntu_22_04, Ubuntu_21_10, Ubuntu_21_04, Ubuntu_20_10, Ubuntu_20_04, Ubuntu_19_10, Ubuntu_19_04, Ubuntu_18_10, Ubuntu_18_04, Ubuntu_16_10, Ubuntu_16_04 until package found.
   (os=Linux and (version is any of LINUX_MINT_19_0, LINUX_MINT_19_1, LINUX_MINT_19_2, LINUX_MINT_19_3, LINUX_MINT_20_0, LINUX_MINT_20_1, LINUX_MINT_20_2, LINUX_MINT_20_3, LINUX_MINT_21_0, LINUX_MINT_21_1, LINUX_MINT_21_2, LINUX_MINT_21_3, LINUX_MINT_22_0, LINUX_MINT_22_1, LINUX_MINT_22_2, LINUX_MINT_22_3))
     use 'UbuntuVersionDowngradePackageFinder' with Ubuntu_18_04 for LINUX_MINT_19_0, LINUX_MINT_19_1, LINUX_MINT_19_2, LINUX_MINT_19_3 and Ubuntu_20_04 for LINUX_MINT_20_0, LINUX_MINT_20_1, LINUX_MINT_20_2, LINUX_MINT_20_3 and Ubuntu_22_04 for LINUX_MINT_21_0, LINUX_MINT_21_1, LINUX_MINT_21_2, LINUX_MINT_21_3 and Ubuntu_24_04 for LINUX_MINT_22_0, LINUX_MINT_22_1, LINUX_MINT_22_2, LINUX_MINT_22_3
   (os=Linux and (version is any of POP_OS_22_4, POP_OS_24_4))
