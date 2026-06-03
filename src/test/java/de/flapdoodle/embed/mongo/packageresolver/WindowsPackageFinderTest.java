@@ -40,7 +40,7 @@ class WindowsPackageFinderTest {
 		  .resolvesTo("/windows/mongodb-windows-x86_64-{}.zip");
 	}
 	@ParameterizedTest
-	@ValueSource(strings = { "8.2.0 -> 8.2.3", "8.0.3 -> 8.0.17", "8.0.0 -> 8.0.1", "7.0.28", "7.0.14 -> 7.0.26", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.27", "5.0.0 -> 5.0.32", "4.4.0 -> 4.4.30" })
+	@ValueSource(strings = { "8.3.0 -> 8.3.2", "8.2.9", "8.2.0 -> 8.2.7", "8.0.23", "8.0.3 -> 8.0.21", "8.0.0 -> 8.0.1", "7.0.34", "7.0.28 -> 7.0.32", "7.0.14 -> 7.0.26", "7.0.11 -> 7.0.12", "7.0.0 -> 7.0.9", "6.0.0 -> 6.0.28", "5.0.0 -> 5.0.33", "4.4.0 -> 4.4.30" })
 	public void Windows(String version) {
 		assertThat(withPlatform(CommonOS.Windows, CommonArchitecture.X86_64), version)
 		  .resolvesTo("/windows/mongodb-windows-x86_64-{}.zip");
@@ -78,7 +78,7 @@ class WindowsPackageFinderTest {
 
 
 	@ParameterizedTest
-	@ValueSource(strings = { "100.14.0", "100.13.0", "100.12.0 -> 100.12.2", "100.11.0", "100.10.0", "100.9.0 -> 100.9.5", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
+	@ValueSource(strings = { "100.17.0", "100.16.0 -> 100.16.1", "100.15.0", "100.14.0 -> 100.14.1", "100.13.0", "100.12.0 -> 100.12.2", "100.11.0", "100.10.0", "100.9.0 -> 100.9.5", "100.8.0", "100.7.0 -> 100.7.5", "100.6.0 -> 100.6.1", "100.5.0 -> 100.5.4", "100.4.0 -> 100.4.1", "100.3.0 -> 100.3.1", "100.2.0 -> 100.2.1", "100.1.0 -> 100.1.1", "100.0.0 -> 100.0.2", "99.0.0" })
 	public void WindowsTools(String version) {
 		assertThatTools(withPlatform(CommonOS.Windows, CommonArchitecture.X86_64), version)
 			.resolvesTo("/tools/db/mongodb-database-tools-windows-x86_64-{}.zip");

@@ -58,6 +58,35 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
   private static ImmutablePackageFinderRules rules(final Command command) {
     FileSet fileSet = fileSetOf(command);
 
+ 
+    PackageFinderRule tools_Redhat_10_ARM_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_10)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.17.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel10-aarch64-{tools.version}.tgz")
+            .build())
+        .build();
+
+ 
+    PackageFinderRule tools_Redhat_10_X86_B64 = PackageFinderRule.builder()
+        .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_10)
+            .andThen(
+                DistributionMatch.any(
+                  ToolVersionRange.of("100.17.0"))
+        ))
+        .finder(UrlTemplatePackageFinder.builder()
+            .fileSet(fileSet)
+            .archiveType(ArchiveType.TGZ)
+            .urlTemplate("/tools/db/mongodb-database-tools-rhel10-x86_64-{tools.version}.tgz")
+            .build())
+        .build();
+
+
     PackageFinderRule devRule_Redhat_9_ARM_B64 = PackageFinderRule.builder()
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_9)
             .andThen(
@@ -95,11 +124,12 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.28"),
+                  VersionRange.of("7.0.34"),
+                  VersionRange.of("7.0.28", "7.0.32"),
                   VersionRange.of("7.0.14", "7.0.26"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.7", "6.0.27"))
+                  VersionRange.of("6.0.7", "6.0.28"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -129,8 +159,11 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("8.2.0", "8.2.3"),
-                  VersionRange.of("8.0.3", "8.0.17"),
+                  VersionRange.of("8.3.0", "8.3.2"),
+                  VersionRange.of("8.2.9"),
+                  VersionRange.of("8.2.0", "8.2.7"),
+                  VersionRange.of("8.0.23"),
+                  VersionRange.of("8.0.3", "8.0.21"),
                   VersionRange.of("8.0.0", "8.0.1"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -173,7 +206,10 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.14.0"),
+                  ToolVersionRange.of("100.17.0"),
+                  ToolVersionRange.of("100.16.0", "100.16.1"),
+                  ToolVersionRange.of("100.15.0"),
+                  ToolVersionRange.of("100.14.0", "100.14.1"),
                   ToolVersionRange.of("100.13.0"),
                   ToolVersionRange.of("100.12.0", "100.12.2"),
                   ToolVersionRange.of("100.11.0"),
@@ -226,11 +262,12 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.28"),
+                  VersionRange.of("7.0.34"),
+                  VersionRange.of("7.0.28", "7.0.32"),
                   VersionRange.of("7.0.14", "7.0.26"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.4", "6.0.27"))
+                  VersionRange.of("6.0.4", "6.0.28"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -260,8 +297,11 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("8.2.0", "8.2.3"),
-                  VersionRange.of("8.0.3", "8.0.17"),
+                  VersionRange.of("8.3.0", "8.3.2"),
+                  VersionRange.of("8.2.9"),
+                  VersionRange.of("8.2.0", "8.2.7"),
+                  VersionRange.of("8.0.23"),
+                  VersionRange.of("8.0.3", "8.0.21"),
                   VersionRange.of("8.0.0", "8.0.1"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
@@ -292,7 +332,10 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_9)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.14.0"),
+                  ToolVersionRange.of("100.17.0"),
+                  ToolVersionRange.of("100.16.0", "100.16.1"),
+                  ToolVersionRange.of("100.15.0"),
+                  ToolVersionRange.of("100.14.0", "100.14.1"),
                   ToolVersionRange.of("100.13.0"),
                   ToolVersionRange.of("100.12.0", "100.12.2"),
                   ToolVersionRange.of("100.11.0"),
@@ -383,13 +426,17 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("8.2.0", "8.2.3"),
-                  VersionRange.of("8.0.3", "8.0.17"),
+                  VersionRange.of("8.3.0", "8.3.2"),
+                  VersionRange.of("8.2.9"),
+                  VersionRange.of("8.2.0", "8.2.7"),
+                  VersionRange.of("8.0.23"),
+                  VersionRange.of("8.0.3", "8.0.21"),
                   VersionRange.of("8.0.0", "8.0.1"),
-                  VersionRange.of("7.0.28"),
+                  VersionRange.of("7.0.34"),
+                  VersionRange.of("7.0.28", "7.0.32"),
                   VersionRange.of("7.0.14", "7.0.26"),
-                  VersionRange.of("6.0.17", "6.0.27"),
-                  VersionRange.of("5.0.29", "5.0.32"))
+                  VersionRange.of("6.0.17", "6.0.28"),
+                  VersionRange.of("5.0.29", "5.0.33"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -434,7 +481,10 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.ARM, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.14.0"),
+                  ToolVersionRange.of("100.17.0"),
+                  ToolVersionRange.of("100.16.0", "100.16.1"),
+                  ToolVersionRange.of("100.15.0"),
+                  ToolVersionRange.of("100.14.0", "100.14.1"),
                   ToolVersionRange.of("100.13.0"),
                   ToolVersionRange.of("100.12.0", "100.12.2"),
                   ToolVersionRange.of("100.11.0"),
@@ -530,13 +580,17 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("8.2.0", "8.2.3"),
-                  VersionRange.of("8.0.3", "8.0.17"),
+                  VersionRange.of("8.3.0", "8.3.2"),
+                  VersionRange.of("8.2.9"),
+                  VersionRange.of("8.2.0", "8.2.7"),
+                  VersionRange.of("8.0.23"),
+                  VersionRange.of("8.0.3", "8.0.21"),
                   VersionRange.of("8.0.0", "8.0.1"),
-                  VersionRange.of("7.0.28"),
+                  VersionRange.of("7.0.34"),
+                  VersionRange.of("7.0.28", "7.0.32"),
                   VersionRange.of("7.0.14", "7.0.26"),
-                  VersionRange.of("6.0.17", "6.0.27"),
-                  VersionRange.of("5.0.29", "5.0.32"))
+                  VersionRange.of("6.0.17", "6.0.28"),
+                  VersionRange.of("5.0.29", "5.0.33"))
         ))
         .finder(UrlTemplatePackageFinder.builder()
             .fileSet(fileSet)
@@ -573,7 +627,10 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_8)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.14.0"),
+                  ToolVersionRange.of("100.17.0"),
+                  ToolVersionRange.of("100.16.0", "100.16.1"),
+                  ToolVersionRange.of("100.15.0"),
+                  ToolVersionRange.of("100.14.0", "100.14.1"),
                   ToolVersionRange.of("100.13.0"),
                   ToolVersionRange.of("100.12.0", "100.12.2"),
                   ToolVersionRange.of("100.11.0"),
@@ -626,12 +683,13 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7)
             .andThen(
                 DistributionMatch.any(
-                  VersionRange.of("7.0.28"),
+                  VersionRange.of("7.0.34"),
+                  VersionRange.of("7.0.28", "7.0.32"),
                   VersionRange.of("7.0.14", "7.0.26"),
                   VersionRange.of("7.0.11", "7.0.12"),
                   VersionRange.of("7.0.0", "7.0.9"),
-                  VersionRange.of("6.0.0", "6.0.27"),
-                  VersionRange.of("5.0.0", "5.0.32"),
+                  VersionRange.of("6.0.0", "6.0.28"),
+                  VersionRange.of("5.0.0", "5.0.33"),
                   VersionRange.of("4.4.0", "4.4.30"),
                   VersionRange.of("4.2.5", "4.2.25"),
                   VersionRange.of("4.2.0", "4.2.3"),
@@ -654,7 +712,10 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
         .match(match(CommonOS.Linux, BitSize.B64, CPUType.X86, RedhatVersion.Redhat_7)
             .andThen(
                 DistributionMatch.any(
-                  ToolVersionRange.of("100.14.0"),
+                  ToolVersionRange.of("100.17.0"),
+                  ToolVersionRange.of("100.16.0", "100.16.1"),
+                  ToolVersionRange.of("100.15.0"),
+                  ToolVersionRange.of("100.14.0", "100.14.1"),
                   ToolVersionRange.of("100.13.0"),
                   ToolVersionRange.of("100.12.0", "100.12.2"),
                   ToolVersionRange.of("100.11.0"),
@@ -746,6 +807,12 @@ public class RedhatPackageFinder extends AbstractPackageFinder implements HasLab
       case MongoImport:
       case MongoRestore:
         return PackageFinderRules.empty()
+            .withAdditionalRules(
+                tools_Redhat_10_ARM_B64
+            )
+            .withAdditionalRules(
+                tools_Redhat_10_X86_B64
+            )
             .withAdditionalRules(
                 tools_Redhat_9_ARM_B64, tools_Redhat_9_ARM_B64_1, tools_Redhat_9_ARM_B64_2
             )

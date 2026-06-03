@@ -223,6 +223,10 @@ public abstract class PackagePlatform implements Comparable<PackagePlatform> {
 			case "RedHat / CentOS 9.0 ARM 64":
 			case "RedHat / CentOS 9.3 ARM 64":
 				return linux(RedhatVersion.Redhat_9, CPUType.ARM, BitSize.B64);
+			case "RedHat / CentOS 10.0 ARM 64":
+				return linux(RedhatVersion.Redhat_10, CPUType.ARM, BitSize.B64);
+			case "RedHat / CentOS 10.0 x64":
+				return linux(RedhatVersion.Redhat_10, CPUType.X86, BitSize.B64);
 			default:
 				throw new IllegalArgumentException("could not parse '"+name+"'");
 		}

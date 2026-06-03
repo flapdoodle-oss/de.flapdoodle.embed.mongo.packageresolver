@@ -24,6 +24,7 @@ import de.flapdoodle.embed.mongo.packageresolver.parser.PackagePlatform;
 import de.flapdoodle.embed.mongo.packageresolver.parser.PackageTree;
 import de.flapdoodle.embed.mongo.packageresolver.parser.SourceCodeGenerator;
 import de.flapdoodle.types.Either;
+import de.flapdoodle.types.Try;
 
 import java.io.IOException;
 import java.nio.file.Path;
