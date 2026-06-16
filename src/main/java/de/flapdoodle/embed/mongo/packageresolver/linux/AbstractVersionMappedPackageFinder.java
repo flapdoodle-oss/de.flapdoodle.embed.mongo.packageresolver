@@ -86,6 +86,6 @@ public abstract class AbstractVersionMappedPackageFinder<S extends Version, D ex
 				.filter(v -> v.second() == uv)
 				.map(it -> it.first().name())
 				.collect(Collectors.joining(", ", uv.name() + " for ", "")))
-			.collect(Collectors.joining(" and ", "use '"+ ExplainRules.finderLabel(delegate)+"' with ", ""));
+			.collect(Collectors.joining(" and ",  "let '" + ExplainRules.finderLabel(this)+"' use '"+ ExplainRules.finderLabel(delegate)+"' with ", ""));
 	}
 }

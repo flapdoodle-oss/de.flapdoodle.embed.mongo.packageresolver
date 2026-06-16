@@ -162,6 +162,12 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 			.finder(new ArchPackageFinder(ubuntuDowngradingPackageFinder))
 			.build();
 
+		ImmutablePackageFinderRule endeavourRule = PackageFinderRule.builder()
+			.match(PlatformMatch.withOs(CommonOS.Linux)
+				.withVersion(EndeavourOSVersion.values()))
+			.finder(new EndeavourOSPackageFinder(ubuntuDowngradingPackageFinder))
+			.build();
+
 		ImmutablePackageFinderRule rockyRule = PackageFinderRule.builder()
 			.match(PlatformMatch.withOs(CommonOS.Linux)
 				.withVersion(RockyVersion.values()))
@@ -210,6 +216,7 @@ public class LinuxPackageFinder extends AbstractPackageFinder {
 				almaRule,
 				manjaroRule,
 				archRule,
+				endeavourRule,
 				rockyRule,
 				amazonRule,
 				alpineRule,

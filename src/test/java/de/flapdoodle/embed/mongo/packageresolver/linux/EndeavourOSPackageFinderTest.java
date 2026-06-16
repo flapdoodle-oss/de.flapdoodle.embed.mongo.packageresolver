@@ -21,19 +21,18 @@
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.embed.mongo.packageresolver.Command;
-import de.flapdoodle.os.linux.ArchVersion;
-import de.flapdoodle.os.linux.ManjaroVersion;
+import de.flapdoodle.os.linux.EndeavourOSVersion;
 import de.flapdoodle.os.linux.UbuntuVersion;
 import org.junit.jupiter.api.Test;
 
-class ArchPackageFinderTest extends AbstractVersionMappedPackageFinderTest<ArchVersion, UbuntuVersion> {
+class EndeavourOSPackageFinderTest extends AbstractVersionMappedPackageFinderTest<EndeavourOSVersion, UbuntuVersion> {
 
-	public ArchPackageFinderTest() {
-		super(new ArchPackageFinder(new UbuntuFallbackToOlderVersionPackageFinder(new UbuntuPackageFinder(Command.MongoD))));
+	public EndeavourOSPackageFinderTest() {
+		super(new EndeavourOSPackageFinder(new UbuntuFallbackToOlderVersionPackageFinder(new UbuntuPackageFinder(Command.MongoD))));
 	}
-	
+
 	@Test
-	public void archUbuntuMapping() {
-		assertMappedVersion(ArchVersion.ROLLING, UbuntuVersion.Ubuntu_24_04);
+	public void endeavourUbuntuMapping() {
+		assertMappedVersion(EndeavourOSVersion.ROLLING, UbuntuVersion.Ubuntu_24_04);
 	}
 }

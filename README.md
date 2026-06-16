@@ -20,6 +20,8 @@ We use http://www.apache.org/licenses/LICENSE-2.0
 
 #### Unreleased
 
+- endeavour os support                              
+
 #### 4.33.0
 
 - dependency updates, mongodb 8.3 and 8.2
