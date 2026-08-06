@@ -22,7 +22,7 @@ package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.os.linux.EndeavourOSVersion;
 import de.flapdoodle.os.linux.UbuntuVersion;
-import de.flapdoodle.types.Pair;
+import de.flapdoodle.commons.types.Pair;
 
 public class EndeavourOSPackageFinder extends AbstractVersionMappedPackageFinder<EndeavourOSVersion, UbuntuVersion> {
 	protected EndeavourOSPackageFinder(UbuntuFallbackToOlderVersionPackageFinder delegate) {

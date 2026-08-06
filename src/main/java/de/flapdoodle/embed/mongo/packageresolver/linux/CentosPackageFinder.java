@@ -23,7 +23,7 @@ package de.flapdoodle.embed.mongo.packageresolver.linux;
 import de.flapdoodle.os.linux.CentosVersion;
 import de.flapdoodle.os.linux.OracleVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
-import de.flapdoodle.types.Pair;
+import de.flapdoodle.commons.types.Pair;
 
 public class CentosPackageFinder extends AbstractVersionMappedPackageFinder<CentosVersion, RedhatVersion> {
 	protected CentosPackageFinder(RedhatFallbackToOlderVersionPackageFinder delegate) {

@@ -23,7 +23,7 @@ package de.flapdoodle.embed.mongo.packageresolver.linux;
 import de.flapdoodle.os.linux.ArchVersion;
 import de.flapdoodle.os.linux.ManjaroVersion;
 import de.flapdoodle.os.linux.UbuntuVersion;
-import de.flapdoodle.types.Pair;
+import de.flapdoodle.commons.types.Pair;
 
 public class ArchPackageFinder extends AbstractVersionMappedPackageFinder<ArchVersion, UbuntuVersion> {
 	protected ArchPackageFinder(UbuntuFallbackToOlderVersionPackageFinder delegate) {

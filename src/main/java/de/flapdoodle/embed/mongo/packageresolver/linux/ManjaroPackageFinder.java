@@ -22,7 +22,7 @@ package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.os.linux.ManjaroVersion;
 import de.flapdoodle.os.linux.UbuntuVersion;
-import de.flapdoodle.types.Pair;
+import de.flapdoodle.commons.types.Pair;
 
 public class ManjaroPackageFinder extends AbstractVersionMappedPackageFinder<ManjaroVersion, UbuntuVersion> {
 	protected ManjaroPackageFinder(UbuntuFallbackToOlderVersionPackageFinder delegate) {

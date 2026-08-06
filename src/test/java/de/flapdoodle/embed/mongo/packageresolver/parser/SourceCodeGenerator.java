@@ -20,7 +20,7 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
-import de.flapdoodle.checks.Preconditions;
+import de.flapdoodle.commons.checks.Preconditions;
 import de.flapdoodle.embed.mongo.packageresolver.parser.st.TypesafeModelAdapters;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroupFile;

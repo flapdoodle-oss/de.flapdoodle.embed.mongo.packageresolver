@@ -28,7 +28,7 @@ import de.flapdoodle.os.BitSize;
 import de.flapdoodle.os.CPUType;
 import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.Version;
-import de.flapdoodle.types.Pair;
+import de.flapdoodle.commons.types.Pair;
 import org.stringtemplate.v4.STGroup;
 
 import java.util.*;

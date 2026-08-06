@@ -20,7 +20,7 @@
  */
 package de.flapdoodle.embed.mongo.packageresolver.linux;
 
-import de.flapdoodle.checks.Preconditions;
+import de.flapdoodle.commons.checks.Preconditions;
 import de.flapdoodle.embed.mongo.packageresolver.ExplainRules;
 import de.flapdoodle.embed.mongo.packageresolver.HasExplanation;
 import de.flapdoodle.embed.mongo.packageresolver.PackageFinder;
@@ -30,7 +30,7 @@ import de.flapdoodle.embed.process.distribution.Distribution;
 import de.flapdoodle.os.CommonOS;
 import de.flapdoodle.os.ImmutablePlatform;
 import de.flapdoodle.os.Version;
-import de.flapdoodle.types.Pair;
+import de.flapdoodle.commons.types.Pair;
 
 import java.util.Arrays;
 import java.util.List;

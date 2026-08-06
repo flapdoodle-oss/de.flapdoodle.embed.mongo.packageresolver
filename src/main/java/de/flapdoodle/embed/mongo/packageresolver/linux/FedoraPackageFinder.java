@@ -22,7 +22,7 @@ package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.os.linux.FedoraVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
-import de.flapdoodle.types.Pair;
+import de.flapdoodle.commons.types.Pair;
 
 public class FedoraPackageFinder extends AbstractVersionMappedPackageFinder<FedoraVersion, RedhatVersion> {
 

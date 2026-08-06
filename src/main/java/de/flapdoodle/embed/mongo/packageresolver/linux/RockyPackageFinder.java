@@ -23,7 +23,7 @@ package de.flapdoodle.embed.mongo.packageresolver.linux;
 import de.flapdoodle.os.linux.AlmaVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
 import de.flapdoodle.os.linux.RockyVersion;
-import de.flapdoodle.types.Pair;
+import de.flapdoodle.commons.types.Pair;
 
 public class RockyPackageFinder extends AbstractVersionMappedPackageFinder<RockyVersion, RedhatVersion> {
 	protected RockyPackageFinder(RedhatFallbackToOlderVersionPackageFinder delegate) {

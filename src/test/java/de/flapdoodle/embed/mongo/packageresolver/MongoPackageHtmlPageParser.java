@@ -33,7 +33,7 @@ import de.flapdoodle.os.linux.AmazonVersion;
 import de.flapdoodle.os.linux.CentosVersion;
 import de.flapdoodle.os.linux.DebianVersion;
 import de.flapdoodle.os.linux.UbuntuVersion;
-import de.flapdoodle.types.Pair;
+import de.flapdoodle.commons.types.Pair;
 
 import java.io.IOException;
 import java.util.*;

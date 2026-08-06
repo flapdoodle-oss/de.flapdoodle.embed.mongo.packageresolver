@@ -26,7 +26,7 @@ import de.flapdoodle.os.linux.AmazonVersion;
 import de.flapdoodle.os.linux.DebianVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
 import de.flapdoodle.os.linux.UbuntuVersion;
-import de.flapdoodle.types.Either;
+import de.flapdoodle.commons.types.Either;
 import org.immutables.value.Value;
 
 import java.util.Comparator;

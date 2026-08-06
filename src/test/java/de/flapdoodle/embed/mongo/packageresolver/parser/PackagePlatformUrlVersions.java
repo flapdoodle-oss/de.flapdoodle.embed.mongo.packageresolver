@@ -21,7 +21,7 @@
 package de.flapdoodle.embed.mongo.packageresolver.parser;
 
 import com.google.common.collect.Maps;
-import de.flapdoodle.types.Pair;
+import de.flapdoodle.commons.types.Pair;
 import org.immutables.value.Value;
 
 import java.util.List;

@@ -22,7 +22,7 @@ package de.flapdoodle.embed.mongo.packageresolver.linux;
 
 import de.flapdoodle.os.linux.AlmaVersion;
 import de.flapdoodle.os.linux.RedhatVersion;
-import de.flapdoodle.types.Pair;
+import de.flapdoodle.commons.types.Pair;
 
 public class AlmaPackageFinder extends AbstractVersionMappedPackageFinder<AlmaVersion, RedhatVersion> {
 	protected AlmaPackageFinder(RedhatFallbackToOlderVersionPackageFinder delegate) {
